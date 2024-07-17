@@ -77,7 +77,7 @@ public class Login_Page extends JFrame {
         login_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = name_txt_f.getText();
-                String pass = pass_txt_f.getSelectedText();
+                char[] pass = pass_txt_f.getPassword();
                 Login log_user = new Login();
                 String role = log_user.login(name, pass);
                 // Login Successfull
