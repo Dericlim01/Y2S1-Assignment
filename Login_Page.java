@@ -84,7 +84,9 @@ public class Login_Page extends JFrame {
                 String role = log_user.login(name, pass);
                 // Login Successfull
                 if (role.equals("customer")) {
-                    // Go to customer page
+                    Customer_Page cus = new Customer_Page(name);
+                    cus.setTitle("Customer");
+                    cus.setVisible(true);
                 } else {
                     // Login failed, show message box
                     JOptionPane.showMessageDialog(
