@@ -66,7 +66,9 @@ public class Login_Page extends JFrame {
         reg_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                // Go to register page
+                Register_Page reg = new Register_Page();
+                reg.setTitle("Register");
+                reg.setVisible(true);
             }
         });
         contentPane.add(reg_btn);
