@@ -72,7 +72,7 @@ public class Update_Profile extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == update_btn) {
                     String name = name_txt_f.getText();
-                    char[] pass = pass_txt_f.getPassword();
+                    String pass = String.valueOf(pass_txt_f.getPassword());
                     String cont_num = cont_num_txt_f.getText();
                     String email = email_txt_f.getText();
                     UpdateProfile update_profile = new UpdateProfile();

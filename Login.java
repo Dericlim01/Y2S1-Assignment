@@ -1,8 +1,7 @@
 import java.io.*;
-import java.util.Arrays;
 
 public class Login {
-    public String login(String n, char[] p) {
+    public String login(String n, String p) {
         String line;
 
         // Check file
@@ -17,7 +16,7 @@ public class Login {
                     String password = data[1];
 
                     // If username and password correct
-                    if (username.equals(n) && Arrays.equals(password.toCharArray(), p)) {
+                    if (username.equals(n) && password.equals(p)) {
                         return data[4];
                     }
                 }

@@ -23,7 +23,7 @@ public class UpdateProfile {
         return users.get(0);
     }
 
-    public Boolean update_user(String n, char[] p, String cn, String em) {
+    public Boolean update_user(String n, String p, String cn, String em) {
         // Create a user list
         ArrayList<String[]> users = new ArrayList<String[]>();
         String line;
@@ -40,7 +40,7 @@ public class UpdateProfile {
             for (int i = 0; i < users.size(); i++) {
                 // If username found
                 if (users.get(i)[0].equals(n)) {
-                    users.get(i)[1] = p.toString();
+                    users.get(i)[1] = p;
                     users.get(i)[2] = cn;
                     users.get(i)[3] = em;
                     user_update = true;
