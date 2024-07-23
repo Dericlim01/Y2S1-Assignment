@@ -2,13 +2,12 @@ import java.io.*;
 
 public class Register {
     private String role;
-    
-    public Register() {}
 
     public Register(String r) {
         role = r;
     }
 
+    // Check if username valid
     String line;
     Create_file file = new Create_file();
     public Boolean chk_user(String name) {
@@ -30,10 +29,11 @@ public class Register {
         return true;
     }
 
+    // Register User
     public Boolean reg_user(String name, String pass, String cont_num, String email) {
         try {
             FileWriter user = new FileWriter("users.txt", true);
-            user.append(name + "," + pass + "," + cont_num + "," + email + role + "\n");
+            user.append(name + "," + pass + "," + cont_num + "," + email + "," + role + "\n");
             user.close();
             return true;
         } catch (IOException e) {
