@@ -60,7 +60,7 @@ public class Register_Page extends JFrame {
 
         // Name status button
         JLabel name_stat_lbl = new JLabel();
-        name_stat_lbl.setBounds(400, 290, 100, 20);
+        name_stat_lbl.setBounds(140, 35, 150, 20);
         contentPane.add(name_stat_lbl);
 
         // Password Text Field
@@ -87,10 +87,14 @@ public class Register_Page extends JFrame {
                 String pass = String.valueOf(pass_txt_f.getPassword());
                 String cont_num = cont_num_txt_f.getText();
                 String email = email_txt_f.getText();
-                Register register_user = new Register(role);
+                Register register_user = new Register(r);
 
-                // If name is not empty
-                if (name != "") {
+                // If username and password is empty
+                if (name.isEmpty() && pass.isEmpty()) {
+                    name_stat_lbl.setText("Username cannot be empty");
+                    name_stat_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+                } else {
+                    // If username and password is not empty
                     // Username available
                     if (register_user.chk_user(name)) {
                         // User register successfuly
@@ -138,10 +142,6 @@ public class Register_Page extends JFrame {
                         name_stat_lbl.setText("Username already exists.");
                         name_stat_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
                     }
-                } else {
-                    // If username empty
-                    name_stat_lbl.setText("Username cannot be empty");
-                    name_stat_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
                 }
             }
         });
