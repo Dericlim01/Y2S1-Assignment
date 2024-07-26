@@ -123,7 +123,7 @@ public class Manager_Home_Page extends JFrame {
     // Logout Button
     JButton logout_btn = new JButton("Logout");
     try{
-        File logoutFile = new File("D:/sem 1/Java/test/Manager/girl avatar.jpeg");
+        File logoutFile = new File("D:/sem 1/Java/test/Manager/little white dog.png");
 
         BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
 
@@ -162,10 +162,11 @@ public class Manager_Home_Page extends JFrame {
     view_btn.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            dispose(); // close the page
+            // close the page
             Manager_View_Profile man_VP = new Manager_View_Profile(n);
             man_VP.setTitle("Manager View Profile");
             man_VP.setVisible(true);
+            dispose();
         }
     });
     manager_HP.add(view_btn);
