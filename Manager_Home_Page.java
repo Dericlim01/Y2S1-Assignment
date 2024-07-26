@@ -1,18 +1,17 @@
 import javax.swing.*;
-import javax.swing.Icon;
 import javax.swing.border.*;
 import javax.imageio.ImageIO;
 
 
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.LinearGradientPaint;
-import java.awt.Color;
+//import java.awt.LinearGradientPaint;
+//import java.awt.Color;
 //import java.awt.Image.*;
-import java.awt.Graphics2D;
+//import java.awt.Graphics2D;
 import java.awt.EventQueue;
-import java.awt.RenderingHints;
-import java.awt.geom.Ellipse2D;
+//import java.awt.RenderingHints;
+//import java.awt.geom.Ellipse2D;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
@@ -22,26 +21,28 @@ import java.io.*;
 
 public class Manager_Home_Page extends JFrame {
    private JPanel manager_HP;
-   private Color startColor;
-   private Color endColor;
+   //private Color startColor;
+   //private Color endColor;
    private static String manname;
-   public static Manager_Home_Page man_HP = new Manager_Home_Page(manname);
+
    public static void main(String[] args) {
-       EventQueue.invokeLater(new Runnable(){
+       EventQueue.invokeLater(new Runnable() {
         @Override
         public void run() {
-            try{
-                man_HP.setTitle("Manager");
-                man_HP.setVisible(true);
-            } catch(Exception e){
+            try {
+                new Manager_Home_Page(manname).setVisible(true);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-       });
-       
+        });
    }
 
-   public Manager_Home_Page(String n){
+   /**
+ * @param n
+ */
+public Manager_Home_Page(String n) {
+    setTitle("Manager");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(140, 100, 1000, 800);
     setResizable(false);
@@ -56,8 +57,8 @@ public class Manager_Home_Page extends JFrame {
     
     //ImageIcon icon = new ImageIcon(image);
     JLabel picture = new JLabel();
-    try{
-        File image_File = new File("D:/sem 1/Java/test/Manager/girl avatar.jpeg");
+    try {
+        File image_File = new File("D:/sem 1/Java/test/Manager/little white dog.png");
 
         BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
 
@@ -88,19 +89,19 @@ public class Manager_Home_Page extends JFrame {
         
         //Image new_Image = newImage.getScaledInstance(newImage.getWidth(), newImage.getHeight(), Image.SCALE_SMOOTH);
         picture.setIcon(new ImageIcon(newImage));
-        picture.setBounds(70, 60, 120, 120);
+        picture.setBounds(60, 60, 120, 120);
         //manager_HP.add(image);
 
-    }catch(IOException e){
+    } catch (IOException e) {
         e.printStackTrace();
     }
   
     manager_HP.add(picture);
 
     // Name 
-    JLabel name_lbl = new JLabel("Hi");
+    JLabel name_lbl = new JLabel("Manager");
     name_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-    name_lbl.setBounds(110, 180, 100, 30);
+    name_lbl.setBounds(94, 180, 100, 30);
     manager_HP.add(name_lbl);
 
     // Welcome
@@ -112,31 +113,51 @@ public class Manager_Home_Page extends JFrame {
 
     // Manager Home Page Label
     JLabel hp_lbl = new JLabel("Manager Home Page");
-    hp_lbl.setFont(new Font("Comic Sams MS", Font.PLAIN, 20));
+    hp_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
     hp_lbl.setBounds(400, 100, 200, 25);
     manager_HP.add(hp_lbl);
 
-    // Logout Button
-    JButton logout_btn = new JButton("Logout");
+    // Hall icon
+    JLabel hall = new JLabel();
     try{
-        File logoutFile = new File("D:/sem 1/Java/test/Manager/girl avatar.jpeg");
+        BufferedImage hallImage = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
 
-        BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+        hallImage = ImageIO.read(new File("D:/sem 1/Java/test/Manager/hall.png"));
 
+        Image hall_Image = hallImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 
-        image = ImageIO.read(logoutFile);
-
-        int width = 120;
-        int height = 120;
-
-        Image newImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        picture.setIcon(new ImageIcon(newImage));
-        picture.setBounds(70, 60, 120, 120);
+        hall.setIcon(new ImageIcon(hall_Image));
+        hall.setBounds(820, 10, 40, 40);
     }catch(IOException e){
         e.printStackTrace();
     }
+    manager_HP.add(hall);
 
-    logout_btn.setBounds(850, 30, 100, 30);
+    // Hall text label
+    JLabel hall_txt_lbl = new JLabel("Symphony Hall");
+    hall_txt_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+    //hall_txt_lbl.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));;
+    hall_txt_lbl.setBounds(860, 10, 110, 40);
+    manager_HP.add(hall_txt_lbl);
+
+    // Logout Button
+    JButton logout_btn = new JButton();
+    try {
+        BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+
+        image = ImageIO.read(new File("D:/sem 1/Java/test/Manager/logout.png"));
+
+
+        Image newImage = image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+        logout_btn.setIcon(new ImageIcon(newImage));
+        logout_btn.setBounds(160, 250, 40, 40);
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    //logout_btn.setBounds(850, 30, 100, 30);
     logout_btn.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -148,6 +169,49 @@ public class Manager_Home_Page extends JFrame {
         }
     });
     manager_HP.add(logout_btn);
+
+    // View Profile Button
+    JButton view_btn = new JButton("View Profile");
+    //view_btn.setFont("Comic Sans MS", Font.PLAIN, 15);
+    view_btn.setBounds(400, 200, 200, 25);
+    
+    view_btn.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            dispose(); // close the page
+            Manager_View_Profile man_VP = new Manager_View_Profile(n);
+            man_VP.setTitle("Manager View Profile");
+            man_VP.setVisible(true);
+        }
+    });
+    manager_HP.add(view_btn);
+
+    // Sale Dashboard Button
+    JButton sales_btn = new JButton("Sales Dashboard");
+    //view_btn.setFont("Comic Sans MS", Font.PLAIN, 15);
+    sales_btn.setBounds(400, 250, 200, 25);
+    manager_HP.add(sales_btn);
+
+    // Booking Management Button
+    JButton book_Man_btn = new JButton("Booking Management");
+    //view_btn.setFont("Comic Sans MS", Font.PLAIN, 15);
+    book_Man_btn.setBounds(400, 300, 200, 25);
+    manager_HP.add(book_Man_btn);
+
+    // Customer Issues Receive Button
+    JButton cus_iss_rec_btn = new JButton("Customer Issues Receive");
+    cus_iss_rec_btn.setBounds(400, 350, 200, 25);
+    manager_HP.add(cus_iss_rec_btn);
+
+    // Task Assign and Status Button
+    JButton task_ass_sta_btn = new JButton("Task Assign and Status");
+    task_ass_sta_btn.setBounds(400, 400, 200, 25);
+    manager_HP.add(task_ass_sta_btn);
+
+    // Design 
+    //Character gradient = new Character('linear-gradient(to right, #1f1c17, #dacfb7, #ded7c6)');
+    // 
+
 
     // 
 
@@ -165,7 +229,7 @@ public class Manager_Home_Page extends JFrame {
 
 
 
-   }
+    }
 
 //    private BufferedImage createCircularImage(BufferedImage newImage, int size){
 //     int diameter = Math.min(newImage.getWidth(), newImage.getHeight());
