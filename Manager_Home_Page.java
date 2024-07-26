@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.Icon;
 import javax.swing.border.*;
 import javax.imageio.ImageIO;
 
@@ -12,6 +13,7 @@ import java.awt.Image;
 import java.awt.EventQueue;
 //import java.awt.RenderingHints;
 //import java.awt.geom.Ellipse2D;
+//import java.awt.LinearGradientPaint;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
@@ -41,8 +43,8 @@ public class Manager_Home_Page extends JFrame {
    /**
  * @param n
  */
-public Manager_Home_Page(String n) {
-    setTitle("Manager");
+    
+   public Manager_Home_Page(String n){
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(140, 100, 1000, 800);
     setResizable(false);
@@ -89,19 +91,19 @@ public Manager_Home_Page(String n) {
         
         //Image new_Image = newImage.getScaledInstance(newImage.getWidth(), newImage.getHeight(), Image.SCALE_SMOOTH);
         picture.setIcon(new ImageIcon(newImage));
-        picture.setBounds(60, 60, 120, 120);
+        picture.setBounds(70, 60, 120, 120);
         //manager_HP.add(image);
 
-    } catch (IOException e) {
+    }catch(IOException e){
         e.printStackTrace();
     }
   
     manager_HP.add(picture);
 
     // Name 
-    JLabel name_lbl = new JLabel("Manager");
+    JLabel name_lbl = new JLabel("Hi");
     name_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-    name_lbl.setBounds(94, 180, 100, 30);
+    name_lbl.setBounds(110, 180, 100, 30);
     manager_HP.add(name_lbl);
 
     // Welcome
@@ -113,51 +115,33 @@ public Manager_Home_Page(String n) {
 
     // Manager Home Page Label
     JLabel hp_lbl = new JLabel("Manager Home Page");
-    hp_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+
+    hp_lbl.setFont(new Font("Comic Sams MS", Font.PLAIN, 20));
     hp_lbl.setBounds(400, 100, 200, 25);
     manager_HP.add(hp_lbl);
 
-    // Hall icon
-    JLabel hall = new JLabel();
-    try{
-        BufferedImage hallImage = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
-        hallImage = ImageIO.read(new File("D:/sem 1/Java/test/Manager/hall.png"));
-
-        Image hall_Image = hallImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-
-        hall.setIcon(new ImageIcon(hall_Image));
-        hall.setBounds(820, 10, 40, 40);
-    }catch(IOException e){
-        e.printStackTrace();
-    }
-    manager_HP.add(hall);
-
-    // Hall text label
-    JLabel hall_txt_lbl = new JLabel("Symphony Hall");
-    hall_txt_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-    //hall_txt_lbl.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));;
-    hall_txt_lbl.setBounds(860, 10, 110, 40);
-    manager_HP.add(hall_txt_lbl);
-
     // Logout Button
-    JButton logout_btn = new JButton();
-    try {
+    JButton logout_btn = new JButton("Logout");
+    try{
+        File logoutFile = new File("D:/sem 1/Java/test/Manager/girl avatar.jpeg");
+
         BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
 
 
-        image = ImageIO.read(new File("D:/sem 1/Java/test/Manager/logout.png"));
+        image = ImageIO.read(logoutFile);
 
+        int width = 120;
+        int height = 120;
 
-        Image newImage = image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-        logout_btn.setIcon(new ImageIcon(newImage));
-        logout_btn.setBounds(160, 250, 40, 40);
-
-    } catch (IOException e) {
+        Image newImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        picture.setIcon(new ImageIcon(newImage));
+        picture.setBounds(70, 60, 120, 120);
+    }catch(IOException e){
         e.printStackTrace();
     }
 
-    //logout_btn.setBounds(850, 30, 100, 30);
+    logout_btn.setBounds(850, 30, 100, 30);
+
     logout_btn.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -212,7 +196,6 @@ public Manager_Home_Page(String n) {
     //Character gradient = new Character('linear-gradient(to right, #1f1c17, #dacfb7, #ded7c6)');
     // 
 
-
     // 
 
     // // Design
@@ -226,10 +209,7 @@ public Manager_Home_Page(String n) {
     // LinearGradientPaint paint = new LinearGradientPaint(0, 0, 0, design_lbl.getHeight(), fractions, colors);
     // design_lbl.setPaint(paint);
 
-
-
-
-    }
+   }
 
 //    private BufferedImage createCircularImage(BufferedImage newImage, int size){
 //     int diameter = Math.min(newImage.getWidth(), newImage.getHeight());
