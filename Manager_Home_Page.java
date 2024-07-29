@@ -115,43 +115,52 @@ public class Manager_Home_Page extends JFrame{
         manager_HP.add(view_btn);
 
         // Sale Dashboard Button
-    JButton sales_btn = new JButton("Sales Dashboard");
-    //view_btn.setFont("Comic Sans MS", Font.PLAIN, 15);
-    sales_btn.setBounds(400, 250, 200, 25);
-    manager_HP.add(sales_btn);
+        JButton sales_btn = new JButton("Sales Dashboard");
+        //view_btn.setFont("Comic Sans MS", Font.PLAIN, 15);
+        sales_btn.setBounds(400, 250, 200, 25);
+        sales_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Sales_Dashboard sales = new Sales_Dashboard();
+                sales.setTitle("Sales Dashboard");
+                sales.setVisible(true);
+                dispose();
+            }
+        });
+        manager_HP.add(sales_btn);
 
-    // Booking Management Button
-    JButton book_Man_btn = new JButton("Booking Management");
-    //view_btn.setFont("Comic Sans MS", Font.PLAIN, 15);
-    book_Man_btn.setBounds(400, 300, 200, 25);
-    manager_HP.add(book_Man_btn);
+        // Booking Management Button
+        JButton book_Man_btn = new JButton("Booking Management");
+        //view_btn.setFont("Comic Sans MS", Font.PLAIN, 15);
+        book_Man_btn.setBounds(400, 300, 200, 25);
+        manager_HP.add(book_Man_btn);
 
-    // Customer Issues Receive Button
-    JButton cus_iss_rec_btn = new JButton("Customer Issues Receive");
-    cus_iss_rec_btn.setBounds(400, 350, 200, 25);
-    manager_HP.add(cus_iss_rec_btn);
+        // Customer Issues Receive Button
+        JButton cus_iss_rec_btn = new JButton("Customer Issues Receive");
+        cus_iss_rec_btn.setBounds(400, 350, 200, 25);
+        manager_HP.add(cus_iss_rec_btn);
 
-    // Task Assign and Status Button
-    JButton task_ass_sta_btn = new JButton("Task Assign and Status");
-    task_ass_sta_btn.setBounds(400, 400, 200, 25);
-    manager_HP.add(task_ass_sta_btn);
+        // Task Assign and Status Button
+        JButton task_ass_sta_btn = new JButton("Task Assign and Status");
+        task_ass_sta_btn.setBounds(400, 400, 200, 25);
+        manager_HP.add(task_ass_sta_btn);
 
-    // Design 
-    //Character gradient = new Character('linear-gradient(to right, #1f1c17, #dacfb7, #ded7c6)');
-    // 
+        // Design 
+        //Character gradient = new Character('linear-gradient(to right, #1f1c17, #dacfb7, #ded7c6)');
+        // 
 
-    // 
+        // 
 
-    // // Design
-    // JLabel design_lbl = new JLabel();
-    // design_lbl.setBounds(100, 100, 150, 500);
+        // // Design
+        // JLabel design_lbl = new JLabel();
+        // design_lbl.setBounds(100, 100, 150, 500);
 
-    // Graphics2D g2d = (Graphics2D) 
+        // Graphics2D g2d = (Graphics2D) 
 
-    // Color[] colors = {startColor, endColor};
-    // float[] fractions = {0f, 1f};
-    // LinearGradientPaint paint = new LinearGradientPaint(0, 0, 0, design_lbl.getHeight(), fractions, colors);
-    // design_lbl.setPaint(paint);
+        // Color[] colors = {startColor, endColor};
+        // float[] fractions = {0f, 1f};
+        // LinearGradientPaint paint = new LinearGradientPaint(0, 0, 0, design_lbl.getHeight(), fractions, colors);
+        // design_lbl.setPaint(paint);
 
     }
 
