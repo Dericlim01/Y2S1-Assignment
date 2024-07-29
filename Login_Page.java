@@ -66,6 +66,7 @@ public class Login_Page extends JFrame {
         reg_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                Register_Page reg = new Register_Page();
                 String role = "customer";
                 Register_Page reg = new Register_Page(role);
                 reg.setTitle("Register");
@@ -89,12 +90,12 @@ public class Login_Page extends JFrame {
                     cus.setTitle("Customer");
                     cus.setVisible(true);
                 }
-                else if (role.equals("admin")){
+                else if(role.equals("admin")){
                     Admin_Page ad = new Admin_Page(name);
                     ad.setTitle("Admin");
                     ad.setVisible(true);
-                }
-                else if (role.equals("manager")) {
+                } 
+                } else if (role.equals("manager")) {
                     Manager_Home_Page man_HP = new Manager_Home_Page(name);
                     man_HP.setTitle("Manager");
                     man_HP.setVisible(true);
