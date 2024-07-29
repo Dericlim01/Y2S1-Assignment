@@ -2,13 +2,15 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.Font;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-
-
-public class Admin_Page extends JFrame{
+public class Admin_Page extends JFrame {
     private JPanel contentPane;
     private static String name;
 
