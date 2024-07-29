@@ -88,7 +88,13 @@ public class Login_Page extends JFrame {
                     Customer_Page cus = new Customer_Page(name);
                     cus.setTitle("Customer");
                     cus.setVisible(true);
-                } else {
+                } else if (role.equals("manager")) {
+                    Manager_Home_Page man_HP = new Manager_Home_Page(name);
+                    man_HP.setTitle("Manager");
+                    man_HP.setVisible(true);
+                    dispose();
+                }
+                else {
                     // Login failed, show message box
                     JOptionPane.showMessageDialog(
                         null,
