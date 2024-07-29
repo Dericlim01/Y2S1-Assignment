@@ -54,7 +54,7 @@ public class UpdateProfile {
         if (user_update) {
             try (PrintWriter writer = new PrintWriter(new FileWriter("users.txt"))) {
                 for (String[] userdata : users) {
-                    writer.println(userdata[0] + "," + userdata[1]);
+                    writer.println(userdata[0] + "," + userdata[1] + "," + userdata[2] + "," + userdata[3] + "," + userdata[4]);
                 }
                 return true;
             } catch (IOException e) {

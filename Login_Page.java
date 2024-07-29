@@ -67,6 +67,8 @@ public class Login_Page extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 Register_Page reg = new Register_Page();
+                String role = "customer";
+                Register_Page reg = new Register_Page(role);
                 reg.setTitle("Register");
                 reg.setVisible(true);
             }
@@ -93,6 +95,12 @@ public class Login_Page extends JFrame {
                     ad.setTitle("Admin");
                     ad.setVisible(true);
                 } 
+                } else if (role.equals("manager")) {
+                    Manager_Home_Page man_HP = new Manager_Home_Page(name);
+                    man_HP.setTitle("Manager");
+                    man_HP.setVisible(true);
+                    dispose();
+                }
                 else {
                     // Login failed, show message box
                     JOptionPane.showMessageDialog(

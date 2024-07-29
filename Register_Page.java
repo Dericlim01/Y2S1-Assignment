@@ -7,11 +7,12 @@ import java.awt.event.ActionListener;
 
 public class Register_Page extends JFrame {
     private JPanel contentPane;
+    private static String role;
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Register_Page reg = new Register_Page();
+                    Register_Page reg = new Register_Page(role);
                     reg.setTitle("Register Page");
                     reg.setVisible(true);
                 } catch (Exception e) {
@@ -21,11 +22,12 @@ public class Register_Page extends JFrame {
         });
     }
 
-    public Register_Page() {
+    public Register_Page(String r) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
         setResizable(false);
 
+        // Set panel
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -58,7 +60,7 @@ public class Register_Page extends JFrame {
 
         // Name status button
         JLabel name_stat_lbl = new JLabel();
-        name_stat_lbl.setBounds(400, 290, 100, 20);
+        name_stat_lbl.setBounds(140, 35, 150, 20);
         contentPane.add(name_stat_lbl);
 
         // Password Text Field
@@ -85,42 +87,61 @@ public class Register_Page extends JFrame {
                 String pass = String.valueOf(pass_txt_f.getPassword());
                 String cont_num = cont_num_txt_f.getText();
                 String email = email_txt_f.getText();
-                String role = "customer";
-                Register register_user = new Register(role);
+                Register register_user = new Register(r);
 
-                // Username available
-                if (register_user.chk_user(name)) {
-                    // User register successfuly
-                    if (register_user.reg_user(name, pass, cont_num, email)) {
-                        // Show Message Dialog
-                        JOptionPane.showMessageDialog(
-                            null,
-                            "User Registered Successfully",
-                            "Information",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        // User register failed, show option dialog
-                        int response = JOptionPane.showConfirmDialog(
-                            null,
-                            "Register Failed, Register again?",
-                            "Question",
-                            JOptionPane.YES_NO_OPTION);
-                        // Register again
-                        if (response == 1) {
-                            // Go to register page
-                            Register_Page reg = new Register_Page();
-                            reg.setVisible(true);
-                        } else {
-                            // Stop registration, back to login
-                            Login_Page login = new Login_Page();
-                            login.setTitle("Login");
-                            login.setVisible(true);
-                        }
-                    }
-                } else {
-                    // Username exists
-                    name_stat_lbl.setText("Username already exists.");
+                // If username and password is empty
+                if (name.isEmpty() && pass.isEmpty()) {
+                    name_stat_lbl.setText("Username cannot be empty");
                     name_stat_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+                } else {
+                    // If username and password is not empty
+                    // Username available
+                    if (register_user.chk_user(name)) {
+                        // User register successfuly
+                        if (register_user.reg_user(name, pass, cont_num, email)) {
+                            // Show Message Dialog
+                            JOptionPane.showMessageDialog(
+                                null,
+                                "User Registered Successfully",
+                                "Information",
+                                JOptionPane.INFORMATION_MESSAGE);
+                            // If superadmin register user, stay at register page
+                            if (role == "superadmin") {
+                                name_txt_f.setText("");
+                                pass_txt_f.setText("");
+                                cont_num_txt_f.setText("");
+                                email_txt_f.setText("");
+                            } else {
+                                // If customer done register, back login
+                                dispose();
+                                Login_Page login = new Login_Page();
+                                login.setTitle("Login");
+                                login.setVisible(true);
+                            }
+                        } else {
+                            // User register failed, show option dialog
+                            int response = JOptionPane.showConfirmDialog(
+                                null,
+                                "Register Failed, Register again?",
+                                "Question",
+                                JOptionPane.YES_NO_OPTION);
+                            // Register again
+                            if (response == 1) {
+                                // Go to register page
+                                Register_Page reg = new Register_Page(role);
+                                reg.setVisible(true);
+                            } else {
+                                // Stop registration, back to login
+                                Login_Page login = new Login_Page();
+                                login.setTitle("Login");
+                                login.setVisible(true);
+                            }
+                        }
+                    } else {
+                        // Username exists
+                        name_stat_lbl.setText("Username already exists.");
+                        name_stat_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+                    }
                 }
             }
         });
