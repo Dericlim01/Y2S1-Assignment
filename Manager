@@ -1,0 +1,29 @@
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
+    manager_HP = new JPanel("Manager_HomePage");
+       manager_HP.setLayout(null);
+       
+       JLabel man_name = new JLabel(name);
+       man_name.setFont(new Font("Calibri", Font.PLAIN, 16));
+       manager_HP.add(welcome);
+
+
+       JLabel welcome = new JLabel("Welcome Back!");
+       welcome.setBounds(35,150,120,80);
+       //welcome.setForeground(Color.PINK);
+       Font wel_font = new Font("Calibri",Font.BOLD,16);
+       welcome.setFont(wel_font);
+       //welcome.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+       //welcome.setSize(400,500);
+
+       JLabel title = new JLabel("Manager Home Page");
+       JButton view_profile = new JButton("View Profile");
+       JButton sales_dash = new JButton("Sales DashBoard   ");
+       JButton cus_issues = new JButton("Customer Issues");
+
+       
+       
+       
+       manager_HP.add(man_name);
+       manager_HP.setSize(900,600);
+       manager_HP.setVisible(true);
+   
