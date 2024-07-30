@@ -1,30 +1,36 @@
 import javax.swing.*;
-import javax.imageio.*;
 import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import javax.imageio.*;
 
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
+
+import java.io.File;
+import java.io.IOException;
 
 
 public class Sales_Dashboard extends JFrame {
 
+    private static String manname;
     private JScrollPane scrollPane;
+    
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable(){
             @Override
             public void run() {
                 try{
-                    new Sales_Dashboard().setVisible(true);
+                    new Sales_Dashboard(manname).setVisible(true);
                 }catch(Exception e){
                     e.printStackTrace();
                 }
@@ -32,7 +38,7 @@ public class Sales_Dashboard extends JFrame {
         });
     }
 
-    public Sales_Dashboard(){
+    public Sales_Dashboard(String n){
         setTitle("Sales Dashboard");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
@@ -65,7 +71,7 @@ public class Sales_Dashboard extends JFrame {
         scrollPane = man_data.present_data(col_name);
         manager_SD.add(scrollPane, BorderLayout.CENTER);
         // Set the table's preffered scrollable viewport size
-        scrollPane.setPreferredSize(new Dimension(400, 200));
+        scrollPane.setPreferredSize(new Dimension(400, 150));
 
         // Filter panel setup ( create another panel for filter)
         JPanel filter_panel = new JPanel();
@@ -75,7 +81,7 @@ public class Sales_Dashboard extends JFrame {
         filter_panel.add(new JLabel("Day"));
         JComboBox day = new JComboBox<>();
         for(int i = 1; i <= 31; i++){
-            day.addItem(String.valueOf(i));
+            day.addItem(String.format("%02d", i));
         }
         filter_panel.add(day);
         
@@ -135,6 +141,29 @@ public class Sales_Dashboard extends JFrame {
         });
         filter_panel.add(refresh);
 
+        JButton back_btn = new JButton();
+        try{
+            BufferedImage backImage = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            backImage = ImageIO.read(new File("D:/sem 1/Java.test/Manager/logout.png"));
+            Image back_ima = backImage.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+
+            back_btn.setIcon(new ImageIcon(back_ima));
+            back_btn.setBounds(920, 30, 100, 100);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        back_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Manager_Home_Page man_HP = new Manager_Home_Page(n);
+                man_HP.setTitle("Manager Home Page");
+                man_HP.setVisible(true);
+            }
+        });
+
+        filter_panel.add(back_btn);
+
 
         manager_SD.add(filter_panel, BorderLayout.NORTH);
 
@@ -153,6 +182,9 @@ public class Sales_Dashboard extends JFrame {
        day.addActionListener(actionListener);
        month.addActionListener(actionListener);
        year.addActionListener(actionListener);
+
+       
+       
 
         // day.addActionListener(new ActionListener() {
         //     @Override

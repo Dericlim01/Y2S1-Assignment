@@ -49,29 +49,34 @@ public class Manager {
         List<RowFilter<Object, Object>> filter = new ArrayList<>();
 
 
-        if(!txt_day.trim().isEmpty()){
+        if(txt_day != null && !txt_day.trim().isEmpty()){
 
-            filter.add(RowFilter.regexFilter("\\b" + txt_day + "\\b" , 4));
-
+            String regexDay = String.format("^%02d/", Integer.parseInt(txt_day));
+            filter.add(RowFilter.regexFilter(regexDay , 4));
+            return;
         }
         
 
-        if(!txt_month.trim().isEmpty()){
-
-            filter.add(RowFilter.regexFilter(txt_month, 4));
-
+        if(txt_month != null && !txt_month.trim().isEmpty()){
+            String regexMonth = String.format("/%s/", txt_month);
+            filter.add(RowFilter.regexFilter(regexMonth, 4));
+            return;
         }
 
-        if(!txt_year.trim().isEmpty()){
-            filter.add(RowFilter.regexFilter(txt_year + "$", 4));
-
+        if(txt_year != null && !txt_year.trim().isEmpty()){
+            String regexYear = String.format("/%s$", txt_year);
+            filter.add(RowFilter.regexFilter(regexYear, 4));
+            return;
         }
 
-        if(filter.size() == 0){
+        if(filter.isEmpty()){
             sorter.setRowFilter(null);
         }else{
-            sorter.setRowFilter(RowFilter.andFilter(filter));
+            sorter.setRowFilter(RowFilter.orFilter(filter));
         }
+
+
+        
 
 
 
@@ -101,6 +106,32 @@ public class Manager {
         Object[][] row_Data = rowData.toArray(new Object[0][]);
 
         table_Model = new DefaultTableModel(row_Data, colname);
+        JTable view = new JTable(table_Model);
+        sorter = new TableRowSorter<>(table_Model);
+        view.setRowSorter(sorter);
+
+        JScrollPane scrollPane = new JScrollPane(view);
+
+        return scrollPane;
+
+    }
+
+    public JScrollPane view_issues(String[] colname){
+        String line_Sales;
+        ArrayList<String[]> issuess = new ArrayList<>();
+        
+        try(BufferedReader read_Sales = new BufferedReader(new FileReader("issues.txt"))){
+            while((line_Sales = read_Sales.readLine()) != null){
+                String[] row = line_Sales.split(",");
+                issuess.add(row);
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+        Object[][] issues = issuess.toArray(new Object[0][]);
+
+        table_Model = new DefaultTableModel(issues, colname);
         JTable view = new JTable(table_Model);
         sorter = new TableRowSorter<>(table_Model);
         view.setRowSorter(sorter);
