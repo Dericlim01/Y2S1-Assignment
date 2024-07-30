@@ -1,14 +1,11 @@
+import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.*;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
 import java.awt.Font;
+import javax.swing.JPanel;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.border.EmptyBorder;
 
 public class Admin_Page extends JFrame {
     private JPanel contentPane;
@@ -56,10 +53,15 @@ public class Admin_Page extends JFrame {
         viewpro_btn.setForeground(new Color(88,57,39));
         viewpro_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         viewpro_btn.setBounds(400,200,200,30);
-        // viewpro_btn.addActionListener(new ActionListener()){
-        //     @Override
-        //     public void
-        // }
+        viewpro_btn.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                dispose();
+                Admin_Profile ap = new Admin_Profile(name);
+                ap.setTitle("Admin Profile");
+                ap.setVisible(true);
+            }
+        });
         contentPane.add(viewpro_btn);
 
         //Staff Management Button
@@ -68,10 +70,16 @@ public class Admin_Page extends JFrame {
         staffman_btn.setForeground(new Color(88,57,39));
         staffman_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         staffman_btn.setBounds(400,240,200,30);
-        //staffman_btn.addActionListner(new ActionListener()){
-        //      @Override
-        //      
-        //}
+        staffman_btn.addActionListener(new ActionListener(){
+             @Override
+             public void actionPerformed(ActionEvent e){
+                dispose();
+                Staff_Management sm = new Staff_Management();
+                sm.setTitle("Staff Management");
+                sm.setVisible(true);
+             }
+             
+        });
         contentPane.add(staffman_btn);
 
         //User Management Button
@@ -83,7 +91,7 @@ public class Admin_Page extends JFrame {
         ////
         contentPane.add(userman_btn);
 
-        //Boking Management Button
+        //Booking Management Button
         JButton bookman_btn = new JButton("Booking Management");
         bookman_btn.setBackground(new Color(255,239,222));
         bookman_btn.setForeground(new Color(88,57,39));
