@@ -11,16 +11,12 @@ import java.awt.event.ActionListener;
  * Login_Page
  */
 public class Login_Page extends JFrame {
-    private JPanel contentPane;
-
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Login_Page login = new Login_Page();
-                    login.setTitle("Login");
-                    login.setVisible(true);
+                    new Login_Page().setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -29,11 +25,13 @@ public class Login_Page extends JFrame {
     }
 
     public Login_Page() {
+        setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
         setResizable(false);
-        //contentPane.setTitle();
-        contentPane = new JPanel();
+
+        // Set panel
+        JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
@@ -45,20 +43,37 @@ public class Login_Page extends JFrame {
         name_lbl.setBounds(250, 250, 100, 30);
         contentPane.add(name_lbl);
 
-        // Password Label
-        JLabel pass_lbl = new JLabel("Password : ");
-        pass_lbl.setBounds(250, 310, 100, 30);
-        contentPane.add(pass_lbl);
-
         // Name Text Field
         JTextField name_txt_f = new JTextField();
         name_txt_f.setBounds(400, 250, 150, 30);
         contentPane.add(name_txt_f);
 
+        // Password Label
+        JLabel pass_lbl = new JLabel("Password : ");
+        pass_lbl.setBounds(250, 310, 100, 30);
+        contentPane.add(pass_lbl);
+
         // Password Text Field
         JPasswordField pass_txt_f = new JPasswordField();
         pass_txt_f.setBounds(400, 310, 150, 30);
+        pass_txt_f.setEchoChar('*');
         contentPane.add(pass_txt_f);
+
+        // Show password check box
+        JCheckBox show_pass = new JCheckBox();
+        show_pass.setBounds(560, 315, 20, 20);
+        show_pass.setSelected(false);
+        show_pass.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (show_pass.isSelected()) {
+                    pass_txt_f.setEchoChar((char) 0);
+                } else {
+                    pass_txt_f.setEchoChar('*');
+                }
+            }
+        });
+        contentPane.add(show_pass);
 
         // Register Button
         JButton reg_btn = new JButton("Register");
@@ -67,9 +82,7 @@ public class Login_Page extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 String role = "customer";
-                Register_Page reg = new Register_Page(role);
-                reg.setTitle("Register");
-                reg.setVisible(true);
+                new Register_Page(role).setVisible(true);
             }
         });
         contentPane.add(reg_btn);
@@ -85,25 +98,20 @@ public class Login_Page extends JFrame {
                 String role = log_user.login(name, pass);
                 // Login Successfull
                 if (role.equals("customer")) {
-                    Customer_Page cus = new Customer_Page(name);
-                    cus.setTitle("Customer");
-                    cus.setVisible(true);
+                    dispose();
+                    new Customer_Page(name).setVisible(true);
                 }
                 else if(role.equals("superadmin")){
-                    Suadmin_Page suad = new Suadmin_Page(name);
-                    suad.setTitle("Super Admin");
-                    suad.setVisible(true);
+                    dispose();
+                    new Suadmin_Page(name).setVisible(true);
                 }
                 else if(role.equals("admin")){
-                    Admin_Page ad = new Admin_Page(name);
-                    ad.setTitle("Admin");
-                    ad.setVisible(true);
+                    dispose();
+                    new Admin_Page(name).setVisible(true);
                 } 
                 else if (role.equals("manager")) {
-                    Manager_Home_Page man_HP = new Manager_Home_Page(name);
-                    man_HP.setTitle("Manager");
-                    man_HP.setVisible(true);
                     dispose();
+                    new Manager_Home_Page(name).setVisible(true);
                 }
                 else {
                     // Login failed, show message box
