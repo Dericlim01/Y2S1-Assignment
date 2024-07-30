@@ -89,6 +89,11 @@ public class Login_Page extends JFrame {
                     cus.setTitle("Customer");
                     cus.setVisible(true);
                 }
+                else if(role.equals("superadmin")){
+                    Suadmin_Page suad = new Suadmin_Page(name);
+                    suad.setTitle("Super Admin");
+                    suad.setVisible(true);
+                }
                 else if(role.equals("admin")){
                     Admin_Page ad = new Admin_Page(name);
                     ad.setTitle("Admin");
