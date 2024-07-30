@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Customer_Page extends JFrame {
-    private JPanel contentPane;
     private static String name;
     
     public static void main(String[] args) {
@@ -30,7 +29,8 @@ public class Customer_Page extends JFrame {
         setBounds(140, 100, 1000, 800);
         setResizable(false);
 
-        contentPane = new JPanel();
+        // Set panel
+        JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
@@ -54,9 +54,7 @@ public class Customer_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Login_Page log = new Login_Page();
-                log.setTitle("Login");
-                log.setVisible(true);
+                new Login_Page().setVisible(true);
             }
         });
         contentPane.add(logout_btn);
@@ -75,9 +73,7 @@ public class Customer_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Update_Profile update = new Update_Profile(n);
-                update.setTitle("Update Profile");
-                update.setVisible(true);
+                new Update_Profile(n).setVisible(true);
             }
         });
         contentPane.add(update_p_btn);

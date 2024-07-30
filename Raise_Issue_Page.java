@@ -28,6 +28,7 @@ public class Raise_Issue_Page extends JFrame {
         setBounds(140, 100, 1000, 800);
         setResizable(false);
 
+        // Set panel
         JPanel contentpane = new JPanel();
         contentpane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentpane);
