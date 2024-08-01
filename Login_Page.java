@@ -101,17 +101,21 @@ public class Login_Page extends JFrame {
                     dispose();
                     new Customer_Page(name).setVisible(true);
                 }
-                else if(role.equals("superadmin")){
+                else if (role.equals("superadmin")) {
                     dispose();
                     new Suadmin_Page(name).setVisible(true);
                 }
-                else if(role.equals("admin")){
+                else if (role.equals("admin")) {
                     dispose();
                     new Admin_Page(name).setVisible(true);
                 } 
                 else if (role.equals("manager")) {
                     dispose();
                     new Manager_Home_Page(name).setVisible(true);
+                }
+                else if (role.equals("scheduler")) {
+                    dispose();
+                    new SchedulerMainPage(name).setVisible(true);
                 }
                 else {
                     // Login failed, show message box
