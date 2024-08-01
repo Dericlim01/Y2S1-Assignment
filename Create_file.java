@@ -1,6 +1,7 @@
 import java.io.*;
 
 public class Create_file {
+    // User file
     public Boolean user_file() {
         try {
             if (new File("users.txt").createNewFile()) {
@@ -16,6 +17,7 @@ public class Create_file {
         }
     }
 
+    // Hall file
     public Boolean hall_file() {
         try {
             if (new File("halls.txt").createNewFile()) {
@@ -31,6 +33,23 @@ public class Create_file {
         }
     }
 
+    // Booking file
+    public Boolean booking_file() {
+        try {
+            if (new File("bookings.txt").createNewFile()) {
+                System.out.println("Booking file created");
+            } else {
+                System.out.println("Booking file exist");
+            }
+            return true;
+        } catch (IOException e) {
+            System.out.println("An error occured");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Issue file
     public Boolean issue_file() {
         try {
             if (new File("issues.txt").createNewFile()) {

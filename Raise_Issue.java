@@ -11,14 +11,26 @@ public class Raise_Issue {
 
     String line;
 
-    // Search hall id
+    // Search hall id in booking file booked previously by the user
     public ArrayList<String> search_hall() {
         ArrayList<String> halls = new ArrayList<String>();
         if (new Create_file().hall_file()) {
-            try (BufferedReader read = new BufferedReader(new FileReader("halls.txt"))) {
+            try (BufferedReader read = new BufferedReader(new FileReader("bookings.txt"))) {
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
-                    halls.add(data[0]);
+                    // if hall is book by user
+                    if (data[10].equals(name)) {
+                        // Check if hall id valid
+                        for (int i = 0; i < halls.size(); i++) {
+                            // if valid, break
+                            if (data[0].equals(halls.get(i))) {
+                                break;
+                            } else {
+                                // else, add
+                                halls.add(data[0]);
+                            }
+                        }
+                    }
                 }
                 return halls;
             } catch (Exception e) {
