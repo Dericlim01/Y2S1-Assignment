@@ -118,5 +118,18 @@ public class Raise_Issue_Page extends JFrame {
             }
         });
         contentpane.add(submit_issue_btn);
+
+        // Back button
+        JButton back_btn = new JButton("Back");
+        back_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        back_btn.setBounds(400, 630, 100, 30);
+        back_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new Customer_Page(n).setVisible(true);
+            }
+        });
+        contentpane.add(back_btn);
     }
 }
