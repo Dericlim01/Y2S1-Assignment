@@ -14,7 +14,7 @@ public class Raise_Issue {
     // Search hall id in booking file booked previously by the user
     public ArrayList<String> search_hall() {
         ArrayList<String> halls = new ArrayList<String>();
-        if (new Create_file().hall_file()) {
+        if (new Create_file().booking_file()) {
             try (BufferedReader read = new BufferedReader(new FileReader("bookings.txt"))) {
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
