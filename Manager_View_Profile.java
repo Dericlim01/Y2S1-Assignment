@@ -1,6 +1,7 @@
 import javax.swing.*;
-import javax.swing.border.*;
 import javax.imageio.*;
+import javax.swing.border.*;
+
 
 import java.awt.Font;
 import java.awt.Image;
@@ -8,9 +9,10 @@ import java.awt.Image;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
+import java.awt.event.ActionListener;
+
 import java.io.File;
 import java.io.IOException;
-import java.awt.event.ActionListener;
 
 public class Manager_View_Profile extends JFrame {
 

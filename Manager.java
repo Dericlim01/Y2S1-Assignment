@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.regex.PatternSyntaxException;
 
 import javax.swing.JTable;
@@ -40,67 +41,132 @@ public class Manager {
         return null;
     }
 
+    // public static List<String[]> data_filter(int day){
+    //     //1, String txt2, String txt3
+    //     // this.table_Model = table_Model;
+    //     // this.sorter = sorter;
+
+    //     // List<RowFilter<Object, Object>> filter = new ArrayList<>();
+
+    //     List<String[]> filter_Data = new ArrayList<>();
+
+
+
+    //     // if(txt.trim().length() == 0){
+    //     //     sorter.setRowFilter(null);
+
+    //     // } else{
+    //     //     sorter.setRowFilter(RowFilter.regexFilter(txt, 4));
+           
+    //     // }
+
+    // }
+
     //DefaultTableModel table_Model, TableRowSorter<DefaultTableModel> sorter,
     public void data_filter(String txt_day, String txt_month, String txt_year){
         //1, String txt2, String txt3
         this.table_Model = table_Model;
         this.sorter = sorter;
 
-        List<RowFilter<Object, Object>> filter = new ArrayList<>();
+        String file_data;
+
+        try (BufferedReader br = new BufferedReader(new FileReader("Sales.txt"))) {
+
+            while ((file_data = br.readLine()) != null){
+                String[] f_data = file_data.split(",");
+                String date_data = f_data[4];
+                String[] new_date_data = date_data.split("-");
+                if(txt_day.trim().equals(new_date_data[0])) {
+
+                    sorter.setRowFilter(RowFilter.regexFilter(txt_day, 4));
+
+                }
 
 
-        if(!txt_day.trim().isEmpty()){
 
-            filter.add(RowFilter.regexFilter("\\b" + txt_day + "\\b" , 4));
+            }
 
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
         
 
-        if(!txt_month.trim().isEmpty()){
+        // List<RowFilter<Object, Object>> filter = new ArrayList<>();
 
-            filter.add(RowFilter.regexFilter(txt_month, 4));
+        // if(txt_day.trim().length() == 0){
+        //     sorter.setRowFilter(null);
+        // }else{
+        //     sorter.setRowFilter(RowFilter.regexFilter(txt_day,4));
+        // }
 
-        }
+        // if(txt_month.trim().length() == 0){
+        //     sorter.setRowFilter(null);
+        // }else{
+        //     sorter.setRowFilter(RowFilter.regexFilter("-" + txt_month + "-", 4));
+        // }
 
-        if(!txt_year.trim().isEmpty()){
-            filter.add(RowFilter.regexFilter(txt_year + "$", 4));
+        // if(txt_year.trim().length() == 0){
+        //     sorter.setRowFilter(null);
+        // }else{
+        //     sorter.setRowFilter(RowFilter.regexFilter("-" + txt_year + "$", 4));
+        // }
 
-        }
-
-        if(filter.size() == 0){
-            sorter.setRowFilter(null);
-        }else{
-            sorter.setRowFilter(RowFilter.andFilter(filter));
-        }
-
-
-
-        // if(txt_day.trim().length() == 0 && txt_month.trim().length() == 0 && txt_year.trim().length() == 0){
+        // if(txt.trim().length() == 0){
         //     sorter.setRowFilter(null);
 
         // } else{
-        //     sorter.setRowFilter(RowFilter.regexFilter(txt_day, 4));
-        //     sorter.setRowFilter(RowFilter.regexFilter(txt_month, 4));
-        //     sorter.setRowFilter(RowFilter.regexFilter(txt_year, 4));
-        // }
+        //     sorter.setRowFilter(RowFilter.regexFilter(txt, 4));
+           
+        // // // }
+
+
     }
 
     public JScrollPane present_data(String[] colname){
         String line_Sales;
         ArrayList<String[]> rowData = new ArrayList<>();
         
-        try(BufferedReader read_Sales = new BufferedReader(new FileReader("Sales.txt"))){
-            while((line_Sales = read_Sales.readLine()) != null){
+        try(BufferedReader read_Sales = new BufferedReader(new FileReader("Sales.txt"))) {
+            while ((line_Sales = read_Sales.readLine()) != null) {
                 String[] row = line_Sales.split(",");
                 rowData.add(row);
             }
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         Object[][] row_Data = rowData.toArray(new Object[0][]);
 
         table_Model = new DefaultTableModel(row_Data, colname);
+        JTable view = new JTable(table_Model);
+        sorter = new TableRowSorter<>(table_Model);
+        view.setRowSorter(sorter);
+
+        JScrollPane scrollPane = new JScrollPane(view);
+
+
+        return scrollPane;
+
+    }
+
+    public JScrollPane view_issues(String[] colname){
+        String line_Sales;
+        ArrayList<String[]> issuess = new ArrayList<>();
+        
+        try(BufferedReader read_Sales = new BufferedReader(new FileReader("issues.txt"))){
+            while((line_Sales = read_Sales.readLine()) != null){
+                String[] row = line_Sales.split(",");
+                issuess.add(row);
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+        Object[][] issues = issuess.toArray(new Object[0][]);
+
+        table_Model = new DefaultTableModel(issues, colname);
         JTable view = new JTable(table_Model);
         sorter = new TableRowSorter<>(table_Model);
         view.setRowSorter(sorter);
