@@ -106,9 +106,7 @@ public class Manager_Home_Page extends JFrame{
         view_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Manager_View_Profile man_VP = new Manager_View_Profile(n);
-                man_VP.setTitle("Manager View Profile");
-                man_VP.setVisible(true);
+                new Manager_View_Profile(n).setVisible(true);
                 dispose();
             }
         });
@@ -121,9 +119,7 @@ public class Manager_Home_Page extends JFrame{
         sales_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Sales_Dashboard sales = new Sales_Dashboard(n);
-                sales.setTitle("Sales Dashboard");
-                sales.setVisible(true);
+                new Sales_Dashboard(n).setVisible(true);
                 dispose();
             }
         });
@@ -136,9 +132,7 @@ public class Manager_Home_Page extends JFrame{
         book_Man_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Booking_Management man_BM = new Booking_Management(n);
-                man_BM.setTitle("Booking Management");
-                man_BM.setVisible(true);
+                new Booking_Management(n).setVisible(true);
                 dispose();
             }
         });
@@ -163,8 +157,7 @@ public class Manager_Home_Page extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Task_Assign_and_Status man_TAS = new Task_Assign_and_Status(n);
-                man_TAS.setTitle("Task Assign and Status");
+                new Task_Assign_and_Status(n).setVisible(true);
             }
         });
         manager_HP.add(task_ass_sta_btn);
