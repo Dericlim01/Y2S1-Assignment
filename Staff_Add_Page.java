@@ -1,11 +1,11 @@
 import java.awt.*;
+import javax.swing.*;
+import java.util.Properties;
+import org.jdatepicker.impl.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import javax.swing.border.EmptyBorder;
-import javax.swing.*;
+
 
 public class Staff_Add_Page extends JFrame{
     private JPanel contentPane;
@@ -22,6 +22,7 @@ public class Staff_Add_Page extends JFrame{
                 sad.getContentPane().setBackground(new Color(230,220,202));
             } catch (Exception e) {
                 // TODO: handle exception
+                e.printStackTrace();
             }
         }
     });
@@ -58,7 +59,7 @@ public Staff_Add_Page(String name){
     contentPane.add(staffpass_lbl);
      
     //Phone Label
-    JLabel staffphone_lbl = new JLabel("Phone NO.:");
+    JLabel staffphone_lbl = new JLabel("Phone NO. :");
     staffphone_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
     staffphone_lbl.setBounds(180,340,200,30);
     contentPane.add(staffphone_lbl);
@@ -114,13 +115,26 @@ public Staff_Add_Page(String name){
     contentPane.add(staffmail_txt);
 
     //D.O.B Calendar
+    UtilDateModel model = new UtilDateModel();
+    //Properties create object to store values in it
+    Properties prop = new Properties();
+    prop.put("text.day", "Day");
+    prop.put("text.month","Month");
+    prop.put("text.year", "Year");
+    //Import Date Panel and Picker
+    JDatePanelImpl datePanel = new JDatePanelImpl(model, prop);
+    JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateFormat());
+    datePicker.setBounds(590,270,170,30);
+    contentPane.add(datePicker);
+
+    //Gender Combo Box
+    String[] gender = {"male", "female"};
+    Component genData = new JComboBox<>(gender);
+    genData.setBounds(590,340,170,30);
+    contentPane.add(genData);
+
+    //Add New Staff Button
     
-
-
-    //Gender Text Field
-    JTextField staffgen_txt = new JTextField();
-    staffgen_txt.setBounds(590,340,170,30);
-    contentPane.add(staffgen_txt);
     
     //Back Staff Management Button
     JButton backstaff_btn = new JButton("Back");
@@ -138,4 +152,7 @@ public Staff_Add_Page(String name){
 
 }
 
+
 }
+
+
