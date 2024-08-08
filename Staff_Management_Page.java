@@ -40,7 +40,6 @@ public class Staff_Management_Page extends JFrame {
 
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
-        getContentPane().setBackground(new Color(212,207,192));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
@@ -48,10 +47,33 @@ public class Staff_Management_Page extends JFrame {
         JLabel staffman_lbl = new JLabel("Staff Management");
         staffman_lbl.setFont(new Font("Broadway",Font.PLAIN,20));
         staffman_lbl.setBounds(400,100,300,30);
-        contentPane.add(staffman_lbl);
+        contentPane.add(staffman_lbl);      
+
+        //Add Staff Button
+        JButton add_btn = new JButton("Add Staff");
+        add_btn.setBounds(700,600,120,30);
+        add_btn.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                dispose();
+                Staff_Add_Page sad = new Staff_Add_Page(name);
+                sad.setTitle("Staff Add");
+                sad.setVisible(true);
+            }
+        });
+        contentPane.add(add_btn);
 
 
-              //Home Page Button
+        //Edit Page Button
+
+
+
+        //View, Filter and Delete Page Button
+
+
+
+             
+        //Home Page Button
         JButton home_btn = new JButton();
         try{
             BufferedImage home_pic = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
