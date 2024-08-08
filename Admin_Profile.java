@@ -39,7 +39,6 @@ public class Admin_Profile extends JFrame{
         
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
-        getContentPane().setBackground(new Color(212,207,192));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         UpdateProfile search = new UpdateProfile();

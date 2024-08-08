@@ -37,7 +37,6 @@ public class Admin_Page extends JFrame {
 
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
-        getContentPane().setBackground(new Color(212,207,192));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
