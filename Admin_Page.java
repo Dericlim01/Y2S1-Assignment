@@ -17,7 +17,6 @@ public class Admin_Page extends JFrame {
             public void run(){
                 try {
                     Admin_Page ad = new Admin_Page(name);
-                    ad.setTitle("Admin");
                     ad.setVisible(true);
                     ad.getContentPane().setBackground(new Color(230,220,202));
        
@@ -29,7 +28,8 @@ public class Admin_Page extends JFrame {
         });
     }
 
-    public Admin_Page(String n){
+    public Admin_Page(String name){
+        setTitle("Admin");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
         setResizable(false);
@@ -74,7 +74,8 @@ public class Admin_Page extends JFrame {
              @Override
              public void actionPerformed(ActionEvent e){
                 dispose();
-                Staff_Management sm = new Staff_Management();
+                // String role = "staffs";
+                Staff_Management_Page sm = new Staff_Management_Page(name);
                 sm.setTitle("Staff Management");
                 sm.setVisible(true);
              }

@@ -1,37 +1,59 @@
-import java.awt.*;
-import java.awt.Font;
-import javax.swing.*;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.EventQueue;
-import java.awt.event.ActionListener;
-import javax.swing.border.EmptyBorder;
+import java.io.*;
+import java.util.Date;
+import java.io.FileWriter;
 
+public class Staff_Management {
+    private String line;
+    private String role;
 
-public class Staff_Management extends JFrame {
-    private JPanel contentPane;
+        public Staff_Management(String r){
+            role = r;
+        }
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable(){
-            @Override
-            public void run(){
-                try {
-                    Staff_Management sm = new Staff_Management();
-                    sm.setTitle("Staff Management");
-                    sm.setVisible(true);
-                } catch (Exception e) {
-                    // TODO: handle exception
-                    e.printStackTrace();
+        //Check the unique staffname
+        Create_file file = new Create_file();
+        public Boolean check_staff (String name){
+        if(file.staffs_file()){
+            try (BufferedReader read_staff = new BufferedReader(new FileReader("staffs.txt"))){
+                while ((line = read_staff.readLine()) != null){
+                    String[] data = line.split(",");
+                    String staffname = data[0];
+                    if(staffname.equals(name)){
+                        return false;
+                    }
                 }
-            }
-        });
-    }
-    
-    public Staff_Management(){
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(140,100,1000,800);
-        setResizable(false);
+            } catch (Exception e) {
+                // TODO: handle exception
+                e.printStackTrace();
+                return false;
+            }    
 
-        contentPane = new JPanel();
+    }
+    return true;
+    }
+
+    //Staff Management
+    public Boolean add_staff(String staffname, String password, String phone, String email, Date D_O_B, String gender){
+        try {      
+                String[] staffsData = {
+                    staffname,
+                    password,
+                    phone,
+                    email,
+                    D_O_B.toString(),
+                    gender,
+                    role
+                };
+                String stSplitData = String.join(",", staffsData);
+                FileWriter staffs = new FileWriter("staffs.txt",true);
+                staffs.write(stSplitData + "\n");
+                staffs.close();
+                return true;
+        }catch (Exception e) {
+            // TODO: handle exception
+            System.out.println("Error occured.");
+            e.printStackTrace();
+        }
+        return false;
     }
 }

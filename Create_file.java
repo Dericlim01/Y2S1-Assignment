@@ -64,4 +64,21 @@ public class Create_file {
             return false;
         }
     }
+
+    public Boolean staffs_file(){
+        try {
+            if(new File("staffs.txt").createNewFile()){
+                System.out.println("Staffs file created");
+            }
+            else{
+                System.out.println("Staffs file exist");
+            }
+            return true;
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println("An error occured");
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

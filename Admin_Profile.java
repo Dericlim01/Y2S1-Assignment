@@ -1,7 +1,8 @@
 import java.awt.*;
 import javax.swing.*;
 import java.io.File;
-
+import java.awt.Font;
+import java.awt.Image;
 import javax.imageio.*;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
@@ -105,27 +106,27 @@ public class Admin_Profile extends JFrame{
         efield.setBounds(500,390,200,30);
 
          //Home Page Button
-        // JButton home_btn = new JButton();
-        // try{
-        //     BufferedImage home_pic = new BufferedImage(50, 50, ABORT);
-        //     home_pic = ImageIO.read(new File("C:\\Users\\ARELLAYIM\\Documents\\JAVA\\Assignment Pictures\\logout.png"));
-        //     Image home_icon = home_pic.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-        //     home_btn.setIcon(new ImageIcon(home_icon));
-        //     home_btn.setBounds(920,30,40,40);
+        JButton home_btn = new JButton();
+        try{
+            BufferedImage home_pic = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            home_pic = ImageIO.read(new File("C:\\Users\\ARELLAYIM\\Documents\\JAVA\\Assignment Pictures\\logout.png"));
+            Image home_icon = home_pic.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+            home_btn.setIcon(new ImageIcon(home_icon));
+            home_btn.setBounds(920,30,40,40);
 
-        // }catch(IOException e){
-        //     e.printStackTrace();
-        // }
-        // home_btn.addActionListener(new ActionListener(){
-        //     @Override
-        //     public void actionPerformed(ActionEvent e){
-        //         dispose();
-        //         Admin_Page ad = new Admin_Page(name);
-        //         ad.setTitle("Admin");
-        //         ad.setVisible(true);
-        //     }
-        // });
-        // contentPane.add(home_btn);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        home_btn.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                dispose();
+                Admin_Page ad = new Admin_Page(name);
+                ad.setTitle("Admin");
+                ad.setVisible(true);
+            }
+        });
+        contentPane.add(home_btn);
 
 
          //Update Button
