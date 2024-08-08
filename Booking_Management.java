@@ -15,6 +15,7 @@ import java.io.IOException;
 
 public class Booking_Management extends JFrame {
     private static String manname;
+    private static JScrollPane scrollPane;
 
 
     public static void main(String[] args) {
@@ -41,6 +42,14 @@ public class Booking_Management extends JFrame {
         setContentPane(manager_BM);
         manager_BM.setLayout(null);
 
+        JButton refresh = new JButton("refresh");
+        refresh.setBounds(720, 23, 80, 20);
+        refresh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manager_BM.remove(scrollPane);
+            }
+        });
 
     }
 }

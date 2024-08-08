@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.imageio.*;
+import javax.management.remote.JMXServerErrorException;
 import javax.swing.border.*;
 
 import java.awt.Font;
@@ -14,6 +15,8 @@ import java.io.IOException;
 
 public class Task_Assign_and_Status extends JFrame {
     private static String manname;
+    private static JScrollPane scrollPane;
+
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -33,6 +36,8 @@ public class Task_Assign_and_Status extends JFrame {
         setBounds(140, 100, 1000, 800);
         setResizable(false);
 
+        Manager man_task = new Manager();
+
         JPanel manager_TAS = new JPanel();
         manager_TAS.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(manager_TAS);
@@ -48,6 +53,11 @@ public class Task_Assign_and_Status extends JFrame {
         // 
         manager_TAS.add(staff);
 
-        String[] row_name = {"Task ID", "Task Title", "Start Date", "End Date"};
+        String[] row_name = {"Task ID", "Issues ID", "Issues", "Description", "Username", "Halls ID", "Staff ID", "Handled Staff", "Issues Status"};
+
+        scrollPane = man_task.view_issues(row_name, "issues.txt");
+        scrollPane.setBounds(9, 350, 970, 100);
+        manager_TAS.add(scrollPane);
+
     }
 }

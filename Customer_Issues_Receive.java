@@ -60,9 +60,9 @@ public class Customer_Issues_Receive extends JFrame {
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                manager_CIR.remove(scrollPane);
                 scrollPane = man_issues.view_issues(col_name);
-                manager_CIR.add(scrollPane, BorderLayout.CENTER);
+                manager_CIR.remove(scrollPane);
+                manager_CIR.add(scrollPane);
                 manager_CIR.revalidate();
                 manager_CIR.repaint();
             }

@@ -1,7 +1,9 @@
 import java.io.*;
 import java.util.*;
 import java.text.DateFormat;
+import java.time.LocalDateTime;
 import java.text.SimpleDateFormat;
+import java.text.DateFormatSymbols;
 import java.util.regex.PatternSyntaxException;
 
 import javax.swing.JTable;
@@ -77,11 +79,9 @@ public class Manager {
                 String date_data = f_data[4];
                 String[] new_date_data = date_data.split("-");
                 if(txt_day.trim().equals(new_date_data[0])) {
-
                     sorter.setRowFilter(RowFilter.regexFilter(txt_day, 4));
 
                 }
-
 
 
             }
@@ -89,7 +89,6 @@ public class Manager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         
 
@@ -177,70 +176,75 @@ public class Manager {
 
     }
 
+    public JscrollPane task_status(){
+        String task;
+        ArrayList<String[]> taskStatus = new ArrayList<>();
+
+        try (BufferedReader br_task = new BufferedReader(new FileReader("issues.txt"))){
+            while((task = br_task.readLine()) != null){
+                String[] row = task.split(",");
+                taskStatus.add(row);
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+         
+    }
 
 
-    // public Object[][] present_data(){
-    //     String line_Sales;
-    //     ArrayList<String[]> rowData = new ArrayList<>();
-    //     try(BufferedReader read_Sales = new BufferedReader(new FileReader("Sales.txt"))){
-    //         while((line_Sales = read_Sales.readLine()) != null){
-    //             String[] row = line_Sales.split(",");
-    //             rowData.add(row);
-    //         }
-    //     }catch(IOException e){
-    //         e.printStackTrace();
-    //     }
 
-    //     Object[][] row_Data = rowData.toArray(new Object[0][]);
+    public ArrayList<String> day_list(int year, int month){
+        ArrayList<String> day_List = new ArrayList<>();
+        int day = 0;
+        // Leap year
 
-    //     return row_Data;
+        if (month == 2) {
+            // Feb 29
+            if (year % 4 == 0) {
+                day = 30;
+            } else {
+                // Feb 28
+                day = 29;
+            }
+        } else if (month < 8 && month % 2 == 1) {
+            // Jan, Mar, May, Jul
+            day = 32;
+        } else if (month > 7 && month % 2 == 0) {
+            // Aug, Oct, Dec
+            day = 32;
+        } else {
+            // Feb, Apr, Jun, Sep, Nov
+            day = 31;
+        }
+        // Add to day list and return
+        for (int i = 1; i < day; i++) {
+            day_List.add(i + "");
+        }
 
-    // }
+        return day_List;
+    }
 
-    // public void date_based_on_month(JComboBox day,JComboBox month, JComboBox year){
-    //     String month_selected = (String) month.getSelectedItem();
-    //     String year_selected = (String) year.getSelectedItem();
-    //     int year_select = Integer.parseInt(year_selected);
+    public ArrayList<String> month_list() {
+        ArrayList<String> month_List = new ArrayList<>();
+        String[] months = new DateFormatSymbols().getMonths();
+        for (int i = 0; i < months.length - 1; i++) {
+            month_List.add(months[i]);
+        }
+        return month_List;
+        
+    }
 
-    //     if(month_selected != null){
-    //         switch(month_selected){
-    //             case "January":
-    //             case "March":
-    //             case "May":
-    //             case "July":
-    //             case "August":
-    //             case "October":
-    //             case "December":
-    //                 day.removeAllItems();
-    //                 for(int i = 1; i <= 31; i++){
-    //                     day.addItem(String.valueOf(i));
-    //                 }
+    public ArrayList<String> year_list() {
+        ArrayList<String> year_List = new ArrayList<>();
+        for (int year = LocalDateTime.now().getYear(); year <= Calendar.getInstance().get(Calendar.YEAR) + 1; year++) {
+            year_List.add(year + "");
+        }
+        return year_List;
 
-    //             case "February":
-    //                 if((year_select % 4 == 0 && year_select % 100 != 0) ||year_select % 400 == 0){
-    //                     day.removeAllItems();
-    //                     for(int i = 1; i <= 29; i++){
-    //                     day.addItem(String.valueOf(i));
-    //     }
-    //                 }else{
-    //                     day.removeAllItems();
-    //                     for(int i = 1; i <= 28; i++){
-    //                     day.addItem(String.valueOf(i));
-    //     }
-    //                 }
+    }
 
-    //             case "April":
-    //             case "June":
-    //             case "September":
-    //             case "November":
-    //                 day.removeAllItems();
-    //                 for(int i = 1; i <= 30; i++){
-    //                     day.addItem(String.valueOf(i));
-    //                 }
 
-    //         }
-    //     }
-
-    // }
 
 }

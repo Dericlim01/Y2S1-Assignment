@@ -21,7 +21,7 @@ import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 
 import java.time.LocalDate;
-
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -89,11 +89,14 @@ public class Sales_Dashboard extends JFrame {
         day_lbl.setBounds(195, 20, 45, 20);
         manager_SD.add(day_lbl);
         
-        JComboBox day = new JComboBox<>();
+        ArrayList<String> day_data = man_data.day_list(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue());
+        String[] days = day_data.toArray(new String [0]);
+        JComboBox<String> day = new JComboBox<>(days);
         day.setBounds(245, 23, 50, 20);
-        for(int i = 1; i <= 31; i++){
-            day.addItem(String.format("%2d", i));
-        }
+        day.setSelectedIndex(LocalDateTime.now().getDayOfMonth() - 1);
+        // for(int i = 1; i <= 31; i++){
+        //     day.addItem(String.format("%2d", i));
+        // }
         
         manager_SD.add(day);
         
@@ -103,17 +106,22 @@ public class Sales_Dashboard extends JFrame {
         month_lbl.setBounds(325, 23, 60, 20);
         manager_SD.add(month_lbl);
 
-        String[] Month = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        JComboBox month = new JComboBox<>(Month);
+        // String[] Month = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        ArrayList<String> month_data = man_data.month_list();
+        String[] months = month_data.toArray(new String[0]);
+        JComboBox<String> month = new JComboBox<>(months);
         month.setBounds(395, 23, 100, 20);
-        // month.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         String txt_month = month.getSelectedItem().toString();
-        //         man_data.data_filter(txt_month);
-        //     }
-        // });
-
+        month.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                day.removeAllItems();
+                ArrayList<String> day_List = man_data.day_list(Integer.parseInt(day.getSelectedItem().toString()), month.getSelectedIndex() + 1);
+                String[] allDay = day_List.toArray(new String[0]);
+                for (int i = 0; i < allDay.length; i++) {
+                    day.addItem(allDay[i]);
+                }
+            }
+        });
         manager_SD.add(month);
 
         JLabel year_lbl = new JLabel("Year : ");
@@ -121,11 +129,13 @@ public class Sales_Dashboard extends JFrame {
         year_lbl.setBounds(530, 23, 60, 20);
         manager_SD.add(year_lbl);
 
-        JComboBox year = new JComboBox<>();
+        ArrayList<String> year_data = man_data.year_list();
+        String[] years = year_data.toArray(new String[0]);
+        JComboBox<String> year = new JComboBox<>(years);
         year.setBounds(600, 23, 80, 20);
-        for (int i = 2000; i <= 2100; i++) {
-            year.addItem(String.valueOf(i));
-        }
+        // for (int i = 2000; i <= 2100; i++) {
+        //     year.addItem(String.valueOf(i));
+        // }
         // year.addActionListener(new ActionListener() {
         //     @Override
         //     public void actionPerformed(ActionEvent e) {
@@ -183,6 +193,7 @@ public class Sales_Dashboard extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
         back_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
