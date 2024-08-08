@@ -26,7 +26,8 @@ public class Suadmin_Page extends JFrame {
         });
     }
 
-    public Suadmin_Page(String n) {
+    public Suadmin_Page(String name) {
+        setTitle("Super Admin");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
         setResizable(false);
@@ -40,7 +41,7 @@ public class Suadmin_Page extends JFrame {
         //Home Page Label
         JLabel suadhome_lbl = new JLabel("Super Admin Home Page");
         suadhome_lbl.setFont(new Font("Broadway",Font.PLAIN,20));
-        suadhome_lbl.setBounds(400,100,300,30);
+        suadhome_lbl.setBounds(365,100,300,30);
         contentPane.add(suadhome_lbl);
 
         //Admin Management Button
@@ -61,8 +62,8 @@ public class Suadmin_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e){
                 dispose();
-                Staff_Management sm = new Staff_Management();
-                sm.setTitle("Staff Managemnt");
+                Staff_Management_Page sm = new Staff_Management_Page(name);
+                sm.setTitle("Staff Management");
                 sm.setVisible(true);
             }
         });
