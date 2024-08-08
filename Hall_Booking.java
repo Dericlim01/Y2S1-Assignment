@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.text.DateFormatSymbols;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -31,7 +30,15 @@ public class Hall_Booking {
         return halls;
     }
 
-    public ArrayList<String> day_list(int year, int month) {
+    public ArrayList<String> day_list(int year, String months, int days) {
+        int month = 0;
+        String[] monthList = new DateFormatSymbols().getMonths();
+        for (int i = 0; i < monthList.length; i++) {
+            if (months.equals(monthList[i])) {
+                month = i + 1;
+                break;
+            }
+        }
         ArrayList<String> dayList = new ArrayList<>();
         int day = 0;
         // Leap year
@@ -55,23 +62,27 @@ public class Hall_Booking {
         }
         // Add to day list and return
         for (int i = 1; i < day; i++) {
-            dayList.add(i + "");
+            if (i > days - 1) {
+                dayList.add(i + "");
+            }
         }
         return dayList;
     }
 
-    public ArrayList<String> month_list() {
+    public ArrayList<String> month_list(int month) {
         ArrayList<String> monthList = new ArrayList<>();
         String[] months = new DateFormatSymbols().getMonths();
         for (int i = 0; i < months.length - 1; i++) {
-            monthList.add(months[i]);
+            if (i > month - 2) {
+                monthList.add(months[i]);
+            }
         }
         return monthList;
     }
 
-    public ArrayList<String> year_list() {
+    public ArrayList<String> year_list(int year) {
         ArrayList<String> yearList = new ArrayList<>();
-        for (int years = LocalDateTime.now().getYear(); years <= Calendar.getInstance().get(Calendar.YEAR) + 1; years++) {
+        for (int years = year; years <= Calendar.getInstance().get(Calendar.YEAR) + 1; years++) {
             yearList.add(years + "");
         }
         return yearList;
@@ -79,8 +90,8 @@ public class Hall_Booking {
 
     public Object[][] hall_data() {
         Object[][] data = {
-            {"H01", "Auditorium", 200, 60, 2000},
-            {"H02", "Meeting Room", 600, 100, 4000}
+            {"H01", "Auditorium", 200, 60, 2000, "Available"},
+            {"H02", "Meeting Room", 600, 100, 4000, "Available"}
         };
         return data;
     }
