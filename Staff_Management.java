@@ -1,10 +1,12 @@
 import java.io.*;
 import java.util.Date;
 import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 
 public class Staff_Management {
     private String line;
     private String role;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
         public Staff_Management(String r){
             role = r;
@@ -33,14 +35,15 @@ public class Staff_Management {
     }
 
     //Staff Management
-    public Boolean add_staff(String staffname, String password, String phone, String email, Date D_O_B, String gender){
+    public Boolean add_staff(String staffname, String password, String phone, String email, Date D_O_B, String gender, String role){
         try {      
+                String dobFormat = dateFormat.format(D_O_B);
                 String[] staffsData = {
                     staffname,
                     password,
                     phone,
                     email,
-                    D_O_B.toString(),
+                    dobFormat,
                     gender,
                     role
                 };
@@ -56,4 +59,5 @@ public class Staff_Management {
         }
         return false;
     }
+
 }

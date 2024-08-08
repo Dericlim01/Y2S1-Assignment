@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.Calendar;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +13,9 @@ public class DateFormat extends JFormattedTextField.AbstractFormatter {
     @Override
     public Object stringToValue(String text) throws ParseException {
         // TODO Auto-generated method stub
-        return dateFormat.parseObject(text);
+        //convert String into Date format
+        //return by Date type
+        return dateFormat.parse(text);
     }
     @Override
     public String valueToString(Object value) throws ParseException {
@@ -21,6 +24,7 @@ public class DateFormat extends JFormattedTextField.AbstractFormatter {
             Calendar cal = (Calendar) value;
             return dateFormat.format(cal.getTime());
         }
+        //return empty when the value is null
         return "";
     }
 }
