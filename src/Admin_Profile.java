@@ -2,8 +2,7 @@ package src;
 import java.awt.*;
 import javax.swing.*;
 import java.io.File;
-import java.awt.Font;
-import java.awt.Image;
+
 import javax.imageio.*;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
@@ -124,6 +123,7 @@ public class Admin_Profile extends JFrame{
                 Admin_Page ad = new Admin_Page(name);
                 ad.setTitle("Admin");
                 ad.setVisible(true);
+                ad.getContentPane().setBackground(new Color(230,220,202));
             }
         });
         contentPane.add(home_btn);

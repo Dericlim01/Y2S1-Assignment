@@ -65,6 +65,7 @@ public class Suadmin_Page extends JFrame {
                 Staff_Management_Page sm = new Staff_Management_Page(name);
                 sm.setTitle("Staff Management");
                 sm.setVisible(true);
+                sm.getContentPane().setBackground(new Color(230,220,202));
             }
         });
         contentPane.add(staBtn);
@@ -73,7 +74,7 @@ public class Suadmin_Page extends JFrame {
         JButton userBtn = new JButton("User Management");
         userBtn.setBackground(new Color(255,239,222));
         userBtn.setForeground(new Color(88,57,39));
-        userBtn.setFont(new Font("Comic San MS",Font.PLAIN,15));
+        userBtn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         userBtn.setBounds(400,280,200,30);
         contentPane.add(userBtn);
 
@@ -98,6 +99,7 @@ public class Suadmin_Page extends JFrame {
                 Login_Page log = new Login_Page();
                 log.setTitle("Login");
                 log.setVisible(true);
+                log.getContentPane().setBackground(new Color(230,220,202));
             }
         });
         contentPane.add(logout_btn);

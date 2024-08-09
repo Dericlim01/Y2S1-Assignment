@@ -4,3 +4,7 @@ manager,manager,0123456789,manager@mail.com,manager
 scheduler,scheduler,0123456789,scheduler@mail.com,scheduler
 customer,customer,0123456789,customer@mail.com,customer
 hayhay,manager,668383,hay@mail.com,null
+bean,manager,8997,beanbean@mail.com,null
+emily,scheduler,6546323,ylime@mail.com,null
+jamal,scheduler,67243,jamal@mail.com,null
+chole,chole,4584685,ccc@mail.com,null
