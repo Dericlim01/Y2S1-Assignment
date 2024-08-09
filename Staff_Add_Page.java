@@ -1,5 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
+
+import java.util.Date;
 import java.util.Properties;
 import org.jdatepicker.impl.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +12,7 @@ import javax.swing.border.EmptyBorder;
 public class Staff_Add_Page extends JFrame{
     private JPanel contentPane;
     private static String name;
-    public static JComboBox roleData;
+
     public static void main(String[] args) {
     EventQueue.invokeLater(new Runnable(){
         @Override
@@ -105,7 +107,7 @@ public Staff_Add_Page(String name){
 
     //Role Combo Box
     String[] roletype = {"scheduler", "manager"};
-    roleData = new JComboBox<>(roletype);
+    JComboBox<String> roleData = new JComboBox<>(roletype);
     roleData.setBounds(300,410,170,30);
     contentPane.add(roleData);
 
@@ -123,18 +125,80 @@ public Staff_Add_Page(String name){
     prop.put("text.year", "Year");
     //Import Date Panel and Picker
     JDatePanelImpl datePanel = new JDatePanelImpl(model, prop);
-    JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateFormat());
-    datePicker.setBounds(590,270,170,30);
-    contentPane.add(datePicker);
+    JDatePickerImpl dobDatePicker = new JDatePickerImpl(datePanel, new DateFormat());
+    dobDatePicker.setBounds(590,270,170,30);
+    contentPane.add(dobDatePicker);
 
     //Gender Combo Box
     String[] gender = {"male", "female"};
-    Component genData = new JComboBox<>(gender);
+    JComboBox<String> genData = new JComboBox<>(gender);
     genData.setBounds(590,340,170,30);
     contentPane.add(genData);
 
     //Add New Staff Button
-    
+    JButton staffadd_btn = new JButton("Add New Staff");
+    staffadd_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+    staffadd_btn.setBounds(400,500,170,30);
+    staffadd_btn.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e){
+            String staffname = staffname_txt.getText();
+            String staffpass = staffpass_txt.getText();
+            String staffphone = staffphone_txt.getText();
+            String staffmail = staffmail_txt.getText();
+            Date staffdob = (Date) dobDatePicker.getModel().getValue();
+            String staffgen = (String) genData.getSelectedItem();
+            String staffrole = (String) roleData.getSelectedItem(); 
+            Staff_Management Staff_Management = new Staff_Management(name);
+            Register register_user = new Register(name);
+
+            //Adding the informations into staffs text file
+            if(Staff_Management.check_staff(staffname)){
+                //Start adding
+                if(Staff_Management.add_staff(staffname, staffpass, staffphone, staffmail, staffdob, staffgen, staffrole)){
+                    //Show Message Dialog
+                    if(register_user.chk_user(name)){
+                        if(register_user.reg_user(staffname, staffpass, staffphone, staffmail/*,staffrole*/)){
+                            int response = JOptionPane.showConfirmDialog(null,"Staff Added Successfully. Do you want to add again?","Question" ,JOptionPane.YES_NO_OPTION);
+                    if(response == 0){
+                        //add again
+                        new Staff_Add_Page(name).setVisible(true);
+                    }
+                    else{
+                        //back to management view page
+                        new Staff_Management_Page(name).setVisible(true);
+                    }
+                        }
+                    }
+                    
+                }
+                else{
+                    //Failed to Add New Staff
+                    int response = JOptionPane.showConfirmDialog(null,"Add Staff Failed. Do you want to add again?","Question" ,JOptionPane.YES_NO_OPTION);
+                    if(response == 0){
+                        //add again
+                        new Staff_Add_Page(name).setVisible(true);
+                    }
+                    else{
+                        //back to management view page
+                        new Staff_Management_Page(name).setVisible(true);
+                    }
+                }
+            }
+            else{
+                //Staffname exists
+                int response = JOptionPane.showConfirmDialog(null,"Staff name exists. Do you want to add again?","Question" ,JOptionPane.YES_NO_OPTION);
+                    if(response == 0){
+                        //add again
+                        new Staff_Add_Page(name).setVisible(true);
+                    }
+                    else{
+                        //back to management view page
+                        new Staff_Management_Page(name).setVisible(true);
+                    }
+            }
+        }
+    });
+    contentPane.add(staffadd_btn);
     
     //Back Staff Management Button
     JButton backstaff_btn = new JButton("Back");
