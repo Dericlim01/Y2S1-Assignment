@@ -88,11 +88,25 @@ public class Hall_Booking {
         return yearList;
     }
 
-    public Object[][] hall_data() {
-        Object[][] data = {
+    public Object[][] hall_data(String hall_type) {
+        Object[][] halls_list = {
             {"H01", "Auditorium", 200, 60, 2000, "Available"},
             {"H02", "Meeting Room", 600, 100, 4000, "Available"}
         };
-        return data;
+        if (new Create_file().hall_file()) {
+            try (BufferedReader read = new BufferedReader(new FileReader("halls.txt"))) {
+                while ((line = read.readLine()) != null) {
+                    String[] data = line.split(",");
+                    for (int i = 0; i < data.length; i++) {
+                        if (data[1].equals(hall_type)) {
+                            halls_list[i] = data;
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+        }
+        return halls_list;
     }
 }

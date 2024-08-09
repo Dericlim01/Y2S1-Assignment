@@ -169,7 +169,7 @@ public class Hall_Booking_Page extends JFrame {
 
         // Table
         String[] col_name = {"Hall ID", "Hall Type", "Capacity", "Price per hour", "Price per day", "Status"};
-        Object[][] data = new Hall_Booking().hall_data();
+        Object[][] data = new Hall_Booking().hall_data(String.valueOf(hall_type_cmbbx.getSelectedItem()));
         DefaultTableModel table = new DefaultTableModel(data, col_name);
         JTable details = new JTable(table);
 
