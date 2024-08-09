@@ -7,7 +7,7 @@ public class UpdateProfile {
         ArrayList<String[]> users = new ArrayList<String[]>();
         String line;
         String[] data;
-        try (BufferedReader read = new BufferedReader(new FileReader("users.txt"))) {
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/users.txt"))) {
             while ((line = read.readLine()) != null) {
                 data = line.split(",");
                 users.add(data);
@@ -30,7 +30,7 @@ public class UpdateProfile {
         String line;
         String[] data;
         Boolean user_update = false;
-        try (BufferedReader read = new BufferedReader(new FileReader("users.txt"))) {
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/users.txt"))) {
             while ((line = read.readLine()) != null) {
                 // Store data into data and add to users array
                 data = line.split(",");
@@ -53,7 +53,7 @@ public class UpdateProfile {
         }
 
         if (user_update) {
-            try (PrintWriter writer = new PrintWriter(new FileWriter("users.txt"))) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter("resources/users.txt"))) {
                 for (String[] userdata : users) {
                     writer.println(userdata[0] + "," + userdata[1] + "," + userdata[2] + "," + userdata[3] + "," + userdata[4]);
                 }

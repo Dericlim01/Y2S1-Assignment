@@ -10,7 +10,7 @@ public class Hall_Booking {
     public ArrayList<String> search_hall() {
         ArrayList<String> halls = new ArrayList<String>();
         if (new Create_file().hall_file()) {
-            try (BufferedReader read = new BufferedReader(new FileReader("halls.txt"))) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/halls.txt"))) {
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
                     for (int i = 0; i < halls.size(); i++) {
@@ -95,7 +95,7 @@ public class Hall_Booking {
             {"H02", "Meeting Room", 600, 100, 4000, "Available"}
         };
         if (new Create_file().hall_file()) {
-            try (BufferedReader read = new BufferedReader(new FileReader("halls.txt"))) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/halls.txt"))) {
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
                     for (int i = 0; i < data.length; i++) {
