@@ -8,7 +8,7 @@ public class Home_back {
         ArrayList<String[]> users = new ArrayList<String[]>();
         String line;
         String[] data;
-        try(BufferedReader read = new BufferedReader(new FileReader("users.txt"))) {
+        try(BufferedReader read = new BufferedReader(new FileReader("resources/users.txt"))) {
             while((line = read.readLine()) != null){
                 data = line.split(",");
                 users.add(data);

@@ -1,9 +1,7 @@
 package src;
 import java.awt.*;
 import javax.swing.*;
-import java.awt.Font;
-import javax.swing.JPanel;
-import java.awt.EventQueue;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
@@ -60,6 +58,7 @@ public class Admin_Page extends JFrame {
                 Admin_Profile ap = new Admin_Profile(name);
                 ap.setTitle("Admin Profile");
                 ap.setVisible(true);
+                ap.getContentPane().setBackground(new Color(230,220,202));
             }
         });
         contentPane.add(viewpro_btn);
@@ -74,10 +73,10 @@ public class Admin_Page extends JFrame {
              @Override
              public void actionPerformed(ActionEvent e){
                 dispose();
-                // String role = "staffs";
                 Staff_Management_Page sm = new Staff_Management_Page(name);
                 sm.setTitle("Staff Management");
                 sm.setVisible(true);
+                sm.getContentPane().setBackground(new Color(230,220,202));
              }
              
         });
@@ -115,6 +114,7 @@ public class Admin_Page extends JFrame {
                 Login_Page log = new Login_Page();
                 log.setTitle("Login");
                 log.setVisible(true);
+                log.getContentPane().setBackground(new Color(230,220,202));
             }
 
         });
