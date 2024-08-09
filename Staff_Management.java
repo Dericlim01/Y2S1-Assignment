@@ -1,11 +1,17 @@
 import java.io.*;
 import java.util.Date;
-import java.io.FileWriter;
+import javax.swing.JTable;
+import java.util.ArrayList;
+import javax.swing.JScrollPane;
 import java.text.SimpleDateFormat;
+import javax.swing.table.TableRowSorter;
+import javax.swing.table.DefaultTableModel;
+
 
 public class Staff_Management {
     private String line;
     private String role;
+    private TableRowSorter<DefaultTableModel> sorter;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
         public Staff_Management(String r){
@@ -60,4 +66,29 @@ public class Staff_Management {
         return false;
     }
 
+    //Search staff and view in table
+    public JScrollPane view_staff(String[] staffCol){
+        ArrayList<String[]> staffData = new ArrayList<>();
+            try (BufferedReader read = new BufferedReader(new FileReader("staffs.txt"))){
+                while((line = read.readLine()) != null){
+                    String[] data = line.split(",");
+                    staffData.add(data);
+                    }
+                }
+                catch (Exception e) {
+                // TODO: handle exception
+                e.printStackTrace();
+            }
+            Object[][] staffRow= staffData.toArray(new Object[0][]);
+
+            DefaultTableModel staff_table = new DefaultTableModel(staffRow,staffCol);
+            JTable table = new JTable(staff_table);
+            sorter = new TableRowSorter<>(staff_table);
+            table.setRowSorter(sorter);           
+            JScrollPane scrollPane = new JScrollPane(table);
+            return scrollPane;
+        
+
+    }
 }
+

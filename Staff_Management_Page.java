@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 public class Staff_Management_Page extends JFrame {
     private JPanel contentPane;
     private static String name;
+    private JScrollPane scrollPane;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable(){
@@ -51,7 +52,8 @@ public class Staff_Management_Page extends JFrame {
 
         //Add Staff Button
         JButton add_btn = new JButton("Add Staff");
-        add_btn.setBounds(700,600,120,30);
+        add_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,12));
+        add_btn.setBounds(700,600,120,20);
         add_btn.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -63,16 +65,30 @@ public class Staff_Management_Page extends JFrame {
         });
         contentPane.add(add_btn);
 
+        //Staffs Table Showing
+        //Create table row sorter
+        Staff_Management staff_man = new Staff_Management(name);
+        String[] staff_table = {"StaffName","Password","Phone","Mail","D.O.B","Gender","Role"};
+        scrollPane = staff_man.view_staff(staff_table);
+        scrollPane.setBounds(100,150,800,380);
+        contentPane.add(scrollPane);
+        scrollPane.setPreferredSize(new Dimension(200,150));
+        
+
+
 
         //Edit Page Button
-
-
+        JButton edit_btn = new JButton("Edit Staff Info");
+        edit_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,12));
+        edit_btn.setBounds(520,600,150,20);
+        contentPane.add(edit_btn);
 
         //View, Filter and Delete Page Button
 
 
 
-             
+
+
         //Home Page Button
         JButton home_btn = new JButton();
         try{
