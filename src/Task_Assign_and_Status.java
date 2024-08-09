@@ -1,3 +1,4 @@
+package src;
 import javax.swing.*;
 import javax.imageio.*;
 import javax.management.remote.JMXServerErrorException;

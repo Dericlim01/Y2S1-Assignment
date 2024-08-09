@@ -1,10 +1,11 @@
+package src;
 import java.io.*;
 
 public class Create_file {
     // User file
     public Boolean user_file() {
         try {
-            if (new File("users.txt").createNewFile()) {
+            if (new File("resources/users.txt").createNewFile()) {
                 System.out.println("User file created");
             } else {
                 System.out.println("User file exist");
@@ -20,7 +21,7 @@ public class Create_file {
     // Hall file
     public Boolean hall_file() {
         try {
-            if (new File("halls.txt").createNewFile()) {
+            if (new File("resources/halls.txt").createNewFile()) {
                 System.out.println("Hall file created");
             } else {
                 System.out.println("Hall file exist");
@@ -36,7 +37,7 @@ public class Create_file {
     // Booking file
     public Boolean booking_file() {
         try {
-            if (new File("bookings.txt").createNewFile()) {
+            if (new File("resources/bookings.txt").createNewFile()) {
                 System.out.println("Booking file created");
             } else {
                 System.out.println("Booking file exist");
@@ -52,7 +53,7 @@ public class Create_file {
     // Issue file
     public Boolean issue_file() {
         try {
-            if (new File("issues.txt").createNewFile()) {
+            if (new File("resources/issues.txt").createNewFile()) {
                 System.out.println("Issue file created");
             } else {
                 System.out.println("Issue file exist");
@@ -67,7 +68,7 @@ public class Create_file {
 
     public Boolean staffs_file(){
         try {
-            if(new File("staffs.txt").createNewFile()){
+            if(new File("resources/staffs.txt").createNewFile()){
                 System.out.println("Staffs file created");
             }
             else{
@@ -75,7 +76,6 @@ public class Create_file {
             }
             return true;
         } catch (Exception e) {
-            // TODO: handle exception
             System.out.println("An error occured");
             e.printStackTrace();
             return false;
