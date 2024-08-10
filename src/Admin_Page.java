@@ -1,8 +1,7 @@
+package src;
 import java.awt.*;
 import javax.swing.*;
-import java.awt.Font;
-import javax.swing.JPanel;
-import java.awt.EventQueue;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
@@ -16,10 +15,7 @@ public class Admin_Page extends JFrame {
             @Override
             public void run(){
                 try {
-                    Admin_Page ad = new Admin_Page(name);
-                    ad.setTitle("Admin");
-                    ad.setVisible(true);
-                    ad.getContentPane().setBackground(new Color(230,220,202));
+                    new Admin_Page(name).setVisible(true);
        
                 } catch (Exception e) {
                     // TODO: handle exception
@@ -29,7 +25,8 @@ public class Admin_Page extends JFrame {
         });
     }
 
-    public Admin_Page(String n){
+    public Admin_Page(String name){
+        setTitle("Admin");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
         setResizable(false);
@@ -37,9 +34,9 @@ public class Admin_Page extends JFrame {
 
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
-        getContentPane().setBackground(new Color(212,207,192));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        contentPane.setBackground(new Color(230,220,202));
 
         //Home Page Label
         JLabel adhome_lbl = new JLabel("Admin Home Page");
@@ -60,6 +57,7 @@ public class Admin_Page extends JFrame {
                 Admin_Profile ap = new Admin_Profile(name);
                 ap.setTitle("Admin Profile");
                 ap.setVisible(true);
+                ap.getContentPane().setBackground(new Color(230,220,202));
             }
         });
         contentPane.add(viewpro_btn);
@@ -74,9 +72,10 @@ public class Admin_Page extends JFrame {
              @Override
              public void actionPerformed(ActionEvent e){
                 dispose();
-                Staff_Management sm = new Staff_Management();
+                Staff_Management_Page sm = new Staff_Management_Page(name);
                 sm.setTitle("Staff Management");
                 sm.setVisible(true);
+                sm.getContentPane().setBackground(new Color(230,220,202));
              }
              
         });

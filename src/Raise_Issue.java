@@ -1,3 +1,4 @@
+package src;
 import java.io.*;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class Raise_Issue {
     public ArrayList<String> search_hall() {
         ArrayList<String> halls = new ArrayList<String>();
         if (new Create_file().booking_file()) {
-            try (BufferedReader read = new BufferedReader(new FileReader("bookings.txt"))) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/bookings.txt"))) {
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
                     // if hall is book by user
@@ -43,7 +44,7 @@ public class Raise_Issue {
     // Search hall type by id
     public String search_id(String id) {
         if (new Create_file().hall_file()) {
-            try (BufferedReader read = new BufferedReader(new FileReader("halls.txt"))) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/halls.txt"))) {
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
                     if (id.equals(data[0])) {
@@ -61,7 +62,7 @@ public class Raise_Issue {
     int num_issue;
     public Boolean send_issue(String issue_title, String issue_desc) {
         if (new Create_file().issue_file()) {
-            try (BufferedReader read = new BufferedReader(new FileReader("issues.txt"))) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/issues.txt"))) {
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
                     int num = data.length;
