@@ -107,7 +107,8 @@ public class Manager_Home_Page extends JFrame{
         view_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Manager_View_Profile(n).setVisible(true);
+                // new Manager_View_Profile(n).setVisible(true);
+                new Update_Profile(n).setVisible(true);
                 dispose();
             }
         });

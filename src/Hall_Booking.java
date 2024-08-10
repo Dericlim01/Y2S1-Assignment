@@ -63,9 +63,7 @@ public class Hall_Booking {
         }
         // Add to day list and return
         for (int i = 1; i < day; i++) {
-            if (i > days - 1) {
-                dayList.add(i + "");
-            }
+            dayList.add(i + "");
         }
         return dayList;
     }

@@ -1,15 +1,14 @@
 package src;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import javax.imageio.*;
 
 //import java.awt.Font;
 //import java.awt.Color;
 import java.awt.Image;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
@@ -22,6 +21,7 @@ import java.io.IOException;
 public class Customer_Issues_Receive extends JFrame {
     private static String manname;
     private JScrollPane scrollPane;
+    private DefaultTableModel table_Model;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable(){
@@ -51,8 +51,16 @@ public class Customer_Issues_Receive extends JFrame {
 
         String[] col_name = {"Username", "Hall Type", "Issues", "Issues Description", "Date"};
 
-        scrollPane = man_issues.view_issues(col_name);
-        scrollPane.setBounds(70, 70, 850, 400);
+        Object[][] row_data = man_issues.present_data("resources/issues.txt");
+        
+        table_Model = new DefaultTableModel(row_data, col_name);
+        JTable view = new JTable(table_Model);
+
+        scrollPane = new JScrollPane(view);
+        scrollPane.setBounds(9, 70, 970, 400);
+
+        // scrollPane = man_issues.view_issues(col_name);
+        // scrollPane.setBounds(70, 70, 850, 400);
 
         manager_CIR.add(scrollPane);
 
@@ -61,11 +69,18 @@ public class Customer_Issues_Receive extends JFrame {
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                scrollPane = man_issues.view_issues(col_name);
                 manager_CIR.remove(scrollPane);
+                Object[][] row_data = man_issues.present_data("resources/issues.txt");
+                table_Model = new DefaultTableModel();
+                table_Model.setDataVector(row_data, col_name);
+                JTable view = new JTable(table_Model);
+
+                scrollPane = new JScrollPane(view);
+                scrollPane.setBounds(9, 70, 970, 400);
+
                 manager_CIR.add(scrollPane);
-                manager_CIR.revalidate();
-                manager_CIR.repaint();
+                view.revalidate();
+                view.repaint();
             }
         });
         manager_CIR.add(refresh);
@@ -82,6 +97,15 @@ public class Customer_Issues_Receive extends JFrame {
         }catch(IOException e){
             e.printStackTrace();
         }
+
+        back_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Manager_Home_Page man_HP = new Manager_Home_Page(n);
+                man_HP.setVisible(true);
+            }
+        });
 
         
 

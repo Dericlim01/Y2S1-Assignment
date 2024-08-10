@@ -1,7 +1,6 @@
 package src;
 import javax.swing.*;
 import javax.imageio.*;
-import javax.management.remote.JMXServerErrorException;
 import javax.swing.border.*;
 
 import java.awt.Font;
@@ -54,11 +53,36 @@ public class Task_Assign_and_Status extends JFrame {
         // 
         manager_TAS.add(staff);
 
-        String[] row_name = {"Task ID", "Issues ID", "Issues", "Description", "Username", "Halls ID", "Staff ID", "Handled Staff", "Issues Status"};
+        String[] col_name = {"Task ID", "Issues ID", "Issues", "Description", "Username", "Halls ID", "Staff ID", "Handled Staff", "Issues Status"};
 
-        scrollPane = man_task.view_issues(row_name, "issues.txt");
+        scrollPane = man_task.task_status(col_name);
         scrollPane.setBounds(9, 350, 970, 100);
         manager_TAS.add(scrollPane);
+
+
+        JButton back_btn = new JButton();
+        try {
+            BufferedImage backImage = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            backImage = ImageIO.read(new File("D:/sem 1/Java/test/Manager/logout.png"));
+            Image back_ima = backImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+
+            back_btn.setIcon(new ImageIcon(back_ima));
+            back_btn.setBounds(920, 23, 25, 25);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        back_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Manager_Home_Page man_HP = new Manager_Home_Page(n);
+                man_HP.setVisible(true);
+            }
+        });
+
+        manager_TAS.add(back_btn);
 
     }
 }
