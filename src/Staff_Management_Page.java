@@ -17,17 +17,14 @@ public class Staff_Management_Page extends JFrame {
     private JPanel contentPane;
     private static String name;
     private JScrollPane scrollPane;
-    private String opFilter;
+    private String valFilter;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable(){
             @Override
             public void run(){
                 try {
-                    Staff_Management_Page sm = new Staff_Management_Page(name);
-                    sm.setTitle("Staff Management");
-                    sm.setVisible(true);
-                    sm.getContentPane().setBackground(new Color(230,220,202));
+                    new Staff_Management_Page(name).setVisible(true);
                 } catch (Exception e) {
                     // TODO: handle exception
                     e.printStackTrace();
@@ -37,6 +34,7 @@ public class Staff_Management_Page extends JFrame {
     }
     
     public Staff_Management_Page(String name){
+        setTitle("Staff Management");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
         setResizable(false);
@@ -45,6 +43,7 @@ public class Staff_Management_Page extends JFrame {
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        contentPane.setBackground(new Color(230,220,202));
 
         //Staff Management Page Label
         JLabel staffman_lbl = new JLabel("Staff Management");
@@ -69,7 +68,6 @@ public class Staff_Management_Page extends JFrame {
         contentPane.add(add_btn);
 
         //Staffs Table Showing
-        //Create table row sorter
         Staff_Management staff_man = new Staff_Management(name);
         String[] staff_table = {"StaffName","Password","Phone","Mail","D.O.B","Gender","Role"};
         scrollPane = staff_man.view_staff(staff_table);
@@ -79,11 +77,23 @@ public class Staff_Management_Page extends JFrame {
         scrollPane.setViewportView(staff_man.view_staff(staff_table));
         scrollPane.setPreferredSize(new Dimension(200,150));
        
-
         //Edit Page Button
         JButton edit_btn = new JButton("Edit Staff Info");
         edit_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,12));
         edit_btn.setBounds(520,630,150,20);
+        try {
+            edit_btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    Edit_Staff_Page es = new Edit_Staff_Page(name);
+                    es.setTitle("Edit Staff Page");
+                    es.setVisible(true);
+                }
+            });
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
         contentPane.add(edit_btn);
 
         //View, Filter and Delete Page Button
@@ -145,12 +155,12 @@ public class Staff_Management_Page extends JFrame {
                     //get the filter options from the combo box
                     String opGet = (String) filOp.getSelectedItem();
                     if (opGet.equals("Gender")){
-                        opFilter = (String) genOp.getSelectedItem();
+                        valFilter = (String) genOp.getSelectedItem();
                     }
                     else if(opGet.equals("Role")){
-                        opFilter = (String) roleOp.getSelectedItem();
+                        valFilter = (String) roleOp.getSelectedItem();
                     }
-                    staff_man.filter_staff(opGet, opFilter);
+                    staff_man.filter_staff(opGet, valFilter);
 
                 }
             });
@@ -210,13 +220,11 @@ public class Staff_Management_Page extends JFrame {
                         Admin_Page ad = new Admin_Page(name);
                         ad.setTitle("Admin");
                         ad.setVisible(true);
-                        ad.getContentPane().setBackground(new Color(230,220,202));
                     }
                     else if(role.equals("superadmin")){
                         Suadmin_Page suad = new Suadmin_Page(name);
                         suad.setTitle("Super Admin");
                         suad.setVisible(true);
-                        suad.getContentPane().setBackground(new Color(230,220,202));
                     }
                     else{
                         System.out.println("Error Occured.");

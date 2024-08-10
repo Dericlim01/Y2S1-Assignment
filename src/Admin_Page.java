@@ -15,9 +15,7 @@ public class Admin_Page extends JFrame {
             @Override
             public void run(){
                 try {
-                    Admin_Page ad = new Admin_Page(name);
-                    ad.setVisible(true);
-                    ad.getContentPane().setBackground(new Color(230,220,202));
+                    new Admin_Page(name).setVisible(true);
        
                 } catch (Exception e) {
                     // TODO: handle exception
@@ -38,6 +36,7 @@ public class Admin_Page extends JFrame {
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        contentPane.setBackground(new Color(230,220,202));
 
         //Home Page Label
         JLabel adhome_lbl = new JLabel("Admin Home Page");
@@ -114,7 +113,6 @@ public class Admin_Page extends JFrame {
                 Login_Page log = new Login_Page();
                 log.setTitle("Login");
                 log.setVisible(true);
-                log.getContentPane().setBackground(new Color(230,220,202));
             }
 
         });

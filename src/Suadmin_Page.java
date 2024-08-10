@@ -15,10 +15,7 @@ public class Suadmin_Page extends JFrame {
             @Override
             public void run() {
                 try {
-                    Suadmin_Page suad = new Suadmin_Page(name);
-                    suad.setTitle("Super Admin");
-                    suad.setVisible(true);
-                    suad.getContentPane().setBackground(new Color(230,220,202));
+                    new Suadmin_Page(name).setVisible(true);
        
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -37,6 +34,7 @@ public class Suadmin_Page extends JFrame {
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        contentPane.setBackground(new Color(230,220,202));
 
         //Home Page Label
         JLabel suadhome_lbl = new JLabel("Super Admin Home Page");
