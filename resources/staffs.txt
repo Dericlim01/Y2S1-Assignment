@@ -4,3 +4,4 @@ bean,manager,8997,beanbean@mail.com,19-11-2009,male,manager
 emily,scheduler,6546323,ylime@mail.com,01-02-2010,female,scheduler
 jamal,scheduler,67243,jamal@mail.com,28-03-2013,male,scheduler
 chole,chole,4584685,ccc@mail.com,12-12-2010,female,scheduler
+mona,hahaha,983003,mona@mail.com,20-03-2017,female,manager

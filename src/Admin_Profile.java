@@ -20,10 +20,7 @@ public class Admin_Profile extends JFrame{
             @Override
             public void run(){
                 try {
-                    Admin_Profile ap = new Admin_Profile(name);               
-                    ap.setTitle("Admin Profile");
-                    ap.setVisible(true);
-                    ap.getContentPane().setBackground(new Color(230,220,202));
+                    new Admin_Profile(name).setVisible(true);;               
        
                 } catch (Exception e) {
                     // TODO: handle exception
@@ -33,6 +30,7 @@ public class Admin_Profile extends JFrame{
         });
     }
     public Admin_Profile(String n){
+        setTitle("Admin Profile Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
         setResizable(false);
@@ -41,6 +39,7 @@ public class Admin_Profile extends JFrame{
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        contentPane.setBackground(new Color(230,220,202));
         UpdateProfile search = new UpdateProfile();
         String[] user = search.search_user(n);
 
