@@ -150,7 +150,7 @@ public class Staff_Add_Page extends JFrame{
                 String staffgen = (String) genData.getSelectedItem();
                 String staffrole = (String) roleData.getSelectedItem(); 
                 Staff_Management Staff_Management = new Staff_Management(name);
-                Register register_user = new Register(name);
+                Register register_user = new Register(String.valueOf(roleData.getSelectedItem()));
 
                 //Adding the informations into staffs text file
                 if(Staff_Management.check_staff(staffname)){

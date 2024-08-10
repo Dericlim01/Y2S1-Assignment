@@ -37,6 +37,12 @@ public class Login_Page extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        // Login Label
+        JLabel login_lbl = new JLabel("Login");
+        login_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
+        login_lbl.setBounds(400, 170, 150, 45);
+        contentPane.add(login_lbl);
+
         // Name Label
         JLabel name_lbl = new JLabel("Name : ");
         name_lbl.setBackground(new Color(255, 255, 0));
