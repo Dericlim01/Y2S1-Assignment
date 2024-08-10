@@ -19,10 +19,7 @@ public class Staff_Add_Page extends JFrame{
         @Override
         public void run(){
             try {
-                Staff_Add_Page sad = new Staff_Add_Page(name);
-                sad.setTitle("Staff Add");
-                sad.setVisible(true);
-                sad.getContentPane().setBackground(new Color(230,220,202));
+                new Staff_Add_Page(name).setVisible(true);
             } catch (Exception e) {
                 // TODO: handle exception
                 e.printStackTrace();
@@ -32,6 +29,7 @@ public class Staff_Add_Page extends JFrame{
 }
 
     public Staff_Add_Page(String name){
+        setTitle("Staff Add Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
         setResizable(false);
@@ -40,6 +38,7 @@ public class Staff_Add_Page extends JFrame{
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        contentPane.setBackground(new Color(230,220,202));
 
         //Staff Information Adding Label
         JLabel staffadd_lbl = new JLabel("Add Staff Information");
@@ -131,7 +130,7 @@ public class Staff_Add_Page extends JFrame{
         contentPane.add(dobDatePicker);
 
         //Gender Combo Box
-        String[] gender = {"male", "female"};
+        String[] gender = {"male","female"};
         JComboBox<String> genData = new JComboBox<>(gender);
         genData.setBounds(590,340,170,30);
         contentPane.add(genData);
@@ -142,70 +141,54 @@ public class Staff_Add_Page extends JFrame{
         staffadd_btn.setBounds(400,500,170,30);
         staffadd_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
+                //get the data from textfield/combobox/datepicker
                 String staffname = staffname_txt.getText();
                 String staffpass = staffpass_txt.getText();
                 String staffphone = staffphone_txt.getText();
                 String staffmail = staffmail_txt.getText();
+                //convert to date form
                 Date staffdob = (Date) dobDatePicker.getModel().getValue();
+                //convert to string form
                 String staffgen = (String) genData.getSelectedItem();
                 String staffrole = (String) roleData.getSelectedItem(); 
+
                 Staff_Management Staff_Management = new Staff_Management(name);
-                Register register_user = new Register(name);
+                Register register_user = new Register(String.valueOf(roleData.getSelectedItem()));
 
                 //Adding the informations into staffs text file
+                //Checking staff whether data is existing
                 if(Staff_Management.check_staff(staffname)){
-                    //Start adding
+                    //Staffname not used, start adding
                     if(Staff_Management.add_staff(staffname, staffpass, staffphone, staffmail, staffdob, staffgen, staffrole)){
                         //Show Message Dialog
                         if(register_user.chk_user(name)){
                             if(register_user.reg_user(staffname, staffpass, staffphone, staffmail/*,staffrole*/)){
                                 int response = JOptionPane.showConfirmDialog(null,"Staff Added Successfully. Do you want to add again?","Question" ,JOptionPane.YES_NO_OPTION);
-                        if(response == 0){
-                            //add again
-                            Staff_Add_Page sad = new Staff_Add_Page(name);
-                            sad.setTitle("Staff Add");
-                            sad.setVisible(true);
-                            sad.getContentPane().setBackground(new Color(230,220,202));
-                        }
-                        else{
-                            //back to management view page
-                            Staff_Management_Page sm = new Staff_Management_Page(name);
-                            sm.setTitle("Staff Management");
-                            sm.setVisible(true);
-                            sm.getContentPane().setBackground(new Color(230,220,202));
-                        }
+                                if(response == 0){
+                                    //add again
+                                    Staff_Add_Page sad = new Staff_Add_Page(name);
+                                    sad.setTitle("Staff Add");
+                                    sad.setVisible(true);
+                                }
+                                else{
+                                    //back to management view page
+                                    dispose();
+                                    Staff_Management_Page sm = new Staff_Management_Page(name);
+                                    sm.setTitle("Staff Management");
+                                    sm.setVisible(true);
+                                }
                             }
-                        }
-                        
+                        }                    
                     }
+                    
                     else{
-                        //Failed to Add New Staff
+                        //Failed to Add New Staff, info insert not completed
                         int response = JOptionPane.showConfirmDialog(null,"Add Staff Failed. Do you want to add again?","Question" ,JOptionPane.YES_NO_OPTION);
                         if(response == 0){
                             //add again
                             Staff_Add_Page sad = new Staff_Add_Page(name);
                             sad.setTitle("Staff Add");
                             sad.setVisible(true);
-                            sad.getContentPane().setBackground(new Color(230,220,202));
-                        }
-                        else{
-                            //back to management view page
-                            Staff_Management_Page sm = new Staff_Management_Page(name);
-                            sm.setTitle("Staff Management");
-                            sm.setVisible(true);
-                            sm.getContentPane().setBackground(new Color(230,220,202));
-                        }
-                    }
-                }
-                else{
-                    //Staffname exists
-                    int response = JOptionPane.showConfirmDialog(null,"Staff name exists. Do you want to add again?","Question" ,JOptionPane.YES_NO_OPTION);
-                        if(response == 0){
-                            //add again
-                            Staff_Add_Page sad = new Staff_Add_Page(name);
-                            sad.setTitle("Staff Add");
-                            sad.setVisible(true);
-                            sad.getContentPane().setBackground(new Color(230,220,202));
                         }
                         else{
                             //back to management view page
@@ -213,8 +196,25 @@ public class Staff_Add_Page extends JFrame{
                             Staff_Management_Page sm = new Staff_Management_Page(name);
                             sm.setTitle("Staff Management");
                             sm.setVisible(true);
-                            sm.getContentPane().setBackground(new Color(230,220,202));
                         }
+                    }
+                }
+                else{
+                    //Staffname exists
+                    int response = JOptionPane.showConfirmDialog(null,"Staff name exists. Do you want to add again?","Question" ,JOptionPane.YES_NO_OPTION);
+                    if(response == 0){
+                        //add again
+                        Staff_Add_Page sad = new Staff_Add_Page(name);
+                        sad.setTitle("Staff Add");
+                        sad.setVisible(true);
+                    }
+                    else{
+                        //back to management view page
+                        dispose();
+                        Staff_Management_Page sm = new Staff_Management_Page(name);
+                        sm.setTitle("Staff Management");
+                        sm.setVisible(true);
+                    }
                 }
             }
         });
@@ -230,7 +230,6 @@ public class Staff_Add_Page extends JFrame{
                 Staff_Management_Page sm = new Staff_Management_Page(name);
                 sm.setTitle("Staff Management");
                 sm.setVisible(true);
-                sm.getContentPane().setBackground(new Color(230,220,202));
             }
         });
         contentPane.add(backstaff_btn);

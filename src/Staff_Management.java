@@ -99,9 +99,10 @@ public class Staff_Management {
         //Gender option
         if(option.equals("Gender")){
             if(value.equals("male") || value.equals("female")){
-                //row sorter to filter by row
-                //make sure data in regular expressions
-                sorter.setRowFilter(RowFilter.regexFilter(value,5));
+                //row sorter, filter by row
+                //regexFilter - searching data in reguar expressions 
+                //^/$ anchor to beginning and ending (prevent searching male in String female)         
+                sorter.setRowFilter(RowFilter.regexFilter("^" + value + "$",5));
             }
             else{
                 JOptionPane.showMessageDialog(null,"Failed to filter.","filter status",JOptionPane.PLAIN_MESSAGE);
