@@ -1,10 +1,11 @@
 package src;
+
 import java.util.Calendar;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.JFormattedTextField;
 
-
+//to handle the conversion both from an Object to a String, and back from a String to an Object
 public class DateFormat extends JFormattedTextField.AbstractFormatter {
     //create custom date format
     private String dateform = "dd-MM-yyyy";
@@ -20,7 +21,8 @@ public class DateFormat extends JFormattedTextField.AbstractFormatter {
     @Override
     public String valueToString(Object value) throws ParseException {
         // TODO Auto-generated method stub
-        if(value != null){           
+        if(value != null){    
+            //casting the value to Date following the Calendar        
             Calendar cal = (Calendar) value;
             return dateFormat.format(cal.getTime());
         }

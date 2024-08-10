@@ -1,7 +1,7 @@
 package src;
+
 import java.awt.*;
 import javax.swing.*;
-
 import java.util.Date;
 import java.util.Properties;
 import org.jdatepicker.impl.*;
@@ -146,9 +146,9 @@ public class Staff_Add_Page extends JFrame{
                 String staffpass = staffpass_txt.getText();
                 String staffphone = staffphone_txt.getText();
                 String staffmail = staffmail_txt.getText();
-                //convert to date form
+                //casting datatypt to Date form
                 Date staffdob = (Date) dobDatePicker.getModel().getValue();
-                //convert to string form
+                //casting datatype to String form
                 String staffgen = (String) genData.getSelectedItem();
                 String staffrole = (String) roleData.getSelectedItem(); 
 
@@ -162,7 +162,7 @@ public class Staff_Add_Page extends JFrame{
                     if(Staff_Management.add_staff(staffname, staffpass, staffphone, staffmail, staffdob, staffgen, staffrole)){
                         //Show Message Dialog
                         if(register_user.chk_user(name)){
-                            if(register_user.reg_user(staffname, staffpass, staffphone, staffmail/*,staffrole*/)){
+                            if(register_user.reg_user(staffname, staffpass, staffphone, staffmail)){
                                 int response = JOptionPane.showConfirmDialog(null,"Staff Added Successfully. Do you want to add again?","Question" ,JOptionPane.YES_NO_OPTION);
                                 if(response == 0){
                                     //add again

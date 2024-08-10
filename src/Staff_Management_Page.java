@@ -1,23 +1,21 @@
 package src;
+
 import java.awt.*;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+import javax.imageio.ImageIO;
+import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
 
 
 public class Staff_Management_Page extends JFrame {
     private JPanel contentPane;
     private static String name;
-    private JScrollPane scrollPane;
     private String valFilter;
+    private JScrollPane scrollPane;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable(){
@@ -51,50 +49,15 @@ public class Staff_Management_Page extends JFrame {
         staffman_lbl.setBounds(400,100,300,30);
         contentPane.add(staffman_lbl);      
 
-        //Add Staff Button
-        JButton add_btn = new JButton("Add Staff");
-        add_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,12));
-        add_btn.setBounds(700,630,150,20);
-        add_btn.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                dispose();
-                Staff_Add_Page sad = new Staff_Add_Page(name);
-                sad.setTitle("Staff Add");
-                sad.setVisible(true);
-                sad.getContentPane().setBackground(new Color(230,220,202));
-            }
-        });
-        contentPane.add(add_btn);
-
         //Staffs Table Showing
         Staff_Management staff_man = new Staff_Management(name);
         String[] staff_table = {"StaffName","Password","Phone","Mail","D.O.B","Gender","Role"};
         scrollPane = staff_man.view_staff(staff_table);
         scrollPane.setBounds(100,150,800,380);
         contentPane.add(scrollPane); 
-        //showing the scrollbars
+        //showing the scrollbars, setup scrollpane clients
         scrollPane.setViewportView(staff_man.view_staff(staff_table));
         scrollPane.setPreferredSize(new Dimension(200,150));
-       
-        //Edit Page Button
-        JButton edit_btn = new JButton("Edit Staff Info");
-        edit_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,12));
-        edit_btn.setBounds(520,630,150,20);
-        try {
-            edit_btn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e){
-                    Edit_Staff_Page es = new Edit_Staff_Page(name);
-                    es.setTitle("Edit Staff Page");
-                    es.setVisible(true);
-                }
-            });
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }
-        contentPane.add(edit_btn);
 
         //View, Filter and Delete Page Button
         //Filter Label
@@ -153,11 +116,14 @@ public class Staff_Management_Page extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e){
                     //get the filter options from the combo box
+                    //casting selected Item to String
                     String opGet = (String) filOp.getSelectedItem();
                     if (opGet.equals("Gender")){
+                        //get male or female option
                         valFilter = (String) genOp.getSelectedItem();
                     }
                     else if(opGet.equals("Role")){
+                        //get scheduler or manager option
                         valFilter = (String) roleOp.getSelectedItem();
                     }
                     staff_man.filter_staff(opGet, valFilter);
@@ -194,6 +160,40 @@ public class Staff_Management_Page extends JFrame {
         }
         contentPane.add(refresh_btn);
 
+         //Edit Page Button
+         JButton edit_btn = new JButton("Edit Staff Info");
+         edit_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,12));
+         edit_btn.setBounds(520,630,150,20);
+         try {
+             edit_btn.addActionListener(new ActionListener() {
+                 @Override
+                 public void actionPerformed(ActionEvent e){
+                    Edit_Staff_Page es = new Edit_Staff_Page(name);
+                    es.setTitle("Edit Staff Page");
+                    es.setVisible(true);
+                 }
+             });
+         } catch (Exception e) {
+             // TODO: handle exception
+             e.printStackTrace();
+         }
+         contentPane.add(edit_btn);
+ 
+        //Add Staff Button
+        JButton add_btn = new JButton("Add Staff");
+        add_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,12));
+        add_btn.setBounds(700,630,150,20);
+        add_btn.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                dispose();
+                Staff_Add_Page sad = new Staff_Add_Page(name);
+                sad.setTitle("Staff Add");
+                sad.setVisible(true);
+                sad.getContentPane().setBackground(new Color(230,220,202));
+            }
+        });
+        contentPane.add(add_btn);
 
         //Home Page Button
         JButton home_btn = new JButton();

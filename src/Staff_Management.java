@@ -1,11 +1,12 @@
 package src;
+
 import java.io.*;
 import java.util.Date;
 import javax.swing.JTable;
-import javax.swing.RowFilter;
-
 import java.util.ArrayList;
-
+import javax.swing.RowFilter;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import java.text.SimpleDateFormat;
@@ -101,7 +102,7 @@ public class Staff_Management {
             if(value.equals("male") || value.equals("female")){
                 //row sorter, filter by row
                 //regexFilter - searching data in reguar expressions 
-                //^/$ anchor to beginning and ending (prevent searching male in String female)         
+                //^/$ anchor of the string beginning and ending (prevent searching male in String female)         
                 sorter.setRowFilter(RowFilter.regexFilter("^" + value + "$",5));
             }
             else{
@@ -119,6 +120,25 @@ public class Staff_Management {
             }
         }
 
+    }
+
+    public void load_staff (JComboBox<String> staffshow){
+        //construct an empty combo box object
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        //set model to JComboBox
+        staffshow.setModel(model);
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/staffs.txt"))){
+            while((line = read.readLine()) != null){
+                String[] data = line.split(",");
+                String staffname = data[0];
+                //adding element at the end of vector with increasing the size by one
+                model.addElement(staffname);
+            }
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
     }
 
 }

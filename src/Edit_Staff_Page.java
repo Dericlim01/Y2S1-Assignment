@@ -1,24 +1,33 @@
 package src;
 
 import java.awt.*;
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.util.Properties;
-
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JButton;
+import java.util.Date;
+import java.util.Properties;
+import javax.swing.JComboBox;
+import org.jdatepicker.impl.*;
 import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.text.SimpleDateFormat;
 import javax.swing.border.EmptyBorder;
 
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
 
 public class Edit_Staff_Page extends JFrame{
     private JPanel contentPane;
     private static String name;
+    private String line;
+    private JTextField staffpass_txt;
+    private JTextField staffphone_txt;
+    private JTextField staffmail_txt;
+    private JComboBox<String> genData;
+    private JComboBox<String> roleData;
+    private JDatePickerImpl dobDatePicker;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable(){
@@ -33,6 +42,7 @@ public class Edit_Staff_Page extends JFrame{
             }
         });
     }
+
     public Edit_Staff_Page(String name){
         setTitle("Edit Staff Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,29 +105,26 @@ public class Edit_Staff_Page extends JFrame{
         staffgen_lbl.setBounds(500,340,200,30);
         contentPane.add(staffgen_lbl);
 
-        //Staffname Text Field
-        JTextField staffname_txt = new JTextField();
-        staffname_txt.setBounds(300,200,170,30);
-        contentPane.add(staffname_txt);
+       
 
         //Staffpass Text Field
-        JTextField staffpass_txt = new JTextField();
+        staffpass_txt = new JTextField();
         staffpass_txt.setBounds(300,270,170,30);
         contentPane.add(staffpass_txt);
 
         //Phone Text Field
-        JTextField staffphone_txt = new JTextField();
+        staffphone_txt = new JTextField();
         staffphone_txt.setBounds(300,340,170,30);
         contentPane.add(staffphone_txt);
 
         //Role Combo Box
         String[] roletype = {"scheduler", "manager"};
-        JComboBox<String> roleData = new JComboBox<>(roletype);
+        roleData = new JComboBox<>(roletype);
         roleData.setBounds(300,410,170,30);
         contentPane.add(roleData);
 
         //Email Text Field
-        JTextField staffmail_txt = new JTextField();
+        staffmail_txt = new JTextField();
         staffmail_txt.setBounds(590,200,170,30);
         contentPane.add(staffmail_txt);
 
@@ -130,15 +137,84 @@ public class Edit_Staff_Page extends JFrame{
         prop.put("text.year", "Year");
         //Import Date Panel and Picker
         JDatePanelImpl datePanel = new JDatePanelImpl(model, prop);
-        JDatePickerImpl dobDatePicker = new JDatePickerImpl(datePanel, new DateFormat());
+        dobDatePicker = new JDatePickerImpl(datePanel, new DateFormat());
         dobDatePicker.setBounds(590,270,170,30);
         contentPane.add(dobDatePicker);
 
         //Gender Combo Box
         String[] gender = {"male","female"};
-        JComboBox<String> genData = new JComboBox<>(gender);
+        genData = new JComboBox<>(gender);
         genData.setBounds(590,340,170,30);
         contentPane.add(genData);
+
+        //Update Button
+        JButton update_btn = new JButton("Update Information");
+        update_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        update_btn.setBounds(400,480,200,30);
+        contentPane.add(update_btn);
+
+
+        //Staffname ComboBox
+        String[] staff ={};
+        JComboBox<String> staffname = new JComboBox<>(staff);
+        staffname.setBounds(300,200,170,30);
+        contentPane.add(staffname);
+        Staff_Management sm = new Staff_Management(name);
+        sm.load_staff(staffname);
+        staffname.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                String selectName = (String) staffname.getSelectedItem();
+                if (selectName != null){
+                    show_info(selectName);
+                }
+            }
+
+        });
+
+        //Back Staff Management Button
+        JButton backstaff_btn = new JButton("Back");
+        backstaff_btn.setBounds(870,30,70,40);
+        backstaff_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                dispose();
+                Staff_Management_Page sm = new Staff_Management_Page(name);
+                sm.setTitle("Staff Management");
+                sm.setVisible(true);
+            }
+        });
+        contentPane.add(backstaff_btn);
+
+
+        
     }
+
+    //showing staff information
+    private void show_info (String name){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/staffs.txt"))){
+            while((line = read.readLine()) != null){
+                String[] data = line.split(",");
+                if(data[0].equals(name)){
+                    staffpass_txt.setText(data[1]);
+                    staffphone_txt.setText(data[2]);
+                    staffmail_txt.setText(data[3]);
+                    
+                    Date dobDate = sdf.parse(data[4]);
+                    UtilDateModel dateModel = (UtilDateModel) dobDatePicker.getModel();
+                    dateModel.setValue(dobDate);
+                    
+                    genData.setSelectedItem(data[5]);
+                    roleData.setSelectedItem(data[6]);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
+    
 
 }

@@ -1,8 +1,8 @@
 package src;
-import java.awt.*;
-import javax.swing.*;
-import java.io.File;
 
+import java.awt.*;
+import java.io.File;
+import javax.swing.*;
 import javax.imageio.*;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
