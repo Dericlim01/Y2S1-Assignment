@@ -1,4 +1,4 @@
-package src;
+package src.Customer;
 import java.awt.Font;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -14,6 +14,8 @@ import javax.swing.table.DefaultTableModel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
+
+import src.DateFormat;
 
 /**
  * Hall_Booking_Page

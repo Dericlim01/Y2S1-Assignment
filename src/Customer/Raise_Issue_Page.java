@@ -1,4 +1,4 @@
-package src;
+package src.Customer;
 import java.awt.Font;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
