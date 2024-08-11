@@ -1,14 +1,19 @@
 package src;
- import java.awt.Font;
+import java.awt.Font;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 /**
  * Hall_Booking_Page
@@ -59,28 +64,14 @@ public class Hall_Booking_Page extends JFrame {
         hall_type_lbl.setBounds(30, 110, 100, 30);
         hall_type_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
         contentPane.add(hall_type_lbl);
-
-        // Show Hall type label
-        JLabel hall_type_show_lbl = new JLabel("Show hall type : ");
-        hall_type_show_lbl.setBounds(300, 110, 200, 30);
-        hall_type_show_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        contentPane.add(hall_type_show_lbl);
-
-        // Hall id
+        
+        // Hall type
         ArrayList<String> hallsList = new Hall_Booking().search_hall();
         String[] halls = hallsList.toArray(new String[0]);
         JComboBox<String> hall_type_cmbbx = new JComboBox<String>(halls);
-        hall_type_cmbbx.setBounds(175, 110, 100, 25);
+        hall_type_cmbbx.setBounds(175, 110, 125, 25);
         hall_type_cmbbx.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         hall_type_cmbbx.setSelectedIndex(-1);
-        hall_type_cmbbx.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String hall_id = String.valueOf(hall_type_cmbbx.getSelectedItem());
-                String hall_type = new Raise_Issue(n).search_id(hall_id);
-                hall_type_show_lbl.setText(hall_type);
-            }
-        });
         contentPane.add(hall_type_cmbbx);
 
         // Start Date
@@ -89,42 +80,18 @@ public class Hall_Booking_Page extends JFrame {
         start_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
         contentPane.add(start_date_lbl);
 
-        // Start Day Combo Box
-        // Set to today's date
-        ArrayList<String> start_day = new Hall_Booking().day_list(current_year, current_month_str_f, current_day);
-        String[] start_days = start_day.toArray(new String[0]);
-        JComboBox<String> start_day_cmbbx = new JComboBox<>(start_days);
-        start_day_cmbbx.setBounds(375, 150, 60, 30);
-        start_day_cmbbx.setSelectedIndex(0);
-        contentPane.add(start_day_cmbbx);
-
-        // Start Year Combo Box
-        ArrayList<String> start_year = new Hall_Booking().year_list(current_year);
-        String[] start_years = start_year.toArray(new String[0]);
-        JComboBox<String> start_year_cmbbx = new JComboBox<>(start_years);
-        start_year_cmbbx.setBounds(175, 150, 70, 30);
-        contentPane.add(start_year_cmbbx);
-
-        // Start Month Combo Box
-        ArrayList<String> start_month = new Hall_Booking().month_list(current_month);
-        String[] start_months = start_month.toArray(new String[0]);
-        JComboBox<String> start_month_cmbbx = new JComboBox<>(start_months);
-        start_month_cmbbx.setBounds(270, 150, 80, 30);
-        start_month_cmbbx.setSelectedIndex(0);
-        start_month_cmbbx.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                start_day_cmbbx.removeAllItems();
-                ArrayList<String> daylist = new Hall_Booking().day_list(Integer.parseInt(start_year_cmbbx.getSelectedItem().toString()),
-                                                                        String.valueOf(start_month_cmbbx.getSelectedItem()),
-                                                                        current_day);
-                String[] all_day = daylist.toArray(new String[0]);
-                for (int i = 0; i < all_day.length; i++) {
-                    start_day_cmbbx.addItem(all_day[i]);
-                }
-            }
-        });
-        contentPane.add(start_month_cmbbx);
+        // Start Calendar
+        UtilDateModel start_date_model = new UtilDateModel();
+        // Properties create object to store values in it
+        Properties start_date_prop = new Properties();
+        start_date_prop.put("text.day", "Day");
+        start_date_prop.put("text.month","Month");
+        start_date_prop.put("text.year", "Year");
+        // Import Date Panel and Picker
+        JDatePanelImpl start_datePanel = new JDatePanelImpl(start_date_model, start_date_prop);
+        JDatePickerImpl start_datePicker = new JDatePickerImpl(start_datePanel, new DateFormat());
+        start_datePicker.setBounds(175,150,140,30);
+        contentPane.add(start_datePicker);
 
         // End Date
         JLabel end_date_lbl = new JLabel("End Date : ");
@@ -132,51 +99,38 @@ public class Hall_Booking_Page extends JFrame {
         end_date_lbl.setFont(new Font("Comic Sans Ms", Font.PLAIN, 20));
         contentPane.add(end_date_lbl);
 
-        // End Day Combo Box
-        ArrayList<String> end_day = new Hall_Booking().day_list(current_year, current_month_str_f, current_day);
-        String[] end_days = end_day.toArray(new String[0]);
-        JComboBox<String> end_day_cmbbx = new JComboBox<>(end_days);
-        end_day_cmbbx.setBounds(375, 190, 60, 30);
-        end_day_cmbbx.setSelectedIndex(0);
-        contentPane.add(end_day_cmbbx);
-
-        // End Year Combo Box
-        ArrayList<String> end_year = new Hall_Booking().year_list(current_year);
-        String[] end_years = end_year.toArray(new String[0]);
-        JComboBox<String> end_year_cmbbx = new JComboBox<>(end_years);
-        end_year_cmbbx.setBounds(175, 190, 70, 30);
-        contentPane.add(end_year_cmbbx);
-
-        // End Month Combo Box
-        ArrayList<String> end_month = new Hall_Booking().month_list(current_month);
-        String[] end_months = end_month.toArray(new String[0]);
-        JComboBox<String> end_month_cmbbx = new JComboBox<>(end_months);
-        end_month_cmbbx.setBounds(270, 190, 80, 30);
-        end_month_cmbbx.setSelectedIndex(0);
-        end_month_cmbbx.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                end_day_cmbbx.removeAllItems();
-                ArrayList<String> daylist = new Hall_Booking().day_list(Integer.parseInt(end_year_cmbbx.getSelectedItem().toString()),
-                                                                        String.valueOf(end_month_cmbbx.getSelectedItem()),
-                                                                        start_day_cmbbx.getSelectedIndex() + 1);
-                String[] all_day = daylist.toArray(new String[0]);
-                for (int i = 0; i < all_day.length; i++) {
-                    end_day_cmbbx.addItem(all_day[i]);
-                }
-            }
-        });
-        contentPane.add(end_month_cmbbx);
+        // End Calendar
+        UtilDateModel end_date_model = new UtilDateModel();
+        // Properties create object to store values in it
+        Properties end_date_prop = new Properties();
+        end_date_prop.put("text.day", "Day");
+        end_date_prop.put("text.month","Month");
+        end_date_prop.put("text.year", "Year");
+        // Import Date Panel and Picker
+        JDatePanelImpl end_datePanel = new JDatePanelImpl(end_date_model, end_date_prop);
+        JDatePickerImpl end_datePicker = new JDatePickerImpl(end_datePanel, new DateFormat());
+        end_datePicker.setBounds(175,190,140,30);
+        contentPane.add(end_datePicker);
 
         // Table
         String[] col_name = {"Hall ID", "Hall Type", "Capacity", "Price per hour", "Price per day", "Status"};
         Object[][] data = new Hall_Booking().hall_data(String.valueOf(hall_type_cmbbx.getSelectedItem()));
         DefaultTableModel table = new DefaultTableModel(data, col_name);
         JTable details = new JTable(table);
-
         JScrollPane scrollPane = new JScrollPane(details);
         scrollPane.setBounds(200, 300, 600, 400);
         contentPane.add(scrollPane);
+
+        hall_type_cmbbx.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String hall_type = String.valueOf(hall_type_cmbbx.getSelectedItem());
+                Object[][] hall_data = new Hall_Booking().hall_data(hall_type);
+                table.setDataVector(hall_data, col_name);
+                details.revalidate();
+                details.repaint();
+            }
+        });
 
         // Search button
         JButton search_btn = new JButton("Search");
