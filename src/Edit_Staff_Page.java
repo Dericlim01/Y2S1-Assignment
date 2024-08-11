@@ -3,6 +3,7 @@ package src;
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.util.Date;
@@ -105,8 +106,6 @@ public class Edit_Staff_Page extends JFrame{
         staffgen_lbl.setBounds(500,340,200,30);
         contentPane.add(staffgen_lbl);
 
-       
-
         //Staffpass Text Field
         staffpass_txt = new JTextField();
         staffpass_txt.setBounds(300,270,170,30);
@@ -147,13 +146,6 @@ public class Edit_Staff_Page extends JFrame{
         genData.setBounds(590,340,170,30);
         contentPane.add(genData);
 
-        //Update Button
-        JButton update_btn = new JButton("Update Information");
-        update_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        update_btn.setBounds(400,480,200,30);
-        contentPane.add(update_btn);
-
-
         //Staffname ComboBox
         String[] staff ={};
         JComboBox<String> staffname = new JComboBox<>(staff);
@@ -172,6 +164,61 @@ public class Edit_Staff_Page extends JFrame{
 
         });
 
+        //Update Button
+        JButton update_btn = new JButton("Update Information");
+        update_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        update_btn.setBounds(400,480,200,30);
+        contentPane.add(update_btn);
+        update_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                String selectName = (String) staffname.getSelectedItem();
+                if(selectName != null){
+                    String editpass = staffpass_txt.getText();
+                    String editphone = staffphone_txt.getText();
+                    String editmail = staffmail_txt.getText();
+                    Date editdob = (Date) dobDatePicker.getModel().getValue();
+                    String editgen = (String) genData.getSelectedItem();
+                    String editrole = (String) roleData.getSelectedItem();
+                    Staff_Management sm = new Staff_Management(name);
+                    if(sm.edit_staff(selectName, editpass, editphone, editmail, editdob, editgen, editrole)){
+                        int response = JOptionPane.showConfirmDialog(null, "Staff Edit Successfully. Do you want to edit again?","Question",JOptionPane.YES_NO_OPTION);
+                        if(response == 0){
+                            //edit again
+                            Edit_Staff_Page esp = new Edit_Staff_Page(name);
+                            esp.setTitle("Edit Staff Page");
+                            esp.setVisible(true);
+                        }
+                        else{
+                            //back to previous page
+                            dispose();
+                            Staff_Management_Page sman = new Staff_Management_Page(name);
+                            sman.setTitle("Staff Managment");
+                            sman.setVisible(true);
+                        }
+                    }
+                    
+                    else{
+                        //Failed to Edit Staff Info, info insert not completed
+                        int response = JOptionPane.showConfirmDialog(null,"Edit Staff Failed. Do you want to edit again?","Question" ,JOptionPane.YES_NO_OPTION);
+                        if(response == 0){
+                            //edit again
+                            Edit_Staff_Page esp = new Edit_Staff_Page(name);
+                            esp.setTitle("Staff Add");
+                            esp.setVisible(true);
+                        }
+                        else{
+                            //back to management view page
+                            dispose();
+                            Staff_Management_Page sman = new Staff_Management_Page(name);
+                            sman.setTitle("Staff Management");
+                            sman.setVisible(true);
+                        }
+                    }
+                }
+            }
+        });
+
         //Back Staff Management Button
         JButton backstaff_btn = new JButton("Back");
         backstaff_btn.setBounds(870,30,70,40);
@@ -185,9 +232,6 @@ public class Edit_Staff_Page extends JFrame{
             }
         });
         contentPane.add(backstaff_btn);
-
-
-        
     }
 
     //showing staff information
@@ -210,7 +254,7 @@ public class Edit_Staff_Page extends JFrame{
                     break;
                 }
             }
-        } catch (Exception e) {
+        }catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
         }

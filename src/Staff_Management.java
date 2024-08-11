@@ -19,7 +19,7 @@ public class Staff_Management {
     private TableRowSorter<DefaultTableModel> sorter;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-        public Staff_Management(String n){
+        public Staff_Management(String name){
 
         }
 
@@ -139,6 +139,54 @@ public class Staff_Management {
             // TODO: handle exception
             e.printStackTrace();
         }
+    }
+
+    public Boolean edit_staff(String staffname, String password, String phone, String email, Date D_O_B, String gender, String role){
+        ArrayList<String> staffnewData = new ArrayList<>();
+        boolean edit = false;
+
+        String dobFormat = dateFormat.format(D_O_B);
+
+        // Read all lines and modify the target line
+        try (BufferedReader reader = new BufferedReader(new FileReader("resources/staffs.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                //update if successful to search the staffname and exist in txt file
+                if (data[0].equals(staffname)) {
+                    data[1] = password;
+                    data[2] = phone;
+                    data[3] = email;
+                    data[4] = dobFormat;
+                    data[5] = gender;
+                    data[6] = role;
+
+                    edit = true;
+                }
+
+                //adding all file datas into ArrayList
+                //spliting data with comma
+                staffnewData.add(String.join(",", data));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        // Ensure all lines are written back to the file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/staffs.txt"))) {
+            //staff String as a single line in the txt file while executing for loop
+            for (String staff : staffnewData) {
+                writer.write(staff);
+                // Ensure each record is on a new line
+                writer.newLine();  
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return edit;
     }
 
 }

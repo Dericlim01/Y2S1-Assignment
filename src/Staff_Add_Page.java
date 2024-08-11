@@ -146,7 +146,7 @@ public class Staff_Add_Page extends JFrame{
                 String staffpass = staffpass_txt.getText();
                 String staffphone = staffphone_txt.getText();
                 String staffmail = staffmail_txt.getText();
-                //casting datatypt to Date form
+                //casting datatype to Date form
                 Date staffdob = (Date) dobDatePicker.getModel().getValue();
                 //casting datatype to String form
                 String staffgen = (String) genData.getSelectedItem();
