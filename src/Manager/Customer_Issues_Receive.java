@@ -55,8 +55,8 @@ public class Customer_Issues_Receive extends JFrame {
         // //debugging mr huzai
         // int test =  row_data.toString().length(); 
         // System.out.println("Here >>>"+row_data.toString().isEmpty());
-        table_Model = new DefaultTableModel();
-        table_Model.setDataVector(row_data, col_name);
+        table_Model = new DefaultTableModel(row_data, col_name);
+        //table_Model.setDataVector(row_data, col_name);
         JTable view = new JTable(table_Model);
         scrollPane = new JScrollPane(view);
         scrollPane.setBounds(9, 70, 970, 400);

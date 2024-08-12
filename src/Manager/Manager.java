@@ -135,7 +135,7 @@ public class Manager {
        String task;
        ArrayList<String[]> taskStatus = new ArrayList<>();
 
-       try (BufferedReader br_task = new BufferedReader(new FileReader("resources/issues.txt"))){
+       try (BufferedReader br_task = new BufferedReader(new FileReader("resources/Database/issues.txt"))){
            while((task = br_task.readLine()) != null){
                String[] row = task.split(",");
                taskStatus.add(row);
