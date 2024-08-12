@@ -6,6 +6,7 @@ import src.Admin.Admin_Page;
 import src.Admin.Suadmin_Page;
 import src.Customer.Customer_Page;
 import src.Manager.Manager_Home_Page;
+import src.Scheduler.Scheduler_Main_Page;
 
 import java.awt.Font;
 import java.awt.Color;
