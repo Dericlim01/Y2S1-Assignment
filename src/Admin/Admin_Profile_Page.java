@@ -33,7 +33,7 @@ public class Admin_Profile_Page extends JFrame {
             }
         });
     }
-    public Admin_Profile_Page(String n) {
+    public Admin_Profile_Page(String name) {
         setTitle("Admin Profile Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
@@ -43,9 +43,70 @@ public class Admin_Profile_Page extends JFrame {
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-        contentPane.setBackground(new Color(230,220,202));
+        contentPane.setBackground(new Color(248,248,255));
         UpdateProfile search = new UpdateProfile();
-        String[] user = search.search_user(n);
+        String[] user = search.search_user(name);
+
+        //Logo Label
+        JLabel logo_lbl = new JLabel("Symphony Hall");
+        logo_lbl.setFont(new Font("French Script MT", Font.BOLD,25));
+        logo_lbl.setForeground(new Color(169,169,169));
+        logo_lbl.setBounds(60,20,160,30);
+        contentPane.add(logo_lbl);
+
+        //Logo Pic
+        JLabel logo = new JLabel();
+        try{
+ 
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\hall (1).png"));
+
+            Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+
+            logo.setIcon(new ImageIcon(image));
+            logo.setBounds(0, 0, 65, 65);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        contentPane.add(logo);
+
+        //Profile Pic
+        JLabel profile = new JLabel();
+        try{
+ 
+            BufferedImage get_image = new BufferedImage(80, 80, BufferedImage.TYPE_INT_RGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\meiya.png"));
+
+            Image image = get_image.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+
+            profile.setIcon(new ImageIcon(image));
+            profile.setBounds(450, 50, 1000, 200);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        contentPane.add(profile);
+
+        //Gradient Design
+        JLabel gradient = new JLabel();
+        try{
+
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\gradient.png"));
+
+            Image image = get_image.getScaledInstance(1000, 280, Image.SCALE_SMOOTH);
+
+            gradient.setIcon(new ImageIcon(image));
+            gradient.setBounds(0, 0, 1000, 200);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        contentPane.add(gradient);
 
         //Greeting Label
         JLabel greet_lbl = new JLabel("Welcome Back!");
@@ -112,10 +173,11 @@ public class Admin_Profile_Page extends JFrame {
         try{
             BufferedImage home_pic = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
             home_pic = ImageIO.read(new File("resources\\Image\\logout.png"));
-            Image home_icon = home_pic.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+            Image home_icon = home_pic.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
             home_btn.setIcon(new ImageIcon(home_icon));
-            home_btn.setBounds(920,30,40,40);
-
+            home_btn.setBounds(920,30,35,35);
+            home_btn.setBackground(new Color(213,196,161));
+            
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -126,7 +188,6 @@ public class Admin_Profile_Page extends JFrame {
                 Admin_Page ad = new Admin_Page(name);
                 ad.setTitle("Admin");
                 ad.setVisible(true);
-                ad.getContentPane().setBackground(new Color(230,220,202));
             }
         });
         contentPane.add(home_btn);
@@ -159,8 +220,11 @@ public class Admin_Profile_Page extends JFrame {
          });
 
       //Edit Button
-      JButton edit_btn = new JButton("Edit");
-      edit_btn.setBounds(450,480,100,30);
+      JButton edit_btn = new JButton("Edit Profile");
+      edit_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+      edit_btn.setBackground(new Color(250,240,230));
+      edit_btn.setForeground(new Color(128,128,128));
+      edit_btn.setBounds(430,480,120,30);
       edit_btn.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
