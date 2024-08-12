@@ -126,7 +126,7 @@ public class Login_Page extends JFrame {
                 }
                 else if (role.equals("scheduler")) {
                     dispose();
-                    new SchedulerMainPage(name).setVisible(true);
+                    new Scheduler_Main_Page(name).setVisible(true);
                 }
                 else {
                     // Login failed, show message box

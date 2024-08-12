@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class SchedulerMainPage extends JFrame {
+public class Scheduler_Main_Page extends JFrame {
     public static String name;
     
     public static void main(String[] args) {
@@ -10,7 +10,7 @@ public class SchedulerMainPage extends JFrame {
             @Override
             public void run() {
                 try{
-                new SchedulerMainPage(name).setVisible(true);
+                new Scheduler_Main_Page(name).setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -19,7 +19,7 @@ public class SchedulerMainPage extends JFrame {
         });
     }
 
-    public SchedulerMainPage(String n){
+    public Scheduler_Main_Page(String n){
         setTitle("Scheduler Main Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
