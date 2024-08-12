@@ -128,7 +128,7 @@ public class Manager_Home_Page extends JFrame{
         sales_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Sales_Dashboard(n).setVisible(true);
+                new Sales_Dashboard_Page(n).setVisible(true);
                 dispose();
             }
         });
@@ -171,38 +171,7 @@ public class Manager_Home_Page extends JFrame{
         });
         manager_HP.add(task_ass_sta_btn);
 
-        // Design 
-        //Character gradient = new Character('linear-gradient(to right, #1f1c17, #dacfb7, #ded7c6)');
-        // 
-
-        // 
-
-        // // Design
-        // JLabel design_lbl = new JLabel();
-        // design_lbl.setBounds(100, 100, 150, 500);
-
-        // Graphics2D g2d = (Graphics2D) 
-
-        // Color[] colors = {startColor, endColor};
-        // float[] fractions = {0f, 1f};
-        // LinearGradientPaint paint = new LinearGradientPaint(0, 0, 0, design_lbl.getHeight(), fractions, colors);
-        // design_lbl.setPaint(paint);
 
     }
 
-//    private BufferedImage createCircularImage(BufferedImage newImage, int size){
-//     int diameter = Math.min(newImage.getWidth(), newImage.getHeight());
-//     BufferedImage circle_Image = new BufferedImage(diameter, diameter, BufferedImage.TYPE_INT_ARGB);
-
-//     Graphics2D g2 = circle_Image.createGraphics();
-//     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); // ini apa?
-//     g2.setClip(new Ellipse2D.Double(0, 0, diameter, diameter));
-
-//     int xSet = (diameter - newImage.getWidth()) / 2;
-//     int ySet = (diameter - newImage.getHeight()) / 2;
-//     g2.drawImage(circle_Image, xSet, ySet, null);
-//     g2.dispose();
-
-//     return circle_Image;
-//    }
 }

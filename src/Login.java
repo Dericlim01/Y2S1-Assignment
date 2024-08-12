@@ -9,7 +9,7 @@ public class Login {
         Create_file file = new Create_file();
         if (file.user_file()) {
             // Read file
-            try (BufferedReader read = new BufferedReader(new FileReader("resources/users.txt"))) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"))) {
                 while ((line = read.readLine()) != null) {
                     // Create array and store data
                     String[] data = line.split(",");

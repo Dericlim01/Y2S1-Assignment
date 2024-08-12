@@ -30,7 +30,7 @@ public class Staff_Management {
         Create_file file = new Create_file();
         public Boolean check_staff (String name) {
         if(file.staffs_file()){
-            try (BufferedReader read_staff = new BufferedReader(new FileReader("resources/staffs.txt"))){
+            try (BufferedReader read_staff = new BufferedReader(new FileReader("resources/Database/staffs.txt"))){
                 while ((line = read_staff.readLine()) != null){
                     String[] data = line.split(",");
                     String staffname = data[0];
@@ -61,7 +61,7 @@ public class Staff_Management {
                     role
                 };
                 String stSplitData = String.join(",", staffsData);
-                FileWriter staffs = new FileWriter("resources/staffs.txt",true);
+                FileWriter staffs = new FileWriter("resources/Database/staffs.txt",true);
                 staffs.write(stSplitData + "\n");
                 staffs.close();
                 return true;
@@ -75,7 +75,7 @@ public class Staff_Management {
     //Search staff and view in table
     public JScrollPane view_staff(String[] staffCol){
         ArrayList<String[]> staffData = new ArrayList<>();
-            try (BufferedReader read = new BufferedReader(new FileReader("resources/staffs.txt"))){
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))){
                 while((line = read.readLine()) != null) {
                     String[] data = line.split(",");
                     staffData.add(data);
@@ -127,7 +127,7 @@ public class Staff_Management {
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         //set model to JComboBox
         staffshow.setModel(model);
-        try (BufferedReader read = new BufferedReader(new FileReader("resources/staffs.txt"))){
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))){
             while((line = read.readLine()) != null){
                 String[] data = line.split(",");
                 String staffname = data[0];
@@ -147,8 +147,7 @@ public class Staff_Management {
         String dobFormat = dateFormat.format(D_O_B);
 
         // Read all lines and modify the target line
-        try (BufferedReader reader = new BufferedReader(new FileReader("resources/staffs.txt"))) {
-            String line;
+        try (BufferedReader reader = new BufferedReader(new FileReader("resources/Database/staffs.txt"))) {
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
                 //update if successful to search the staffname and exist in txt file
@@ -172,8 +171,8 @@ public class Staff_Management {
             return false;
         }
 
-        // Ensure all lines are written back to the file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/staffs.txt"))) {
+        //Ensure all lines are written back to the file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/staffs.txt"))) {
             //staff String as a single line in the txt file while executing for loop
             for (String staff : staffnewData) {
                 writer.write(staff);
@@ -188,5 +187,38 @@ public class Staff_Management {
         return edit;
     }
 
+    public Boolean delete_staff(String staffname) {
+        ArrayList<String> staffData = new ArrayList<>();
+        boolean delete = false;
+        try(BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))) {
+            while((line = read.readLine())!= null){
+                String[] data = line.split(",");
+                if (data[0].equals(staffname)){
+                    delete = true;
+                    //when succeffully searching and matching staff name, continue to delete
+                    continue;
+
+                }
+                staffData.add(line);
+        }          
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        if(delete){
+            //Ensure all line are written back to the file
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/staffs.txt"))) {
+                for(String staff: staffData){
+                    writer.write(staff);
+                    writer.newLine();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return delete;
+    }
+    
 }
 
