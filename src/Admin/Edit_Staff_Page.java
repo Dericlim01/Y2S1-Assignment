@@ -241,7 +241,7 @@ public class Edit_Staff_Page extends JFrame {
     //showing staff information
     private void show_info (String name){
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        try (BufferedReader read = new BufferedReader(new FileReader("resources/staffs.txt"))){
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))){
             while((line = read.readLine()) != null) {
                 String[] data = line.split(",");
                 if(data[0].equals(name)){
