@@ -1,15 +1,15 @@
 package src.Manager;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
+import javax.swing.table.DefaultTableModel;
 import javax.imageio.*;
 
 //import java.awt.Font;
 //import java.awt.Color;
 import java.awt.Image;
+import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
@@ -17,11 +17,13 @@ import java.awt.event.ActionListener;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class Customer_Issues_Receive extends JFrame {
     private static String manname;
     private JScrollPane scrollPane;
+    private DefaultTableModel table_Model;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable(){
@@ -51,21 +53,53 @@ public class Customer_Issues_Receive extends JFrame {
 
         String[] col_name = {"Username", "Hall Type", "Issues", "Issues Description", "Date"};
 
-        scrollPane = man_issues.view_issues(col_name);
-        scrollPane.setBounds(70, 70, 850, 400);
+        Object[][] row_data = man_issues.present_data("resources/issues.txt");
+        
+        table_Model = new DefaultTableModel(row_data, col_name);
+        JTable view = new JTable(table_Model);
+
+        scrollPane = new JScrollPane(view);
+        scrollPane.setBounds(9, 70, 970, 400);
+
+        // scrollPane = man_issues.view_issues(col_name);
+        // scrollPane.setBounds(70, 70, 850, 400);
 
         manager_CIR.add(scrollPane);
+        //scrollPane.setViewportView(table_Model);
+        scrollPane.setPreferredSize(new Dimension(200, 150));
+
+        // Hall Type filter Label
+        JLabel hall = new JLabel("Hall Type:");
+        hall.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+        hall.setBounds(50, 25, 80, 20);
+        manager_CIR.add(hall);
+
+        // Hall Type combo box
+        ArrayList<String> hall_Type = man_issues.hall_type();
+        String[] hall_data = hall_Type.toArray(new String[0]);
+        JComboBox<String> hall_cb = new JComboBox<String>(hall_data);
+        hall_cb.setBounds(125, 27, 120, 20);
+        hall_cb.setSelectedItem(-1);
+        manager_CIR.add(hall_cb);
+
 
         JButton refresh = new JButton("Refresh");
         refresh.setBounds(720, 23, 80, 20);
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                scrollPane = man_issues.view_issues(col_name);
                 manager_CIR.remove(scrollPane);
+                Object[][] row_data = man_issues.present_data("resources/issues.txt");
+                table_Model = new DefaultTableModel();
+                table_Model.setDataVector(row_data, col_name);
+                JTable view = new JTable(table_Model);
+
+                scrollPane = new JScrollPane(view);
+                scrollPane.setBounds(9, 70, 970, 400);
+
                 manager_CIR.add(scrollPane);
-                manager_CIR.revalidate();
-                manager_CIR.repaint();
+                view.revalidate();
+                view.repaint();
             }
         });
         manager_CIR.add(refresh);
@@ -82,6 +116,15 @@ public class Customer_Issues_Receive extends JFrame {
         }catch(IOException e){
             e.printStackTrace();
         }
+
+        back_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Manager_Home_Page man_HP = new Manager_Home_Page(n);
+                man_HP.setVisible(true);
+            }
+        });
 
         
 
