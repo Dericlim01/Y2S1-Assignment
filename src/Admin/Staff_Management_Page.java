@@ -1,4 +1,4 @@
-package src;
+package src.Admin;
 import java.awt.*;
 
 import javax.imageio.ImageIO;

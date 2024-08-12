@@ -2,6 +2,11 @@ package src;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import src.Admin.Admin_Page;
+import src.Admin.Suadmin_Page;
+import src.Customer.Customer_Page;
+import src.Manager.Manager_Home_Page;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -36,6 +41,12 @@ public class Login_Page extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+
+        // Login Label
+        JLabel login_lbl = new JLabel("Login");
+        login_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
+        login_lbl.setBounds(400, 170, 150, 45);
+        contentPane.add(login_lbl);
 
         // Name Label
         JLabel name_lbl = new JLabel("Name : ");
