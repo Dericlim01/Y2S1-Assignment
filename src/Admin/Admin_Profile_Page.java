@@ -1,22 +1,22 @@
 package src.Admin;
-import java.awt.*;
-import javax.swing.*;
-import java.io.File;
-
-import java.awt.*;
-import java.io.File;
-import javax.swing.*;
-import javax.imageio.*;
-import java.io.IOException;
-import java.awt.image.BufferedImage;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.border.EmptyBorder;
 
 import src.UpdateProfile;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Admin_Profile extends JFrame{
+import java.io.File;
+import java.io.IOException;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+import javax.imageio.*;
+
+
+public class Admin_Profile_Page extends JFrame {
     private JPanel contentPane;
     private static String name;
     
@@ -25,16 +25,15 @@ public class Admin_Profile extends JFrame{
             @Override
             public void run(){
                 try {
-                    new Admin_Profile(name).setVisible(true);;               
+                    new Admin_Profile_Page(name).setVisible(true);;               
        
                 } catch (Exception e) {
-                    // TODO: handle exception
                     e.printStackTrace();
                 }
             }
         });
     }
-    public Admin_Profile(String n){
+    public Admin_Profile_Page(String n) {
         setTitle("Admin Profile Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
@@ -108,7 +107,7 @@ public class Admin_Profile extends JFrame{
         JTextField efield = new JTextField();
         efield.setBounds(500,390,200,30);
 
-         //Home Page Button
+        //Home Page Button
         JButton home_btn = new JButton();
         try{
             BufferedImage home_pic = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
@@ -120,9 +119,9 @@ public class Admin_Profile extends JFrame{
         }catch(IOException e){
             e.printStackTrace();
         }
-        home_btn.addActionListener(new ActionListener(){
+        home_btn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 dispose();
                 Admin_Page ad = new Admin_Page(name);
                 ad.setTitle("Admin");
@@ -138,7 +137,7 @@ public class Admin_Profile extends JFrame{
          up_btn.setBounds(450,480,100,30);
          up_btn.addActionListener(new ActionListener() {
              @Override
-             public void actionPerformed(ActionEvent e){
+             public void actionPerformed(ActionEvent e) {
                  String username = user_lbl.getText();
                  String pass = pfield.getText();
                  String con= cfield.getText();
@@ -164,7 +163,7 @@ public class Admin_Profile extends JFrame{
       edit_btn.setBounds(450,480,100,30);
       edit_btn.addActionListener(new ActionListener() {
           @Override
-          public void actionPerformed(ActionEvent e){
+          public void actionPerformed(ActionEvent e) {
               pfield.setText(pshow_lbl.getText());
               cfield.setText(cshow_lbl.getText());
               efield.setText(eshow_lbl.getText());

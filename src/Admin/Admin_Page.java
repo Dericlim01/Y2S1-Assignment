@@ -1,11 +1,13 @@
 package src.Admin;
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.border.EmptyBorder;
 
 import src.Login_Page;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class Admin_Page extends JFrame {
     private JPanel contentPane;
@@ -19,14 +21,13 @@ public class Admin_Page extends JFrame {
                     new Admin_Page(name).setVisible(true);
        
                 } catch (Exception e) {
-                    // TODO: handle exception
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    public Admin_Page(String name){
+    public Admin_Page(String name) {
         setTitle("Admin");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
@@ -51,11 +52,11 @@ public class Admin_Page extends JFrame {
         viewpro_btn.setForeground(new Color(88,57,39));
         viewpro_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         viewpro_btn.setBounds(400,200,200,30);
-        viewpro_btn.addActionListener(new ActionListener(){
+        viewpro_btn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 dispose();
-                Admin_Profile ap = new Admin_Profile(name);
+                Admin_Profile_Page ap = new Admin_Profile_Page(name);
                 ap.setTitle("Admin Profile");
                 ap.setVisible(true);
                 ap.getContentPane().setBackground(new Color(230,220,202));
@@ -69,9 +70,9 @@ public class Admin_Page extends JFrame {
         staffman_btn.setForeground(new Color(88,57,39));
         staffman_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         staffman_btn.setBounds(400,240,200,30);
-        staffman_btn.addActionListener(new ActionListener(){
+        staffman_btn.addActionListener(new ActionListener() {
              @Override
-             public void actionPerformed(ActionEvent e){
+             public void actionPerformed(ActionEvent e) {
                 dispose();
                 Staff_Management_Page sm = new Staff_Management_Page(name);
                 sm.setTitle("Staff Management");
@@ -107,9 +108,9 @@ public class Admin_Page extends JFrame {
         logout_btn.setForeground(new Color(88,57,39));
         logout_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         logout_btn.setBounds(850,30,100,30);
-        logout_btn.addActionListener(new ActionListener(){
+        logout_btn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 dispose();
                 Login_Page log = new Login_Page();
                 log.setTitle("Login");

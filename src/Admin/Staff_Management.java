@@ -1,33 +1,34 @@
 package src.Admin;
-import java.io.*;
-import java.util.Date;
-import javax.swing.JTable;
-import java.util.ArrayList;
-import javax.swing.RowFilter;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import java.text.SimpleDateFormat;
-import javax.swing.table.TableRowSorter;
 
 import src.Create_file;
 
+import java.io.*;
+import java.util.Date;
+import java.util.ArrayList;
+
+import javax.swing.JTable;
+import javax.swing.RowFilter;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.table.TableRowSorter;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
+import java.text.SimpleDateFormat;
 
 public class Staff_Management {
     private String line;
     private TableRowSorter<DefaultTableModel> sorter;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-        public Staff_Management(String name){
+        public Staff_Management(String name) {
 
         }
 
         //Check the unique staffname
         Create_file file = new Create_file();
-        public Boolean check_staff (String name){
+        public Boolean check_staff (String name) {
         if(file.staffs_file()){
             try (BufferedReader read_staff = new BufferedReader(new FileReader("resources/staffs.txt"))){
                 while ((line = read_staff.readLine()) != null){
@@ -38,7 +39,6 @@ public class Staff_Management {
                     }
                 }
             } catch (Exception e) {
-                // TODO: handle exception
                 e.printStackTrace();
                 return false;
             }    
@@ -66,7 +66,6 @@ public class Staff_Management {
                 staffs.close();
                 return true;
         }catch (Exception e) {
-            // TODO: handle exception
             System.out.println("Error occured.");
             e.printStackTrace();
         }
@@ -77,13 +76,12 @@ public class Staff_Management {
     public JScrollPane view_staff(String[] staffCol){
         ArrayList<String[]> staffData = new ArrayList<>();
             try (BufferedReader read = new BufferedReader(new FileReader("resources/staffs.txt"))){
-                while((line = read.readLine()) != null){
+                while((line = read.readLine()) != null) {
                     String[] data = line.split(",");
                     staffData.add(data);
                     }
                 }
                 catch (Exception e) {
-                // TODO: handle exception
                 e.printStackTrace();
             }
             Object[][] staffRow= staffData.toArray(new Object[0][]);
@@ -97,11 +95,11 @@ public class Staff_Management {
     }
 
 
-    public void filter_staff(String option, String value){
+    public void filter_staff(String option, String value) {
         //Two main option to filter
         //Gender option
         if(option.equals("Gender")){
-            if(value.equals("male") || value.equals("female")){
+            if(value.equals("male") || value.equals("female")) {
                 //row sorter, filter by row
                 //regexFilter - searching data in reguar expressions 
                 //^/$ anchor of the string beginning and ending (prevent searching male in String female)         
@@ -113,8 +111,8 @@ public class Staff_Management {
       
         }
         //Role option
-        else if(option.equals("Role")){
-            if(value.equals("scheduler") || value.equals("manager")){
+        else if(option.equals("Role")) {
+            if(value.equals("scheduler") || value.equals("manager")) {
                 sorter.setRowFilter(RowFilter.regexFilter(value,6));
             }
             else{
@@ -124,7 +122,7 @@ public class Staff_Management {
 
     }
 
-    public void load_staff (JComboBox<String> staffshow){
+    public void load_staff (JComboBox<String> staffshow) {
         //construct an empty combo box object
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         //set model to JComboBox
@@ -138,7 +136,6 @@ public class Staff_Management {
             }
 
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
     }

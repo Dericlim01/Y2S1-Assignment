@@ -1,14 +1,17 @@
 package src.Admin;
+
 import java.awt.*;
-import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import javax.imageio.ImageIO;
 
 public class Staff_Management_Page extends JFrame {
     private JPanel contentPane;
@@ -23,14 +26,13 @@ public class Staff_Management_Page extends JFrame {
                 try {
                     new Staff_Management_Page(name).setVisible(true);
                 } catch (Exception e) {
-                    // TODO: handle exception
                     e.printStackTrace();
                 }
             }
         });
     }
     
-    public Staff_Management_Page(String name){
+    public Staff_Management_Page(String name) {
         setTitle("Staff Management");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
@@ -86,7 +88,7 @@ public class Staff_Management_Page extends JFrame {
         JComboBox<String> filOp = new JComboBox<>(option);
         filOp.setBounds(170,603,150,20);
         try {
-            filOp.addActionListener(new ActionListener(){
+            filOp.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
                     if(filOp.getSelectedItem().equals("Gender")){
@@ -100,7 +102,6 @@ public class Staff_Management_Page extends JFrame {
                 }
             });
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
         contentPane.add(filOp);
@@ -130,7 +131,6 @@ public class Staff_Management_Page extends JFrame {
                 }
             });
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
         contentPane.add(filter_btn);
@@ -154,7 +154,6 @@ public class Staff_Management_Page extends JFrame {
                 }
             });
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
         contentPane.add(refresh_btn);
@@ -173,7 +172,6 @@ public class Staff_Management_Page extends JFrame {
                  }
              });
          } catch (Exception e) {
-             // TODO: handle exception
              e.printStackTrace();
          }
          contentPane.add(edit_btn);
@@ -182,9 +180,9 @@ public class Staff_Management_Page extends JFrame {
         JButton add_btn = new JButton("Add Staff");
         add_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,12));
         add_btn.setBounds(700,630,150,20);
-        add_btn.addActionListener(new ActionListener(){
+        add_btn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 dispose();
                 Staff_Add_Page sad = new Staff_Add_Page(name);
                 sad.setTitle("Staff Add");
@@ -206,9 +204,9 @@ public class Staff_Management_Page extends JFrame {
         }catch(IOException e){
             e.printStackTrace();
         }
-        home_btn.addActionListener(new ActionListener(){
+        home_btn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 dispose();
                 Home_back hb = new Home_back();
                 String[] users = hb.home_back(name);

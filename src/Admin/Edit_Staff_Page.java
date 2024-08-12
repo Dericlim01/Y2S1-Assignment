@@ -1,27 +1,30 @@
 package src.Admin;
 
-import java.awt.*;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import java.util.Date;
-import java.util.Properties;
-import javax.swing.JComboBox;
-import org.jdatepicker.impl.*;
-import javax.swing.JTextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.text.SimpleDateFormat;
-import javax.swing.border.EmptyBorder;
-
-
 import src.DateFormat;
 
-public class Edit_Staff_Page extends JFrame{
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+import java.util.Properties;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+import javax.swing.border.EmptyBorder;
+
+import org.jdatepicker.impl.*;
+
+public class Edit_Staff_Page extends JFrame {
     private JPanel contentPane;
     private static String name;
     private String line;
@@ -39,14 +42,13 @@ public class Edit_Staff_Page extends JFrame{
                 try {
                     new Edit_Staff_Page(name).setVisible(true);
                 } catch (Exception e) {
-                    // TODO: handle exception
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    public Edit_Staff_Page(String name){
+    public Edit_Staff_Page(String name) {
         setTitle("Edit Staff Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
@@ -157,7 +159,7 @@ public class Edit_Staff_Page extends JFrame{
         sm.load_staff(staffname);
         staffname.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 String selectName = (String) staffname.getSelectedItem();
                 if (selectName != null){
                     show_info(selectName);
@@ -173,7 +175,7 @@ public class Edit_Staff_Page extends JFrame{
         contentPane.add(update_btn);
         update_btn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 String selectName = (String) staffname.getSelectedItem();
                 if(selectName != null){
                     String editpass = staffpass_txt.getText();
@@ -183,7 +185,7 @@ public class Edit_Staff_Page extends JFrame{
                     String editgen = (String) genData.getSelectedItem();
                     String editrole = (String) roleData.getSelectedItem();
                     Staff_Management sm = new Staff_Management(name);
-                    if(sm.edit_staff(selectName, editpass, editphone, editmail, editdob, editgen, editrole)){
+                    if(sm.edit_staff(selectName, editpass, editphone, editmail, editdob, editgen, editrole)) {
                         int response = JOptionPane.showConfirmDialog(null, "Staff Edit Successfully. Do you want to edit again?","Question",JOptionPane.YES_NO_OPTION);
                         if(response == 0){
                             //edit again
@@ -226,7 +228,7 @@ public class Edit_Staff_Page extends JFrame{
         backstaff_btn.setBounds(870,30,70,40);
         backstaff_btn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 dispose();
                 Staff_Management_Page sm = new Staff_Management_Page(name);
                 sm.setTitle("Staff Management");
@@ -240,7 +242,7 @@ public class Edit_Staff_Page extends JFrame{
     private void show_info (String name){
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         try (BufferedReader read = new BufferedReader(new FileReader("resources/staffs.txt"))){
-            while((line = read.readLine()) != null){
+            while((line = read.readLine()) != null) {
                 String[] data = line.split(",");
                 if(data[0].equals(name)){
                     staffpass_txt.setText(data[1]);
@@ -257,7 +259,6 @@ public class Edit_Staff_Page extends JFrame{
                 }
             }
         }catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
     }
