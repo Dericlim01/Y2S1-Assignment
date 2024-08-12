@@ -148,7 +148,6 @@ public class Staff_Management {
 
         // Read all lines and modify the target line
         try (BufferedReader reader = new BufferedReader(new FileReader("resources/Database/staffs.txt"))) {
-            String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
                 //update if successful to search the staffname and exist in txt file
@@ -172,7 +171,7 @@ public class Staff_Management {
             return false;
         }
 
-        // Ensure all lines are written back to the file
+        //Ensure all lines are written back to the file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/staffs.txt"))) {
             //staff String as a single line in the txt file while executing for loop
             for (String staff : staffnewData) {
@@ -188,5 +187,38 @@ public class Staff_Management {
         return edit;
     }
 
+    public Boolean delete_staff(String staffname) {
+        ArrayList<String> staffData = new ArrayList<>();
+        boolean delete = false;
+        try(BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))) {
+            while((line = read.readLine())!= null){
+                String[] data = line.split(",");
+                if (data[0].equals(staffname)){
+                    delete = true;
+                    //when succeffully searching and matching staff name, continue to delete
+                    continue;
+
+                }
+                staffData.add(line);
+        }          
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        if(delete){
+            //Ensure all line are written back to the file
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/staffs.txt"))) {
+                for(String staff: staffData){
+                    writer.write(staff);
+                    writer.newLine();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return delete;
+    }
+    
 }
 
