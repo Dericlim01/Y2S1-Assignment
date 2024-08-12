@@ -1,3 +1,0 @@
-H01, Auditorium, 1000, 300,
-H02, Banquet_Hall, 300, 100,
-H03, Meeting_Rooms, 30, 50,
