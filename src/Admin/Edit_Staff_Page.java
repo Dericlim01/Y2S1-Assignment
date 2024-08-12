@@ -168,10 +168,58 @@ public class Edit_Staff_Page extends JFrame {
 
         });
 
+        //Delete Button
+        JButton delete_btn = new JButton("Delete Information");
+        delete_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        delete_btn.setBounds(530,530,180,30);
+        contentPane.add(delete_btn);
+        delete_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectName = (String) staffname.getSelectedItem();
+                if(selectName != null){
+                    Staff_Management sm = new Staff_Management(name);
+                    if(sm.delete_staff(selectName)){
+                        int response = JOptionPane.showConfirmDialog(null, "Staff Delete Successfully. Do you want to delete again?","Question",JOptionPane.YES_NO_OPTION);
+                        if(response == 0){
+                            //delete again
+                            Edit_Staff_Page esp = new Edit_Staff_Page(name);
+                            esp.setTitle("Edit Staff Page");
+                            esp.setVisible(true);
+                        }
+                        else{
+                            //back to previous page
+                            dispose();
+                            Staff_Management_Page sman = new Staff_Management_Page(name);
+                            sman.setTitle("Staff Managment");
+                            sman.setVisible(true);
+                        }
+                    }
+                    else{
+                        //Failed to Delete Staff
+                        int response = JOptionPane.showConfirmDialog(null,"Delete Staff Failed. Do you want to delete again?","Question" ,JOptionPane.YES_NO_OPTION);
+                        if(response == 0){
+                            //stay at this page
+                            Edit_Staff_Page esp = new Edit_Staff_Page(name);
+                            esp.setTitle("Edit Staff Page");
+                            esp.setVisible(true);
+                        }
+                        else{
+                            //back to management view page
+                            dispose();
+                            Staff_Management_Page sman = new Staff_Management_Page(name);
+                            sman.setTitle("Staff Management");
+                            sman.setVisible(true);
+                        }
+                    }
+                }
+            }
+        });
+
         //Update Button
         JButton update_btn = new JButton("Update Information");
         update_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        update_btn.setBounds(400,480,200,30);
+        update_btn.setBounds(330,530,180,30);
         contentPane.add(update_btn);
         update_btn.addActionListener(new ActionListener() {
             @Override
@@ -208,7 +256,7 @@ public class Edit_Staff_Page extends JFrame {
                         if(response == 0){
                             //edit again
                             Edit_Staff_Page esp = new Edit_Staff_Page(name);
-                            esp.setTitle("Staff Add");
+                            esp.setTitle("Edit Staff Page");
                             esp.setVisible(true);
                         }
                         else{
