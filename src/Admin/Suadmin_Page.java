@@ -1,12 +1,13 @@
 package src.Admin;
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.border.EmptyBorder;
 
 import src.Login_Page;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class Suadmin_Page extends JFrame {
     private JPanel contentPane;
@@ -58,9 +59,9 @@ public class Suadmin_Page extends JFrame {
         staBtn.setForeground(new Color(88,57,39));
         staBtn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         staBtn.setBounds(400,240,200,30);
-        staBtn.addActionListener(new ActionListener(){
+        staBtn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 dispose();
                 Staff_Management_Page sm = new Staff_Management_Page(name);
                 sm.setTitle("Staff Management");
@@ -94,7 +95,7 @@ public class Suadmin_Page extends JFrame {
         logout_btn.setBounds(850,30,100,30);
         logout_btn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 dispose();
                 Login_Page log = new Login_Page();
                 log.setTitle("Login");

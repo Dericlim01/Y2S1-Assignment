@@ -1,38 +1,38 @@
 package src.Admin;
+
+import src.Register;
+import src.DateFormat;
+
 import java.awt.*;
-import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import java.util.Date;
 import java.util.Properties;
-import org.jdatepicker.impl.*;
 
-import src.DateFormat;
-import src.Register;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import org.jdatepicker.impl.*;
 
-public class Staff_Add_Page extends JFrame{
+public class Staff_Add_Page extends JFrame {
     private JPanel contentPane;
     private static String name;
 
     public static void main(String[] args) {
-    EventQueue.invokeLater(new Runnable(){
+    EventQueue.invokeLater(new Runnable() {
         @Override
-        public void run(){
+        public void run() {
             try {
                 new Staff_Add_Page(name).setVisible(true);
             } catch (Exception e) {
-                // TODO: handle exception
                 e.printStackTrace();
             }
         }
     });
 }
 
-    public Staff_Add_Page(String name){
+    public Staff_Add_Page(String name) {
         setTitle("Staff Add Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
@@ -144,15 +144,15 @@ public class Staff_Add_Page extends JFrame{
         staffadd_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         staffadd_btn.setBounds(400,500,170,30);
         staffadd_btn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 //get the data from textfield/combobox/datepicker
                 String staffname = staffname_txt.getText();
                 String staffpass = staffpass_txt.getText();
                 String staffphone = staffphone_txt.getText();
                 String staffmail = staffmail_txt.getText();
-                //convert to date form
+                //casting datatype to Date form
                 Date staffdob = (Date) dobDatePicker.getModel().getValue();
-                //convert to string form
+                //casting datatype to String form
                 String staffgen = (String) genData.getSelectedItem();
                 String staffrole = (String) roleData.getSelectedItem(); 
 
@@ -161,12 +161,12 @@ public class Staff_Add_Page extends JFrame{
 
                 //Adding the informations into staffs text file
                 //Checking staff whether data is existing
-                if(Staff_Management.check_staff(staffname)){
+                if(Staff_Management.check_staff(staffname)) {
                     //Staffname not used, start adding
                     if(Staff_Management.add_staff(staffname, staffpass, staffphone, staffmail, staffdob, staffgen, staffrole)){
                         //Show Message Dialog
-                        if(register_user.chk_user(name)){
-                            if(register_user.reg_user(staffname, staffpass, staffphone, staffmail/*,staffrole*/)){
+                        if(register_user.chk_user(name)) {
+                            if(register_user.reg_user(staffname, staffpass, staffphone, staffmail)){
                                 int response = JOptionPane.showConfirmDialog(null,"Staff Added Successfully. Do you want to add again?","Question" ,JOptionPane.YES_NO_OPTION);
                                 if(response == 0){
                                     //add again
@@ -229,7 +229,7 @@ public class Staff_Add_Page extends JFrame{
         backstaff_btn.setBounds(870,30,70,40);
         backstaff_btn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 dispose();
                 Staff_Management_Page sm = new Staff_Management_Page(name);
                 sm.setTitle("Staff Management");
