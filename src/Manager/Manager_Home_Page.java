@@ -5,7 +5,7 @@ import javax.swing.border.*;
 import javax.imageio.ImageIO;
 
 import src.Login_Page;
-
+import src.Update_Profile;
 
 
 import java.awt.Font;
@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import java.io.*;
+
+
 
 
 public class Manager_Home_Page extends JFrame{
