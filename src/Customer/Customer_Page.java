@@ -1,11 +1,14 @@
 package src.Customer;
-import javax.swing.*;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 
 import src.Login_Page;
 import src.Update_Profile;
 import src.Customer.Hall_Booking.Hall_Booking_Page;
+import src.Customer.Booking_Info.Booking_Info_Page;
 import src.Customer.Raise_Issue.Raise_Issue_Page;
 
 import java.awt.Font;
@@ -103,7 +106,7 @@ public class Customer_Page extends JFrame {
         book_info_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // go to booking information page
+                new Booking_Info_Page(n).setVisible(true);
             }
         });
         contentPane.add(book_info_btn);
