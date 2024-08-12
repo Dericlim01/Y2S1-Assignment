@@ -7,7 +7,6 @@ import javax.imageio.*;
 //import java.awt.Font;
 //import java.awt.Color;
 import java.awt.Image;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -52,21 +51,19 @@ public class Customer_Issues_Receive extends JFrame {
         Manager man_issues = new Manager();
 
         String[] col_name = {"Username", "Hall Type", "Issues", "Issues Description", "Date"};
-
-        Object[][] row_data = man_issues.present_data("resources/issues.txt");
-        
-        table_Model = new DefaultTableModel(row_data, col_name);
+        Object[][] row_data = man_issues.present_data("resources/Database/issues.txt");
+        // //debugging mr huzai
+        // int test =  row_data.toString().length(); 
+        // System.out.println("Here >>>"+row_data.toString().isEmpty());
+        table_Model = new DefaultTableModel();
+        table_Model.setDataVector(row_data, col_name);
         JTable view = new JTable(table_Model);
-
         scrollPane = new JScrollPane(view);
         scrollPane.setBounds(9, 70, 970, 400);
 
-        // scrollPane = man_issues.view_issues(col_name);
-        // scrollPane.setBounds(70, 70, 850, 400);
-
         manager_CIR.add(scrollPane);
         //scrollPane.setViewportView(table_Model);
-        scrollPane.setPreferredSize(new Dimension(200, 150));
+        //scrollPane.setPreferredSize(new Dimension(200, 150));
 
         // Hall Type filter Label
         JLabel hall = new JLabel("Hall Type:");
@@ -79,7 +76,17 @@ public class Customer_Issues_Receive extends JFrame {
         String[] hall_data = hall_Type.toArray(new String[0]);
         JComboBox<String> hall_cb = new JComboBox<String>(hall_data);
         hall_cb.setBounds(125, 27, 120, 20);
-        hall_cb.setSelectedItem(-1);
+        hall_cb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String hallType = String.valueOf(hall_cb.getSelectedItem());
+                Object[][] hallData = man_issues.hallData(hallType);
+                table_Model.setDataVector(hallData, col_name);
+                view.revalidate();
+                view.repaint();
+            }
+        });
+        hall_cb.setSelectedIndex(-1);
         manager_CIR.add(hall_cb);
 
 
@@ -89,7 +96,7 @@ public class Customer_Issues_Receive extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 manager_CIR.remove(scrollPane);
-                Object[][] row_data = man_issues.present_data("resources/issues.txt");
+                Object[][] row_data = man_issues.present_data("resources/Database/issues.txt");
                 table_Model = new DefaultTableModel();
                 table_Model.setDataVector(row_data, col_name);
                 JTable view = new JTable(table_Model);
@@ -107,7 +114,7 @@ public class Customer_Issues_Receive extends JFrame {
         JButton back_btn = new JButton();
         try{
             BufferedImage backImage = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-            backImage = ImageIO.read(new File("D:/sem 1/Java/test/Manager/logout.png"));
+            backImage = ImageIO.read(new File("resources/Image/logout.png"));
             Image back_ima = backImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 
             back_btn.setIcon(new ImageIcon(back_ima));

@@ -31,16 +31,14 @@ public class Manager {
                 }
                 // Search in arrayList
                 for (int i = 0; i < users.size(); i++) {
-                    if(users.get(i)[0].equals(n)){
+                    if(users.get(i)[0].equals(n)) {
                         return users.get(i);
                     }
                 }
-       
-            }catch(IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
         return null;
     }
 
@@ -116,7 +114,7 @@ public class Manager {
         return filteredDates;
     }
 
-    public Object[][] present_data(String fileName){
+    public Object[][] present_data(String fileName) {
         String line_Sales;
         ArrayList<String[]> rowData = new ArrayList<>();
         
@@ -129,14 +127,8 @@ public class Manager {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } 
-
-        
-
-        Object[][] row_Data = rowData.toArray(new Object[0][]);
-
-        return row_Data;
-
+        }
+        return rowData.toArray(new Object[0][]);
     }
 
    public JScrollPane task_status(String[] colname){
@@ -167,13 +159,13 @@ public class Manager {
    }
 
 
-
+   // Customer_Issues_Receive
     public ArrayList<String> hall_type() {
         String hall_line;
         ArrayList<String>  halls = new ArrayList<>();
 
         if (new Create_file().hall_file()) {
-            try (BufferedReader hall_br = new BufferedReader(new FileReader("resources/halls.txt"))) {
+            try (BufferedReader hall_br = new BufferedReader(new FileReader("resources/Database/halls.txt"))) {
                 while ((hall_line = hall_br.readLine()) != null) {
                     String[] row_hall = hall_line.split(",");
                     if(!halls.contains(row_hall[1])) {
@@ -189,6 +181,26 @@ public class Manager {
 
         
     }
+
+    public Object[][] hallData(String hall_type) {
+        List<Object[]> hallList = new ArrayList<>();
+        if (new Create_file().hall_file()) {
+            try (BufferedReader hall_read = new BufferedReader(new FileReader("resources/Database/issues.txt"))) {
+                String line;
+                while ((line = hall_read.readLine()) != null) {
+                    String[] data = line.split(",");
+                    if (data[1].equals(hall_type)) {
+                        hallList.add(data);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return hallList.toArray(new Object[0][]);
+    }
+
+
 
 
 
