@@ -196,7 +196,7 @@ public class Staff_Management_Page extends JFrame {
         JButton home_btn = new JButton();
         try{
             BufferedImage home_pic = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-            home_pic = ImageIO.read(new File("C:\\Users\\ARELLAYIM\\Documents\\JAVA\\Assignment Pictures\\logout.png"));
+            home_pic = ImageIO.read(new File("resources\\Image\\logout.png"));
             Image home_icon = home_pic.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
             home_btn.setIcon(new ImageIcon(home_icon));
             home_btn.setBounds(920,30,40,40);
