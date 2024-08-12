@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 
 import java.io.File;
-import java.io.IOException;
 
 public class Task_Assign_and_Status extends JFrame {
     private static String manname;
@@ -48,7 +47,7 @@ public class Task_Assign_and_Status extends JFrame {
         taskAssign_lbl.setBounds(50,70, 120, 40);
         manager_TAS.add(taskAssign_lbl);
 
-        JComboBox staff = new JComboBox<>();
+        JComboBox<String> staff = new JComboBox<>();
         staff.setBounds(160, 83, 120, 20);
         // 
         manager_TAS.add(staff);
