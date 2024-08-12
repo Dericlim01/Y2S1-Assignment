@@ -1,8 +1,9 @@
-package src;
+package src.Manager;
 import javax.swing.*;
 import javax.imageio.*;
 import javax.swing.border.*;
 
+import src.Update_Profile;
 
 import java.awt.Font;
 import java.awt.Image;

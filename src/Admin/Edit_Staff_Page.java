@@ -1,4 +1,4 @@
-package src;
+package src.Admin;
 
 import java.awt.*;
 import javax.swing.JFrame;
@@ -18,6 +18,8 @@ import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import javax.swing.border.EmptyBorder;
 
+
+import src.DateFormat;
 
 public class Edit_Staff_Page extends JFrame{
     private JPanel contentPane;

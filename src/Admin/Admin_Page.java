@@ -1,10 +1,11 @@
-package src;
-
+package src.Admin;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
+
+import src.Login_Page;
 
 public class Admin_Page extends JFrame {
     private JPanel contentPane;

@@ -1,4 +1,7 @@
-package src;
+package src.Admin;
+import java.awt.*;
+import javax.swing.*;
+import java.io.File;
 
 import java.awt.*;
 import java.io.File;
@@ -9,6 +12,8 @@ import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
+
+import src.UpdateProfile;
 
 
 public class Admin_Profile extends JFrame{

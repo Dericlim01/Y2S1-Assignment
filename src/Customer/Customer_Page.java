@@ -1,7 +1,10 @@
-package src;
+package src.Customer;
 import javax.swing.*;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import src.Login_Page;
+import src.Update_Profile;
 
 import java.awt.Font;
 import java.awt.EventQueue;

@@ -1,5 +1,4 @@
-package src;
-
+package src.Admin;
 import java.awt.*;
 import javax.swing.*;
 import java.io.File;
