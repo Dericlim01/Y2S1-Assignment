@@ -1,6 +1,9 @@
-package src;
+package src.Manager;
 import javax.swing.*;
 import javax.swing.border.*;
+
+import src.Login_Page;
+
 import javax.imageio.ImageIO;
 
 import java.awt.Font;
