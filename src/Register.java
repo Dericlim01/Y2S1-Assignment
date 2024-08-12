@@ -13,7 +13,7 @@ public class Register {
     Create_file file = new Create_file();
     public Boolean chk_user(String name) {
         if (file.user_file()) {
-            try (BufferedReader read = new BufferedReader(new FileReader("resources/users.txt"))) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"))) {
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
                     String username = data[0];
@@ -33,7 +33,7 @@ public class Register {
     // Register User
     public Boolean reg_user(String name, String pass, String cont_num, String email) {
         try {
-            FileWriter user = new FileWriter("resources/users.txt", true);
+            FileWriter user = new FileWriter("resources/Database/users.txt", true);
             user.append(name + "," + pass + "," + cont_num + "," + email + "," + role + "\n");
             user.close();
             return true;

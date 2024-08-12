@@ -1,4 +1,4 @@
-package src.Customer;
+package src.Customer.Raise_Issue;
 import java.awt.Font;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import src.Customer.Customer_Page;
 
 public class Raise_Issue_Page extends JFrame {
     public static String name;

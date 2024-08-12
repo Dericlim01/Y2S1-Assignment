@@ -1,6 +1,6 @@
-package src.Customer;
-import java.io.*;
+package src.Customer.Raise_Issue;
 
+import java.io.*;
 import java.util.ArrayList;
 
 import src.Create_file;
@@ -18,7 +18,7 @@ public class Raise_Issue {
     public ArrayList<String> search_hall() {
         ArrayList<String> halls = new ArrayList<String>();
         if (new Create_file().booking_file()) {
-            try (BufferedReader read = new BufferedReader(new FileReader("resources/bookings.txt"))) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/bookings.txt"))) {
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
                     // if hall is book by user
@@ -46,7 +46,7 @@ public class Raise_Issue {
     // Search hall type by id
     public String search_id(String id) {
         if (new Create_file().hall_file()) {
-            try (BufferedReader read = new BufferedReader(new FileReader("resources/halls.txt"))) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/halls.txt"))) {
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
                     if (id.equals(data[0])) {
@@ -64,13 +64,13 @@ public class Raise_Issue {
     int num_issue;
     public Boolean send_issue(String issue_title, String issue_desc) {
         if (new Create_file().issue_file()) {
-            try (BufferedReader read = new BufferedReader(new FileReader("resources/issues.txt"))) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/issues.txt"))) {
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
                     int num = data.length;
                     num_issue = num + 1;
                 }
-                FileWriter issues = new FileWriter("issues.txt", true);
+                FileWriter issues = new FileWriter("resources/Database/issues.txt", true);
                 issues.append("I" + num_issue + "," + issue_title + "," + issue_desc + "," + name);
                 issues.close();
                 return true;

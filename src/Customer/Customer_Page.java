@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 
 import src.Login_Page;
 import src.Update_Profile;
+import src.Customer.Hall_Booking.Hall_Booking_Page;
+import src.Customer.Raise_Issue.Raise_Issue_Page;
 
 import java.awt.Font;
 import java.awt.EventQueue;
@@ -89,7 +91,7 @@ public class Customer_Page extends JFrame {
         update_p_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // go to booking page
+                new Hall_Booking_Page(n).setVisible(true);
             }
         });
         contentPane.add(book_hall_btn);

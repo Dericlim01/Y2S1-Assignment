@@ -5,7 +5,7 @@ public class Create_file {
     // User file
     public Boolean user_file() {
         try {
-            if (new File("resources/users.txt").createNewFile()) {
+            if (new File("resources/Database/users.txt").createNewFile()) {
                 System.out.println("User file created");
             } else {
                 System.out.println("User file exist");
@@ -21,7 +21,7 @@ public class Create_file {
     // Hall file
     public Boolean hall_file() {
         try {
-            if (new File("resources/halls.txt").createNewFile()) {
+            if (new File("resources/Database/halls.txt").createNewFile()) {
                 System.out.println("Hall file created");
             } else {
                 System.out.println("Hall file exist");
@@ -37,7 +37,7 @@ public class Create_file {
     // Booking file
     public Boolean booking_file() {
         try {
-            if (new File("resources/bookings.txt").createNewFile()) {
+            if (new File("resources/Database/bookings.txt").createNewFile()) {
                 System.out.println("Booking file created");
             } else {
                 System.out.println("Booking file exist");
@@ -53,7 +53,7 @@ public class Create_file {
     // Issue file
     public Boolean issue_file() {
         try {
-            if (new File("resources/issues.txt").createNewFile()) {
+            if (new File("resources/Database/issues.txt").createNewFile()) {
                 System.out.println("Issue file created");
             } else {
                 System.out.println("Issue file exist");
@@ -68,7 +68,7 @@ public class Create_file {
 
     public Boolean staffs_file(){
         try {
-            if(new File("resources/staffs.txt").createNewFile()){
+            if(new File("resources/Database/staffs.txt").createNewFile()){
                 System.out.println("Staffs file created");
             }
             else{
