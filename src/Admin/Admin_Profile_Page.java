@@ -35,6 +35,7 @@ public class Admin_Profile_Page extends JFrame {
     }
     public Admin_Profile_Page(String name) {
         setTitle("Admin Profile Page");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
         setResizable(false);

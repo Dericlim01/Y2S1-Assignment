@@ -1,10 +1,15 @@
 package src;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Register_Page extends JFrame {
     public static void main(String[] args) {
@@ -21,6 +26,7 @@ public class Register_Page extends JFrame {
 
     public Register_Page() {
         setTitle("Register Page");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
         setResizable(false);
@@ -28,63 +34,125 @@ public class Register_Page extends JFrame {
         // Set panel
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setBackground(new Color(248,248,248));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        // Logo Label
+        JLabel logo_lbl = new JLabel("Symphony Hall");
+        logo_lbl.setFont(new Font("French Script MT", Font.BOLD,25));
+        logo_lbl.setForeground(new Color(169,169,169));
+        logo_lbl.setBounds(60,20,160,30);
+        contentPane.add(logo_lbl);
+
+        // Logo Pic
+        JLabel logo = new JLabel();
+        try{
+ 
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\hall (1).png"));
+
+            Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+
+            logo.setIcon(new ImageIcon(image));
+            logo.setBounds(0, 0, 65, 65);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        contentPane.add(logo);
+
+        // Design Pic 1
+        JLabel des1 = new JLabel();
+        try{
+ 
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\design1.png"));
+
+            Image image = get_image.getScaledInstance(300, 280, Image.SCALE_SMOOTH);
+
+            des1.setIcon(new ImageIcon(image));
+            des1.setBounds(780, 0, 250, 200);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        contentPane.add(des1);
+
+        // Design3 Pic
+        JLabel des3 = new JLabel();
+        try{
+ 
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\design3.png"));
+
+            Image image = get_image.getScaledInstance(400, 200, Image.SCALE_SMOOTH);
+
+            des3.setIcon(new ImageIcon(image));
+            des3.setBounds(-50, -50, 400, 200);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        contentPane.add(des3);
+
         // Register Label
         JLabel reg_lbl = new JLabel("Register");
-        reg_lbl.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 35));
-        reg_lbl.setBounds(400, 100, 200, 45);
+        reg_lbl.setFont(new Font("Engravers MT", Font.PLAIN|Font.PLAIN, 20));
+        reg_lbl.setBounds(430, 120, 200, 45);
         contentPane.add(reg_lbl);
 
         // Username Label
         JLabel name_lbl = new JLabel("Username : ");
-        name_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        name_lbl.setBounds(280, 200, 150, 20);
+        name_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+        name_lbl.setBounds(240, 200, 150, 20);
         contentPane.add(name_lbl);
 
         // Name Text Field
         JTextField name_txt_f = new JTextField();
         name_txt_f.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        name_txt_f.setBounds(500, 200, 150, 30);
+        name_txt_f.setBounds(420, 200, 300, 25);
         contentPane.add(name_txt_f);
 
         // Name status button
         JLabel name_stat_lbl = new JLabel();
         name_stat_lbl.setFont(new Font("Comic Sans MS", Font.ITALIC, 15));
         name_stat_lbl.setForeground(new Color(255, 0, 0));
-        name_stat_lbl.setBounds(500, 230, 150, 20);
+        name_stat_lbl.setBounds(420, 230, 150, 20);
         contentPane.add(name_stat_lbl);
 
         // Password Label
         JLabel pass_lbl = new JLabel("Password : ");
-        pass_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        pass_lbl.setBounds(280, 250, 150, 20);
+        pass_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+        pass_lbl.setBounds(240, 250, 150, 20);
         contentPane.add(pass_lbl);
 
         // Password Text Field
         JPasswordField pass_txt_f = new JPasswordField();
         pass_txt_f.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        pass_txt_f.setBounds(500, 250, 150, 30);
+        pass_txt_f.setBounds(420, 250, 300, 30);
         pass_txt_f.setEchoChar('*');
         contentPane.add(pass_txt_f);
 
         // Re-enter Password Label
         JLabel reen_pass_lbl = new JLabel("Re-enter Password : ");
-        reen_pass_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        reen_pass_lbl.setBounds(280, 300, 200, 20);
+        reen_pass_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+        reen_pass_lbl.setBounds(240, 300, 200, 20);
         contentPane.add(reen_pass_lbl);
 
         // Re-enter Password Text Field
         JPasswordField pass_txt_f_reen = new JPasswordField();
         pass_txt_f_reen.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        pass_txt_f_reen.setBounds(500, 300, 150, 30);
+        pass_txt_f_reen.setBounds(420, 300, 300, 30);
         pass_txt_f_reen.setEchoChar('*');
         contentPane.add(pass_txt_f_reen);
 
         // Show password check box
         JCheckBox show_pass = new JCheckBox();
-        show_pass.setBounds(655, 305, 20, 20);
+        show_pass.setBounds(760, 256, 20, 20);
         show_pass.setSelected(false);
         show_pass.addActionListener(new ActionListener() {
             @Override
@@ -102,45 +170,49 @@ public class Register_Page extends JFrame {
 
         // Contact Number Label
         JLabel cont_num_lbl = new JLabel("Contact Number : ");
-        cont_num_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        cont_num_lbl.setBounds(280, 350, 200, 20);
+        cont_num_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+        cont_num_lbl.setBounds(240, 350, 200, 20);
         contentPane.add(cont_num_lbl);
 
         // Contact Number Text Field
         JTextField cont_num_txt_f = new JTextField();
         cont_num_txt_f.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        cont_num_txt_f.setBounds(500, 350, 150, 30);
+        cont_num_txt_f.setBounds(420, 350, 300, 30);
         contentPane.add(cont_num_txt_f);
 
         // Email Label
         JLabel email_lbl = new JLabel("Email : ");
-        email_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        email_lbl.setBounds(280, 400, 200, 20);
+        email_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+        email_lbl.setBounds(240, 400, 200, 20);
         contentPane.add(email_lbl);
 
         // Email Text Field
         JTextField email_txt_f = new JTextField();
         email_txt_f.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        email_txt_f.setBounds(500, 400, 150, 30);
+        email_txt_f.setBounds(420, 400, 300, 30);
         contentPane.add(email_txt_f);
 
-        // Back button
-        JButton back_btn = new JButton("Back");
-        back_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        back_btn.setBounds(280, 450, 100, 30);
-        back_btn.addActionListener(new ActionListener() {
+        // Back Label
+        JLabel back_lbl = new JLabel("<html><u>Already have an account? Click here to login!</u></html>");
+        back_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        back_lbl.setForeground(new Color(128,128,128));
+        back_lbl.setBounds(350, 540, 400, 30);
+        back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        back_lbl.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
                 dispose();
                 new Login_Page().setVisible(true);
             }
         });
-        contentPane.add(back_btn);
+        contentPane.add(back_lbl);
 
         // Register Button
         JButton register_btn = new JButton("Sign Up");
-        register_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        register_btn.setBounds(425, 450, 150, 30);
+        register_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        register_btn.setBackground(new Color(250,240,230));
+        register_btn.setForeground(new Color(128,128,128));
+        register_btn.setBounds(435, 500, 150, 30);
         register_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = name_txt_f.getText();
