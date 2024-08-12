@@ -2,9 +2,11 @@ package src.Manager;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import javax.imageio.ImageIO;
+
 import src.Login_Page;
 
-import javax.imageio.ImageIO;
+
 
 import java.awt.Font;
 import java.awt.Image;
@@ -110,7 +112,8 @@ public class Manager_Home_Page extends JFrame{
         view_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Manager_View_Profile(n).setVisible(true);
+                // new Manager_View_Profile(n).setVisible(true);
+                new Update_Profile(n).setVisible(true);
                 dispose();
             }
         });

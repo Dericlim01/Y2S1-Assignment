@@ -1,39 +1,42 @@
 package src.Manager;
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.table.TableRowSorter;
 import javax.swing.table.DefaultTableModel;
 
 import javax.imageio.*;
 
 import java.io.*;
-
+import java.text.SimpleDateFormat;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Insets;
-import java.awt.Dimension;
 import java.awt.EventQueue;
-
-import java.text.DateFormat;
-import java.awt.GridBagLayout;
-import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+// import java.time.LocalDate;
+
+
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Properties;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 
 public class Sales_Dashboard extends JFrame {
 
     private static String manname;
     private JScrollPane scrollPane;
-    private List<LocalDate> data;
+    private DefaultTableModel tm;
+    //private List<LocalDate> data;
 
-    
+    // private static Integer now_day = LocalDate.now().getDayOfMonth();
+    // private static Integer now_month = LocalDate.now().getMonthValue();
+    // private static String now_month_str = String.valueOf(LocalDate.now().getMonth());
+    // private static String now_month_str_f = now_month_str.substring(0, 1).toUpperCase() + now_month_str.substring(1).toLowerCase();
+    // private static Integer now_year = LocalDate.now().getYear();
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -62,121 +65,111 @@ public class Sales_Dashboard extends JFrame {
         Manager man_data = new Manager();
 
         // Define the columns names
-        String[] col_name = {"ID", "Name", "Age", "Department", "Date"};
+        String[] col_name = {"Booking ID", "Hall ID", "Num of Guests", "Start Date", "End Date", "Start Time", "End Time", "Book Status", "Booking Paid", "Deposit Paid", "Username"};
 
         // Define the data for the table
         // Object [][] represents whole table
 
-       
+        Object[][] row_Data = man_data.present_data("resources/bookings.txt");
 
-        // DefaultTableModel table_Model = new DefaultTableModel(row_Data, col_name);
-        //JTable view = new JTable();
+        tm = new DefaultTableModel(row_Data, col_name);
+        JTable view = new JTable(tm);
 
-        
-
-        // Create the TableRowSorter and set it on the Table
-        // TableRowSorter<DefaultTableModel> table_sorter = new TableRowSorter<>(table_Model);
-        // view.setRowSorter(table_sorter); 
-
-        scrollPane = man_data.present_data(col_name);
-        scrollPane.setBounds(9, 70, 970, 400);
+        scrollPane = new JScrollPane(view);
+        scrollPane.setBounds(9, 125, 970, 400);
         manager_SD.add(scrollPane);
-        // Set the table's preffered scrollable viewport size
-        scrollPane.setPreferredSize(new Dimension(400,150));
 
-
-        JLabel day_lbl = new JLabel("Day : ");
+        // Start Date label
+        JLabel day_lbl = new JLabel("Start Date :");
         day_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        day_lbl.setBounds(195, 20, 45, 20);
+        day_lbl.setBounds(80, 26, 90, 20);
         manager_SD.add(day_lbl);
-        
-        ArrayList<String> day_data = man_data.day_list(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue());
-        String[] days = day_data.toArray(new String [0]);
-        JComboBox<String> day = new JComboBox<>(days);
-        day.setBounds(245, 23, 50, 20);
-        day.setSelectedIndex(LocalDateTime.now().getDayOfMonth() - 1);
-        // for(int i = 1; i <= 31; i++){
-        //     day.addItem(String.format("%2d", i));
-        // }
-        
-        manager_SD.add(day);
-        
-        
-        JLabel month_lbl = new JLabel("Month : ");
-        month_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        month_lbl.setBounds(325, 23, 60, 20);
-        manager_SD.add(month_lbl);
 
-        // String[] Month = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        ArrayList<String> month_data = man_data.month_list();
-        String[] months = month_data.toArray(new String[0]);
-        JComboBox<String> month = new JComboBox<>(months);
-        month.setBounds(395, 23, 100, 20);
-        month.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                day.removeAllItems();
-                ArrayList<String> day_List = man_data.day_list(Integer.parseInt(day.getSelectedItem().toString()), month.getSelectedIndex() + 1);
-                String[] allDay = day_List.toArray(new String[0]);
-                for (int i = 0; i < allDay.length; i++) {
-                    day.addItem(allDay[i]);
+        // End Date label
+        JLabel end_date = new JLabel("End Date:");
+        end_date.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        end_date.setBounds(400, 26, 90, 20);
+        manager_SD.add(end_date);
+
+        // Calendar
+        // Setup date picker model
+        // Start date Calendar
+        UtilDateModel start_date_model = new UtilDateModel();
+        Properties start_p = new Properties();
+        start_p.put("text.day", "Day");
+        start_p.put("text.month", "Month");
+        start_p.put("text.year", "Year");
+        JDatePanelImpl start_datePanel = new JDatePanelImpl(start_date_model, start_p);
+        JDatePickerImpl start_datePicker = new JDatePickerImpl(start_datePanel, new DateFormat());
+        start_datePicker.setBounds(170, 23, 170, 30);
+        manager_SD.add(start_datePicker);
+
+        // End Date Calendar
+        UtilDateModel end_date_model = new UtilDateModel();
+        Properties end_p = new Properties();
+        end_p.put("text.day", "Day");
+        end_p.put("text.month", "Month");
+        end_p.put("text.year", "Year");
+        JDatePanelImpl end_datePanel = new JDatePanelImpl(end_date_model, end_p);
+        JDatePickerImpl end_datePicker = new JDatePickerImpl(end_datePanel, new DateFormat());
+        end_datePicker.setBounds(480, 23, 170, 30);
+        manager_SD.add(end_datePicker);
+        
+
+       ActionListener actionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            List<Object[]> filteredDate = man_data.date_read(start_datePicker, end_datePicker, "resources/bookings.txt");
+            tm.setRowCount(0);
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+            for (Object[] dates : filteredDate) {
+                Object[] formated = new Object[dates.length];
+
+                for (int i = 0; i < dates.length; i++) {
+                    if (i == 3 || i == 4) {
+                        formated[i] = dateFormat.format(dates[i]);
+                    } else {
+                        formated[i] = dates[i];
+                    }
                 }
+
+                tm.addRow(formated);
             }
-        });
-        manager_SD.add(month);
 
-        JLabel year_lbl = new JLabel("Year : ");
-        year_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        year_lbl.setBounds(530, 23, 60, 20);
-        manager_SD.add(year_lbl);
-
-        ArrayList<String> year_data = man_data.year_list();
-        String[] years = year_data.toArray(new String[0]);
-        JComboBox<String> year = new JComboBox<>(years);
-        year.setBounds(600, 23, 80, 20);
-        // for (int i = 2000; i <= 2100; i++) {
-        //     year.addItem(String.valueOf(i));
-        // }
-        // year.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         String txt_year = year.getSelectedItem().toString();
-        //         man_data.data_filter(txt_year);
-        //     }
-        // });
-        manager_SD.add(year);
+            view.revalidate();
+            view.repaint();
 
 
-        //month.setBounds(450, 200, 100, 50);
-        
-        // day.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
+        }
+       };
 
-        //         String text = day.getSelectedItem().toString();
-        //         man_data.data_filter(table_Model, table_sorter,text);
-        //         // day.removeAllItems();
-        //         // man_data.date_based_on_month(day, month, year);
-                
-        //     }
-        // });
+       start_datePicker.addActionListener(actionListener);
+       end_datePicker.addActionListener(actionListener);
 
-        // JTextField filterTextField = new JTextField(10);
-        // filterTextField.setBounds(450, 200, 100, 50);
-        // filter_panel.add(filterTextField);
-
-        JButton refresh = new JButton("Refresh");
-        refresh.setBounds(720, 23, 80, 20);
+       JButton refresh = new JButton("Refresh");
+        refresh.setBounds(720, 43, 80, 20);
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 manager_SD.remove(scrollPane);
-                scrollPane = man_data.present_data(col_name);
-                scrollPane.setBounds(9, 70, 970, 400);
-                
-                manager_SD.revalidate(); // important, recalculate the layout / resize the panel?
-                manager_SD.repaint(); // important, rearranging components
+                Object[][] row_Data = man_data.present_data("resources/bookings.txt");
+
+                DefaultTableModel tm = new DefaultTableModel();
+                tm.setDataVector(row_Data, col_name);
+                JTable table_tm = new JTable(tm);
+
+
+
+                JScrollPane scrollPane = new JScrollPane(table_tm);
+
+                scrollPane.setBounds(9, 125, 970, 400);
                 manager_SD.add(scrollPane);
+                
+                table_tm.revalidate(); // important, recalculate the layout / resize the panel?
+                table_tm.repaint(); // important, rearranging components
+               
                 
                 
             }
@@ -206,143 +199,7 @@ public class Sales_Dashboard extends JFrame {
         });
 
         manager_SD.add(back_btn);
-
-       ActionListener actionListener = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String txt_day = day.getSelectedItem().toString();
-            String txt_month = month.getSelectedItem().toString();
-            String txt_year = year.getSelectedItem().toString();
-
-
-    
-            man_data.data_filter(txt_day, txt_month, txt_year);
-
-        }
-       };
-
-       day.addActionListener(actionListener);
-       month.addActionListener(actionListener);
-       year.addActionListener(actionListener);
-
-       
-    // day.addActionListener(new ActionListener() {
-    //     @Override
-    //     public void actionPerformed(ActionEvent e) {
-    //         ArrayList<String[]> data = new ArrayList<>();
-    
-    //         JOptionPane.showMessageDialog(null, day.getSelectedItem());
-    
-    //         String txt_day = day.getSelectedItem().toString();
-    //         String txt_month = month.getSelectedItem().toString();
-    //         String txt_year = year.getSelectedItem().toString();
-    
-    //         man_data.data_filter(txt_day, txt_month, txt_year);
-    
-    //         try {
-    //             FileReader fr = new FileReader("Sales.txt");
-    //             BufferedReader br = new BufferedReader(fr);
-    //             String read;
-    //             while ((read = br.readLine()) != null) {
-    //                 String[] fields = read.split(",");
-    //                 String dateData = fields[4];
-    //                 String[] dateParts = dateData.split("-");
-    //                 String dayPart = dateParts[0];
-    
-    //                 if (dayPart.equals(txt_day)) {
-    //                     System.out.println(day.getSelectedItem().toString().trim());
-    //                 }
-    //             }
-    //             br.close();
-    //             fr.close();
-    //         } catch (IOException io) {
-    //             System.out.println(io.getMessage());
-    //         }
-    //     }
-    // });
-        // month.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         String text = day.getSelectedItem().toString();
-        //         man_data.data_filter(table_Model, table_sorter,text);
-        //         //, text2, text3
-
-
-        //     }
-        // });
-
-        // year.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         String text = day.getSelectedItem().toString();
-        //         man_data.data_filter(table_Model, table_sorter,text);
-
-
-        //     }
-        // });
-
-        /* 
-        public void itemStateChanged(ItemEvent e)
-        {
-            // if the state combobox is changed
-            if (e.getSource() == c1) {
-     
-                l1.setText(c1.getSelectedItem() + " selected");
-            }
-        }*/
-        
-        // day.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-
-        //         String line_data;
-        //         ArrayList<String[]> data = new ArrayList<>();
-                
-        //         try(BufferedReader read_file = new BufferedReader(new FileReader("Sales.txt"))){
-        //             while((line_data = read_file.readLine()) != null){
-        //                 String[] row = line_data.split(",");x
-        //                 data.add(row);
-
-        //                 for(int i = 0; i < row.length; i++){
-        //                     String date_data = row[i][4];
-
-        //                 }
-
-                        
-
-        //             }
-        //         }catch(IOException ie){
-        //             ie.printStackTrace();
-        //         }
-
-        //         JOptionPane.showMessageDialog(null,day.getSelectedItem());
-                
-        //         String txt_day = day.getSelectedItem().toString();
-        //         String txt_month = month.getSelectedItem().toString();
-        //         String txt_year = year.getSelectedItem().toString();
-
-                
-        //         man_data.data_filter(txt_day, txt_month, txt_year);
-        //         try{
-        //             FileReader fr = new FileReader("Sales.txt");
-        //             BufferedReader br = new BufferedReader(fr);
-        //             String read;
-        //             while((read = br.readLine())!=null){
-        //                String dateData = read.split(",")[4]; 
-        //                DateFormat df = new SimpleDateFormat(day);
-        //                if(dateData=="01"){
-        //                 System.out.println(day.getSelectedItem().toString().trim());
-        //                }
-        //             }
-        //         } catch(IOException io){
-        //             System.out.println(io.getMessage());
-        //         }
-        //     }
-        // });
         
     }
 
-    // private void refresh(){
-    //     Sales_Dashboard();
-    // }
 }

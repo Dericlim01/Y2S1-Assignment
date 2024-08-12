@@ -1,2 +1,3 @@
-java, hall 1, hall dirty, blablablalabablablablablablabla, 30/7/2024
-java, hall 2, environment hall cannot la, blablabla ok, 31/7/2024
+java, Auditorium, hall dirty, blablablalabablablablablablabla, 30/7/2024
+java, Banquet_Hall, environment hall cannot la, blablabla ok, 31/7/2024
+java, Meeting_Rooms, environment hall cannot la, blablabla ok, 31/7/2024
