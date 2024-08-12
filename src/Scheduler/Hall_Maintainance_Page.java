@@ -1,7 +1,6 @@
+package src.Scheduler;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 public class Hall_Maintainance_Page extends JFrame {
     public static String name;
     public static void main(String[] args) {
