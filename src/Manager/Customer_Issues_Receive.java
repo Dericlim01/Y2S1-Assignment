@@ -2,13 +2,14 @@ package src.Manager;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import javax.imageio.*;
 
 //import java.awt.Font;
 //import java.awt.Color;
 import java.awt.Image;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
@@ -16,6 +17,7 @@ import java.awt.event.ActionListener;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class Customer_Issues_Receive extends JFrame {
@@ -63,6 +65,23 @@ public class Customer_Issues_Receive extends JFrame {
         // scrollPane.setBounds(70, 70, 850, 400);
 
         manager_CIR.add(scrollPane);
+        //scrollPane.setViewportView(table_Model);
+        scrollPane.setPreferredSize(new Dimension(200, 150));
+
+        // Hall Type filter Label
+        JLabel hall = new JLabel("Hall Type:");
+        hall.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+        hall.setBounds(50, 25, 80, 20);
+        manager_CIR.add(hall);
+
+        // Hall Type combo box
+        ArrayList<String> hall_Type = man_issues.hall_type();
+        String[] hall_data = hall_Type.toArray(new String[0]);
+        JComboBox<String> hall_cb = new JComboBox<String>(hall_data);
+        hall_cb.setBounds(125, 27, 120, 20);
+        hall_cb.setSelectedItem(-1);
+        manager_CIR.add(hall_cb);
+
 
         JButton refresh = new JButton("Refresh");
         refresh.setBounds(720, 23, 80, 20);

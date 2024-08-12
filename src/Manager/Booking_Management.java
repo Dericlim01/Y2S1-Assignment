@@ -4,7 +4,7 @@ import javax.imageio.*;
 import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;
 
-import java.util.Date;
+
 import java.util.Properties;
 import java.awt.Font;
 import java.awt.Image;
@@ -15,7 +15,6 @@ import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -82,7 +81,7 @@ public class Booking_Management extends JFrame {
         // Start date Calendar
         UtilDateModel start_date_model = new UtilDateModel();
         Properties start_p = new Properties();
-        start_p.put("texy.day", "Day");
+        start_p.put("text.day", "Day");
         start_p.put("text.month", "Month");
         start_p.put("text.year", "Year");
         JDatePanelImpl start_datePanel = new JDatePanelImpl(start_date_model, start_p);   
@@ -93,7 +92,7 @@ public class Booking_Management extends JFrame {
         // End Date Calendar
         UtilDateModel end_date_model = new UtilDateModel();
         Properties end_p = new Properties();
-        end_p.put("texy.day", "Day");
+        end_p.put("text.day", "Day");
         end_p.put("text.month", "Month");
         end_p.put("text.year", "Year");
         JDatePanelImpl end_datePanel = new JDatePanelImpl(end_date_model, start_p);   
@@ -101,13 +100,14 @@ public class Booking_Management extends JFrame {
         end_datePicker.setBounds(480, 23, 170, 30);
         manager_BM.add(end_datePicker);
 
+        // Do a filter data action according date selected 
         ActionListener actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<Object[]> filteredDate = man_booking.date_read(start_datePicker, end_datePicker);
+                List<Object[]> filteredDate = man_booking.date_read(start_datePicker, end_datePicker, "resources/bookings.txt");
                 tm.setRowCount(0);
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyy");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
                 for (Object[] dates : filteredDate) {
                     Object[] formated = new Object[dates.length];
@@ -131,7 +131,7 @@ public class Booking_Management extends JFrame {
         start_datePicker.addActionListener(actionListener);
         end_datePicker.addActionListener(actionListener);
 
-
+        // Refresh button to get whole data(new / old) again
         JButton refresh = new JButton("refresh");
         refresh.setBounds(720, 23, 80, 20);
         refresh.addActionListener(new ActionListener() {
@@ -154,6 +154,7 @@ public class Booking_Management extends JFrame {
         });
         manager_BM.add(refresh);
         
+        // Back button back to Home Page
         JButton back_btn = new JButton();
         try {
             BufferedImage backImage = new BufferedImage(
