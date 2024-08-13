@@ -1,9 +1,15 @@
 package src.Customer.Raise_Issue;
 
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -11,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
@@ -34,6 +42,7 @@ public class Raise_Issue_Page extends JFrame {
 
     public Raise_Issue_Page(String n) {
         setTitle("Raise Issue");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
         setResizable(false);
@@ -43,6 +52,26 @@ public class Raise_Issue_Page extends JFrame {
         contentpane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentpane);
         contentpane.setLayout(null);
+
+        //Logo Label
+        JLabel logo_lbl = new JLabel("Symphony Hall");
+        logo_lbl.setFont(new Font("French Script MT", Font.BOLD,25));
+        logo_lbl.setForeground(new Color(169,169,169));
+        logo_lbl.setBounds(60,20,160,30);
+        contentpane.add(logo_lbl);
+
+        //Logo Pic
+        JLabel logo = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources\\Image\\hall (1).png"));
+            Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+            logo.setIcon(new ImageIcon(image));
+            logo.setBounds(0, 0, 65, 65);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        contentpane.add(logo);
 
         // Hall type label
         JLabel hall_type_lbl = new JLabel("Hall Type : ");
@@ -141,5 +170,18 @@ public class Raise_Issue_Page extends JFrame {
             }
         });
         contentpane.add(back_btn);
+
+        // Design 4 Pic
+        JLabel des4 = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources\\Image\\design4.png"));
+            Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
+            des4.setIcon(new ImageIcon(image));
+            des4.setBounds(0, 0, 1000, 800);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        contentpane.add(des4);
     }
 }
