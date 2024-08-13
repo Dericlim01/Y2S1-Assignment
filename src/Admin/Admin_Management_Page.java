@@ -124,7 +124,10 @@ public class Admin_Management_Page extends JFrame {
         editad_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                dispose();
+                Edit_Admin_Page editad = new Edit_Admin_Page(name);
+                editad.setTitle("Edit Admin Page");
+                editad.setVisible(true);
             }
         });
         contentPane.add(editad_btn);

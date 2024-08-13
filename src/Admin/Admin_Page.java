@@ -190,8 +190,8 @@ public class Admin_Page extends JFrame {
 
         //Home Page Label
         JLabel adhome_lbl = new JLabel("Admin Home Page");
-        adhome_lbl.setFont(new Font("Engravers MT",Font.PLAIN,20));
-        adhome_lbl.setBounds(480,200,300,30);
+        adhome_lbl.setFont(new Font("Engravers MT",Font.PLAIN,15));
+        adhome_lbl.setBounds(500,200,300,30);
         contentPane.add(adhome_lbl);
 
         //View Profile Button
