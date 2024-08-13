@@ -9,7 +9,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 import java.util.Properties;
 
@@ -217,6 +216,7 @@ public class Edit_Staff_Page extends JFrame {
                 if(selectName != null){
                     Staff_Management sm = new Staff_Management(name);
                     if(sm.delete_staff(selectName)){
+                        sm.delete_staffuser(selectName);
                         int response = JOptionPane.showConfirmDialog(null, "Staff Delete Successfully. Do you want to delete again?","Question",JOptionPane.YES_NO_OPTION);
                         if(response == 0){
                             //delete again
@@ -273,6 +273,7 @@ public class Edit_Staff_Page extends JFrame {
                     String editrole = (String) roleData.getSelectedItem();
                     Staff_Management sm = new Staff_Management(name);
                     if(sm.edit_staff(selectName, editpass, editphone, editmail, editdob, editgen, editrole)) {
+                        sm.edit_to_users(selectName, editpass, editphone, editmail, editrole);
                         int response = JOptionPane.showConfirmDialog(null, "Staff Edit Successfully. Do you want to edit again?","Question",JOptionPane.YES_NO_OPTION);
                         if(response == 0){
                             //edit again

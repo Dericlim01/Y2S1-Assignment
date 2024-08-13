@@ -303,8 +303,10 @@ public class Staff_Add_Page extends JFrame {
             e.printStackTrace();
         }
         contentPane.add(des4);
-
     }
+        
+
+    
 
 
 }
