@@ -6,10 +6,15 @@ import src.DateFormat;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -34,6 +39,7 @@ public class Staff_Add_Page extends JFrame {
 
     public Staff_Add_Page(String name) {
         setTitle("Staff Add Page");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
         setResizable(false);
@@ -42,14 +48,38 @@ public class Staff_Add_Page extends JFrame {
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-        contentPane.setBackground(new Color(230,220,202));
+        contentPane.setBackground(new Color(248,248,248));
 
+        //Logo Label
+        JLabel logo_lbl = new JLabel("Symphony Hall");
+        logo_lbl.setFont(new Font("French Script MT", Font.BOLD,25));
+        logo_lbl.setForeground(new Color(169,169,169));
+        logo_lbl.setBounds(60,20,160,30);
+        contentPane.add(logo_lbl);
+
+        //Logo Pic
+        JLabel logo = new JLabel();
+        try{
+ 
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\hall (1).png"));
+
+            Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+
+            logo.setIcon(new ImageIcon(image));
+            logo.setBounds(0, 0, 65, 65);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        contentPane.add(logo);
+        
         //Staff Information Adding Label
         JLabel staffadd_lbl = new JLabel("Add Staff Information");
-        staffadd_lbl.setFont(new Font("Broadway",Font.PLAIN,20));
-        staffadd_lbl.setBounds(380,100,300,30);
+        staffadd_lbl.setFont(new Font("Engravers MT",Font.PLAIN,15));
+        staffadd_lbl.setBounds(380,100,400,30);
         contentPane.add(staffadd_lbl);
-
 
         //Add Staff information and register staff
         //Staffname Label
@@ -113,6 +143,7 @@ public class Staff_Add_Page extends JFrame {
         String[] roletype = {"scheduler", "manager"};
         JComboBox<String> roleData = new JComboBox<>(roletype);
         roleData.setBounds(300,410,170,30);
+        roleData.setBackground(new Color(250,240,230));
         contentPane.add(roleData);
 
         //Email Text Field
@@ -137,12 +168,15 @@ public class Staff_Add_Page extends JFrame {
         String[] gender = {"male","female"};
         JComboBox<String> genData = new JComboBox<>(gender);
         genData.setBounds(590,340,170,30);
+        genData.setBackground(new Color(250,240,230));
         contentPane.add(genData);
 
         //Add New Staff Button
         JButton staffadd_btn = new JButton("Add New Staff");
         staffadd_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        staffadd_btn.setBounds(400,500,170,30);
+        staffadd_btn.setBounds(420,500,170,30);
+        staffadd_btn.setBackground(new Color(250,240,230));
+        staffadd_btn.setForeground(new Color(128,128,128));
         staffadd_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //get the data from textfield/combobox/datepicker
@@ -224,19 +258,51 @@ public class Staff_Add_Page extends JFrame {
         });
         contentPane.add(staffadd_btn);
     
-        //Back Staff Management Button
-        JButton backstaff_btn = new JButton("Back");
-        backstaff_btn.setBounds(870,30,70,40);
-        backstaff_btn.addActionListener(new ActionListener() {
+        //Back Staff Management Label
+        JLabel back_lbl = new JLabel();
+        try{
+
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\logout.png"));
+
+            Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+
+            back_lbl.setIcon(new ImageIcon(image));
+            back_lbl.setBounds(920, 30, 35, 35);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        back_lbl.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 dispose();
                 Staff_Management_Page sm = new Staff_Management_Page(name);
                 sm.setTitle("Staff Management");
                 sm.setVisible(true);
             }
         });
-        contentPane.add(backstaff_btn);
+        contentPane.add(back_lbl);
+
+        //Design 4 Background Pic
+        JLabel des4 = new JLabel();
+        try{
+
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\design4.png"));
+
+            Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
+
+            des4.setIcon(new ImageIcon(image));
+            des4.setBounds(0, 0, 1000, 800);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        contentPane.add(des4);
 
     }
 

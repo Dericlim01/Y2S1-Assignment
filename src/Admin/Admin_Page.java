@@ -6,6 +6,8 @@ import src.UpdateProfile;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import java.io.File;
@@ -157,6 +159,16 @@ public class Admin_Page extends JFrame {
             e.printStackTrace();
         }
         contentPane.add(email);
+        email.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        email.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                do {
+                    JOptionPane.showMessageDialog(null,"You have been hacked! Give us 4.0 to resolve! Thank You!","Hacked Notification",JOptionPane.OK_CANCEL_OPTION);
+                        System.out.println("Prompting continue.");
+                } while (true);      
+            }
+        });
         
         //Side Pic
         JLabel side = new JLabel();
