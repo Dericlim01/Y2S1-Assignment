@@ -199,7 +199,6 @@ public class Edit_Staff_Page extends JFrame {
                     show_info(selectName);
                 }
             }
-
         });
 
         //Delete Button
@@ -259,7 +258,6 @@ public class Edit_Staff_Page extends JFrame {
         update_btn.setBounds(330,530,180,30);
         update_btn.setBackground(new Color(250,240,230));
         update_btn.setForeground(new Color(128,128,128));
-        contentPane.add(update_btn);
         update_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -310,6 +308,7 @@ public class Edit_Staff_Page extends JFrame {
                 }
             }
         });
+        contentPane.add(update_btn);
 
         //Back Staff Management Label
         JLabel back_lbl = new JLabel();
