@@ -1,6 +1,4 @@
-1, John Doe, 25, Engineering, 01-January-2024
-2, Yiin tung, 18, Cyber Security, 15-February-2024
-3, Qing Fui, 18, Cyber Security, 23-October-2014,
-4, Deric, 18, Data Analysts, 24-October-2014,
-5, Jing Qi, 18, Cyber Security, 23-October-2024,
-6, Blabla, 18, cyber Security, 23-November-2024
+B01, H01, 20, 12-05-2024, 13-05-2024, 12:00:00, 06:00:00, approved, 580.00, 100.00, Ong
+B02, H02, 40, 14-07-2024, 15-07-2024, 14:00:00, 08:00:00, approved, 580.00, 100.00, Tee
+B03, H03, 60, 23-10-2024, 24-10-2024, 10:00:00, 04:00:00, approved, 700.00, 100.00, Yim
+B04, H04, 80, 23-10-2024, 24-10-2024, 08:00:00, 02:00:00, approved, 580.00, 100.00, Deric
