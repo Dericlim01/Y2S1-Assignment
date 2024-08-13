@@ -9,6 +9,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import src.Create_file;
+
 public class Admin_Management {
     private String line;
     private TableRowSorter<DefaultTableModel> sorter;
@@ -16,6 +18,29 @@ public class Admin_Management {
     public Admin_Management (String name){
 
     }
+
+    //Check the unique adminname
+    //Check the unique staffname
+        Create_file file = new Create_file();
+        public Boolean check_staff (String name) {
+        if(file.staffs_file()){
+            try (BufferedReader read_staff = new BufferedReader(new FileReader("resources/Database/userss.txt"))){
+                while ((line = read_staff.readLine()) != null){
+                    String[] data = line.split(",");
+                    String staffname = data[0];
+                    if(staffname.equals(name)){
+                        return false;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }    
+
+    }
+    return true;
+    }
+
 
     public JScrollPane view_admin(String[] adCol){
     ArrayList<String[]> adData = new ArrayList<>();
