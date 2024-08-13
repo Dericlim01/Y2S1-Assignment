@@ -1,14 +1,27 @@
 package src.Customer.Hall_Booking;
+
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Properties;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,6 +31,7 @@ import org.jdatepicker.impl.UtilDateModel;
 
 import src.DateFormat;
 import src.Customer.Customer_Page;
+import src.Customer.Payment.Payment_Page;
 
 /**
  * Hall_Booking_Page
@@ -47,6 +61,7 @@ public class Hall_Booking_Page extends JFrame {
 
     public Hall_Booking_Page(String n) {
         setTitle("Hall Booking");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
         setResizable(false);
@@ -84,45 +99,19 @@ public class Hall_Booking_Page extends JFrame {
         start_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
         contentPane.add(start_date_lbl);
 
-        // Start Calendar
-        UtilDateModel start_date_model = new UtilDateModel();
-        // Properties create object to store values in it
-        Properties start_date_prop = new Properties();
-        start_date_prop.put("text.day", "Day");
-        start_date_prop.put("text.month","Month");
-        start_date_prop.put("text.year", "Year");
-        // Import Date Panel and Picker
-        JDatePanelImpl start_datePanel = new JDatePanelImpl(start_date_model, start_date_prop);
-        JDatePickerImpl start_datePicker = new JDatePickerImpl(start_datePanel, new DateFormat());
-        start_datePicker.setBounds(175,150,140,30);
-        contentPane.add(start_datePicker);
-
         // End Date
         JLabel end_date_lbl = new JLabel("End Date : ");
         end_date_lbl.setBounds(30, 190, 150, 30);
         end_date_lbl.setFont(new Font("Comic Sans Ms", Font.PLAIN, 20));
         contentPane.add(end_date_lbl);
 
-        // End Calendar
-        UtilDateModel end_date_model = new UtilDateModel();
-        // Properties create object to store values in it
-        Properties end_date_prop = new Properties();
-        end_date_prop.put("text.day", "Day");
-        end_date_prop.put("text.month","Month");
-        end_date_prop.put("text.year", "Year");
-        // Import Date Panel and Picker
-        JDatePanelImpl end_datePanel = new JDatePanelImpl(end_date_model, end_date_prop);
-        JDatePickerImpl end_datePicker = new JDatePickerImpl(end_datePanel, new DateFormat());
-        end_datePicker.setBounds(175,190,140,30);
-        contentPane.add(end_datePicker);
-
         // Table
         String[] col_name = {"Hall ID", "Hall Type", "Capacity", "Price per hour", "Price per day", "Status"};
-        Object[][] data = new Hall_Booking().hall_data(String.valueOf(hall_type_cmbbx.getSelectedItem()));
+        Object[][] data = new Hall_Booking().hall_data(String.valueOf(hall_type_cmbbx.getSelectedIndex()));
         DefaultTableModel table = new DefaultTableModel(data, col_name);
         JTable details = new JTable(table);
         JScrollPane scrollPane = new JScrollPane(details);
-        scrollPane.setBounds(200, 300, 600, 400);
+        scrollPane.setBounds(100, 250, 800, 400);
         contentPane.add(scrollPane);
 
         hall_type_cmbbx.addActionListener(new ActionListener() {
@@ -136,26 +125,67 @@ public class Hall_Booking_Page extends JFrame {
             }
         });
 
-        Date start_date = (Date) start_datePicker.getModel().getValue();
+        // Start Calendar
+        UtilDateModel start_date_model = new UtilDateModel();
+        // Properties create object to store values in it
+        Properties start_date_prop = new Properties();
+        start_date_prop.put("text.day", "Day");
+        start_date_prop.put("text.month","Month");
+        start_date_prop.put("text.year", "Year");
+        // Import Date Panel and Picker
+        JDatePanelImpl start_datePanel = new JDatePanelImpl(start_date_model, start_date_prop);
+        JDatePickerImpl start_datePicker = new JDatePickerImpl(start_datePanel, new DateFormat());
+        start_datePicker.setBounds(175,150,140,30);
+        contentPane.add(start_datePicker);
+
+        // Calander action listener
+        LocalDate start_date = (LocalDate) start_datePicker.getModel().getValue();
         start_datePicker.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Object[][] start_date = new Hall_Booking().hall_data(n);
+                Object[][] start_date_data = new Hall_Booking().start_filter(start_date);
+                table.setDataVector(start_date_data, col_name);
+                details.revalidate();
+                details.repaint();
             }
         });
 
-        Date end_date = (Date) end_datePicker.getModel().getValue();
+        // End Calendar
+        UtilDateModel end_date_model = new UtilDateModel();
+        // Properties create object to store values in it
+        Properties end_date_prop = new Properties();
+        end_date_prop.put("text.day", "Day");
+        end_date_prop.put("text.month","Month");
+        end_date_prop.put("text.year", "Year");
+        // Import Date Panel and Picker
+        JDatePanelImpl end_datePanel = new JDatePanelImpl(end_date_model, end_date_prop);
+        JDatePickerImpl end_datePicker = new JDatePickerImpl(end_datePanel, new DateFormat());
+        end_datePicker.setBounds(175,190,140,30);
+        contentPane.add(end_datePicker);
+        
+        // Calander action listener
+        LocalDate end_date = (LocalDate) end_datePicker.getModel().getValue();
         end_datePicker.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Object[][] end_date = new Hall_Booking().hall_data(n);
+                Object[][] end_date_data = new Hall_Booking().end_filter(start_date, end_date);
+                table.setDataVector(end_date_data, col_name);
+                details.revalidate();
+                details.repaint();
             }
         });
 
-        // Search button
-        JButton search_btn = new JButton("Search");
+        // Next button
+        JButton search_btn = new JButton("Next");
         search_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
         search_btn.setBounds(600, 190, 120, 30);
+        search_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new Payment_Page(n).setVisible(true);
+            }
+        });
         contentPane.add(search_btn);
 
         // Back button
@@ -170,5 +200,18 @@ public class Hall_Booking_Page extends JFrame {
             }
         });
         contentPane.add(back_btn);
+
+        // Design 4 Pic
+        JLabel des4 = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources\\Image\\design4.png"));
+            Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
+            des4.setIcon(new ImageIcon(image));
+            des4.setBounds(0, 0, 1000, 800);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        contentPane.add(des4);
     }
 }
