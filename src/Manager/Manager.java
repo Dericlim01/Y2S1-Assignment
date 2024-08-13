@@ -23,7 +23,7 @@ public class Manager {
         String line;
         String[] data;
         if (new Create_file().user_file()) {
-            try(BufferedReader read = new BufferedReader(new FileReader("resources/users.txt"));){
+            try(BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"));){
                 while((line = read.readLine()) != null){
                     // Create array and store data 
                     data = line.split(",");
@@ -131,30 +131,26 @@ public class Manager {
         return rowData.toArray(new Object[0][]);
     }
 
-   public JScrollPane task_status(String[] colname){
+   public Object[][] task_status(){
        String task;
        ArrayList<String[]> taskStatus = new ArrayList<>();
 
-       try (BufferedReader br_task = new BufferedReader(new FileReader("resources/Database/issues.txt"))){
-           while((task = br_task.readLine()) != null){
-               String[] row = task.split(",");
-               taskStatus.add(row);
-           }
-
-       } catch (IOException ex) {
-           ex.printStackTrace();
+       if(new Create_file().issue_file()){
+        try (BufferedReader br_task = new BufferedReader(new FileReader("resources/Database/issues.txt"))){
+            while((task = br_task.readLine()) != null){
+                String[] row = task.split(",");
+                taskStatus.add(row);
+            }
+ 
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
        }
 
        Object[][] tasks_status = taskStatus.toArray(new Object[0][]);
 
-       table_Model = new DefaultTableModel(tasks_status, colname);
-       JTable view = new JTable(table_Model);
-       sorter = new TableRowSorter<>(table_Model);
-       view.setRowSorter(sorter);
 
-       JScrollPane scrollPane = new JScrollPane(view);
-
-       return scrollPane;
+       return tasks_status;
         
    }
 
@@ -185,9 +181,9 @@ public class Manager {
     public Object[][] hallData(String hall_type) {
         List<Object[]> hallList = new ArrayList<>();
         if (new Create_file().hall_file()) {
-            try (BufferedReader hall_read = new BufferedReader(new FileReader("resources/Database/issues.txt"))) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/issues.txt"))) {
                 String line;
-                while ((line = hall_read.readLine()) != null) {
+                while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
                     if (data[1].equals(hall_type)) {
                         hallList.add(data);
@@ -198,6 +194,39 @@ public class Manager {
             }
         }
         return hallList.toArray(new Object[0][]);
+    }
+
+    public ArrayList<String> assign_staff(){
+        String staff_data;
+        ArrayList<String> staffList = new ArrayList<>();
+        if(new Create_file().staffs_file()) {
+            try(BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))){
+                while((staff_data = read.readLine()) != null){
+                    String[] data = staff_data.split(",");
+                    if(!staffList.contains(data[0])){
+                        staffList.add(data[0]);
+                    }
+
+                }
+                return staffList;
+
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        return staffList;
+    }
+
+    int task_Id;
+    public Boolean keep_task() {
+        int f_id = 1;
+        
+        try(BufferedReader id_read = new BufferedReader(new FileReader("resources/Database/issues.txt"))){
+            
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
 

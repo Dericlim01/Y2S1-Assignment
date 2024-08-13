@@ -1,11 +1,14 @@
 package src.Manager;
+import java.awt.EventQueue;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.imageio.*;
 
-//import java.awt.Font;
-//import java.awt.Color;
 import java.awt.Image;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -14,22 +17,19 @@ import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-
-public class Customer_Issues_Receive extends JFrame {
+public class View_Customer_Issues extends JFrame{
     private static String manname;
     private JScrollPane scrollPane;
-    private DefaultTableModel table_Model;
+    private DefaultTableModel tm;
+
+    private JTable view;
 
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable(){
+        EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try{
-                    new Customer_Issues_Receive(manname).setVisible(true);
+                    new View_Customer_Issues(manname).setVisible(true);
                 }catch(Exception e){
                     e.printStackTrace();
                 }
@@ -37,37 +37,33 @@ public class Customer_Issues_Receive extends JFrame {
         });
     }
 
-    public Customer_Issues_Receive(String n){
-        setTitle("Customer Issues Receive");
+    public View_Customer_Issues(String n){
+        setTitle("View Customer Issues");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
         setResizable(false);
 
-        JPanel manager_CIR = new JPanel();
-        manager_CIR.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(manager_CIR);
-        manager_CIR.setLayout(null);
+        JPanel manager_VCI = new JPanel();
+        manager_VCI.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(manager_VCI);
+        manager_VCI.setLayout(null);
 
         Manager man_issues = new Manager();
 
         String[] col_name = {"Username", "Hall Type", "Issues", "Issues Description", "Date"};
-        Object[][] row_data = man_issues.present_data("resources/Database/issues.txt");
-        table_Model = new DefaultTableModel();
-        table_Model.setDataVector(row_data, col_name);
-        JTable view = new JTable(table_Model);
+        Object[][] row_Data = man_issues.present_data("resources/Database/issues.txt");
+        tm = new DefaultTableModel(row_Data, col_name);
+        view = new JTable(tm);
 
         scrollPane = new JScrollPane(view);
-        scrollPane.setBounds(9, 70, 970, 400);
-
-        manager_CIR.add(scrollPane);
-        //scrollPane.setViewportView(table_Model);
-        //scrollPane.setPreferredSize(new Dimension(200, 150));
+        scrollPane.setBounds(9, 125, 970, 400);
+        manager_VCI.add(scrollPane);
 
         // Hall Type filter Label
         JLabel hall = new JLabel("Hall Type:");
         hall.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
         hall.setBounds(50, 25, 80, 20);
-        manager_CIR.add(hall);
+        manager_VCI.add(hall);
 
         // Hall Type combo box
         ArrayList<String> hall_Type = man_issues.hall_type();
@@ -79,13 +75,13 @@ public class Customer_Issues_Receive extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String hallType = String.valueOf(hall_cb.getSelectedItem());
                 Object[][] hall_Data = man_issues.hallData(hallType);
-                table_Model.setDataVector(hall_Data, col_name);
+                tm.setDataVector(hall_Data, col_name);
                 view.revalidate();
                 view.repaint();
             }
         });
         hall_cb.setSelectedIndex(-1);
-        manager_CIR.add(hall_cb);
+        manager_VCI.add(hall_cb);
 
 
         JButton refresh = new JButton("Refresh");
@@ -93,21 +89,21 @@ public class Customer_Issues_Receive extends JFrame {
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                manager_CIR.remove(scrollPane);
+                manager_VCI.remove(scrollPane);
                 Object[][] row_data = man_issues.present_data("resources/Database/issues.txt");
-                table_Model = new DefaultTableModel();
-                table_Model.setDataVector(row_data, col_name);
-                JTable view = new JTable(table_Model);
+                tm = new DefaultTableModel();
+                tm.setDataVector(row_data, col_name);
+                JTable view = new JTable(tm);
 
                 scrollPane = new JScrollPane(view);
-                scrollPane.setBounds(9, 70, 970, 400);
+                scrollPane.setBounds(9, 125, 970, 400);
 
-                manager_CIR.add(scrollPane);
+                manager_VCI.add(scrollPane);
                 view.revalidate();
                 view.repaint();
             }
         });
-        manager_CIR.add(refresh);
+        manager_VCI.add(refresh);
 
         JButton back_btn = new JButton();
         try{
@@ -131,17 +127,6 @@ public class Customer_Issues_Receive extends JFrame {
             }
         });
 
-        
-
-
-        manager_CIR.add(back_btn);
-
-
-
-
-
-
-
-        
+        manager_VCI.add(back_btn);
     }
 }
