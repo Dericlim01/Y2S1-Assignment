@@ -152,7 +152,7 @@ public class Register_Page extends JFrame {
 
         // Show password check box
         JCheckBox show_pass = new JCheckBox();
-        show_pass.setBounds(760, 256, 20, 20);
+        show_pass.setBounds(730, 256, 20, 20);
         show_pass.setSelected(false);
         show_pass.addActionListener(new ActionListener() {
             @Override
@@ -194,9 +194,9 @@ public class Register_Page extends JFrame {
 
         // Back Label
         JLabel back_lbl = new JLabel("<html><u>Already have an account? Click here to login!</u></html>");
-        back_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        back_lbl.setFont(new Font("Serif", Font.PLAIN, 15));
         back_lbl.setForeground(new Color(128,128,128));
-        back_lbl.setBounds(350, 540, 400, 30);
+        back_lbl.setBounds(360, 530, 400, 30);
         back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
         back_lbl.addMouseListener(new MouseAdapter() {
             @Override
@@ -212,7 +212,7 @@ public class Register_Page extends JFrame {
         register_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         register_btn.setBackground(new Color(250,240,230));
         register_btn.setForeground(new Color(128,128,128));
-        register_btn.setBounds(435, 500, 150, 30);
+        register_btn.setBounds(420, 470, 150, 30);
         register_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = name_txt_f.getText();

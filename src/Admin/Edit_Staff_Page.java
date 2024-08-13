@@ -5,17 +5,23 @@ import src.DateFormat;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 import java.util.Properties;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -50,6 +56,7 @@ public class Edit_Staff_Page extends JFrame {
 
     public Edit_Staff_Page(String name) {
         setTitle("Edit Staff Page");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
         setResizable(false);
@@ -58,14 +65,38 @@ public class Edit_Staff_Page extends JFrame {
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-        contentPane.setBackground(new Color(230,220,202));
+        contentPane.setBackground(new Color(248,248,248));
 
-        //Staff Information Adding Label
+        //Logo Label
+        JLabel logo_lbl = new JLabel("Symphony Hall");
+        logo_lbl.setFont(new Font("French Script MT", Font.BOLD,25));
+        logo_lbl.setForeground(new Color(169,169,169));
+        logo_lbl.setBounds(60,20,160,30);
+        contentPane.add(logo_lbl);
+
+        //Logo Pic
+        JLabel logo = new JLabel();
+        try{
+ 
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\hall (1).png"));
+
+            Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+
+            logo.setIcon(new ImageIcon(image));
+            logo.setBounds(0, 0, 65, 65);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        contentPane.add(logo);
+
+        //Staff Information Edit Label
         JLabel staffadd_lbl = new JLabel("Edit Staff Information");
-        staffadd_lbl.setFont(new Font("Broadway",Font.PLAIN,20));
-        staffadd_lbl.setBounds(380,100,300,30);
+        staffadd_lbl.setFont(new Font("Engravers MT",Font.PLAIN,15));
+        staffadd_lbl.setBounds(380,100,400,30);
         contentPane.add(staffadd_lbl);
-
 
         //Edit Staff Information
         //Staffname Label
@@ -124,6 +155,7 @@ public class Edit_Staff_Page extends JFrame {
         String[] roletype = {"scheduler", "manager"};
         roleData = new JComboBox<>(roletype);
         roleData.setBounds(300,410,170,30);
+        roleData.setBackground(new Color(250,240,230));
         contentPane.add(roleData);
 
         //Email Text Field
@@ -148,12 +180,14 @@ public class Edit_Staff_Page extends JFrame {
         String[] gender = {"male","female"};
         genData = new JComboBox<>(gender);
         genData.setBounds(590,340,170,30);
+        genData.setBackground(new Color(250,240,230));
         contentPane.add(genData);
 
         //Staffname ComboBox
         String[] staff ={};
         JComboBox<String> staffname = new JComboBox<>(staff);
         staffname.setBounds(300,200,170,30);
+        staffname.setBackground(new Color(250,240,230));
         contentPane.add(staffname);
         Staff_Management sm = new Staff_Management(name);
         sm.load_staff(staffname);
@@ -172,6 +206,8 @@ public class Edit_Staff_Page extends JFrame {
         JButton delete_btn = new JButton("Delete Information");
         delete_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         delete_btn.setBounds(530,530,180,30);
+        delete_btn.setBackground(new Color(250,240,230));
+        delete_btn.setForeground(new Color(128,128,128));
         contentPane.add(delete_btn);
         delete_btn.addActionListener(new ActionListener() {
             @Override
@@ -180,6 +216,7 @@ public class Edit_Staff_Page extends JFrame {
                 if(selectName != null){
                     Staff_Management sm = new Staff_Management(name);
                     if(sm.delete_staff(selectName)){
+                        sm.delete_staffuser(selectName);
                         int response = JOptionPane.showConfirmDialog(null, "Staff Delete Successfully. Do you want to delete again?","Question",JOptionPane.YES_NO_OPTION);
                         if(response == 0){
                             //delete again
@@ -220,6 +257,8 @@ public class Edit_Staff_Page extends JFrame {
         JButton update_btn = new JButton("Update Information");
         update_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         update_btn.setBounds(330,530,180,30);
+        update_btn.setBackground(new Color(250,240,230));
+        update_btn.setForeground(new Color(128,128,128));
         contentPane.add(update_btn);
         update_btn.addActionListener(new ActionListener() {
             @Override
@@ -234,6 +273,7 @@ public class Edit_Staff_Page extends JFrame {
                     String editrole = (String) roleData.getSelectedItem();
                     Staff_Management sm = new Staff_Management(name);
                     if(sm.edit_staff(selectName, editpass, editphone, editmail, editdob, editgen, editrole)) {
+                        sm.edit_to_users(selectName, editpass, editphone, editmail, editrole);
                         int response = JOptionPane.showConfirmDialog(null, "Staff Edit Successfully. Do you want to edit again?","Question",JOptionPane.YES_NO_OPTION);
                         if(response == 0){
                             //edit again
@@ -271,19 +311,52 @@ public class Edit_Staff_Page extends JFrame {
             }
         });
 
-        //Back Staff Management Button
-        JButton backstaff_btn = new JButton("Back");
-        backstaff_btn.setBounds(870,30,70,40);
-        backstaff_btn.addActionListener(new ActionListener() {
+        //Back Staff Management Label
+        JLabel back_lbl = new JLabel();
+        try{
+
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\logout.png"));
+
+            Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+
+            back_lbl.setIcon(new ImageIcon(image));
+            back_lbl.setBounds(920, 30, 35, 35);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        back_lbl.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 dispose();
                 Staff_Management_Page sm = new Staff_Management_Page(name);
                 sm.setTitle("Staff Management");
                 sm.setVisible(true);
             }
         });
-        contentPane.add(backstaff_btn);
+        contentPane.add(back_lbl);
+
+        //Design 4 Background Pic
+        JLabel des4 = new JLabel();
+        try{
+
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\design4.png"));
+
+            Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
+
+            des4.setIcon(new ImageIcon(image));
+            des4.setBounds(0, 0, 1000, 800);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        contentPane.add(des4);
+
     }
 
     //showing staff information

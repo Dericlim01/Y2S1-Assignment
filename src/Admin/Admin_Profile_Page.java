@@ -6,7 +6,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -91,6 +92,34 @@ public class Admin_Profile_Page extends JFrame {
         }
         contentPane.add(profile);
 
+        //Home Page Label
+        JLabel back_lbl = new JLabel();
+        try{
+
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\logout.png"));
+
+            Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+
+            back_lbl.setIcon(new ImageIcon(image));
+            back_lbl.setBounds(920, 30, 35, 35);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        back_lbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dispose();
+                Admin_Page ad = new Admin_Page(name);
+                ad.setTitle("Admin");
+                ad.setVisible(true);
+            }
+        });
+        contentPane.add(back_lbl);
+
         //Gradient Design
         JLabel gradient = new JLabel();
         try{
@@ -169,31 +198,8 @@ public class Admin_Profile_Page extends JFrame {
         JTextField efield = new JTextField();
         efield.setBounds(500,390,200,30);
 
-        //Home Page Button
-        JButton home_btn = new JButton();
-        try{
-            BufferedImage home_pic = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-            home_pic = ImageIO.read(new File("resources\\Image\\logout.png"));
-            Image home_icon = home_pic.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-            home_btn.setIcon(new ImageIcon(home_icon));
-            home_btn.setBounds(920,30,35,35);
-            home_btn.setBackground(new Color(213,196,161));
-            
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        home_btn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                Admin_Page ad = new Admin_Page(name);
-                ad.setTitle("Admin");
-                ad.setVisible(true);
-            }
-        });
-        contentPane.add(home_btn);
-
-
+       
+        
          //Update Button
          JButton up_btn = new JButton("Update");
          up_btn.setBounds(450,480,100,30);

@@ -1,6 +1,6 @@
-arellayim,scheduler,324342,yim@mail.com,16-01-2020,female,scheduler
-hayhay,manager,668383,hay@mail.com,30-08-2019,male,manager
-bean,manager,8997,beanbean@mail.com,19-11-2009,male,manager
-emily,scheduler,6546323,ylime@mail.com,01-02-2010,female,scheduler
-chole,chole,4584685,ccc@mail.com,12-12-2010,female,scheduler
-mona,hehehe,98990,mona222@mail.com,20-03-2017,female,scheduler
+hayhay,scheduler,36347,hay@mail.com,19-03-2017,male,scheduler
+mona,mama,95954,mona@mail.com,12-05-2014,female,manager
+bean,beanbean,236374,mr@mail.com,27-11-2016,male,manager
+jingqi,ong,5486796,jingqi@mail.com,23-10-2004,male,manager
+qingfui,tee,32675467,qingfui@mail.com,23-10-2004,male,scheduler
+fish,yuyu,12547,fish@mail.com,13-01-2005,female,scheduler

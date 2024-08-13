@@ -187,6 +187,46 @@ public class Staff_Management {
         return edit;
     }
 
+    public Boolean edit_to_users (String staffname, String password, String phone, String mail, String role){
+        ArrayList<String> usersnewData = new ArrayList<>();
+        boolean edit = false;
+        // Read all lines and modify the target line
+        try (BufferedReader reader = new BufferedReader(new FileReader("resources/Database/users.txt"))) {
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                //update if successful to search the staffname and exist in txt file
+                if (data[0].equals(staffname)) {
+                    data[1] = password;
+                    data[2] = phone;
+                    data[3] = mail;
+                    data[4] = role;
+                    edit = true;
+                }
+                //adding all file datas into ArrayList
+                //spliting data with comma
+                usersnewData.add(String.join(",", data));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        //Ensure all lines are written back to the file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/users.txt"))) {
+            //staff String as a single line in the txt file while executing for loop
+            for (String user : usersnewData) {
+                writer.write(user);
+                // Ensure each record is on a new line
+                writer.newLine();  
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return edit;
+    }
+
     public Boolean delete_staff(String staffname) {
         ArrayList<String> staffData = new ArrayList<>();
         boolean delete = false;
@@ -210,6 +250,39 @@ public class Staff_Management {
             try(BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/staffs.txt"))) {
                 for(String staff: staffData){
                     writer.write(staff);
+                    writer.newLine();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return delete;
+    }
+
+    public Boolean delete_staffuser(String staffname) {
+        ArrayList<String> usersData = new ArrayList<>();
+        boolean delete = false;
+        try(BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"))) {
+            while((line = read.readLine())!= null){
+                String[] data = line.split(",");
+                if (data[0].equals(staffname)){
+                    delete = true;
+                    //when succeffully searching and matching staff name, continue to delete
+                    continue;
+
+                }
+                usersData.add(line);
+        }          
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        if(delete){
+            //Ensure all line are written back to the file
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/users.txt"))) {
+                for(String user: usersData){
+                    writer.write(user);
                     writer.newLine();
                 }
             } catch (Exception e) {
