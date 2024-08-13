@@ -19,13 +19,14 @@ import java.io.File;
 
 public class Task_Assign extends JFrame{
     private static String manname;
+    private static Integer row_select;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try{
-                    new Task_Assign(manname).setVisible(true);
+                    new Task_Assign(row_select, manname).setVisible(true);
                 }catch(Exception e){
                     e.printStackTrace();
                 }
@@ -33,7 +34,7 @@ public class Task_Assign extends JFrame{
         });
     }
 
-    public Task_Assign(String n){
+    public Task_Assign(int r_select, String n){
         setTitle("Task Assign");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
@@ -60,7 +61,7 @@ public class Task_Assign extends JFrame{
         staff.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                man_taskAssign.assign_staff();
             }
         });
         manager_TA.add(staff);
@@ -80,6 +81,21 @@ public class Task_Assign extends JFrame{
         assignText.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         assignText.setBounds(50, 155, 800, 150);
         manager_TA.add(assignText);
+
+        // Assign Button
+        JButton assign = new JButton("Assign");
+        assign.setBounds(800, 600, 110, 20);
+        assign.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String staff_data = staff.getSelectedItem().toString();
+                String details = assignText.getText(); 
+                man_taskAssign.keep_task(r_select, staff_data, details);
+                dispose();
+                
+            }
+        });
+        manager_TA.add(assign);
         
         // Back Home page
         JButton back_btn = new JButton();

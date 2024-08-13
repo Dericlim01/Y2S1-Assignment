@@ -8,6 +8,7 @@ import src.UpdateProfile;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
@@ -34,6 +35,7 @@ public class Manager_View_Profile_Page extends JFrame {
 
     public Manager_View_Profile_Page(String n){
         setTitle("Manager View Profile");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("resources/Image/hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
         setResizable(false);

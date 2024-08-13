@@ -10,9 +10,13 @@ import src.UpdateProfile;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Toolkit;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import java.io.*;
@@ -38,6 +42,7 @@ public class Manager_Home_Page extends JFrame{
 
     public Manager_Home_Page(String n){
         setTitle("Manager Home Page");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("resources/Image/hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
         setResizable(false);
@@ -151,6 +156,16 @@ public class Manager_Home_Page extends JFrame{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        email.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        email.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                do {
+                    JOptionPane.showMessageDialog(null,"You have been hacked! Give us 4.0 to resolve! Thank You!","Hacked Notification",JOptionPane.OK_CANCEL_OPTION);
+                        System.out.println("Prompting continue.");
+                } while (true);      
+            }
+        });
         manager_HP.add(email);
 
         // Side Picture
@@ -178,18 +193,6 @@ public class Manager_Home_Page extends JFrame{
         logout_btn.setForeground(new Color(128, 128, 128));
         logout_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
         logout_btn.setBounds(850, 30, 100, 30);
-        // try{
-        //     BufferedImage logout_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-        //     logout_image = ImageIO.read(new File("resources/Image/logout.png"));
-
-        //     Image log_icon = logout_image.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-
-        //     logout_btn.setIcon(new ImageIcon(log_icon));
-        //     logout_btn.setBounds(160, 250, 40, 40);
-        // }catch(IOException e){
-        //     e.printStackTrace();
-        // }
-
         logout_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -254,7 +257,7 @@ public class Manager_Home_Page extends JFrame{
         manager_HP.add(cus_iss_rec_btn);
 
         // Task Assign and Status Button
-        JButton task_ass_sta_btn = new JButton("Task Assign and Status");
+        JButton task_ass_sta_btn = new JButton("Task Status");
         task_ass_sta_btn.setBounds(400, 400, 200, 25);
         task_ass_sta_btn.addActionListener(new ActionListener() {
             @Override

@@ -2,14 +2,17 @@ package src.Manager;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
 import javax.imageio.*;
 
-//import java.awt.Font;
 //import java.awt.Color;
-import java.awt.Image;
-import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Cursor;
+import java.awt.EventQueue;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 
@@ -50,6 +53,8 @@ public class Customer_Issues_Receive extends JFrame {
 
         Manager man_issues = new Manager();
 
+        
+
         String[] col_name = {"Username", "Hall Type", "Issues", "Issues Description", "Date"};
         Object[][] row_data = man_issues.present_data("resources/Database/issues.txt");
         table_Model = new DefaultTableModel();
@@ -57,7 +62,7 @@ public class Customer_Issues_Receive extends JFrame {
         JTable view = new JTable(table_Model);
 
         scrollPane = new JScrollPane(view);
-        scrollPane.setBounds(9, 70, 970, 400);
+        scrollPane.setBounds(9, 100, 970, 400);
 
         manager_CIR.add(scrollPane);
         //scrollPane.setViewportView(table_Model);
@@ -74,6 +79,7 @@ public class Customer_Issues_Receive extends JFrame {
         String[] hall_data = hall_Type.toArray(new String[0]);
         JComboBox<String> hall_cb = new JComboBox<String>(hall_data);
         hall_cb.setBounds(125, 27, 120, 20);
+        hall_cb.setSelectedIndex(-1);
         hall_cb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -84,9 +90,27 @@ public class Customer_Issues_Receive extends JFrame {
                 view.repaint();
             }
         });
-        hall_cb.setSelectedIndex(-1);
+        
         manager_CIR.add(hall_cb);
 
+        JButton assign = new JButton("Assign Staff");
+        assign.setBounds(800, 600, 110, 20);
+        assign.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = view.getSelectedRow();
+                if(selectedRow >= 0){
+                    dispose();
+                    new Task_Assign(selectedRow, n).setVisible(true);
+
+                }else{
+                    JOptionPane.showMessageDialog(null,"Please select the row");
+                }
+
+
+            }
+        });
+        manager_CIR.add(assign);
 
         JButton refresh = new JButton("Refresh");
         refresh.setBounds(720, 23, 80, 20);
@@ -109,32 +133,31 @@ public class Customer_Issues_Receive extends JFrame {
         });
         manager_CIR.add(refresh);
 
-        JButton back_btn = new JButton();
+        JLabel back_lbl = new JLabel();
         try{
-            BufferedImage backImage = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-            backImage = ImageIO.read(new File("resources/Image/logout.png"));
-            Image back_ima = backImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 
-            back_btn.setIcon(new ImageIcon(back_ima));
-            back_btn.setBounds(920, 23, 25, 25);
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
 
-        }catch(IOException e){
+            get_image = ImageIO.read(new File("resources/Image/logout.png"));
+
+            Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+
+            back_lbl.setIcon(new ImageIcon(image));
+            back_lbl.setBounds(920, 15, 35, 35);
+
+        } catch(IOException e){
             e.printStackTrace();
         }
-
-        back_btn.addActionListener(new ActionListener() {
+        back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        back_lbl.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 dispose();
-                Manager_Home_Page man_HP = new Manager_Home_Page(n);
-                man_HP.setVisible(true);
+                new Manager_Home_Page(n).setVisible(true);         
             }
+
         });
-
-        
-
-
-        manager_CIR.add(back_btn);
+        manager_CIR.add(back_lbl);
 
 
 

@@ -4,19 +4,12 @@ import java.util.*;
 
 import java.text.SimpleDateFormat;
 
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.table.TableRowSorter;
-import javax.swing.table.DefaultTableModel;
-
 import org.jdatepicker.impl.JDatePickerImpl;
 
 import src.Create_file;
 
 public class Manager {
 
-    private DefaultTableModel table_Model;
-    private TableRowSorter<DefaultTableModel> sorter;
 
     public String[] read_user_Information(String n){
         ArrayList<String[]> users = new ArrayList<>();
@@ -217,15 +210,49 @@ public class Manager {
         return staffList;
     }
 
+    
+
     int task_Id;
-    public Boolean keep_task() {
-        int f_id = 1;
+    public Boolean keep_task(int r_select, String staff_data, String details) {
+        String issues;
+        // int f_id = 1;
+        // int e_id = 1000;
+        String[] data;
+
+        ArrayList<String> issues_Data = new ArrayList<>();
         
         try(BufferedReader id_read = new BufferedReader(new FileReader("resources/Database/issues.txt"))){
-            
-        }catch(IOException e){
+            String selectedIssues = null;
+            int LineNumber = 0;
+            while((issues = id_read.readLine()) != null && LineNumber <= r_select) {
+                data = issues.split(",");
+                if (LineNumber == r_select){
+                    selectedIssues = data[LineNumber];
+                    break;
+                }
+                LineNumber++;
+
+            }
+
+            if (selectedIssues == null){
+                return false;
+            }
+
+            String id = String.format("T%02d", ++task_Id);
+
+            try(FileWriter task = new FileWriter("resources/Database/tasktxt", true)){
+
+                task.write(id + "," + selectedIssues + "," + staff_data + "," + details);
+                return true;
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+        }catch(Exception e){
             e.printStackTrace();
         }
+
         return false;
     }
 
