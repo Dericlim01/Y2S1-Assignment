@@ -36,6 +36,7 @@ public class Admin_Page extends JFrame {
 
     public Admin_Page(String name) {
         setTitle("Admin");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
         setResizable(false);
@@ -157,9 +158,6 @@ public class Admin_Page extends JFrame {
         }
         contentPane.add(email);
         
-        
-        
-
         //Side Pic
         JLabel side = new JLabel();
         try{
