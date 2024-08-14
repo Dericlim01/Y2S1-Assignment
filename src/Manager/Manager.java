@@ -18,7 +18,7 @@ public class Manager {
         String line;
         String[] data;
         if (new Create_file().user_file()) {
-            try(BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"));){
+            try(BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"));){
                 while((line = read.readLine()) != null){
                     // Create array and store data 
                     data = line.split(",");
@@ -26,7 +26,7 @@ public class Manager {
                 }
                 // Search in arrayList
                 for (int i = 0; i < users.size(); i++) {
-                    if(users.get(i)[0].equals(n)) {
+                    if(users.get(i)[0].equals(n) && users.get(i)[6].equals("manager")) {
                         return users.get(i);
                     }
                 }
@@ -267,6 +267,24 @@ public class Manager {
         }
 
         return false;
+    }
+
+    public Double paid_total(){
+        Double totalPaid = 0.00;
+        
+        try(BufferedReader paid_br = new BufferedReader(new FileReader("resources/Database/bookings.txt"))){
+            String paid_data;            
+            while((paid_data = paid_br.readLine()) != null){
+                String[] p_data = paid_data.split(",");
+                if(p_data.length <= 9){
+                    totalPaid += Double.parseDouble(p_data[0]);
+                }
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+        return totalPaid;
     }
 
 

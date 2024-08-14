@@ -66,6 +66,7 @@ public class Booking_Management extends JFrame {
         title.setBounds(350, 20, 400, 20);
         manager_BM.add(title);
 
+
         String[] col_name = {"Booking ID", "Hall ID", "Num of Guests", "Start Date", "End Date", "Start Time", "End Time", "Book Status", "Booking Paid", "Deposit Paid", "Username"};
 
         Object[][] row_data = man_booking.present_data("resources/Database/bookings.txt");
@@ -168,6 +169,14 @@ public class Booking_Management extends JFrame {
             }
         });
         manager_BM.add(refresh);
+
+        // Cancel Booking
+        JButton cancel = new JButton("Cancel Booking");
+        cancel.setBackground(new Color(250,240,230));
+        cancel.setForeground(new Color(128,128,128));
+        cancel.setBounds(720, 920, 80, 20);
+        manager_BM.add(cancel);
+        
         
         //Back Page Pic
         JLabel back_lbl = new JLabel();
@@ -175,7 +184,7 @@ public class Booking_Management extends JFrame {
 
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
 
-            get_image = ImageIO.read(new File("resources\\Image\\logout.png"));
+            get_image = ImageIO.read(new File("resources/Image/logout.png"));
 
             Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
 

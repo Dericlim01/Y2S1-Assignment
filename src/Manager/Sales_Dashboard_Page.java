@@ -67,7 +67,7 @@ public class Sales_Dashboard_Page extends JFrame {
         // Title 
         JLabel title = new JLabel("Sales Dashboard");
         title.setFont(new Font("Engravers MT", Font.PLAIN, 20));
-        title.setBounds(400, 20, 200, 20);
+        title.setBounds(400, 20, 300, 20);
         manager_SD.add(title);
 
         // Define the columns names
@@ -139,20 +139,18 @@ public class Sales_Dashboard_Page extends JFrame {
                         } else {
                             formated[i] = dates[i];
                         }
-                    }   
-
+                    }
                     tm.addRow(formated);
                 }
 
                 view.revalidate();
                 view.repaint();
-
-
+                
             }
         };
 
-       start_datePicker.addActionListener(actionListener);
-       end_datePicker.addActionListener(actionListener);
+        start_datePicker.addActionListener(actionListener);
+        end_datePicker.addActionListener(actionListener);
 
        // Refresh Button
         JButton refresh = new JButton("Refresh");
@@ -165,13 +163,10 @@ public class Sales_Dashboard_Page extends JFrame {
                 manager_SD.remove(scrollPane);
                 Object[][] row_Data = man_data.present_data("resources/Database/bookings.txt");
 
-                DefaultTableModel tm = new DefaultTableModel();
                 tm.setDataVector(row_Data, col_name);
                 JTable table_tm = new JTable(tm);
 
-
-
-                JScrollPane scrollPane = new JScrollPane(table_tm);
+                scrollPane = new JScrollPane(table_tm);
 
                 scrollPane.setBounds(9, 125, 970, 400);
                 manager_SD.add(scrollPane);
@@ -184,6 +179,19 @@ public class Sales_Dashboard_Page extends JFrame {
             }
         });
         manager_SD.add(refresh);
+
+        // Total Label
+        JLabel tt_lbl = new JLabel("Total:");
+        tt_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        tt_lbl.setBounds(700, 575, 110, 20);
+        manager_SD.add(tt_lbl);
+
+        // Total Show Label
+        Double totalPaid = man_data.paid_total();
+        JLabel paid = new JLabel(Double.toString(totalPaid));
+        paid.setFont(new Font("Comic Sans Ms", Font.PLAIN, 15));
+        paid.setBounds(800, 575, 110, 20);
+        manager_SD.add(paid);
 
         //Back Page Pic
         JLabel back_lbl = new JLabel();

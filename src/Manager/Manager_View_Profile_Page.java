@@ -44,8 +44,8 @@ public class Manager_View_Profile_Page extends JFrame {
         manager_VP.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(manager_VP);
         manager_VP.setLayout(null);
-        UpdateProfile up = new UpdateProfile();
-        String[] user = up.search_user(n);
+        Manager up = new Manager();
+        String[] user = up.read_user_Information(n);
 
 
         // Hall icon
@@ -69,7 +69,7 @@ public class Manager_View_Profile_Page extends JFrame {
         hall_txt_lbl.setFont(new Font("French Script MT", Font.BOLD, 25));
         hall_txt_lbl.setForeground(new Color(169, 169, 169));
         //hall_txt_lbl.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));;
-        hall_txt_lbl.setBounds(50, 5, 110, 40);
+        hall_txt_lbl.setBounds(50, 5, 130, 40);
         manager_VP.add(hall_txt_lbl);
 
         // Profile Picture 
@@ -135,7 +135,7 @@ public class Manager_View_Profile_Page extends JFrame {
         // Username Label
         JLabel username = new JLabel(user[0]);
         username.setFont(new Font("Serif", Font.PLAIN, 15));
-        username.setBounds(450, 240, 200, 30);
+        username.setBounds(475, 240, 200, 30);
         manager_VP.add(username);
 
         // Password Label (455, 300)
@@ -150,19 +150,56 @@ public class Manager_View_Profile_Page extends JFrame {
         pshow_lbl.setBounds(450, 290, 200, 30);
         manager_VP.add(pshow_lbl);
 
-        
         // Mobile Number Label
+        JLabel c_lbl = new JLabel("Phone Number:");
+        pass_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        c_lbl.setBounds(350, 340, 200, 30);
+        manager_VP.add(c_lbl);
+
+        // Mobile Number Show Label
         JLabel cshow_lbl = new JLabel(user[2]);
         cshow_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         cshow_lbl.setBounds(450, 340, 200, 30);
         manager_VP.add(cshow_lbl);
 
         // Email Label
+        JLabel e_lbl = new JLabel("Email:");
+        pass_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        e_lbl.setBounds(350, 290, 200, 30);
+        manager_VP.add(e_lbl);
+
+        // Email Show Label
         JLabel email = new JLabel(user[3]);
         email.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         //email.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        email.setBounds(450, 390, 200, 50);
+        email.setBounds(450, 290, 200, 50);
         manager_VP.add(email);
+
+        // Birth Label
+        JLabel b_lbl = new JLabel("Birthday:");
+        b_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        b_lbl.setBounds(350, 240, 200, 30);
+        manager_VP.add(b_lbl);
+
+        // Birth Show Label
+        JLabel birth = new JLabel(user[4]);
+        birth.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        //email.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        birth.setBounds(450, 240, 200, 50);
+        manager_VP.add(birth);
+
+        // Gender Label
+        JLabel g_lbl = new JLabel("Gender:");
+        g_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        g_lbl.setBounds(350, 190, 200, 30);
+        manager_VP.add(g_lbl);
+
+        // Gender Show Label
+        JLabel gender = new JLabel(user[5]);
+        gender.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        //email.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        gender.setBounds(450, 190, 200, 50);
+        manager_VP.add(gender);
 
         // Password field
         JTextField pfield = new JTextField();
