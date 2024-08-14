@@ -210,8 +210,9 @@ public class Update_Profile extends JFrame {
                     Date dob = (Date) dobDatePicker.getModel().getValue();
                     String gender = String.valueOf(gen_cmbbx.getSelectedItem());
                     UpdateProfile update_profile = new UpdateProfile();
+                    
                     // Update Successfully
-                    if (update_profile.update_user(name, pass, cont_num, email, dob, gender)) {
+                    if (update_profile.update_user(name, pass) && update_profile.update_users(name, cont_num, email, dob, gender)) {
                         JOptionPane.showMessageDialog(
                             null,
                             "Update Successfully",
