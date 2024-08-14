@@ -56,7 +56,7 @@ public class Booking_Management extends JFrame {
         Manager man_booking = new Manager();
         String[] col_name = {"Booking ID", "Hall ID", "Num of Guests", "Start Date", "End Date", "Start Time", "End Time", "Book Status", "Booking Paid", "Deposit Paid", "Username"};
 
-        Object[][] row_data = man_booking.present_data("resources/bookings.txt");
+        Object[][] row_data = man_booking.present_data("resources/Database/bookings.txt");
 
         tm = new DefaultTableModel(row_data, col_name);
         JTable view = new JTable(tm);
@@ -105,7 +105,7 @@ public class Booking_Management extends JFrame {
         ActionListener actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<Object[]> filteredDate = man_booking.date_read(start_datePicker, end_datePicker, "resources/bookings.txt");
+                List<Object[]> filteredDate = man_booking.date_read(start_datePicker, end_datePicker, "resources/Database/bookings.txt");
                 tm.setRowCount(0);
 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -139,7 +139,7 @@ public class Booking_Management extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 manager_BM.remove(scrollPane);
-                Object[][] row_data = man_booking.present_data("resources/bookings.txt");
+                Object[][] row_data = man_booking.present_data("resources/Database/bookings.txt");
                 tm = new DefaultTableModel();
                 tm.setDataVector(row_data, col_name);
                 JTable view = new JTable(tm);
@@ -160,7 +160,7 @@ public class Booking_Management extends JFrame {
         try {
             BufferedImage backImage = new BufferedImage(
                 50, 50, BufferedImage.TYPE_INT_ARGB);
-            backImage = ImageIO.read(new File("D:/sem 1/Java/test/Manager/logout.png"));
+            backImage = ImageIO.read(new File("resources/Image/logout.png"));
             Image back_ima = backImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 
             back_btn.setIcon(new ImageIcon(back_ima));

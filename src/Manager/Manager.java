@@ -4,26 +4,19 @@ import java.util.*;
 
 import java.text.SimpleDateFormat;
 
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.table.TableRowSorter;
-import javax.swing.table.DefaultTableModel;
-
 import org.jdatepicker.impl.JDatePickerImpl;
 
 import src.Create_file;
 
 public class Manager {
 
-    private DefaultTableModel table_Model;
-    private TableRowSorter<DefaultTableModel> sorter;
 
     public String[] read_user_Information(String n){
         ArrayList<String[]> users = new ArrayList<>();
         String line;
         String[] data;
         if (new Create_file().user_file()) {
-            try(BufferedReader read = new BufferedReader(new FileReader("resources/users.txt"));){
+            try(BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"));){
                 while((line = read.readLine()) != null){
                     // Create array and store data 
                     data = line.split(",");
@@ -131,30 +124,26 @@ public class Manager {
         return rowData.toArray(new Object[0][]);
     }
 
-   public JScrollPane task_status(String[] colname){
+   public Object[][] task_status(){
        String task;
        ArrayList<String[]> taskStatus = new ArrayList<>();
 
-       try (BufferedReader br_task = new BufferedReader(new FileReader("resources/issues.txt"))){
-           while((task = br_task.readLine()) != null){
-               String[] row = task.split(",");
-               taskStatus.add(row);
-           }
-
-       } catch (IOException ex) {
-           ex.printStackTrace();
+       if(new Create_file().issue_file()){
+        try (BufferedReader br_task = new BufferedReader(new FileReader("resources/Database/issues.txt"))){
+            while((task = br_task.readLine()) != null){
+                String[] row = task.split(",");
+                taskStatus.add(row);
+            }
+ 
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
        }
 
        Object[][] tasks_status = taskStatus.toArray(new Object[0][]);
 
-       table_Model = new DefaultTableModel(tasks_status, colname);
-       JTable view = new JTable(table_Model);
-       sorter = new TableRowSorter<>(table_Model);
-       view.setRowSorter(sorter);
 
-       JScrollPane scrollPane = new JScrollPane(view);
-
-       return scrollPane;
+       return tasks_status;
         
    }
 
@@ -185,9 +174,9 @@ public class Manager {
     public Object[][] hallData(String hall_type) {
         List<Object[]> hallList = new ArrayList<>();
         if (new Create_file().hall_file()) {
-            try (BufferedReader hall_read = new BufferedReader(new FileReader("resources/Database/issues.txt"))) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/issues.txt"))) {
                 String line;
-                while ((line = hall_read.readLine()) != null) {
+                while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
                     if (data[1].equals(hall_type)) {
                         hallList.add(data);
@@ -198,6 +187,73 @@ public class Manager {
             }
         }
         return hallList.toArray(new Object[0][]);
+    }
+
+    public ArrayList<String> assign_staff(){
+        String staff_data;
+        ArrayList<String> staffList = new ArrayList<>();
+        if(new Create_file().staffs_file()) {
+            try(BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))){
+                while((staff_data = read.readLine()) != null){
+                    String[] data = staff_data.split(",");
+                    if(!staffList.contains(data[0])){
+                        staffList.add(data[0]);
+                    }
+
+                }
+                return staffList;
+
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        return staffList;
+    }
+
+    
+
+    int task_Id;
+    public Boolean keep_task(int r_select, String staff_data, String details) {
+        String issues;
+        // int f_id = 1;
+        // int e_id = 1000;
+        String[] data;
+
+        ArrayList<String> issues_Data = new ArrayList<>();
+        
+        try(BufferedReader id_read = new BufferedReader(new FileReader("resources/Database/issues.txt"))){
+            String selectedIssues = null;
+            int LineNumber = 0;
+            while((issues = id_read.readLine()) != null && LineNumber <= r_select) {
+                data = issues.split(",");
+                if (LineNumber == r_select){
+                    selectedIssues = data[LineNumber];
+                    break;
+                }
+                LineNumber++;
+
+            }
+
+            if (selectedIssues == null){
+                return false;
+            }
+
+            String id = String.format("T%02d", ++task_Id);
+
+            try(FileWriter task = new FileWriter("resources/Database/tasktxt", true)){
+
+                task.write(id + "," + selectedIssues + "," + staff_data + "," + details);
+                return true;
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
 

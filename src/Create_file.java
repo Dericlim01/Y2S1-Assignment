@@ -66,13 +66,45 @@ public class Create_file {
         }
     }
 
-    public Boolean staffs_file(){
+    // Staffs file
+    public Boolean staffs_file() {
         try {
-            if(new File("resources/Database/staffs.txt").createNewFile()){
+            if (new File("resources/Database/staffs.txt").createNewFile()) {
                 System.out.println("Staffs file created");
-            }
-            else{
+            } else{
                 System.out.println("Staffs file exist");
+            }
+            return true;
+        } catch (Exception e) {
+            System.out.println("An error occured");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Hall Status file
+    public Boolean hall_stat_file() {
+        try {
+            if (new File("resources/Database/hall_status.txt").createNewFile()) {
+                System.out.println("Hall Status file created");
+            } else {
+                System.out.println("Hall Status File exist");
+            }
+            return true;
+        } catch (Exception e) {
+            System.out.println("An error occured");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Customer file
+    public Boolean customer_file() {
+        try {
+            if (new File("resources/Database/customers.txt").createNewFile()) {
+                System.out.println("Customer file created");
+            } else {
+                System.out.println("Customer File exist");
             }
             return true;
         } catch (Exception e) {
