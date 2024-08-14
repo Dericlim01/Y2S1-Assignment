@@ -204,6 +204,7 @@ public class Staff_Add_Page extends JFrame {
                                 int response = JOptionPane.showConfirmDialog(null,"Staff Added Successfully. Do you want to add again?","Question" ,JOptionPane.YES_NO_OPTION);
                                 if(response == 0){
                                     //add again
+                                    dispose();
                                     Staff_Add_Page sad = new Staff_Add_Page(name);
                                     sad.setTitle("Staff Add");
                                     sad.setVisible(true);
@@ -224,6 +225,7 @@ public class Staff_Add_Page extends JFrame {
                         int response = JOptionPane.showConfirmDialog(null,"Add Staff Failed. Do you want to add again?","Question" ,JOptionPane.YES_NO_OPTION);
                         if(response == 0){
                             //add again
+                            dispose();
                             Staff_Add_Page sad = new Staff_Add_Page(name);
                             sad.setTitle("Staff Add");
                             sad.setVisible(true);
@@ -242,6 +244,7 @@ public class Staff_Add_Page extends JFrame {
                     int response = JOptionPane.showConfirmDialog(null,"Staff name exists. Do you want to add again?","Question" ,JOptionPane.YES_NO_OPTION);
                     if(response == 0){
                         //add again
+                        dispose();
                         Staff_Add_Page sad = new Staff_Add_Page(name);
                         sad.setTitle("Staff Add");
                         sad.setVisible(true);

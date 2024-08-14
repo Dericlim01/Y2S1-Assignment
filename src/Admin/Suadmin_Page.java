@@ -93,7 +93,7 @@ public class Suadmin_Page extends JFrame {
 
             BufferedImage get_image = new BufferedImage(80, 80, BufferedImage.TYPE_INT_RGB);
 
-            get_image = ImageIO.read(new File("resources\\Image\\meiya.png"));
+            get_image = ImageIO.read(new File("resources\\Image\\nanazi.png"));
 
             Image image = get_image.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
 
@@ -234,6 +234,15 @@ public class Suadmin_Page extends JFrame {
         userBtn.setForeground(new Color(128,128,128));
         userBtn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         userBtn.setBounds(500,360,200,30);
+        userBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                User_Management_Page um = new User_Management_Page(name);
+                um.setTitle("User Management Page");
+                um.setVisible(true);
+            }
+        });
         contentPane.add(userBtn);
 
         //Booking Management Button
