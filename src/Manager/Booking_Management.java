@@ -8,17 +8,22 @@ import java.util.Properties;
 import java.awt.Font;
 import java.awt.Image;
 import java.util.List;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
+
 
 import src.DateFormat;
 
@@ -54,6 +59,13 @@ public class Booking_Management extends JFrame {
         manager_BM.setLayout(null);
 
         Manager man_booking = new Manager();
+
+        // Title 
+        JLabel title = new JLabel("Booking Management");
+        title.setFont(new Font("Engravers MT", Font.PLAIN, 20));
+        title.setBounds(350, 20, 400, 20);
+        manager_BM.add(title);
+
         String[] col_name = {"Booking ID", "Hall ID", "Num of Guests", "Start Date", "End Date", "Start Time", "End Time", "Book Status", "Booking Paid", "Deposit Paid", "Username"};
 
         Object[][] row_data = man_booking.present_data("resources/Database/bookings.txt");
@@ -68,13 +80,13 @@ public class Booking_Management extends JFrame {
         // Start date label
         JLabel start_date = new JLabel("Start Date:");
         start_date.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        start_date.setBounds(80, 26, 90, 20);
+        start_date.setBounds(80, 80, 90, 20);
         manager_BM.add(start_date);
 
         // End date label
         JLabel end_date = new JLabel("End Date:");
         end_date.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        end_date.setBounds(400, 26, 90, 20);
+        end_date.setBounds(400, 80, 90, 20);
         manager_BM.add(end_date);
 
         // Calendar
@@ -87,7 +99,7 @@ public class Booking_Management extends JFrame {
         start_p.put("text.year", "Year");
         JDatePanelImpl start_datePanel = new JDatePanelImpl(start_date_model, start_p);   
         JDatePickerImpl start_datePicker = new JDatePickerImpl(start_datePanel, new DateFormat()); 
-        start_datePicker.setBounds(170, 23, 170, 30);
+        start_datePicker.setBounds(170, 80, 170, 30);
         manager_BM.add(start_datePicker);
 
         // End Date Calendar
@@ -98,7 +110,7 @@ public class Booking_Management extends JFrame {
         end_p.put("text.year", "Year");
         JDatePanelImpl end_datePanel = new JDatePanelImpl(end_date_model, start_p);   
         JDatePickerImpl end_datePicker = new JDatePickerImpl(end_datePanel, new DateFormat()); 
-        end_datePicker.setBounds(480, 23, 170, 30);
+        end_datePicker.setBounds(480, 80, 170, 30);
         manager_BM.add(end_datePicker);
 
         // Do a filter data action according date selected 
@@ -134,7 +146,9 @@ public class Booking_Management extends JFrame {
 
         // Refresh button to get whole data(new / old) again
         JButton refresh = new JButton("refresh");
-        refresh.setBounds(720, 23, 80, 20);
+        refresh.setBackground(new Color(250,240,230));
+        refresh.setForeground(new Color(128,128,128));
+        refresh.setBounds(720, 83, 80, 20);
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -155,30 +169,51 @@ public class Booking_Management extends JFrame {
         });
         manager_BM.add(refresh);
         
-        // Back button back to Home Page
-        JButton back_btn = new JButton();
-        try {
-            BufferedImage backImage = new BufferedImage(
-                50, 50, BufferedImage.TYPE_INT_ARGB);
-            backImage = ImageIO.read(new File("resources/Image/logout.png"));
-            Image back_ima = backImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        //Back Page Pic
+        JLabel back_lbl = new JLabel();
+        try{
 
-            back_btn.setIcon(new ImageIcon(back_ima));
-            back_btn.setBounds(920, 23, 25, 25);
-            
-        } catch (Exception e) {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\logout.png"));
+
+            Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+
+            back_lbl.setIcon(new ImageIcon(image));
+            back_lbl.setBounds(920, 30, 35, 35);
+
+        } catch(IOException e){
             e.printStackTrace();
         }
-        back_btn.addActionListener(new ActionListener() {
+        back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        back_lbl.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 dispose();
-                Manager_Home_Page man_HP = new Manager_Home_Page(n);
-                man_HP.setVisible(true);
+                new Manager_Home_Page(n).setVisible(true);         
             }
-        });
 
-        manager_BM.add(back_btn);
+        });
+        manager_BM.add(back_lbl);
+
+
+        //Design 4 Background Pic
+        JLabel des4 = new JLabel();
+        try{
+
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources/Image/design4.png"));
+
+            Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
+
+            des4.setIcon(new ImageIcon(image));
+            des4.setBounds(0, 0, 1000, 800);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        manager_BM.add(des4);
 
 
         

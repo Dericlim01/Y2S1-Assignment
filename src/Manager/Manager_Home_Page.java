@@ -184,7 +184,7 @@ public class Manager_Home_Page extends JFrame{
         // Manager Home Page Label
         JLabel hp_lbl = new JLabel("Manager Home Page");
         hp_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        hp_lbl.setBounds(400, 100, 200, 25);
+        hp_lbl.setBounds(500,200,300,30);
         manager_HP.add(hp_lbl);
 
         // Logout Button
@@ -207,11 +207,12 @@ public class Manager_Home_Page extends JFrame{
 
         // View Profile Button
         JButton view_btn = new JButton("View Profile");
-        view_btn.setBounds(400, 200, 200, 25);
+        view_btn.setBackground((new Color(250, 240, 230)));
+        view_btn.setForeground(new Color(128, 128, 128));
+        view_btn.setBounds(500,280,200,30);
         view_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // new Manager_View_Profile(n).setVisible(true);
                 new Manager_View_Profile_Page(n).setVisible(true);
                 dispose();
             }
@@ -220,8 +221,9 @@ public class Manager_Home_Page extends JFrame{
 
         // Sale Dashboard Button
         JButton sales_btn = new JButton("Sales Dashboard");
-        //view_btn.setFont("Comic Sans MS", Font.PLAIN, 15);
-        sales_btn.setBounds(400, 250, 200, 25);
+        sales_btn.setBackground((new Color(250, 240, 230)));
+        sales_btn.setForeground(new Color(128, 128, 128));
+        sales_btn.setBounds(500,320,200,30);
         sales_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -233,8 +235,9 @@ public class Manager_Home_Page extends JFrame{
 
         // Booking Management Button
         JButton book_Man_btn = new JButton("Booking Management");
-        //view_btn.setFont("Comic Sans MS", Font.PLAIN, 15);
-        book_Man_btn.setBounds(400, 300, 200, 25);
+        book_Man_btn.setBackground((new Color(250, 240, 230)));
+        book_Man_btn.setForeground(new Color(128, 128, 128));
+        book_Man_btn.setBounds(500,360,200,30);
         book_Man_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -246,11 +249,14 @@ public class Manager_Home_Page extends JFrame{
 
         // Customer Issues Receive Button
         JButton cus_iss_rec_btn = new JButton("Customer Issues Receive");
-        cus_iss_rec_btn.setBounds(400, 350, 200, 25);
+        cus_iss_rec_btn.setBackground((new Color(250, 240, 230)));
+        cus_iss_rec_btn.setForeground(new Color(128, 128, 128));
+        cus_iss_rec_btn.setBounds(500,400,200,30);
         cus_iss_rec_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Customer_Issues_Receive(n).setVisible(true);
+                dispose();
                 
             }
         });
@@ -258,7 +264,9 @@ public class Manager_Home_Page extends JFrame{
 
         // Task Assign and Status Button
         JButton task_ass_sta_btn = new JButton("Task Status");
-        task_ass_sta_btn.setBounds(400, 400, 200, 25);
+        task_ass_sta_btn.setBackground((new Color(250, 240, 230)));
+        task_ass_sta_btn.setForeground(new Color(128, 128, 128));
+        task_ass_sta_btn.setBounds(500, 440, 200, 30);
         task_ass_sta_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
