@@ -185,19 +185,15 @@ public class Manager_View_Profile_Page extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String userName = username.getText();
                 String pass = pfield.getText();
-                String con = cfield.getText();
-                String mail = efield.getText();
                 UpdateProfile up = new UpdateProfile();
-                if (up.update_user(userName, pass, con, mail)) {
+                if (up.update_user(userName, pass)) {
                     JOptionPane.showMessageDialog(null, "Update Successfully", "Plain", JOptionPane.INFORMATION_MESSAGE);
 
                 } else {
                     // UPdate Failed
                     int response = JOptionPane.showConfirmDialog(null, "Update Failed, Do you want to Update Again?", "Question", JOptionPane.YES_NO_CANCEL_OPTION);
                     if (response == 1) {
-                        pfield.setText("");
-                        cfield.setText("");
-                        efield.setText("");
+                        new Manager_View_Profile_Page(n).setVisible(true);
                     }
                 }
             }

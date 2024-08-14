@@ -2,6 +2,8 @@ package src.Manager;
 import java.io.*;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 import java.text.SimpleDateFormat;
 
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -129,7 +131,7 @@ public class Manager {
        ArrayList<String[]> taskStatus = new ArrayList<>();
 
        if(new Create_file().issue_file()){
-        try (BufferedReader br_task = new BufferedReader(new FileReader("resources/Database/issues.txt"))){
+        try (BufferedReader br_task = new BufferedReader(new FileReader("resources/Database/task.txt"))){
             while((task = br_task.readLine()) != null){
                 String[] row = task.split(",");
                 taskStatus.add(row);
@@ -140,8 +142,19 @@ public class Manager {
         }
        }
 
-       Object[][] tasks_status = taskStatus.toArray(new Object[0][]);
+       Object[][] tasks_status = new Object[taskStatus.size()][8];
+       for(int i = 0 ; i < taskStatus.size(); i++){
+            String[] task_row = taskStatus.get(i);
+            tasks_status[i][0] = task_row[0];
+            tasks_status[i][1] = task_row[1];
+            tasks_status[i][2] = task_row[2];
+            tasks_status[i][3] = task_row[3];
+            tasks_status[i][4] = task_row[4];
+            tasks_status[i][5] = task_row[5];
+            tasks_status[i][6] = task_row[6];
+            tasks_status[i][7] = task_row[8];
 
+       }
 
        return tasks_status;
         
@@ -178,7 +191,7 @@ public class Manager {
                 String line;
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
-                    if (data[1].equals(hall_type)) {
+                    if (data[3].equals(hall_type)) {
                         hallList.add(data);
                     }
                 }
@@ -196,7 +209,8 @@ public class Manager {
             try(BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))){
                 while((staff_data = read.readLine()) != null){
                     String[] data = staff_data.split(",");
-                    if(!staffList.contains(data[0])){
+                    
+                    if(!staffList.contains(data[0])  && data[6].equals("scheduler")){
                         staffList.add(data[0]);
                     }
 
@@ -211,43 +225,42 @@ public class Manager {
     }
 
     
+    public Boolean keep_task(List<String> issuesRow, String staff_data, String details) {
+        //String halls;
+        int nextID = 0;
+        String ID_data;
+        String issues_id = issuesRow.get(0);
+        String issues = issuesRow.get(1);
+        String description = issuesRow.get(2);
+        String hallType = issuesRow.get(3);
+        String userName = issuesRow.get(4);
 
-    int task_Id;
-    public Boolean keep_task(int r_select, String staff_data, String details) {
-        String issues;
-        // int f_id = 1;
-        // int e_id = 1000;
-        String[] data;
-
-        ArrayList<String> issues_Data = new ArrayList<>();
-        
-        try(BufferedReader id_read = new BufferedReader(new FileReader("resources/Database/issues.txt"))){
-            String selectedIssues = null;
-            int LineNumber = 0;
-            while((issues = id_read.readLine()) != null && LineNumber <= r_select) {
-                data = issues.split(",");
-                if (LineNumber == r_select){
-                    selectedIssues = data[LineNumber];
-                    break;
+        try(BufferedReader task_br = new BufferedReader(new FileReader("resources/Database/task.txt"))){
+            int maxID = 0;
+            while((ID_data = task_br.readLine()) != null){
+                String[] partsID = ID_data.split(",");
+                // Extract ID from "Txx" format
+                int old_id = Integer.parseInt(partsID[0].substring(1));
+                if(old_id > maxID){
+                    maxID = old_id;
                 }
-                LineNumber++;
-
             }
+            nextID = maxID + 1;
 
-            if (selectedIssues == null){
-                return false;
-            }
+        }catch(IOException e){
+            e.printStackTrace();
 
-            String id = String.format("T%02d", ++task_Id);
+        }
 
-            try(FileWriter task = new FileWriter("resources/Database/tasktxt", true)){
+        String id = String.format("T%02d", nextID);
 
-                task.write(id + "," + selectedIssues + "," + staff_data + "," + details);
-                return true;
+        // In progress , Done, Closed, Cancelled
+        String issues_status = "In progress";
 
-            }catch(Exception e){
-                e.printStackTrace();
-            }
+        try(FileWriter task = new FileWriter("resources/Database/task.txt", true)){
+            task.write(id + "," + issues_id + "," + issues + "," + description + "," + userName + "," + hallType + "," + staff_data + ","+ details + "," + issues_status + "\n");
+            JOptionPane.showMessageDialog(null,"Assign Successfull. Please go to the Task Status Page to check. Thank You ^_^", "Successful Assign Notification",JOptionPane.OK_CANCEL_OPTION);
+            
 
         }catch(Exception e){
             e.printStackTrace();
