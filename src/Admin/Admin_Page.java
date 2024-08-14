@@ -239,7 +239,7 @@ public class Admin_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                User_Management_Page um = new User_Management_Page(name);
+                Admin_User_Management_Page um = new Admin_User_Management_Page(name);
                 um.setTitle("User Management Page");
                 um.setVisible(true);
             }

@@ -219,6 +219,7 @@ public class Edit_Staff_Page extends JFrame {
                         int response = JOptionPane.showConfirmDialog(null, "Staff Delete Successfully. Do you want to delete again?","Question",JOptionPane.YES_NO_OPTION);
                         if(response == 0){
                             //delete again
+                            dispose();
                             Edit_Staff_Page esp = new Edit_Staff_Page(name);
                             esp.setTitle("Edit Staff Page");
                             esp.setVisible(true);
@@ -236,6 +237,7 @@ public class Edit_Staff_Page extends JFrame {
                         int response = JOptionPane.showConfirmDialog(null,"Delete Staff Failed. Do you want to delete again?","Question" ,JOptionPane.YES_NO_OPTION);
                         if(response == 0){
                             //stay at this page
+                            dispose();
                             Edit_Staff_Page esp = new Edit_Staff_Page(name);
                             esp.setTitle("Edit Staff Page");
                             esp.setVisible(true);
@@ -275,6 +277,7 @@ public class Edit_Staff_Page extends JFrame {
                         int response = JOptionPane.showConfirmDialog(null, "Staff Edit Successfully. Do you want to edit again?","Question",JOptionPane.YES_NO_OPTION);
                         if(response == 0){
                             //edit again
+                            dispose();
                             Edit_Staff_Page esp = new Edit_Staff_Page(name);
                             esp.setTitle("Edit Staff Page");
                             esp.setVisible(true);
@@ -293,6 +296,7 @@ public class Edit_Staff_Page extends JFrame {
                         int response = JOptionPane.showConfirmDialog(null,"Edit Staff Failed. Do you want to edit again?","Question" ,JOptionPane.YES_NO_OPTION);
                         if(response == 0){
                             //edit again
+                            dispose();
                             Edit_Staff_Page esp = new Edit_Staff_Page(name);
                             esp.setTitle("Edit Staff Page");
                             esp.setVisible(true);

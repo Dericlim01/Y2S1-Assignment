@@ -93,7 +93,7 @@ public class Suadmin_Page extends JFrame {
 
             BufferedImage get_image = new BufferedImage(80, 80, BufferedImage.TYPE_INT_RGB);
 
-            get_image = ImageIO.read(new File("resources\\Image\\meiya.png"));
+            get_image = ImageIO.read(new File("resources\\Image\\nanazi.png"));
 
             Image image = get_image.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
 

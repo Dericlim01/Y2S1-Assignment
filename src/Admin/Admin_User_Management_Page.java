@@ -26,17 +26,17 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-public class User_Management_Page extends JFrame {
+public class Admin_User_Management_Page extends JFrame {
     private JPanel contentPane;
     private static String name;
     private JScrollPane scrollPane;
-    
+
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try {
-                    new User_Management_Page(name).setVisible(true);
+                    new Admin_User_Management_Page(name).setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -44,19 +44,19 @@ public class User_Management_Page extends JFrame {
         });
     }
 
-    public User_Management_Page(String name) {
+    public Admin_User_Management_Page(String name){
         setTitle("User Management Page");
         setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140,100,1000,800);
         setResizable(false);
-        
+
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         contentPane.setBackground(new Color(248,248,248));
-
+        
         //Logo Label
         JLabel logo_lbl = new JLabel("Symphony Hall");
         logo_lbl.setFont(new Font("French Script MT", Font.BOLD,25));
@@ -163,7 +163,7 @@ public class User_Management_Page extends JFrame {
         userbox.setBounds(200,610,150,20);
         userbox.setBackground(new Color(250,240,230));
         contentPane.add(userbox);
-        userman.load_user(userbox);
+        userman.admin_load_user(userbox);
 
         //Delete Page Button
         JButton delete_btn = new JButton("~Click Me To Delete a User~");
@@ -199,7 +199,6 @@ public class User_Management_Page extends JFrame {
                 }
             }
         });
-
         contentPane.add(delete_btn);
 
         //Home Page Label
@@ -223,9 +222,9 @@ public class User_Management_Page extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-                Suadmin_Page suad = new Suadmin_Page(name);
-                suad.setTitle("Super Admin Home Page");
-                suad.setVisible(true);
+                Admin_Page ad = new Admin_Page(name);
+                ad.setTitle("Admin Home Page");
+                ad.setVisible(true);
             }
         });
         contentPane.add(back_lbl);
@@ -247,7 +246,5 @@ public class User_Management_Page extends JFrame {
             e.printStackTrace();
         }
         contentPane.add(des4);
-
-
     }
 }
