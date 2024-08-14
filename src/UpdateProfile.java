@@ -24,12 +24,13 @@ public class UpdateProfile {
         return users.get(0);
     }
 
-    public Boolean update_user(String n, String p, String cn, String em) {
+    public Boolean update_user(String n, String p, String cn, String em, Date dob, String gender) {
         // Create a user list
         ArrayList<String[]> users = new ArrayList<String[]>();
         String line;
         String[] data;
         Boolean user_update = false;
+        Boolean users_update = false;
         try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"))) {
             while ((line = read.readLine()) != null) {
                 // Store data into data and add to users array
@@ -42,8 +43,6 @@ public class UpdateProfile {
                 // If username found
                 if (users.get(i)[0].equals(n)) {
                     users.get(i)[1] = p;
-                    users.get(i)[2] = cn;
-                    users.get(i)[3] = em;
                     user_update = true;
                 }
             }
@@ -54,6 +53,21 @@ public class UpdateProfile {
 
         if (user_update) {
             try (PrintWriter writer = new PrintWriter(new FileWriter("resources/Database/users.txt"))) {
+                for (String[] userdata : users) {
+                    writer.println(userdata[0] + "," + userdata[1] + "," + userdata[2]);
+                }
+                users_update = true;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        } else {
+            System.out.println("User not found");
+            return false;
+        }
+
+        if (users_update) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter("resources/Database/customers.txt"))) {
                 for (String[] userdata : users) {
                     writer.println(userdata[0] + "," + userdata[1] + "," + userdata[2] + "," + userdata[3] + "," + userdata[4]);
                 }

@@ -3,6 +3,10 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +14,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
+import java.util.Properties;
 
 public class Register_Page extends JFrame {
     public static void main(String[] args) {
@@ -47,54 +53,39 @@ public class Register_Page extends JFrame {
 
         // Logo Pic
         JLabel logo = new JLabel();
-        try{
- 
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\hall (1).png"));
-
             Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-
             logo.setIcon(new ImageIcon(image));
             logo.setBounds(0, 0, 65, 65);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         contentPane.add(logo);
 
         // Design Pic 1
         JLabel des1 = new JLabel();
-        try{
- 
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\design1.png"));
-
             Image image = get_image.getScaledInstance(300, 280, Image.SCALE_SMOOTH);
-
             des1.setIcon(new ImageIcon(image));
             des1.setBounds(780, 0, 250, 200);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         contentPane.add(des1);
 
         // Design3 Pic
         JLabel des3 = new JLabel();
-        try{
- 
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\design3.png"));
-
             Image image = get_image.getScaledInstance(400, 200, Image.SCALE_SMOOTH);
-
             des3.setIcon(new ImageIcon(image));
             des3.setBounds(-50, -50, 400, 200);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         contentPane.add(des3);
@@ -192,11 +183,44 @@ public class Register_Page extends JFrame {
         email_txt_f.setBounds(420, 400, 300, 30);
         contentPane.add(email_txt_f);
 
+        // DOB Label
+        JLabel dob_lbl = new JLabel("Date of Birth : ");
+        dob_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+        dob_lbl.setBounds(240, 450, 200, 20);
+        contentPane.add(dob_lbl);
+
+        // D.O.B Calendar
+        UtilDateModel model = new UtilDateModel();
+        // Properties create object to store values in it
+        Properties prop = new Properties();
+        prop.put("text.day", "Day");
+        prop.put("text.month","Month");
+        prop.put("text.year", "Year");
+        // Import Date Panel and Picker
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, prop);
+        JDatePickerImpl dobDatePicker = new JDatePickerImpl(datePanel, new DateFormat());
+        dobDatePicker.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        dobDatePicker.setBounds(420,450,300,30);
+        contentPane.add(dobDatePicker);
+
+        // Gender Label
+        JLabel gender_lbl = new JLabel("Gender : ");
+        gender_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+        gender_lbl.setBounds(240, 500, 200, 20);
+        contentPane.add(gender_lbl);
+
+        // Gender Combo Box
+        String[] gender_data = {"male","female"};
+        JComboBox<String> gen_cmbbx = new JComboBox<>(gender_data);
+        gen_cmbbx.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        gen_cmbbx.setBounds(420, 500, 300, 30);
+        contentPane.add(gen_cmbbx);
+
         // Back Label
         JLabel back_lbl = new JLabel("<html><u>Already have an account? Click here to login!</u></html>");
         back_lbl.setFont(new Font("Serif", Font.PLAIN, 15));
         back_lbl.setForeground(new Color(128,128,128));
-        back_lbl.setBounds(360, 530, 400, 30);
+        back_lbl.setBounds(360, 630, 400, 30);
         back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
         back_lbl.addMouseListener(new MouseAdapter() {
             @Override
@@ -212,13 +236,15 @@ public class Register_Page extends JFrame {
         register_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         register_btn.setBackground(new Color(250,240,230));
         register_btn.setForeground(new Color(128,128,128));
-        register_btn.setBounds(420, 470, 150, 30);
+        register_btn.setBounds(420, 570, 150, 30);
         register_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = name_txt_f.getText();
                 String pass = String.valueOf(pass_txt_f.getPassword());
                 String cont_num = cont_num_txt_f.getText();
                 String email = email_txt_f.getText();
+                Date dob = (Date) dobDatePicker.getModel().getValue();
+                String gender = String.valueOf(gen_cmbbx.getSelectedItem());
                 String role = "customer";
                 Register register_user = new Register(role);
 
@@ -231,7 +257,7 @@ public class Register_Page extends JFrame {
                     // Username available
                     if (register_user.chk_user(name)) {
                         // User register successfuly
-                        if (register_user.reg_user(name, pass, cont_num, email)) {
+                        if (register_user.reg_user(name, pass) && register_user.reg_users(name, cont_num, email, dob, gender)) {
                             // Show Message Dialog
                             JOptionPane.showMessageDialog(
                                 null,
