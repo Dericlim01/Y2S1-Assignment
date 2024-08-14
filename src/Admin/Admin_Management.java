@@ -97,7 +97,7 @@ public class Admin_Management {
         if (user_update) {
             try (PrintWriter writer = new PrintWriter(new FileWriter("resources/Database/users.txt"))) {
                 for (String[] userdata : users) {
-                    writer.println(userdata[0] + "," + userdata[1]);
+                    writer.println(userdata[0] + "," + userdata[1] + "," + userdata[2]);
                 }
                 users_update = true;
             } catch (IOException e) {
@@ -112,7 +112,7 @@ public class Admin_Management {
         if (users_update) {
             try (PrintWriter writer = new PrintWriter(new FileWriter("resources/Database/users.txt"))) {
                 for (String[] userdata : users) {
-                    writer.println(userdata[0] + "," + userdata[1]);
+                    writer.println(userdata[0] + "," + userdata[1] + "," + userdata[2]);
                 }
                 return true;
             } catch (IOException e) {
