@@ -64,7 +64,7 @@ public class Customer_Page extends JFrame {
         logo_lbl.setBounds(60,20,160,30);
         contentPane.add(logo_lbl);
 
-        //Logo Pic
+        // Logo Pic
         JLabel logo = new JLabel();
         try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
@@ -77,15 +77,33 @@ public class Customer_Page extends JFrame {
         }
         contentPane.add(logo);
 
+        // Profile Pic
+        JLabel profile = new JLabel();
+        try{
+
+            BufferedImage get_image = new BufferedImage(80, 80, BufferedImage.TYPE_INT_RGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\labixiaoxin(red).png"));
+
+            Image image = get_image.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+
+            profile.setIcon(new ImageIcon(image));
+            profile.setBounds(75, 50, 1000, 200);
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        contentPane.add(profile);
+
         // Name Label
         JLabel name_lbl = new JLabel(n);
-        name_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        name_lbl.setBounds(100, 150, 100, 30);
+        name_lbl.setFont(new Font("Serif", Font.PLAIN, 15));
+        name_lbl.setBounds(90, 240, 200, 30);
         contentPane.add(name_lbl);
 
         // Welcome back
         JLabel welcome_lbl = new JLabel("Welcome Back !");
-        welcome_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        welcome_lbl.setFont(new Font("Serif", Font.PLAIN, 15));
         welcome_lbl.setBounds(70,210,200,30);
         contentPane.add(welcome_lbl);
 
@@ -158,14 +176,14 @@ public class Customer_Page extends JFrame {
         // Customer title
         JLabel cus_page_title = new JLabel("Customer Home Page");
         cus_page_title.setFont(new Font("Engravers MT", Font.PLAIN, 15));
-        cus_page_title.setBounds(500,200,300,30);
+        cus_page_title.setBounds(480,200,300,30);
         contentPane.add(cus_page_title);
 
         // Update Profile button
         JButton update_p_btn = new JButton("Update Profile");
         update_p_btn.setBackground(new Color(250,240,230));
         update_p_btn.setForeground(new Color(128,128,128));
-        update_p_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        update_p_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         update_p_btn.setBounds(500,280,200,30);
         update_p_btn.addActionListener(new ActionListener() {
             @Override
@@ -180,7 +198,7 @@ public class Customer_Page extends JFrame {
         JButton book_hall_btn = new JButton("Hall Booking");
         book_hall_btn.setBackground(new Color(250,240,230));
         book_hall_btn.setForeground(new Color(128,128,128));
-        book_hall_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        book_hall_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         book_hall_btn.setBounds(500,320,200,30);
         book_hall_btn.addActionListener(new ActionListener() {
             @Override
@@ -195,7 +213,7 @@ public class Customer_Page extends JFrame {
         JButton book_info_btn = new JButton("Book Information");
         book_info_btn.setBackground(new Color(250,240,230));
         book_info_btn.setForeground(new Color(128,128,128));
-        book_info_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        book_info_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         book_info_btn.setBounds(500,360,200,30);
         book_info_btn.addActionListener(new ActionListener() {
             @Override
@@ -210,7 +228,7 @@ public class Customer_Page extends JFrame {
         JButton issue_btn = new JButton("Issue Raising");
         issue_btn.setBackground(new Color(250,240,230));
         issue_btn.setForeground(new Color(128,128,128));
-        issue_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        issue_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         issue_btn.setBounds(500,400,200,30);
         issue_btn.addActionListener(new ActionListener() {
             @Override

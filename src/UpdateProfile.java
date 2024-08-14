@@ -7,7 +7,7 @@ public class UpdateProfile {
         ArrayList<String[]> users = new ArrayList<String[]>();
         String line;
         String[] data;
-        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"))) {
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/customers.txt"))) {
             while ((line = read.readLine()) != null) {
                 data = line.split(",");
                 users.add(data);
@@ -31,7 +31,7 @@ public class UpdateProfile {
         String[] data;
         Boolean user_update = false;
         Boolean users_update = false;
-        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"))) {
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/customers.txt"))) {
             while ((line = read.readLine()) != null) {
                 // Store data into data and add to users array
                 data = line.split(",");

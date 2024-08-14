@@ -28,8 +28,6 @@ public class Edit_Admin_Page extends JFrame {
     private String line;
     private JComboBox<String> adname;
     private JTextField adpass_txt;
-    private JTextField adphone_txt;
-    private JTextField admail_txt;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -100,22 +98,10 @@ public class Edit_Admin_Page extends JFrame {
         adpass_lbl.setBounds(280,270,200,30);
         contentPane.add(adpass_lbl);
 
-        //Phone Label
-        JLabel adphone_lbl = new JLabel("Phone:");
-        adphone_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN,15));
-        adphone_lbl.setBounds(280,340,200,30);
-        contentPane.add(adphone_lbl);
-
-        //Email Label
-        JLabel admail_lbl = new JLabel("Email:");
-        admail_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN,15));
-        admail_lbl.setBounds(280,410,200,30);
-        contentPane.add(admail_lbl);
-
         //Role Label
         JLabel adrole_lbl = new JLabel("Role:");
         adrole_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN,15));
-        adrole_lbl.setBounds(280,480,200,30);
+        adrole_lbl.setBounds(280,340,200,30);
         contentPane.add(adrole_lbl);
 
         //Admin Name Combo Box
@@ -139,7 +125,7 @@ public class Edit_Admin_Page extends JFrame {
         //Role Show Label
         JLabel adshow_lbl = new JLabel("admin");
         adshow_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN,15));
-        adshow_lbl.setBounds(500,480,200,30);
+        adshow_lbl.setBounds(500,340,200,30);
         contentPane.add(adshow_lbl);
 
         //Password Textfield
@@ -147,20 +133,10 @@ public class Edit_Admin_Page extends JFrame {
         adpass_txt.setBounds(390,270,300,30);
         contentPane.add(adpass_txt);
 
-        //Phone Textfield
-        adphone_txt = new JTextField();
-        adphone_txt.setBounds(390,340,300,30);
-        contentPane.add(adphone_txt);
-
-        //Email Textfield
-        admail_txt = new JTextField();
-        admail_txt.setBounds(390,410,300,30);
-        contentPane.add(admail_txt);
-
         //Edit Admin Information Button
         JButton editad_btn = new JButton("Edit Admin");
         editad_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        editad_btn.setBounds(360,580,150,30);
+        editad_btn.setBounds(360,450,150,30);
         editad_btn.setBackground(new Color(250,240,230));
         editad_btn.setForeground(new Color(128,128,128));
         editad_btn.addActionListener(new ActionListener() {
@@ -168,11 +144,9 @@ public class Edit_Admin_Page extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String adminname = (String) adname.getSelectedItem();
                 String adpass = adpass_txt.getText();
-                String adphone = adphone_txt.getText();
-                String admail = admail_txt.getText();
                 String adrole = adshow_lbl.getText();
                 Admin_Management adman = new Admin_Management(name);
-                if(adman.edit_admin(adminname, adpass, adphone, admail, adrole)){
+                if(adman.edit_admin(adminname, adpass,adrole)){
                     int response = JOptionPane.showConfirmDialog(null, "Admin Edit Successfully. Do you want to edit again?","Question",JOptionPane.YES_NO_OPTION);
                     if(response == 0){
                         //edit again
@@ -214,7 +188,7 @@ public class Edit_Admin_Page extends JFrame {
         //Delete Admin Login Information
         JButton deletead_btn = new JButton("Delete Admin");
         deletead_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        deletead_btn.setBounds(530,580,150,30);
+        deletead_btn.setBounds(530,450,150,30);
         deletead_btn.setBackground(new Color(250,240,230));
         deletead_btn.setForeground(new Color(128,128,128));
         deletead_btn.addActionListener(new ActionListener() {
@@ -311,11 +285,9 @@ public class Edit_Admin_Page extends JFrame {
         try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"))){
             while((line = read.readLine()) != null) {
                 String[] data = line.split(",");
-                if(data[4].equals("admin") && data[0].equals(selectedName)){
+                if(data[2].equals("admin") && data[0].equals(selectedName)){
                     adname.setSelectedItem(data[0]);
                     adpass_txt.setText(data[1]);
-                    adphone_txt.setText(data[2]);
-                    admail_txt.setText(data[3]);
                     break;
                 }
             }

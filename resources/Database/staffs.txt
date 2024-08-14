@@ -4,3 +4,4 @@ bean,beanbean,236374,mr@mail.com,27-11-2016,male,manager
 jingqi,ong,5486796,jingqi@mail.com,23-10-2004,male,manager
 qingfui,tee,32675467,qingfui@mail.com,23-10-2004,male,scheduler
 fish,yuyu,12547,fish@mail.com,13-01-2005,female,scheduler
+saga,protonwira,52000,saga@mail.com,20-03-2011,male,scheduler

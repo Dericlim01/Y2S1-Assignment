@@ -1,0 +1,1 @@
+customer,customer,01234567,cus@mail.com,13-04-2001,male

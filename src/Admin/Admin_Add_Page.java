@@ -88,28 +88,16 @@ public class Admin_Add_Page extends JFrame {
         adpass_lbl.setBounds(280,270,200,30);
         contentPane.add(adpass_lbl);
 
-        //Phone Label
-        JLabel adphone_lbl = new JLabel("Phone:");
-        adphone_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN,15));
-        adphone_lbl.setBounds(280,340,200,30);
-        contentPane.add(adphone_lbl);
-
-        //Email Label
-        JLabel admail_lbl = new JLabel("Email:");
-        admail_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN,15));
-        admail_lbl.setBounds(280,410,200,30);
-        contentPane.add(admail_lbl);
-
         //Role Label
         JLabel adrole_lbl = new JLabel("Role:");
         adrole_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN,15));
-        adrole_lbl.setBounds(280,480,200,30);
+        adrole_lbl.setBounds(280,340,200,30);
         contentPane.add(adrole_lbl);
         
         //Role Show Label
         JLabel adshow_lbl = new JLabel("admin");
         adshow_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN,15));
-        adshow_lbl.setBounds(500,480,200,30);
+        adshow_lbl.setBounds(500,340,200,30);
         contentPane.add(adshow_lbl);
 
         //Admin Name Textfield
@@ -122,20 +110,10 @@ public class Admin_Add_Page extends JFrame {
         adpass_txt.setBounds(390,270,300,30);
         contentPane.add(adpass_txt);
 
-        //Phone Textfield
-        JTextField adphone_txt = new JTextField();
-        adphone_txt.setBounds(390,340,300,30);
-        contentPane.add(adphone_txt);
-
-        //Email Textfield
-        JTextField admail_txt = new JTextField();
-        admail_txt.setBounds(390,410,300,30);
-        contentPane.add(admail_txt);
-
         //Add New Admin Button
         JButton adadd_btn = new JButton("Add Admin Login Information");
         adadd_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        adadd_btn.setBounds(400,580,240,30);
+        adadd_btn.setBounds(400,450,240,30);
         adadd_btn.setBackground(new Color(250,240,230));
         adadd_btn.setForeground(new Color(128,128,128));
         adadd_btn.addActionListener(new ActionListener() {
@@ -143,14 +121,12 @@ public class Admin_Add_Page extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String adname = adname_txt.getText();
                 String adpass = adpass_txt.getText();
-                String adphone = adphone_txt.getText();
-                String admail = admail_txt.getText();
                 String adrole = adshow_lbl.getText();
 
                 Register register = new Register(adrole);
 
                 // Check if any text field is empty
-                if (adname.isEmpty() || adpass.isEmpty() || adphone.isEmpty() || admail.isEmpty() || adrole.isEmpty()) {
+                if (adname.isEmpty() || adpass.isEmpty() || adrole.isEmpty()) {
                     // Show a message prompting the user to fill in all fields
                     JOptionPane.showMessageDialog(null, "Please complete all fields before adding the admin.");
                 }
@@ -158,7 +134,7 @@ public class Admin_Add_Page extends JFrame {
                     // Checking if admin data already exists
                     if (register.chk_user(adname)) {
                         // Admin name not used, start adding
-                        if (register.reg_user(adname, adpass, adphone, admail)) {
+                        if (register.reg_user(adname, adpass)) {
                             int response = JOptionPane.showConfirmDialog(null, "Admin Added Successfully. Do you want to add again?", "Question", JOptionPane.YES_NO_OPTION);
                             if (response == 0) {
                                 // Add again

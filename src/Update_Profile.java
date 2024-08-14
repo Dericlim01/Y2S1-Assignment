@@ -1,4 +1,5 @@
 package src;
+import src.Admin.Admin_Page;
 import src.Customer.Customer_Page;
 
 import javax.imageio.ImageIO;
@@ -61,6 +62,7 @@ public class Update_Profile extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        contentPane.setBackground(new Color(248,248,255));
 
         UpdateProfile search = new UpdateProfile();
         String[] user = search.search_user(n);
@@ -85,26 +87,91 @@ public class Update_Profile extends JFrame {
         }
         contentPane.add(logo);
 
-        // Name Label
-        JLabel name_lbl = new JLabel("Name : ");
-        name_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        name_lbl.setBounds(180,200,200,30);
-        contentPane.add(name_lbl);
+        // Profile Pic
+        JLabel profile = new JLabel();
+        try{
+ 
+            BufferedImage get_image = new BufferedImage(80, 80, BufferedImage.TYPE_INT_RGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\labixiaoxin(red).png"));
+
+            Image image = get_image.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+
+            profile.setIcon(new ImageIcon(image));
+            profile.setBounds(450, 50, 1000, 200);
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        contentPane.add(profile);
+
+        //Home Page Label
+        JLabel back_lbl = new JLabel();
+        try{
+
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\logout.png"));
+
+            Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+
+            back_lbl.setIcon(new ImageIcon(image));
+            back_lbl.setBounds(920, 30, 35, 35);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        back_lbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dispose();
+                Customer_Page cp = new Customer_Page(name);
+                cp.setTitle("Admin");
+                cp.setVisible(true);
+            }
+        });
+        contentPane.add(back_lbl);
+
+        // Gradient Design
+        JLabel gradient = new JLabel();
+        try{
+
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\gradient.png"));
+
+            Image image = get_image.getScaledInstance(1000, 280, Image.SCALE_SMOOTH);
+
+            gradient.setIcon(new ImageIcon(image));
+            gradient.setBounds(0, 0, 1000, 200);
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        contentPane.add(gradient);
+
+        //Greeting Label
+        JLabel greet_lbl = new JLabel("Welcome Back!");
+        greet_lbl.setFont(new Font("Serif",Font.PLAIN,15));
+        greet_lbl.setBounds(450,210,200,30);
+        contentPane.add(greet_lbl);
 
         // Name showing Label
         JLabel name_show_lbl = new JLabel(user[0]);
-        name_show_lbl.setBounds(300,200,170,30);
+        name_show_lbl.setFont(new Font("Serif",Font.PLAIN,15));
+        name_show_lbl.setBounds(470,240,200,30);
         contentPane.add(name_show_lbl);
 
         // Password Label
-        JLabel pass_lbl = new JLabel("Password : ");
+        JLabel pass_lbl = new JLabel("Password: ");
         pass_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        pass_lbl.setBounds(180,270,200,30);
+        pass_lbl.setBounds(310,280,200,25);
         contentPane.add(pass_lbl);
 
         // Password text field
         JPasswordField pass_txt_f = new JPasswordField(user[1]);
-        pass_txt_f.setBounds(300,270,170,30);
+        pass_txt_f.setBounds(460,280,200,25);
         pass_txt_f.setEchoChar('*');
         pass_txt_f.setEditable(false);
         contentPane.add(pass_txt_f);
@@ -112,12 +179,12 @@ public class Update_Profile extends JFrame {
         // Reenter Password Label
         JLabel reen_pass_lbl = new JLabel("Re-enter Password : ");
         reen_pass_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        reen_pass_lbl.setBounds(180,340,200,30);
+        reen_pass_lbl.setBounds(310,330,200,25);
         contentPane.add(reen_pass_lbl);
 
         // Re-enter Password text field
         JPasswordField reen_pass_txt_f = new JPasswordField(user[1]);
-        reen_pass_txt_f.setBounds(300,340,170,30);
+        reen_pass_txt_f.setBounds(460,330,200,25);
         reen_pass_txt_f.setEchoChar('*');
         reen_pass_txt_f.setEditable(false);
         contentPane.add(reen_pass_txt_f);
@@ -125,31 +192,31 @@ public class Update_Profile extends JFrame {
         // Contact Number Label
         JLabel cont_num_lbl = new JLabel("Contact Number : ");
         cont_num_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        cont_num_lbl.setBounds(500,200,200,30);
+        cont_num_lbl.setBounds(310,380,200,25);
         contentPane.add(cont_num_lbl);
 
         // Contact number text field
         JTextField cont_num_txt_f = new JTextField(user[2]);
-        cont_num_txt_f.setBounds(590,200,170,30);
+        cont_num_txt_f.setBounds(460,380,200,25);
         cont_num_txt_f.setEditable(false);
         contentPane.add(cont_num_txt_f);
 
         // Email Label
         JLabel email_lbl = new JLabel("Email : ");
         email_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        email_lbl.setBounds(500,270,200,30);
+        email_lbl.setBounds(310,430,200,25);
         contentPane.add(email_lbl);
 
         // Email text field
         JTextField email_txt_f = new JTextField(user[3]);
-        email_txt_f.setBounds(590,270,170,30);
+        email_txt_f.setBounds(460,430,200,25);
         email_txt_f.setEditable(false);
         contentPane.add(email_txt_f);
         
         // DOB
         JLabel dob_lbl = new JLabel("Date of Birth : ");
         dob_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        dob_lbl.setBounds(500,340,200,30);
+        dob_lbl.setBounds(310,480,200,30);
         contentPane.add(dob_lbl);
 
         //D.O.B Calendar
@@ -162,12 +229,12 @@ public class Update_Profile extends JFrame {
         //Import Date Panel and Picker
         JDatePanelImpl datePanel = new JDatePanelImpl(model, prop);
         JDatePickerImpl dobDatePicker = new JDatePickerImpl(datePanel, new DateFormat());
-        dobDatePicker.setBounds(590,340,170,30);
+        dobDatePicker.setBounds(460,480,200,25);
         contentPane.add(dobDatePicker);
 
         // Show password check box
         JCheckBox show_pass = new JCheckBox();
-        show_pass.setBounds(470, 275, 20, 20);
+        show_pass.setBounds(670, 330, 20, 20);
         show_pass.setSelected(false);
         show_pass.addActionListener(new ActionListener() {
             @Override
@@ -185,20 +252,23 @@ public class Update_Profile extends JFrame {
         
         // Gender Label
         JLabel gender_lbl = new JLabel("Gender : ");
-        gender_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
-        gender_lbl.setBounds(240, 500, 200, 20);
+        gender_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        gender_lbl.setBounds(310, 530, 200, 25);
         contentPane.add(gender_lbl);
 
         // Gender Combo Box
         String[] gender_data = {"male","female"};
         JComboBox<String> gen_cmbbx = new JComboBox<>(gender_data);
         gen_cmbbx.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        gen_cmbbx.setBounds(420, 500, 300, 30);
+        gen_cmbbx.setBounds(460, 530, 200, 25);
+        gen_cmbbx.setBackground(new Color(250,240,230));
         contentPane.add(gen_cmbbx);
 
         // Update button
         JButton update_btn = new JButton("Update");
-        update_btn.setBounds(550, 400, 80, 25);
+        update_btn.setBackground(new Color(250,240,230));
+        update_btn.setForeground(new Color(128,128,128));
+        update_btn.setBounds(420, 610, 150, 25);
         update_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // If password and reenter password match
@@ -242,7 +312,9 @@ public class Update_Profile extends JFrame {
         // Edit button
         JButton edit_btn = new JButton("Edit");
         edit_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        edit_btn.setBounds(550, 400, 80, 25);
+        edit_btn.setBackground(new Color(250,240,230));
+        edit_btn.setForeground(new Color(128,128,128));
+        edit_btn.setBounds(420, 610, 150, 25);
         edit_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -257,38 +329,6 @@ public class Update_Profile extends JFrame {
         });
         contentPane.add(edit_btn);
 
-        // Back Staff Management Label
-        JLabel back_lbl = new JLabel();
-        try {
-            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-            get_image = ImageIO.read(new File("resources\\Image\\logout.png"));
-            Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-            back_lbl.setIcon(new ImageIcon(image));
-            back_lbl.setBounds(920, 30, 35, 35);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        back_lbl.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                dispose();
-                new Customer_Page(name).setVisible(true);
-            }
-        });
-        contentPane.add(back_lbl);
 
-        // Design 4 Pic
-        JLabel des4 = new JLabel();
-        try {
-            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-            get_image = ImageIO.read(new File("resources\\Image\\design4.png"));
-            Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
-            des4.setIcon(new ImageIcon(image));
-            des4.setBounds(0, 0, 1000, 800);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        contentPane.add(des4);
     }
 }
