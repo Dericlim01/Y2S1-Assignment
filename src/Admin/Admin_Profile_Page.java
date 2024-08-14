@@ -168,7 +168,7 @@ public class Admin_Profile_Page extends JFrame {
         contentPane.add(pass_lbl);
 
         //Password Show Label
-        JLabel pshow_lbl = new JLabel(user[0]);
+        JLabel pshow_lbl = new JLabel(user[1]);
         pshow_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         pshow_lbl.setBounds(480,350,200,30);
         contentPane.add(pshow_lbl);

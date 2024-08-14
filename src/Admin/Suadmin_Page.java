@@ -234,6 +234,15 @@ public class Suadmin_Page extends JFrame {
         userBtn.setForeground(new Color(128,128,128));
         userBtn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         userBtn.setBounds(500,360,200,30);
+        userBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                User_Management_Page um = new User_Management_Page(name);
+                um.setTitle("User Management Page");
+                um.setVisible(true);
+            }
+        });
         contentPane.add(userBtn);
 
         //Booking Management Button

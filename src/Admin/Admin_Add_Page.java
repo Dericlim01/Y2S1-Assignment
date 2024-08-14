@@ -138,6 +138,7 @@ public class Admin_Add_Page extends JFrame {
                             int response = JOptionPane.showConfirmDialog(null, "Admin Added Successfully. Do you want to add again?", "Question", JOptionPane.YES_NO_OPTION);
                             if (response == 0) {
                                 // Add again
+                                dispose();
                                 Admin_Add_Page adadd = new Admin_Add_Page(name);
                                 adadd.setTitle("Admin Add Page");
                                 adadd.setVisible(true);
@@ -156,6 +157,7 @@ public class Admin_Add_Page extends JFrame {
                             int response = JOptionPane.showConfirmDialog(null,"Admin Name Exist. Do you want to add again?","Question" ,JOptionPane.YES_NO_OPTION);
                             if(response == 0){
                                 //add again
+                                dispose();
                                 Admin_Add_Page adadd = new Admin_Add_Page(name);
                                 adadd.setTitle("Admin Add Page");
                                 adadd.setVisible(true);

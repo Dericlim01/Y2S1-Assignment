@@ -11,3 +11,4 @@ qingfui,mrtee,scheduler
 fish,yuyu,scheduler
 saga,protonwira,manager
 hiadmin,newadmin,admin
+nxde,gidle,admin

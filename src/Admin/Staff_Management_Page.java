@@ -253,8 +253,8 @@ public class Staff_Management_Page extends JFrame {
                 Home_back hb = new Home_back();
                 String[] users = hb.home_back(name);
 
-                if (users != null && users.length > 4){
-                    String role = users[4];
+                if (users != null && users.length > 2){
+                    String role = users[2];
                     if(role.equals("admin")){
                         Admin_Page ad = new Admin_Page(name);
                         ad.setTitle("Admin");

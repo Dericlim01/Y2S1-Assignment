@@ -150,6 +150,7 @@ public class Edit_Admin_Page extends JFrame {
                     int response = JOptionPane.showConfirmDialog(null, "Admin Edit Successfully. Do you want to edit again?","Question",JOptionPane.YES_NO_OPTION);
                     if(response == 0){
                         //edit again
+                        dispose();
                         Edit_Admin_Page eap = new Edit_Admin_Page(name);
                         eap.setTitle("Edit Admin Page");
                         eap.setVisible(true);
@@ -167,6 +168,7 @@ public class Edit_Admin_Page extends JFrame {
                     int response = JOptionPane.showConfirmDialog(null,"Edit Staff Failed. Do you want to edit again?","Question" ,JOptionPane.YES_NO_OPTION);
                     if(response == 0){
                         //edit again
+                        dispose();
                         Edit_Admin_Page eap = new Edit_Admin_Page(name);
                         eap.setTitle("Edit Staff Page");
                         eap.setVisible(true);
@@ -200,6 +202,7 @@ public class Edit_Admin_Page extends JFrame {
                     int response = JOptionPane.showConfirmDialog(null, "Admin Delete Successfully. Do you want to delete again?","Question",JOptionPane.YES_NO_OPTION);
                     if(response == 0){
                         //delete again
+                        dispose();
                         Edit_Admin_Page eap = new Edit_Admin_Page(name);
                         eap.setTitle("Edit Admin Page");
                         eap.setVisible(true);
@@ -217,6 +220,7 @@ public class Edit_Admin_Page extends JFrame {
                     int response = JOptionPane.showConfirmDialog(null,"Delete Staff Failed. Do you want to delete again?","Question" ,JOptionPane.YES_NO_OPTION);
                     if(response == 0){
                         //stay at this page
+                        dispose();
                         Edit_Staff_Page esp = new Edit_Staff_Page(name);
                         esp.setTitle("Edit Admin Page");
                         esp.setVisible(true);
