@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Toolkit;
 import java.awt.EventQueue;
@@ -19,11 +20,13 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+
 public class Task_Status extends JFrame {
     private static String manname;
-    private JScrollPane scrollPane;
-    private DefaultTableModel tm;
-    private JTable view;
+    private static JScrollPane scrollPane;
+    private static DefaultTableModel tm;
+    private static JTable view;
+    
 
 
     public static void main(String[] args) {
@@ -55,20 +58,21 @@ public class Task_Status extends JFrame {
 
         // Title 
         JLabel title = new JLabel("Task Status");
-        title.setFont(new Font("Comic Sans Ms", Font.PLAIN, 20));
-        title.setBounds(450, 20, 120, 20);
+        title.setFont(new Font("Engravers MT", Font.PLAIN, 20));
+        title.setBounds(400, 20, 200, 20);
         manager_TAS.add(title);
 
-        String[] col_name = {"Task ID", "Issues ID", "Issues", "Description", "Username", "Halls ID", "Staff ID", "Handled Staff", "Issues Status"};
+        String[] col_name = {"Task ID", "Issues ID", "Issues", "Description", "Username", "Halls ID", "Handled Staff", "Issues Status"};
         Object[][] tasks_status = man_task.task_status();
         
         tm = new DefaultTableModel(tasks_status, col_name);
         view = new JTable(tm);
 
         scrollPane = new JScrollPane(view);
-        scrollPane.setBounds(9, 50, 970, 600);
+        scrollPane.setBounds(9, 80, 970, 550);
         manager_TAS.add(scrollPane);
 
+        // Back Label
         JLabel back_lbl = new JLabel();
         try{
 
@@ -94,6 +98,48 @@ public class Task_Status extends JFrame {
 
         });
         manager_TAS.add(back_lbl);
+
+        // Update button
+        JButton update = new JButton("Update");
+        update.setBackground(new Color(250,240,230));
+        update.setForeground(new Color(128,128,128));
+        update.setBounds(800, 675, 110, 20);
+        update.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Object[][] taskStatus = man_task.task_status();
+                tm.setDataVector(taskStatus, col_name);
+                view = new JTable(tm);
+                
+                scrollPane = new JScrollPane(view);
+                scrollPane.setBounds(9, 80, 970, 550);
+
+                manager_TAS.add(scrollPane);
+                
+                view.revalidate();
+                view.repaint();
+
+            }
+        });
+        manager_TAS.add(update);
+
+        //Design 4 Background Pic
+        JLabel des4 = new JLabel();
+        try{
+
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources/Image/design4.png"));
+
+            Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
+
+            des4.setIcon(new ImageIcon(image));
+            des4.setBounds(0, 0, 1000, 800);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        manager_TAS.add(des4);
 
     }
 }
