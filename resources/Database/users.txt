@@ -11,3 +11,10 @@ qingfui,mrtee,scheduler
 fish,yuyu,scheduler
 saga,protonwira,manager
 hiadmin,newadmin,admin
+cus1,cus1,customer
+cus2,cus2,customer
+cus3,cus3,customer
+cus4,cus4,customer
+suga,suga,customer
+v,v,customer
+rm,rm,customer

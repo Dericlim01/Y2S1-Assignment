@@ -1,13 +1,21 @@
 package src;
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import src.Admin.Admin_Page;
 import src.Admin.Suadmin_Page;
 import src.Customer.Customer_Page;
 import src.Manager.Manager_Home_Page;
 import src.Scheduler.Scheduler_Main_Page;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.border.EmptyBorder;
+import javax.imageio.ImageIO;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -63,18 +71,13 @@ public class Login_Page extends JFrame {
 
         // Logo Pic
         JLabel logo = new JLabel();
-        try{
- 
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\hall (1).png"));
-
             Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-
             logo.setIcon(new ImageIcon(image));
             logo.setBounds(0, 0, 65, 65);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         contentPane.add(logo);
@@ -93,36 +96,26 @@ public class Login_Page extends JFrame {
 
         // Graphic Hall Pic
         JLabel graphicHall = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\graphichall.png"));
-
             Image image = get_image.getScaledInstance(300, 350, Image.SCALE_SMOOTH);
-
             graphicHall.setIcon(new ImageIcon(image));
             graphicHall.setBounds(60, 230, 300, 400);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         contentPane.add(graphicHall);
 
         // Graphic Border Pic
         JLabel graphicBorder = new JLabel();
-        try{
- 
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\graphicBorder.png"));
-
             Image image = get_image.getScaledInstance(400, 800, Image.SCALE_SMOOTH);
-
             graphicBorder.setIcon(new ImageIcon(image));
             graphicBorder.setBounds(10, 0, 400, 800);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         contentPane.add(graphicBorder);
@@ -235,36 +228,26 @@ public class Login_Page extends JFrame {
 
         // Design Pic 1
         JLabel des1 = new JLabel();
-        try{
- 
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\design1.png"));
-
             Image image = get_image.getScaledInstance(300, 280, Image.SCALE_SMOOTH);
-
             des1.setIcon(new ImageIcon(image));
             des1.setBounds(780, 0, 250, 200);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         contentPane.add(des1);
 
         // Design Pic 2
         JLabel des2 = new JLabel();
-        try{
- 
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\design2.png"));
-
             Image image = get_image.getScaledInstance(300, 280, Image.SCALE_SMOOTH);
-
             des2.setIcon(new ImageIcon(image));
             des2.setBounds(310,580, 250, 200);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         contentPane.add(des2);
