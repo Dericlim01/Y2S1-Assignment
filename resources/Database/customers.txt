@@ -1,1 +1,8 @@
-customer,customer,01234567,cus@mail.com,13-04-2001,male
+customer,0123456789,customer@mail.com,07-08-2024,male
+cus1,0123456789,cus1@mail.com,07-08-2024,female
+cus2,0123456789,cus2@mail.com,07-08-2024,male
+cus3,0123456789,cus3@mail.com,07-08-2024,female
+cus4,0123456789,cus4@mail.com,07-08-2024,male
+suga,0123456789,suga@mail.com,07-08-2024,female
+v,0123456789,v@mail.com,07-08-2024,male
+rm,0123456789,rm@mail.com,07-08-2024,female

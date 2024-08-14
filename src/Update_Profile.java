@@ -1,18 +1,17 @@
 package src;
-
 import src.Customer.Customer_Page;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import javax.swing.JTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -20,15 +19,15 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Cursor;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.EventQueue;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -94,36 +93,26 @@ public class Update_Profile extends JFrame {
 
         // Profile Pic
         JLabel profile = new JLabel();
-        try{
- 
+        try {
             BufferedImage get_image = new BufferedImage(80, 80, BufferedImage.TYPE_INT_RGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\labixiaoxin(red).png"));
-
             Image image = get_image.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-
             profile.setIcon(new ImageIcon(image));
             profile.setBounds(450, 50, 1000, 200);
-
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         contentPane.add(profile);
 
         // Home Page Label
         JLabel back_lbl = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\logout.png"));
-
             Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-
             back_lbl.setIcon(new ImageIcon(image));
             back_lbl.setBounds(920, 30, 35, 35);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -140,18 +129,13 @@ public class Update_Profile extends JFrame {
 
         // Gradient Design
         JLabel gradient = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\gradient.png"));
-
             Image image = get_image.getScaledInstance(1000, 280, Image.SCALE_SMOOTH);
-
             gradient.setIcon(new ImageIcon(image));
             gradient.setBounds(0, 0, 1000, 200);
-
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         contentPane.add(gradient);
@@ -224,14 +208,14 @@ public class Update_Profile extends JFrame {
         dob_lbl.setBounds(310,480,200,30);
         contentPane.add(dob_lbl);
 
-        //D.O.B Calendar
+        // D.O.B Calendar
         UtilDateModel model = new UtilDateModel();
         //Properties create object to store values in it
         Properties prop = new Properties();
         prop.put("text.day", "Day");
         prop.put("text.month","Month");
         prop.put("text.year", "Year");
-        //Import Date Panel and Picker
+        // Import Date Panel and Picker
         JDatePanelImpl datePanel = new JDatePanelImpl(model, prop);
         JDatePickerImpl dobDatePicker = new JDatePickerImpl(datePanel, new DateFormat());
         dobDatePicker.setBounds(460,480,200,25);
@@ -279,6 +263,7 @@ public class Update_Profile extends JFrame {
         } else {
             gen_cmbbx.setSelectedIndex(1);
         }
+        gen_cmbbx.setEnabled(false);
         contentPane.add(gen_cmbbx);
 
         // Update button
@@ -340,13 +325,12 @@ public class Update_Profile extends JFrame {
                 reen_pass_txt_f.setEditable(true);
                 cont_num_txt_f.setEditable(true);
                 email_txt_f.setEditable(true);
+                gen_cmbbx.setEnabled(true);
                 contentPane.add(show_pass);
                 contentPane.remove(edit_btn);
                 contentPane.add(update_btn);
             }
         });
         contentPane.add(edit_btn);
-
-
     }
 }
