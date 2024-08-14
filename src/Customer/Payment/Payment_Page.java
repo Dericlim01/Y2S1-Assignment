@@ -49,6 +49,7 @@ public class Payment_Page extends JFrame {
         // Create a panel
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setBackground(new Color(248,248,255));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
@@ -151,5 +152,20 @@ public class Payment_Page extends JFrame {
 
         });
         contentPane.add(back_lbl);
+
+        // Design 4 Pic
+        JLabel des4 = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources\\Image\\design4.png"));
+            Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
+            des4.setIcon(new ImageIcon(image));
+            des4.setBounds(0, 0, 1000, 800);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        contentPane.add(des4);
     }
+
+    
 }

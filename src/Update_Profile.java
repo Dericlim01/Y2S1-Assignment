@@ -110,7 +110,7 @@ public class Update_Profile extends JFrame {
         }
         contentPane.add(profile);
 
-        //Home Page Label
+        // Home Page Label
         JLabel back_lbl = new JLabel();
         try{
 
@@ -132,7 +132,7 @@ public class Update_Profile extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 dispose();
                 Customer_Page cp = new Customer_Page(name);
-                cp.setTitle("Admin");
+                cp.setTitle("Customer");
                 cp.setVisible(true);
             }
         });

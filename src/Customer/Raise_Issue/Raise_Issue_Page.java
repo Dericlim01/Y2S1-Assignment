@@ -4,9 +4,12 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +53,7 @@ public class Raise_Issue_Page extends JFrame {
         // Set panel
         JPanel contentpane = new JPanel();
         contentpane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentpane.setBackground(new Color(248,248,255));
         setContentPane(contentpane);
         contentpane.setLayout(null);
 
@@ -158,18 +162,33 @@ public class Raise_Issue_Page extends JFrame {
         });
         contentpane.add(submit_issue_btn);
 
-        // Back button
-        JButton back_btn = new JButton("Back");
-        back_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        back_btn.setBounds(400, 630, 100, 30);
-        back_btn.addActionListener(new ActionListener() {
+        // Home Page Label
+        JLabel back_lbl = new JLabel();
+        try{
+
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources\\Image\\logout.png"));
+
+            Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+
+            back_lbl.setIcon(new ImageIcon(image));
+            back_lbl.setBounds(920, 30, 35, 35);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        back_lbl.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 dispose();
-                new Customer_Page(n).setVisible(true);
+                Customer_Page cp = new Customer_Page(name);
+                cp.setTitle("Customer");
+                cp.setVisible(true);
             }
         });
-        contentpane.add(back_btn);
+        contentpane.add(back_lbl);
 
         // Design 4 Pic
         JLabel des4 = new JLabel();
