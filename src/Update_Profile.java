@@ -32,6 +32,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
@@ -64,8 +65,12 @@ public class Update_Profile extends JFrame {
         contentPane.setLayout(null);
         contentPane.setBackground(new Color(248,248,255));
 
+        // search in user txt
         UpdateProfile search = new UpdateProfile();
         String[] user = search.search_user(n);
+        // search in customer txt
+        UpdateProfile search_user = new UpdateProfile();
+        String[] users = search_user.search_users(n);
 
         // Logo Label
         JLabel logo_lbl = new JLabel("Symphony Hall");
@@ -196,8 +201,8 @@ public class Update_Profile extends JFrame {
         contentPane.add(cont_num_lbl);
 
         // Contact number text field
-        JTextField cont_num_txt_f = new JTextField(user[2]);
-        cont_num_txt_f.setBounds(460,380,200,25);
+        JTextField cont_num_txt_f = new JTextField(users[1]);
+        cont_num_txt_f.setBounds(460,380,200,30);
         cont_num_txt_f.setEditable(false);
         contentPane.add(cont_num_txt_f);
 
@@ -208,7 +213,7 @@ public class Update_Profile extends JFrame {
         contentPane.add(email_lbl);
 
         // Email text field
-        JTextField email_txt_f = new JTextField(user[3]);
+        JTextField email_txt_f = new JTextField(users[2]);
         email_txt_f.setBounds(460,430,200,25);
         email_txt_f.setEditable(false);
         contentPane.add(email_txt_f);
@@ -230,6 +235,13 @@ public class Update_Profile extends JFrame {
         JDatePanelImpl datePanel = new JDatePanelImpl(model, prop);
         JDatePickerImpl dobDatePicker = new JDatePickerImpl(datePanel, new DateFormat());
         dobDatePicker.setBounds(460,480,200,25);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date dob = dateFormat.parse(users[3]);
+            model.setValue(dob);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         contentPane.add(dobDatePicker);
 
         // Show password check box
@@ -259,9 +271,14 @@ public class Update_Profile extends JFrame {
         // Gender Combo Box
         String[] gender_data = {"male","female"};
         JComboBox<String> gen_cmbbx = new JComboBox<>(gender_data);
+        gen_cmbbx.setBackground(new Color(250,240,230));
         gen_cmbbx.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         gen_cmbbx.setBounds(460, 530, 200, 25);
-        gen_cmbbx.setBackground(new Color(250,240,230));
+        if (users[4].equals("male")) {
+            gen_cmbbx.setSelectedIndex(0);
+        } else {
+            gen_cmbbx.setSelectedIndex(1);
+        }
         contentPane.add(gen_cmbbx);
 
         // Update button
@@ -280,8 +297,9 @@ public class Update_Profile extends JFrame {
                     Date dob = (Date) dobDatePicker.getModel().getValue();
                     String gender = String.valueOf(gen_cmbbx.getSelectedItem());
                     UpdateProfile update_profile = new UpdateProfile();
+                    
                     // Update Successfully
-                    if (update_profile.update_user(name, pass, cont_num, email, dob, gender)) {
+                    if (update_profile.update_user(name, pass) && update_profile.update_users(name, cont_num, email, dob, gender)) {
                         JOptionPane.showMessageDialog(
                             null,
                             "Update Successfully",

@@ -3,10 +3,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Register {
     private String role;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     public Register(String r) {
         role = r;
@@ -50,14 +52,17 @@ public class Register {
 
     // Register User to customer txt
     public Boolean reg_users(String username, String cont_num, String email, Date dob, String gender) {
-        try {
-            FileWriter users = new FileWriter("resources/Database/customers.txt", true);
-            users.append(username + "," + cont_num + "," + email + "," + dob + "," + gender + "\n");
-            users.close();
-            return true;
-        } catch (IOException e) {
-            System.out.println("Error");
-            e.printStackTrace();
+        String dobformat = dateFormat.format(dob);
+        if (new Create_file().customer_file()) {
+            try {
+                FileWriter users = new FileWriter("resources/Database/customers.txt", true);
+                users.append(username + "," + cont_num + "," + email + "," + dobformat + "," + gender + "\n");
+                users.close();
+                return true;
+            } catch (IOException e) {
+                System.out.println("Error");
+                e.printStackTrace();
+            }
         }
         return false;
     }
