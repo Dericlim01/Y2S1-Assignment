@@ -115,7 +115,7 @@ public class Customer_Page extends JFrame {
         }
         contentPane.add(noti);
 
-        //Mail Pic
+        // Mail Pic
         JLabel email = new JLabel();
         try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
@@ -182,7 +182,7 @@ public class Customer_Page extends JFrame {
         book_hall_btn.setForeground(new Color(128,128,128));
         book_hall_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
         book_hall_btn.setBounds(500,320,200,30);
-        update_p_btn.addActionListener(new ActionListener() {
+        book_hall_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();

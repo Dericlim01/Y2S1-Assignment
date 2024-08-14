@@ -1,10 +1,38 @@
 package src;
-import javax.swing.*;
+import src.Customer.Customer_Page;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Properties;
 
 public class Update_Profile extends JFrame {
     private static String name;
@@ -23,9 +51,12 @@ public class Update_Profile extends JFrame {
 
     public Update_Profile(String n) {
         setTitle("Update Profile");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
         setResizable(false);
+
+        // Set Panel
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -34,65 +65,109 @@ public class Update_Profile extends JFrame {
         UpdateProfile search = new UpdateProfile();
         String[] user = search.search_user(n);
 
+        // Logo Label
+        JLabel logo_lbl = new JLabel("Symphony Hall");
+        logo_lbl.setFont(new Font("French Script MT", Font.BOLD,25));
+        logo_lbl.setForeground(new Color(169,169,169));
+        logo_lbl.setBounds(60,20,160,30);
+        contentPane.add(logo_lbl);
+
+        // Logo Pic
+        JLabel logo = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources\\Image\\hall (1).png"));
+            Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+            logo.setIcon(new ImageIcon(image));
+            logo.setBounds(0, 0, 65, 65);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        contentPane.add(logo);
+
         // Name Label
         JLabel name_lbl = new JLabel("Name : ");
-        name_lbl.setBounds(30, 20, 50, 20);
+        name_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        name_lbl.setBounds(180,200,200,30);
         contentPane.add(name_lbl);
 
         // Name showing Label
         JLabel name_show_lbl = new JLabel(user[0]);
-        name_show_lbl.setBounds(140, 20, 100, 20);
+        name_show_lbl.setBounds(300,200,170,30);
         contentPane.add(name_show_lbl);
 
         // Password Label
         JLabel pass_lbl = new JLabel("Password : ");
-        pass_lbl.setBounds(30, 50, 100, 20);
+        pass_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        pass_lbl.setBounds(180,270,200,30);
         contentPane.add(pass_lbl);
 
         // Password text field
         JPasswordField pass_txt_f = new JPasswordField(user[1]);
-        pass_txt_f.setBounds(140, 50, 100, 20);
+        pass_txt_f.setBounds(300,270,170,30);
         pass_txt_f.setEchoChar('*');
         pass_txt_f.setEditable(false);
         contentPane.add(pass_txt_f);
 
         // Reenter Password Label
         JLabel reen_pass_lbl = new JLabel("Re-enter Password : ");
-        reen_pass_lbl.setBounds(30, 80, 100, 20);
+        reen_pass_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        reen_pass_lbl.setBounds(180,340,200,30);
         contentPane.add(reen_pass_lbl);
 
         // Re-enter Password text field
         JPasswordField reen_pass_txt_f = new JPasswordField(user[1]);
-        reen_pass_txt_f.setBounds(140, 80, 100, 20);
+        reen_pass_txt_f.setBounds(300,340,170,30);
         reen_pass_txt_f.setEchoChar('*');
         reen_pass_txt_f.setEditable(false);
         contentPane.add(reen_pass_txt_f);
 
         // Contact Number Label
         JLabel cont_num_lbl = new JLabel("Contact Number : ");
-        cont_num_lbl.setBounds(30, 110, 120, 20);
+        cont_num_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        cont_num_lbl.setBounds(500,200,200,30);
         contentPane.add(cont_num_lbl);
 
         // Contact number text field
         JTextField cont_num_txt_f = new JTextField(user[2]);
-        cont_num_txt_f.setBounds(140, 110, 100, 20);
+        cont_num_txt_f.setBounds(590,200,170,30);
         cont_num_txt_f.setEditable(false);
         contentPane.add(cont_num_txt_f);
 
         // Email Label
         JLabel email_lbl = new JLabel("Email : ");
-        email_lbl.setBounds(30, 140, 100, 20);
+        email_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        email_lbl.setBounds(500,270,200,30);
         contentPane.add(email_lbl);
 
         // Email text field
         JTextField email_txt_f = new JTextField(user[3]);
-        email_txt_f.setBounds(140, 140, 100, 20);
+        email_txt_f.setBounds(590,270,170,30);
         email_txt_f.setEditable(false);
         contentPane.add(email_txt_f);
+        
+        // DOB
+        JLabel dob_lbl = new JLabel("Date of Birth : ");
+        dob_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        dob_lbl.setBounds(500,340,200,30);
+        contentPane.add(dob_lbl);
+
+        //D.O.B Calendar
+        UtilDateModel model = new UtilDateModel();
+        //Properties create object to store values in it
+        Properties prop = new Properties();
+        prop.put("text.day", "Day");
+        prop.put("text.month","Month");
+        prop.put("text.year", "Year");
+        //Import Date Panel and Picker
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, prop);
+        JDatePickerImpl dobDatePicker = new JDatePickerImpl(datePanel, new DateFormat());
+        dobDatePicker.setBounds(590,340,170,30);
+        contentPane.add(dobDatePicker);
 
         // Show password check box
         JCheckBox show_pass = new JCheckBox();
-        show_pass.setBounds(560, 315, 20, 20);
+        show_pass.setBounds(470, 275, 20, 20);
         show_pass.setSelected(false);
         show_pass.addActionListener(new ActionListener() {
             @Override
@@ -106,10 +181,24 @@ public class Update_Profile extends JFrame {
                 }
             }
         });
+        contentPane.add(show_pass);
+        
+        // Gender Label
+        JLabel gender_lbl = new JLabel("Gender : ");
+        gender_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+        gender_lbl.setBounds(240, 500, 200, 20);
+        contentPane.add(gender_lbl);
+
+        // Gender Combo Box
+        String[] gender_data = {"male","female"};
+        JComboBox<String> gen_cmbbx = new JComboBox<>(gender_data);
+        gen_cmbbx.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        gen_cmbbx.setBounds(420, 500, 300, 30);
+        contentPane.add(gen_cmbbx);
 
         // Update button
         JButton update_btn = new JButton("Update");
-        update_btn.setBounds(140, 170, 100, 20);
+        update_btn.setBounds(550, 400, 80, 25);
         update_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // If password and reenter password match
@@ -118,9 +207,11 @@ public class Update_Profile extends JFrame {
                     String pass = String.valueOf(pass_txt_f.getPassword());
                     String cont_num = cont_num_txt_f.getText();
                     String email = email_txt_f.getText();
+                    Date dob = (Date) dobDatePicker.getModel().getValue();
+                    String gender = String.valueOf(gen_cmbbx.getSelectedItem());
                     UpdateProfile update_profile = new UpdateProfile();
                     // Update Successfully
-                    if (update_profile.update_user(name, pass, cont_num, email)) {
+                    if (update_profile.update_user(name, pass, cont_num, email, dob, gender)) {
                         JOptionPane.showMessageDialog(
                             null,
                             "Update Successfully",
@@ -150,7 +241,8 @@ public class Update_Profile extends JFrame {
 
         // Edit button
         JButton edit_btn = new JButton("Edit");
-        edit_btn.setBounds(140, 170, 100, 20);
+        edit_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        edit_btn.setBounds(550, 400, 80, 25);
         edit_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -164,5 +256,39 @@ public class Update_Profile extends JFrame {
             }
         });
         contentPane.add(edit_btn);
+
+        // Back Staff Management Label
+        JLabel back_lbl = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources\\Image\\logout.png"));
+            Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+            back_lbl.setIcon(new ImageIcon(image));
+            back_lbl.setBounds(920, 30, 35, 35);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        back_lbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dispose();
+                new Customer_Page(name).setVisible(true);
+            }
+        });
+        contentPane.add(back_lbl);
+
+        // Design 4 Pic
+        JLabel des4 = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources\\Image\\design4.png"));
+            Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
+            des4.setIcon(new ImageIcon(image));
+            des4.setBounds(0, 0, 1000, 800);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        contentPane.add(des4);
     }
 }

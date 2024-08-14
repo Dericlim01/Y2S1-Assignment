@@ -18,7 +18,7 @@ public class Login {
 
                     // If username and password correct
                     if (username.equals(n) && password.equals(p)) {
-                        return data[4];
+                        return data[2];
                     }
                 }
             } catch (IOException e) {
