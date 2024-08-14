@@ -28,6 +28,29 @@ public class UpdateProfile {
         return users.get(0);
     }
 
+    // search user and return to update for display
+    public String[] search_users(String name) {
+        // Create an user arraylist
+        ArrayList<String[]> users = new ArrayList<String[]>();
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/customers.txt"))) {
+            // read every line and add to arraylist
+            while ((line = read.readLine()) != null) {
+                String[] data = line.split(",");
+                users.add(data);
+            }
+            // Search in arraylist
+            for (int i = 0; i < users.size(); i++) {
+                // if username found
+                if (users.get(i)[0].equals(name)) {
+                    return users.get(i);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return users.get(0);
+    }
+
     // update user to user txt
     public Boolean update_user(String n, String p) {
         // Create a user list
