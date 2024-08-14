@@ -5,14 +5,18 @@ import javax.swing.border.*;
 import javax.imageio.ImageIO;
 
 import src.Login_Page;
-import src.Update_Profile;
-
+import src.UpdateProfile;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Toolkit;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import java.io.*;
@@ -38,6 +42,7 @@ public class Manager_Home_Page extends JFrame{
 
     public Manager_Home_Page(String n){
         setTitle("Manager Home Page");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("resources/Image/hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
         setResizable(false);
@@ -46,13 +51,38 @@ public class Manager_Home_Page extends JFrame{
         manager_HP.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(manager_HP);
         manager_HP.setLayout(null);
+        manager_HP.setBackground(new Color(248, 248, 248));
+
+        UpdateProfile searchUser = new UpdateProfile();
+        String[] user = searchUser.search_user(n);
+
+        // Logo Label
+        JLabel logo_lbl = new JLabel("Symphony Hall");
+        logo_lbl.setFont(new Font("French Script MT", Font.BOLD, 25));
+        logo_lbl.setForeground(new Color(169, 169, 169));
+        logo_lbl.setBounds(60, 20, 160, 30);
+        manager_HP.add(logo_lbl);
+
+        // Logo Picture
+        JLabel logo = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources/Image/hall (1).png"));
+            Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+
+            logo.setIcon(new ImageIcon(image));
+            logo.setBounds(0, 0, 65, 65);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        manager_HP.add(logo);
 
         // image icon
         JLabel picture = new JLabel();
         try{
             BufferedImage image_icon = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
 
-            image_icon = ImageIO.read(new File("D:/sem 1/Java/test/Manager/little white dog.png"));
+            image_icon = ImageIO.read(new File("resources/Image/little white dog.png"));
 
             Image imageIcon = image_icon.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
 
@@ -64,9 +94,11 @@ public class Manager_Home_Page extends JFrame{
         }
         manager_HP.add(picture);
 
+
+
         // Name
-        JLabel name_lbl = new JLabel("HI");
-        name_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        JLabel name_lbl = new JLabel(user[0]);
+        name_lbl.setFont(new Font("Serif", Font.PLAIN, 15));
         name_lbl.setBounds(110, 180, 100, 30);
         manager_HP.add(name_lbl);
 
@@ -76,6 +108,79 @@ public class Manager_Home_Page extends JFrame{
         wel_lbl.setBounds(70, 210, 125, 25);
         manager_HP.add(wel_lbl);
 
+        // Setting Picture
+        JLabel setting = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources/Image/setting.png"));
+
+            Image image = get_image.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+
+            setting.setIcon(new ImageIcon(image));
+            setting.setBounds(40, 290, 30, 30);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        manager_HP.add(setting);
+
+   
+        //Notification Pic
+        JLabel noti= new JLabel();
+        try{
+ 
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources/Image/notification.png"));
+
+            Image image = get_image.getScaledInstance(43, 43, Image.SCALE_SMOOTH);
+
+            noti.setIcon(new ImageIcon(image));
+            noti.setBounds(100, 285, 38, 38);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        manager_HP.add(noti);
+
+
+        // Mail Picture
+        JLabel email = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources/Image/email.png"));
+            Image image = get_image.getScaledInstance(55, 55, Image.SCALE_SMOOTH);
+            email.setIcon(new ImageIcon(image));
+            email.setBounds(160, 280, 55, 55);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        email.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        email.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                do {
+                    JOptionPane.showMessageDialog(null,"You have been hacked! Give us 4.0 to resolve! Thank You!","Hacked Notification",JOptionPane.OK_CANCEL_OPTION);
+                        System.out.println("Prompting continue.");
+                } while (true);      
+            }
+        });
+        manager_HP.add(email);
+
+        // Side Picture
+        JLabel side = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources/Image/side.png"));
+            Image image = get_image.getScaledInstance(400, 800, Image.SCALE_SMOOTH);
+            side.setIcon(new ImageIcon(image));
+            side.setBounds(0, 0, 400, 800);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        manager_HP.add(side);
+
         // Manager Home Page Label
         JLabel hp_lbl = new JLabel("Manager Home Page");
         hp_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
@@ -83,19 +188,11 @@ public class Manager_Home_Page extends JFrame{
         manager_HP.add(hp_lbl);
 
         // Logout Button
-        JButton logout_btn = new JButton();
-        try{
-            BufferedImage logout_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-            logout_image = ImageIO.read(new File("D:/sem 1/Java/test/Manager/logout.png"));
-
-            Image log_icon = logout_image.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-
-            logout_btn.setIcon(new ImageIcon(log_icon));
-            logout_btn.setBounds(160, 250, 40, 40);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-
+        JButton logout_btn = new JButton("Logout");
+        logout_btn.setBackground((new Color(250, 240, 230)));
+        logout_btn.setForeground(new Color(128, 128, 128));
+        logout_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
+        logout_btn.setBounds(850, 30, 100, 30);
         logout_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -115,7 +212,7 @@ public class Manager_Home_Page extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 // new Manager_View_Profile(n).setVisible(true);
-                new Update_Profile(n).setVisible(true);
+                new Manager_View_Profile_Page(n).setVisible(true);
                 dispose();
             }
         });
@@ -160,13 +257,13 @@ public class Manager_Home_Page extends JFrame{
         manager_HP.add(cus_iss_rec_btn);
 
         // Task Assign and Status Button
-        JButton task_ass_sta_btn = new JButton("Task Assign and Status");
+        JButton task_ass_sta_btn = new JButton("Task Status");
         task_ass_sta_btn.setBounds(400, 400, 200, 25);
         task_ass_sta_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new Task_Assign_and_Status(n).setVisible(true);
+                new Task_Status(n).setVisible(true);
             }
         });
         manager_HP.add(task_ass_sta_btn);
