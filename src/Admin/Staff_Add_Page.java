@@ -200,7 +200,7 @@ public class Staff_Add_Page extends JFrame {
                     if(Staff_Management.add_staff(staffname, staffpass, staffphone, staffmail, staffdob, staffgen, staffrole)){
                         //Show Message Dialog
                         if(register_user.chk_user(name)) {
-                            if(register_user.reg_user(staffname, staffpass, staffphone, staffmail)){
+                            if(register_user.reg_user(staffname, staffpass)){
                                 int response = JOptionPane.showConfirmDialog(null,"Staff Added Successfully. Do you want to add again?","Question" ,JOptionPane.YES_NO_OPTION);
                                 if(response == 0){
                                     //add again

@@ -90,7 +90,7 @@ public class Admin_Management_Page extends JFrame {
 
         //Admin Table Showing
         Admin_Management ad_man = new Admin_Management(name);
-        String[] admin_table = {"Admin","Password","Phone","Mail","Role"};
+        String[] admin_table = {"Admin","Password","Role"};
         scrollPane = ad_man.view_admin(admin_table);
         scrollPane.setBounds(100,150,800,380);
         contentPane.add(scrollPane); 

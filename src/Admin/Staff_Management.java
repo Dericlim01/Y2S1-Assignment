@@ -197,9 +197,7 @@ public class Staff_Management {
                 //update if successful to search the staffname and exist in txt file
                 if (data[0].equals(staffname)) {
                     data[1] = password;
-                    data[2] = phone;
-                    data[3] = mail;
-                    data[4] = role;
+                    data[2] = role;
                     edit = true;
                 }
                 //adding all file datas into ArrayList

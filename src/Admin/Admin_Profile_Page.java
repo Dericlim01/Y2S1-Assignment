@@ -1,13 +1,12 @@
 package src.Admin;
 
-import src.UpdateProfile;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -46,7 +45,7 @@ public class Admin_Profile_Page extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
         contentPane.setBackground(new Color(248,248,255));
-        UpdateProfile search = new UpdateProfile();
+        Admin_Management search = new Admin_Management(name);
         String[] user = search.search_user(name);
 
         //Logo Label
@@ -150,101 +149,78 @@ public class Admin_Profile_Page extends JFrame {
         user_lbl.setBounds(470,240,200,30);
         contentPane.add(user_lbl);
 
+        //Role label
+        JLabel role_lbl = new JLabel("Your Role:");
+        role_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        role_lbl.setBounds(360,300,200,30);
+        contentPane.add(role_lbl);
+
+        //Role Show Label
+        JLabel rshow_lbl = new JLabel("Admin");
+        rshow_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        rshow_lbl.setBounds(480,300,200,30);
+        contentPane.add(rshow_lbl);
+
         //Password label
         JLabel pass_lbl = new JLabel("Password:");
         pass_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        pass_lbl.setBounds(400,290,200,30);
+        pass_lbl.setBounds(360,350,200,30);
         contentPane.add(pass_lbl);
 
         //Password Show Label
-        JLabel pshow_lbl = new JLabel(user[1]);
+        JLabel pshow_lbl = new JLabel(user[0]);
         pshow_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        pshow_lbl.setBounds(500,290,200,30);
+        pshow_lbl.setBounds(480,350,200,30);
         contentPane.add(pshow_lbl);
-
-        //Contact No. Label
-        JLabel con_lbl = new JLabel("Contact Number:");
-        con_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        con_lbl.setBounds(350,340,200,30);
-        contentPane.add(con_lbl);
-
-        //Contact No. Show Label
-        JLabel cshow_lbl = new JLabel(user[2]);
-        cshow_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        cshow_lbl.setBounds(500,340,200,30);
-        contentPane.add(cshow_lbl);
-
-        //Email Label
-        JLabel email_lbl = new JLabel("Email:");
-        email_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        email_lbl.setBounds(425,390,200,30);
-        contentPane.add(email_lbl);
-
-        //Email Show Label
-        JLabel eshow_lbl = new JLabel(user[3]);
-        eshow_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        eshow_lbl.setBounds(500,390,200,30);
-        contentPane.add(eshow_lbl);
 
         //Password field
         JTextField pfield = new JTextField();
-        pfield.setBounds(500,290,200,30);
+        pfield.setBounds(460,350,200,30);
+   
+        //Update Button
+        JButton up_btn = new JButton("Update");
+        up_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        up_btn.setBackground(new Color(250,240,230));
+        up_btn.setForeground(new Color(128,128,128));
+        up_btn.setBounds(430,480,150,30);
+        up_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = user_lbl.getText();
+                String pass = pfield.getText();
+                Admin_Management adman = new Admin_Management(name);          
+                if(adman.update_user(username, pass)){
+                    JOptionPane.showMessageDialog(null,"Update Successfully","Plain",JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    //Update Failed
+                    int response = JOptionPane.showConfirmDialog(null,"Update Failed, Do you want to Update Again?","Question",JOptionPane.YES_NO_CANCEL_OPTION);
+                    if(response == 1){
+                        new Admin_Profile_Page(name).setVisible(true);
+                    }
+                }
+            }
+        });
+        contentPane.add(up_btn);
+        up_btn.setVisible(false);
 
-        //Contact No. Text Field
-        JTextField cfield = new JTextField();
-        cfield.setBounds(500,340,200,30);
+        //Edit Button
+        JButton edit_btn = new JButton("Edit Password");
+        edit_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        edit_btn.setBackground(new Color(250,240,230));
+        edit_btn.setForeground(new Color(128,128,128));
+        edit_btn.setBounds(430,480,150,30);
+        edit_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pfield.setText(pshow_lbl.getText());
+                contentPane.add(pfield);
+                pshow_lbl.setVisible(false);
+                up_btn.setVisible(true);
 
-        //Email Text Field
-        JTextField efield = new JTextField();
-        efield.setBounds(500,390,200,30);
-
-       
-        
-         //Update Button
-         JButton up_btn = new JButton("Update");
-         up_btn.setBounds(450,480,100,30);
-         up_btn.addActionListener(new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 String username = user_lbl.getText();
-                 String pass = pfield.getText();
-                 String con= cfield.getText();
-                 String mail = efield.getText();
-                 UpdateProfile up = new UpdateProfile();          
-                 if(up.update_user(username, pass, con, mail)){
-                     JOptionPane.showMessageDialog(null,"Update Successfully","Plain",JOptionPane.INFORMATION_MESSAGE);
-                 }
-                 else{
-                     //Update Failed
-                     int response = JOptionPane.showConfirmDialog(null,"Update Failed, Do you want to Update Again?","Question",JOptionPane.YES_NO_CANCEL_OPTION);
-                     if(response == 1){
-                         pfield.setText("");
-                         cfield.setText("");
-                         efield.setText("");       
-                     }
-                 }
-             }
-         });
-
-      //Edit Button
-      JButton edit_btn = new JButton("Edit Profile");
-      edit_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-      edit_btn.setBackground(new Color(250,240,230));
-      edit_btn.setForeground(new Color(128,128,128));
-      edit_btn.setBounds(430,480,120,30);
-      edit_btn.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-              pfield.setText(pshow_lbl.getText());
-              cfield.setText(cshow_lbl.getText());
-              efield.setText(eshow_lbl.getText());
-              contentPane.add(pfield);
-              contentPane.add(cfield);
-              contentPane.add(efield);
-              contentPane.add(up_btn);
-          }
-      });
-      contentPane.add(edit_btn);
-    }
+            }
+        });
+        contentPane.add(edit_btn);
+        }
       
 }
