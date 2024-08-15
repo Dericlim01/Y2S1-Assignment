@@ -273,7 +273,7 @@ public class Edit_Staff_Page extends JFrame {
                     String editrole = (String) roleData.getSelectedItem();
                     Staff_Management sm = new Staff_Management(name);
                     if(sm.edit_staff(selectName, editpass, editphone, editmail, editdob, editgen, editrole)) {
-                        sm.edit_to_users(selectName, editpass, editphone, editmail, editrole);
+                        sm.edit_to_users(selectName, editpass, editrole);
                         int response = JOptionPane.showConfirmDialog(null, "Staff Edit Successfully. Do you want to edit again?","Question",JOptionPane.YES_NO_OPTION);
                         if(response == 0){
                             //edit again
@@ -369,17 +369,20 @@ public class Edit_Staff_Page extends JFrame {
             while((line = read.readLine()) != null) {
                 String[] data = line.split(",");
                 if(data[0].equals(name)){
-                    staffpass_txt.setText(data[1]);
-                    staffphone_txt.setText(data[2]);
-                    staffmail_txt.setText(data[3]);
-                    
-                    Date dobDate = sdf.parse(data[4]);
-                    UtilDateModel dateModel = (UtilDateModel) dobDatePicker.getModel();
-                    dateModel.setValue(dobDate);
-                    
-                    genData.setSelectedItem(data[5]);
-                    roleData.setSelectedItem(data[6]);
+                    if(!data[6].equals("admin")){
+                        staffpass_txt.setText(data[1]);
+                        staffphone_txt.setText(data[2]);
+                        staffmail_txt.setText(data[3]);
+                        
+                        Date dobDate = sdf.parse(data[4]);
+                        UtilDateModel dateModel = (UtilDateModel) dobDatePicker.getModel();
+                        dateModel.setValue(dobDate);
+                        
+                        genData.setSelectedItem(data[5]);
+                        roleData.setSelectedItem(data[6]);
                     break;
+                    }
+                    
                 }
             }
         }catch (Exception e) {

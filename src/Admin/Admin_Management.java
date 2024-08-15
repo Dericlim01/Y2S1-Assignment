@@ -153,10 +153,10 @@ public class Admin_Management {
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         //set model to JComboBox
         adshow.setModel(model);
-        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"))){
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))){
             while((line = read.readLine()) != null){
                 String[] data = line.split(",");
-                if(data[2].equals("admin")){
+                if(data[6].equals("admin")){
                     String adname = data[0];
                     //adding element at the end of vector with increasing the size by one
                     model.addElement(adname);

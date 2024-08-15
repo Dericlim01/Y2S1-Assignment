@@ -4,7 +4,6 @@ scheduler,scheduler,scheduler
 customer,customer,customer
 hayhay,scheduler,scheduler
 jingqi,ong,manager
-qingfui,mrtee,scheduler
 fish,yuyu,scheduler
 saga,protonwira,manager
 hiadmin,newadmin,admin
@@ -14,3 +13,5 @@ cus3,cus3,customer
 cus4,cus4,customer
 suga,suga,customer
 rm,rm,customer
+xinchan,xc1234,admin
+nanazi,nanaz1234,admin
