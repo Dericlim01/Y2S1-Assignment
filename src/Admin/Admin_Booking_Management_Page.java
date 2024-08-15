@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+
 public class Admin_Booking_Management_Page extends JFrame {
     private JPanel contentPane;
     private static String name;
@@ -111,7 +112,7 @@ public class Admin_Booking_Management_Page extends JFrame {
         contentPane.add(filbookOp);
 
         //Filter Button
-        JButton filter_btn = new JButton("~Click Me To Filter by Booking~");
+        JButton filter_btn = new JButton("~Click Me To Filter~");
         filter_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,12));
         filter_btn.setBounds(550,570,300,20);
         filter_btn.setBackground(new Color(250,240,230));
@@ -119,7 +120,11 @@ public class Admin_Booking_Management_Page extends JFrame {
         filter_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                String filOp = (String) filbookOp.getSelectedItem();
+                JScrollPane bookfilter = bookman.filter_booking(booking_table, filOp);
+                scrollPane.setBounds(85,150,850,380);
+                contentPane.add(scrollPane);
+                scrollPane.setViewportView(bookfilter);
             }
         });
         contentPane.add(filter_btn);
