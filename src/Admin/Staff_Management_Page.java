@@ -104,7 +104,7 @@ public class Staff_Management_Page extends JFrame {
         contentPane.add(genOp);
   
         //Role option combo box
-        String[] role = {"scheduler", "manager"};
+        String[] role = {"admin","scheduler", "manager"};
         JComboBox<String> roleOp = new JComboBox<>(role);
         roleOp.setBounds(170,603,150,20);
         roleOp.setBackground(new Color(250,240,230));
@@ -202,6 +202,7 @@ public class Staff_Management_Page extends JFrame {
             edit_btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
+                dispose();
                 Edit_Staff_Page es = new Edit_Staff_Page(name);
                 es.setTitle("Edit Staff Page");
                 es.setVisible(true);
@@ -256,13 +257,15 @@ public class Staff_Management_Page extends JFrame {
                 if (users != null && users.length > 2){
                     String role = users[2];
                     if(role.equals("admin")){
+                        dispose();
                         Admin_Page ad = new Admin_Page(name);
-                        ad.setTitle("Admin");
+                        ad.setTitle("Admin Home Page");
                         ad.setVisible(true);
                     }
                     else if(role.equals("superadmin")){
+                        dispose();
                         Suadmin_Page suad = new Suadmin_Page(name);
-                        suad.setTitle("Super Admin");
+                        suad.setTitle("Super Admin Home Page");
                         suad.setVisible(true);
                     }
                     else{

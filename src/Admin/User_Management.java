@@ -30,7 +30,7 @@ public class User_Management {
             }
             catch (Exception e) {
             e.printStackTrace();
-        }
+            }
         Object[][] userRow = usersData.toArray(new Object[0][]);
 
         DefaultTableModel users_table = new DefaultTableModel(userRow, userCol);

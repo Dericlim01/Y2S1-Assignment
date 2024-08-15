@@ -251,6 +251,15 @@ public class Suadmin_Page extends JFrame {
         bookBtn.setForeground(new Color(128,128,128));
         bookBtn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         bookBtn.setBounds(500,400,200,30);
+        bookBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Admin_Booking_Management_Page bookman = new Admin_Booking_Management_Page(name);
+                bookman.setTitle("Booking Management Page");
+                bookman.setVisible(true);
+            }
+        });
         contentPane.add(bookBtn);
 
         //Logout Button
