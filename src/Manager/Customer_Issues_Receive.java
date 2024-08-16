@@ -8,6 +8,7 @@ import javax.imageio.*;
 //import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.event.MouseEvent;
@@ -20,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Customer_Issues_Receive extends JFrame {
@@ -53,32 +55,38 @@ public class Customer_Issues_Receive extends JFrame {
 
         Manager man_issues = new Manager();
 
-        
-
-        String[] col_name = {"Username", "Hall Type", "Issues", "Issues Description", "Date"};
+        String[] col_name = {"Issue ID", "Issue", "Description","Hall Type","Username"};
         Object[][] row_data = man_issues.present_data("resources/Database/issues.txt");
         table_Model = new DefaultTableModel();
         table_Model.setDataVector(row_data, col_name);
         JTable view = new JTable(table_Model);
 
         scrollPane = new JScrollPane(view);
-        scrollPane.setBounds(9, 100, 970, 400);
+        scrollPane.setBounds(9, 105, 970, 550);
 
         manager_CIR.add(scrollPane);
         //scrollPane.setViewportView(table_Model);
         //scrollPane.setPreferredSize(new Dimension(200, 150));
 
+        // Page Name Label
+        JLabel cus = new JLabel("Customer Issues Receive");
+        cus.setFont(new Font("Engravers MT", Font.PLAIN, 20));
+        cus.setBounds(300, 20, 400, 20);
+        manager_CIR.add(cus);
+
         // Hall Type filter Label
         JLabel hall = new JLabel("Hall Type:");
         hall.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
-        hall.setBounds(50, 25, 80, 20);
+        hall.setBounds(50, 70, 80, 20);
         manager_CIR.add(hall);
 
         // Hall Type combo box
         ArrayList<String> hall_Type = man_issues.hall_type();
         String[] hall_data = hall_Type.toArray(new String[0]);
         JComboBox<String> hall_cb = new JComboBox<String>(hall_data);
-        hall_cb.setBounds(125, 27, 120, 20);
+        hall_cb.setBackground(new Color(250,240,230));
+        hall_cb.setForeground(new Color(128,128,128));
+        hall_cb.setBounds(125, 72, 120, 20);
         hall_cb.setSelectedIndex(-1);
         hall_cb.addActionListener(new ActionListener() {
             @Override
@@ -93,15 +101,37 @@ public class Customer_Issues_Receive extends JFrame {
         
         manager_CIR.add(hall_cb);
 
+        // Assign Staff
+        List<String> issues_Row = new ArrayList<>();
         JButton assign = new JButton("Assign Staff");
-        assign.setBounds(800, 600, 110, 20);
+        assign.setBackground(new Color(250,240,230));
+        assign.setForeground(new Color(128,128,128));
+        assign.setBounds(800, 675, 110, 20);
         assign.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = view.getSelectedRow();
+                
                 if(selectedRow >= 0){
-                    dispose();
-                    new Task_Assign(selectedRow, n).setVisible(true);
+                    int col_count = view.getColumnCount();
+                    if(col_count >= 5 ){
+                        String Issues_ID = view.getValueAt(selectedRow, 0).toString();
+                        String Issue = view.getValueAt(selectedRow, 1).toString();
+                        String description = view.getValueAt(selectedRow, 2).toString();
+                        String hallType = view.getValueAt(selectedRow, 3).toString();
+                        String userName = view.getValueAt(selectedRow, 4).toString();
+
+                        issues_Row.add(Issues_ID);
+                        issues_Row.add(Issue);
+                        issues_Row.add(description);
+                        issues_Row.add(hallType);
+                        issues_Row.add(userName);
+
+                        new Task_Assign(n, issues_Row).setVisible(true);
+                        dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Invalid row data");
+                    }
 
                 }else{
                     JOptionPane.showMessageDialog(null,"Please select the row");
@@ -112,8 +142,11 @@ public class Customer_Issues_Receive extends JFrame {
         });
         manager_CIR.add(assign);
 
+        // Refresh Button
         JButton refresh = new JButton("Refresh");
-        refresh.setBounds(720, 23, 80, 20);
+        refresh.setBackground(new Color(250,240,230));
+        refresh.setForeground(new Color(128,128,128));
+        refresh.setBounds(720, 68, 80, 20);
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -124,7 +157,7 @@ public class Customer_Issues_Receive extends JFrame {
                 JTable view = new JTable(table_Model);
 
                 scrollPane = new JScrollPane(view);
-                scrollPane.setBounds(9, 70, 970, 400);
+                scrollPane.setBounds(9, 105, 970, 550);
 
                 manager_CIR.add(scrollPane);
                 view.revalidate();
@@ -132,7 +165,45 @@ public class Customer_Issues_Receive extends JFrame {
             }
         });
         manager_CIR.add(refresh);
+        
+        // Reply Customer
+        JButton reply = new JButton("Respond");
+        reply.setBackground(new Color(250,240,230));
+        reply.setForeground(new Color(128,128,128));
+        reply.setBounds(50, 675, 100, 20);
+        reply.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = view.getSelectedRow();
+                if(selectedRow >= 0){
+                    int col_count = view.getColumnCount();
+                    if(col_count >= 5 ){
+                        String Issues_ID = view.getValueAt(selectedRow, 0).toString();
+                        String Issue = view.getValueAt(selectedRow, 1).toString();
+                        String description = view.getValueAt(selectedRow, 2).toString();
+                        String hallType = view.getValueAt(selectedRow, 3).toString();
+                        String userName = view.getValueAt(selectedRow, 4).toString();
 
+                        issues_Row.add(Issues_ID);
+                        issues_Row.add(Issue);
+                        issues_Row.add(description);
+                        issues_Row.add(hallType);
+                        issues_Row.add(userName);
+                        
+                        new Reply_Customer(n, issues_Row).setVisible(true);
+                        dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Invalid row data");
+                    }
+
+                }else{
+                    JOptionPane.showMessageDialog(null,"Please select the row");
+                }
+            }
+        });;
+        manager_CIR.add(reply);
+
+        // Back to Home Page Label
         JLabel back_lbl = new JLabel();
         try{
 
@@ -158,6 +229,25 @@ public class Customer_Issues_Receive extends JFrame {
 
         });
         manager_CIR.add(back_lbl);
+
+
+        //Design 4 Background Pic
+        JLabel des4 = new JLabel();
+        try{
+
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+
+            get_image = ImageIO.read(new File("resources/Image/design4.png"));
+
+            Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
+
+            des4.setIcon(new ImageIcon(image));
+            des4.setBounds(0, 0, 1000, 800);
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        manager_CIR.add(des4);
 
 
 
