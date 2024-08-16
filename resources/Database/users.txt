@@ -1,5 +1,4 @@
 suadmin,susu,superadmin
-admin1,iamadmin,admin
 scheduler,scheduler,scheduler
 customer,customer,customer
 hayhay,scheduler,scheduler
@@ -7,11 +6,6 @@ jingqi,ong,manager
 fish,yuyu,scheduler
 saga,protonwira,manager
 hiadmin,newadmin,admin
-cus1,cus1,customer
-cus2,cus2,customer
-cus3,cus3,customer
-cus4,cus4,customer
 suga,suga,customer
-rm,rm,customer
-xinchan,xc1234,admin
+xinchan,xc12345,admin
 nanazi,nanaz1234,admin
