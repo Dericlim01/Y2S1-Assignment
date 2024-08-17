@@ -1,16 +1,19 @@
 package src.Customer.Hall_Booking;
+import src.DateFormat;
+import src.Customer.Customer_Page;
+import src.Customer.Payment.Payment_Page;
 
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Toolkit;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -20,22 +23,19 @@ import java.util.Properties;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JComboBox;
 import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.imageio.ImageIO;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-
-import src.DateFormat;
-import src.Customer.Customer_Page;
-import src.Customer.Payment.Payment_Page;
 
 /**
  * Hall_Booking_Page
@@ -130,13 +130,26 @@ public class Hall_Booking_Page extends JFrame {
         end_date_lbl.setFont(new Font("Comic Sans Ms", Font.PLAIN, 20));
         contentPane.add(end_date_lbl);
 
+        // Remarks label
+        JLabel remark_lbl = new JLabel("Remarks : ");
+        remark_lbl.setBounds(30, 230, 150,30);
+        remark_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        contentPane.add(remark_lbl);
+
+        // Remarks text area
+        JTextArea remark_txtarea = new JTextArea();
+        remark_txtarea.setBounds(175, 230, 400, 40);
+        remark_txtarea.setForeground(new Color(169, 169, 169));
+        remark_txtarea.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+        contentPane.add(remark_txtarea);
+
         // Table
-        String[] col_name = {"Hall ID", "Hall Type", "Capacity", "Price per hour", "Price per day", "Status"};
+        String[] col_name = {"Hall Type", "Capacity", "Price per hour", "Start date", "Start time", "End date", "End time"};
         Object[][] data = new Hall_Booking().hall_data(String.valueOf(hall_type_cmbbx.getSelectedIndex()));
         DefaultTableModel table = new DefaultTableModel(data, col_name);
         JTable details = new JTable(table);
         JScrollPane scrollPane = new JScrollPane(details);
-        scrollPane.setBounds(100, 250, 800, 400);
+        scrollPane.setBounds(100, 300, 800, 400);
         contentPane.add(scrollPane);
 
         hall_type_cmbbx.addActionListener(new ActionListener() {
