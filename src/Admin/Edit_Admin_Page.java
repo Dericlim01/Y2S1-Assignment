@@ -10,6 +10,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -22,12 +25,22 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
+import src.DateFormat;
+
 public class Edit_Admin_Page extends JFrame {
     private JPanel contentPane;
     private static String name;
     private String line;
     private JComboBox<String> adname;
     private JTextField adpass_txt;
+    private JTextField adphone_txt;
+    private JTextField admail_txt;
+    private JComboBox<String> genData;
+    private JDatePickerImpl dobDatePicker;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -81,33 +94,77 @@ public class Edit_Admin_Page extends JFrame {
         contentPane.add(logo);
 
         //Admin login info Edit Label
-        JLabel adadd_lbl = new JLabel("Edit Admin Login Information");
+        JLabel adadd_lbl = new JLabel("Edit Admin Information");
         adadd_lbl.setFont(new Font("Engravers MT",Font.PLAIN,15));
         adadd_lbl.setBounds(365,100,350,30);
         contentPane.add(adadd_lbl);
 
-        //Admin Name Label
+        //Adminname Label
         JLabel adname_lbl = new JLabel("Admin Name:");
         adname_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN,15));
-        adname_lbl.setBounds(280,200,200,30);
+        adname_lbl.setBounds(180,200,200,30);
         contentPane.add(adname_lbl);
 
         //Password Label
         JLabel adpass_lbl = new JLabel("Password:");
         adpass_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN,15));
-        adpass_lbl.setBounds(280,270,200,30);
+        adpass_lbl.setBounds(180,270,200,30);
         contentPane.add(adpass_lbl);
+     
+        //Phone Label
+        JLabel adphone_lbl = new JLabel("Phone NO. :");
+        adphone_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        adphone_lbl.setBounds(180,340,200,30);
+        contentPane.add(adphone_lbl);
 
         //Role Label
         JLabel adrole_lbl = new JLabel("Role:");
-        adrole_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN,15));
-        adrole_lbl.setBounds(280,340,200,30);
+        adrole_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        adrole_lbl.setBounds(180,410,200,30);
         contentPane.add(adrole_lbl);
 
+        //Email Label
+        JLabel admail_lbl = new JLabel("Email:");
+        admail_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        admail_lbl.setBounds(500,200,200,30);
+        contentPane.add(admail_lbl);
+
+        //D.O.B Label
+        JLabel addob_lbl = new JLabel("D.O.B:");
+        addob_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        addob_lbl.setBounds(500,270,200,30);
+        contentPane.add(addob_lbl);
+
+        //D.O.B Calendar
+        UtilDateModel model = new UtilDateModel();
+        //Properties create object to store values in it
+        Properties prop = new Properties();
+        prop.put("text.day", "Day");
+        prop.put("text.month","Month");
+        prop.put("text.year", "Year");
+        //Import Date Panel and Picker
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, prop);
+        dobDatePicker = new JDatePickerImpl(datePanel, new DateFormat());
+        dobDatePicker.setBounds(590,270,170,30);
+        contentPane.add(dobDatePicker);
+
+        //Gender Label
+        JLabel adgen_lbl = new JLabel("Gender:");
+        adgen_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        adgen_lbl.setBounds(500,340,200,30);
+        contentPane.add(adgen_lbl);
+
+        //Gender Combo Box
+        String[] gender = {"male","female"};
+        genData = new JComboBox<>(gender);
+        genData.setBounds(590,340,170,30);
+        genData.setBackground(new Color(250,240,230));
+        contentPane.add(genData);        
+       
         //Admin Name Combo Box
         String[] admin ={};
         adname = new JComboBox<>(admin);
-        adname.setBounds(390,200,300,30);
+        adname.setBounds(300,200,170,30);
         adname.setBackground(new Color(250,240,230));
         contentPane.add(adname);
         Admin_Management adman = new Admin_Management(name);
@@ -125,18 +182,28 @@ public class Edit_Admin_Page extends JFrame {
         //Role Show Label
         JLabel adshow_lbl = new JLabel("admin");
         adshow_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN,15));
-        adshow_lbl.setBounds(500,340,200,30);
+        adshow_lbl.setBounds(350,410,200,30);
         contentPane.add(adshow_lbl);
 
         //Password Textfield
         adpass_txt = new JTextField();
-        adpass_txt.setBounds(390,270,300,30);
+        adpass_txt.setBounds(300,270,170,30);
         contentPane.add(adpass_txt);
+
+        //Phone Text Field
+        adphone_txt = new JTextField();
+        adphone_txt.setBounds(300,340,170,30);
+        contentPane.add(adphone_txt);
+
+        //Email Text Field
+        admail_txt = new JTextField();
+        admail_txt.setBounds(590,200,170,30);
+        contentPane.add(admail_txt);
 
         //Edit Admin Information Button
         JButton editad_btn = new JButton("Edit Admin");
         editad_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        editad_btn.setBounds(360,450,150,30);
+        editad_btn.setBounds(330,530,180,30);
         editad_btn.setBackground(new Color(250,240,230));
         editad_btn.setForeground(new Color(128,128,128));
         editad_btn.addActionListener(new ActionListener() {
@@ -144,12 +211,18 @@ public class Edit_Admin_Page extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String adminname = (String) adname.getSelectedItem();
                 String adpass = adpass_txt.getText();
+                String adphone = adphone_txt.getText();
+                String admail = admail_txt.getText();
+                Date addob = (Date) dobDatePicker.getModel().getValue();
+                String adgen = (String)genData.getSelectedItem();
                 String adrole = adshow_lbl.getText();
-                Admin_Management adman = new Admin_Management(name);
-                if(adman.edit_admin(adminname, adpass,adrole)){
+                Staff_Management sm = new Staff_Management(name);
+                if(sm.edit_staff(adminname, adpass, adphone, admail, addob, adgen, adrole)){
+                    adman.edit_admin(adminname, adpass,adrole);
                     int response = JOptionPane.showConfirmDialog(null, "Admin Edit Successfully. Do you want to edit again?","Question",JOptionPane.YES_NO_OPTION);
                     if(response == 0){
                         //edit again
+                        dispose();
                         Edit_Admin_Page eap = new Edit_Admin_Page(name);
                         eap.setTitle("Edit Admin Page");
                         eap.setVisible(true);
@@ -167,6 +240,7 @@ public class Edit_Admin_Page extends JFrame {
                     int response = JOptionPane.showConfirmDialog(null,"Edit Staff Failed. Do you want to edit again?","Question" ,JOptionPane.YES_NO_OPTION);
                     if(response == 0){
                         //edit again
+                        dispose();
                         Edit_Admin_Page eap = new Edit_Admin_Page(name);
                         eap.setTitle("Edit Staff Page");
                         eap.setVisible(true);
@@ -179,8 +253,6 @@ public class Edit_Admin_Page extends JFrame {
                         admanage.setVisible(true);
                     }
                 }
-
-
             }
         });
         contentPane.add(editad_btn);
@@ -188,47 +260,54 @@ public class Edit_Admin_Page extends JFrame {
         //Delete Admin Login Information
         JButton deletead_btn = new JButton("Delete Admin");
         deletead_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        deletead_btn.setBounds(530,450,150,30);
+        deletead_btn.setBounds(530,530,180,30);
         deletead_btn.setBackground(new Color(250,240,230));
         deletead_btn.setForeground(new Color(128,128,128));
         deletead_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String adminname = (String) adname.getSelectedItem();
-                Admin_Management adman = new Admin_Management(name);
-                if(adman.delete_admin(adminname)){
-                    int response = JOptionPane.showConfirmDialog(null, "Admin Delete Successfully. Do you want to delete again?","Question",JOptionPane.YES_NO_OPTION);
-                    if(response == 0){
-                        //delete again
-                        Edit_Admin_Page eap = new Edit_Admin_Page(name);
-                        eap.setTitle("Edit Admin Page");
-                        eap.setVisible(true);
+                if(adminname != null){
+                    Staff_Management sm = new Staff_Management(name);
+                    if(adman.delete_admin(adminname)){
+                        sm.delete_staff(adminname);
+                        int response = JOptionPane.showConfirmDialog(null, "Admin Delete Successfully. Do you want to delete again?","Question",JOptionPane.YES_NO_OPTION);
+                        if(response == 0){
+                            //delete again
+                            dispose();
+                            Edit_Admin_Page eap = new Edit_Admin_Page(name);
+                            eap.setTitle("Edit Admin Page");
+                            eap.setVisible(true);
+                        }
+                        else{
+                            //back to previous page
+                            dispose();
+                            Admin_Management_Page admanage = new Admin_Management_Page(name);
+                            admanage.setTitle("Admin Managment Page");
+                            admanage.setVisible(true);
+                        }
                     }
                     else{
-                        //back to previous page
-                        dispose();
-                        Admin_Management_Page admanage = new Admin_Management_Page(name);
-                        admanage.setTitle("Admin Managment Page");
-                        admanage.setVisible(true);
+                        //Failed to Delete Admin
+                        int response = JOptionPane.showConfirmDialog(null,"Delete Staff Failed. Do you want to delete again?","Question" ,JOptionPane.YES_NO_OPTION);
+                        if(response == 0){
+                            //stay at this page
+                            dispose();
+                            Edit_Staff_Page esp = new Edit_Staff_Page(name);
+                            esp.setTitle("Edit Admin Page");
+                            esp.setVisible(true);
+                        }
+                        else{
+                            //back to management view page
+                            dispose();
+                            Admin_Management_Page admanage = new Admin_Management_Page(name);
+                            admanage.setTitle("Admin Management Page");
+                            admanage.setVisible(true);
+                        }
                     }
                 }
-                else{
-                    //Failed to Delete Admin
-                    int response = JOptionPane.showConfirmDialog(null,"Delete Staff Failed. Do you want to delete again?","Question" ,JOptionPane.YES_NO_OPTION);
-                    if(response == 0){
-                        //stay at this page
-                        Edit_Staff_Page esp = new Edit_Staff_Page(name);
-                        esp.setTitle("Edit Admin Page");
-                        esp.setVisible(true);
-                    }
-                    else{
-                        //back to management view page
-                        dispose();
-                        Admin_Management_Page admanage = new Admin_Management_Page(name);
-                        admanage.setTitle("Admin Management Page");
-                        admanage.setVisible(true);
-                    }
-                }
+                
+                
             }
         });
         contentPane.add(deletead_btn);
@@ -282,12 +361,21 @@ public class Edit_Admin_Page extends JFrame {
 
     //showing admin information
     private void show_info (String selectedName){
-        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"))){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))){
             while((line = read.readLine()) != null) {
                 String[] data = line.split(",");
-                if(data[2].equals("admin") && data[0].equals(selectedName)){
+                if(data[6].equals("admin") && data[0].equals(selectedName)){
                     adname.setSelectedItem(data[0]);
                     adpass_txt.setText(data[1]);
+                    adphone_txt.setText(data[2]);
+                    admail_txt.setText(data[3]);
+                    
+                    Date dobDate = sdf.parse(data[4]);
+                    UtilDateModel dateModel = (UtilDateModel)dobDatePicker.getModel();
+                    dateModel.setValue(dobDate);
+
+                    genData.setSelectedItem(data[5]);
                     break;
                 }
             }

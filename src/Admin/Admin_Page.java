@@ -235,7 +235,15 @@ public class Admin_Page extends JFrame {
         userman_btn.setForeground(new Color(128,128,128));
         userman_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         userman_btn.setBounds(500,360,200,30);
-        ////
+        userman_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Admin_User_Management_Page um = new Admin_User_Management_Page(name);
+                um.setTitle("User Management Page");
+                um.setVisible(true);
+            }
+        });
         contentPane.add(userman_btn);
 
         //Booking Management Button
@@ -244,7 +252,15 @@ public class Admin_Page extends JFrame {
         bookman_btn.setForeground(new Color(128,128,128));
         bookman_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         bookman_btn.setBounds(500,400,200,30);
-        //
+        bookman_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Admin_Booking_Management_Page bookman = new Admin_Booking_Management_Page(name);
+                bookman.setTitle("Booking Management Page");
+                bookman.setVisible(true);
+            }
+        });
         contentPane.add(bookman_btn);
 
 

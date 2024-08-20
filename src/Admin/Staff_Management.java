@@ -112,7 +112,7 @@ public class Staff_Management {
         }
         //Role option
         else if(option.equals("Role")) {
-            if(value.equals("scheduler") || value.equals("manager")) {
+            if(value.equals("admin") || value.equals("scheduler") || value.equals("manager")) {
                 sorter.setRowFilter(RowFilter.regexFilter(value,6));
             }
             else{
@@ -131,8 +131,10 @@ public class Staff_Management {
             while((line = read.readLine()) != null){
                 String[] data = line.split(",");
                 String staffname = data[0];
-                //adding element at the end of vector with increasing the size by one
-                model.addElement(staffname);
+                if(!data[6].equals("admin")){
+                    //adding element at the end of vector with increasing the size by one
+                    model.addElement(staffname);
+                }
             }
 
         } catch (Exception e) {
@@ -187,7 +189,7 @@ public class Staff_Management {
         return edit;
     }
 
-    public Boolean edit_to_users (String staffname, String password, String phone, String mail, String role){
+    public Boolean edit_to_users (String staffname, String password, String role){
         ArrayList<String> usersnewData = new ArrayList<>();
         boolean edit = false;
         // Read all lines and modify the target line

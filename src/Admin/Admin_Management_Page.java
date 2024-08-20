@@ -44,7 +44,7 @@ public class Admin_Management_Page extends JFrame {
         });
     }
     
-    public Admin_Management_Page(String name){
+    public Admin_Management_Page(String name) {
         setTitle("Admin Management Page");
         setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,10 +83,10 @@ public class Admin_Management_Page extends JFrame {
         contentPane.add(logo);
 
         //Admin Management Label
-        JLabel suadhome_lbl = new JLabel("Admin Management");
-        suadhome_lbl.setFont(new Font("Engravers MT",Font.PLAIN,15));
-        suadhome_lbl.setBounds(390,100,300,30);
-        contentPane.add(suadhome_lbl);
+        JLabel adman_lbl = new JLabel("Admin Management");
+        adman_lbl.setFont(new Font("Engravers MT",Font.PLAIN,15));
+        adman_lbl.setBounds(390,100,300,30);
+        contentPane.add(adman_lbl);
 
         //Admin Table Showing
         Admin_Management ad_man = new Admin_Management(name);
@@ -103,7 +103,7 @@ public class Admin_Management_Page extends JFrame {
         addad_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,12));
         addad_btn.setBackground(new Color(250,240,230));
         addad_btn.setForeground(new Color(128,128,128));
-        addad_btn.setBounds(120,600,150,20);
+        addad_btn.setBounds(320,600,150,20);
         addad_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -120,7 +120,7 @@ public class Admin_Management_Page extends JFrame {
         editad_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,12));
         editad_btn.setBackground(new Color(250,240,230));
         editad_btn.setForeground(new Color(128,128,128));
-        editad_btn.setBounds(420,600,150,20);
+        editad_btn.setBounds(520,600,150,20);
         editad_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -131,20 +131,6 @@ public class Admin_Management_Page extends JFrame {
             }
         });
         contentPane.add(editad_btn);
-
-        //Raise Staff to Admin
-        JButton raisest_btn = new JButton("Raise Staff");
-        raisest_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,12));
-        raisest_btn.setBackground(new Color(250,240,230));
-        raisest_btn.setForeground(new Color(128,128,128));
-        raisest_btn.setBounds(720,600,150,20);
-        raisest_btn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-        contentPane.add(raisest_btn);
 
         //Home Page Label
         JLabel back_lbl = new JLabel();
