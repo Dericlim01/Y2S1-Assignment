@@ -56,6 +56,27 @@ public class Task_Status extends JFrame {
         setContentPane(manager_TAS);
         manager_TAS.setLayout(null);
 
+        // Logo Label
+        JLabel logo_lbl = new JLabel("Symphony Hall");
+        logo_lbl.setFont(new Font("French Script MT", Font.BOLD, 25));
+        logo_lbl.setForeground(new Color(169, 169, 169));
+        logo_lbl.setBounds(60, 20, 160, 30);
+        manager_TAS.add(logo_lbl);
+
+        // Logo Picture
+        JLabel logo = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources/Image/hall (1).png"));
+            Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+
+            logo.setIcon(new ImageIcon(image));
+            logo.setBounds(0, 0, 65, 65);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        manager_TAS.add(logo);
+        
         // Title 
         JLabel title = new JLabel("Task Status");
         title.setFont(new Font("Engravers MT", Font.PLAIN, 20));
