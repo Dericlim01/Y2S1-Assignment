@@ -1,8 +1,11 @@
 package src.Manager;
+
 import java.io.*;
 import java.util.*;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import java.text.SimpleDateFormat;
 
@@ -12,21 +15,20 @@ import src.Create_file;
 
 public class Manager {
 
-
-    public String[] read_user_Information(String n){
+    public String[] read_user_Information(String n) {
         ArrayList<String[]> users = new ArrayList<>();
         String line;
         String[] data;
         if (new Create_file().user_file()) {
-            try(BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"));){
-                while((line = read.readLine()) != null){
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"));) {
+                while ((line = read.readLine()) != null) {
                     // Create array and store data 
                     data = line.split(",");
                     users.add(data);
                 }
                 // Search in arrayList
                 for (int i = 0; i < users.size(); i++) {
-                    if(users.get(i)[0].equals(n)) {
+                    if (users.get(i)[0].equals(n) && users.get(i)[6].equals("manager")) {
                         return users.get(i);
                     }
                 }
@@ -37,17 +39,15 @@ public class Manager {
         return null;
     }
 
-    
-
-    public List<Object[]> date_read(JDatePickerImpl start_date, JDatePickerImpl end_date, String filename){
+    public List<Object[]> date_read(JDatePickerImpl start_date, JDatePickerImpl end_date, String filename) {
         //Opject startDateOption = start_date.getDate();
 
         List<Object[]> dateList = new ArrayList<>();
-        
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
         if (new Create_file().booking_file()) {
-            try (BufferedReader read = new BufferedReader(new FileReader(filename))){
+            try (BufferedReader read = new BufferedReader(new FileReader(filename))) {
                 String line;
                 while ((line = read.readLine()) != null) {
                     String[] f_data = line.split(",");
@@ -59,7 +59,7 @@ public class Manager {
 
                     // Create an object array to hold the data
                     Object[] rowData = new Object[f_data.length];
-                    
+
                     // Fill other data first
                     for (int i = 0; i < 3; i++) {
                         rowData[i] = f_data[i].trim();
@@ -78,7 +78,6 @@ public class Manager {
 
                 }
 
-                    
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -101,7 +100,6 @@ public class Manager {
             if (!Startdate.before(decrease_one_date) && !Enddate.after(endDate)) {
                 filteredDates.add(dateData);
 
-            
             }
 
         }
@@ -112,9 +110,9 @@ public class Manager {
     public Object[][] present_data(String fileName) {
         String line_Sales;
         ArrayList<String[]> rowData = new ArrayList<>();
-        
+
         if (new Create_file().booking_file()) {
-            try(BufferedReader read_Sales = new BufferedReader(new FileReader(fileName))) {
+            try (BufferedReader read_Sales = new BufferedReader(new FileReader(fileName))) {
                 while ((line_Sales = read_Sales.readLine()) != null) {
                     String[] row = line_Sales.split(",");
                     rowData.add(row);
@@ -126,24 +124,24 @@ public class Manager {
         return rowData.toArray(new Object[0][]);
     }
 
-   public Object[][] task_status(){
-       String task;
-       ArrayList<String[]> taskStatus = new ArrayList<>();
+    public Object[][] task_status() {
+        String task;
+        ArrayList<String[]> taskStatus = new ArrayList<>();
 
-       if(new Create_file().issue_file()){
-        try (BufferedReader br_task = new BufferedReader(new FileReader("resources/Database/task.txt"))){
-            while((task = br_task.readLine()) != null){
-                String[] row = task.split(",");
-                taskStatus.add(row);
+        if (new Create_file().issue_file()) {
+            try (BufferedReader br_task = new BufferedReader(new FileReader("resources/Database/task.txt"))) {
+                while ((task = br_task.readLine()) != null) {
+                    String[] row = task.split(",");
+                    taskStatus.add(row);
+                }
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
- 
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
-       }
 
-       Object[][] tasks_status = new Object[taskStatus.size()][8];
-       for(int i = 0 ; i < taskStatus.size(); i++){
+        Object[][] tasks_status = new Object[taskStatus.size()][8];
+        for (int i = 0; i < taskStatus.size(); i++) {
             String[] task_row = taskStatus.get(i);
             tasks_status[i][0] = task_row[0];
             tasks_status[i][1] = task_row[1];
@@ -154,23 +152,22 @@ public class Manager {
             tasks_status[i][6] = task_row[6];
             tasks_status[i][7] = task_row[8];
 
-       }
+        }
 
-       return tasks_status;
-        
-   }
+        return tasks_status;
 
+    }
 
-   // Customer_Issues_Receive
+    // Customer_Issues_Receive
     public ArrayList<String> hall_type() {
         String hall_line;
-        ArrayList<String>  halls = new ArrayList<>();
+        ArrayList<String> halls = new ArrayList<>();
 
         if (new Create_file().hall_file()) {
             try (BufferedReader hall_br = new BufferedReader(new FileReader("resources/Database/halls.txt"))) {
                 while ((hall_line = hall_br.readLine()) != null) {
                     String[] row_hall = hall_line.split(",");
-                    if(!halls.contains(row_hall[1])) {
+                    if (!halls.contains(row_hall[1])) {
                         halls.add(row_hall[1]);
                     }
                 }
@@ -181,7 +178,6 @@ public class Manager {
         }
         return halls;
 
-        
     }
 
     public Object[][] hallData(String hall_type) {
@@ -202,29 +198,28 @@ public class Manager {
         return hallList.toArray(new Object[0][]);
     }
 
-    public ArrayList<String> assign_staff(){
+    public ArrayList<String> assign_staff() {
         String staff_data;
         ArrayList<String> staffList = new ArrayList<>();
-        if(new Create_file().staffs_file()) {
-            try(BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))){
-                while((staff_data = read.readLine()) != null){
+        if (new Create_file().staffs_file()) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))) {
+                while ((staff_data = read.readLine()) != null) {
                     String[] data = staff_data.split(",");
-                    
-                    if(!staffList.contains(data[0])  && data[6].equals("scheduler")){
+
+                    if (!staffList.contains(data[0]) && data[6].equals("scheduler")) {
                         staffList.add(data[0]);
                     }
 
                 }
                 return staffList;
 
-            }catch(IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         return staffList;
     }
 
-    
     public Boolean keep_task(List<String> issuesRow, String staff_data, String details) {
         //String halls;
         int nextID = 0;
@@ -235,19 +230,19 @@ public class Manager {
         String hallType = issuesRow.get(3);
         String userName = issuesRow.get(4);
 
-        try(BufferedReader task_br = new BufferedReader(new FileReader("resources/Database/task.txt"))){
+        try (BufferedReader task_br = new BufferedReader(new FileReader("resources/Database/task.txt"))) {
             int maxID = 0;
-            while((ID_data = task_br.readLine()) != null){
+            while ((ID_data = task_br.readLine()) != null) {
                 String[] partsID = ID_data.split(",");
                 // Extract ID from "Txx" format
                 int old_id = Integer.parseInt(partsID[0].substring(1));
-                if(old_id > maxID){
+                if (old_id > maxID) {
                     maxID = old_id;
                 }
             }
             nextID = maxID + 1;
 
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
 
         }
@@ -257,20 +252,94 @@ public class Manager {
         // In progress , Done, Closed, Cancelled
         String issues_status = "In progress";
 
-        try(FileWriter task = new FileWriter("resources/Database/task.txt", true)){
-            task.write(id + "," + issues_id + "," + issues + "," + description + "," + userName + "," + hallType + "," + staff_data + ","+ details + "," + issues_status + "\n");
-            JOptionPane.showMessageDialog(null,"Assign Successfull. Please go to the Task Status Page to check. Thank You ^_^", "Successful Assign Notification",JOptionPane.OK_CANCEL_OPTION);
-            
+        try (FileWriter task = new FileWriter("resources/Database/task.txt", true)) {
+            task.write(id + "," + issues_id + "," + issues + "," + description + "," + userName + "," + hallType + "," + staff_data + "," + details + "," + issues_status + "\n");
+            JOptionPane.showMessageDialog(null, "Assign Successfull. Please go to the Task Status Page to check. Thank You ^_^", "Successful Assign Notification", JOptionPane.OK_CANCEL_OPTION);
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return false;
     }
 
+    public Double paid_total(List<Object[]> filteredDate, SimpleDateFormat dateFormat, JDatePickerImpl startDate, JDatePickerImpl endDate) {
+        double totalPaid = 0.00;
+        // Iterate through the filteredDate list, adding up the "Booking Paid" data for each row.
+        System.out.println("Filtered Date Entries:");
+        for (Object[] data : filteredDate) {
+            if (data == null && data.length <= 8) {
+                System.err.println("Invalid data entry: " + (data == null ? "null" : "length too short"));
+                continue;
+            }
 
+            if (data != null) {
+                System.out.println(Arrays.toString(data));
+            }
 
+            String paidStr = data[8].toString();
+            try {
+                double price = Double.parseDouble(paidStr);
+                totalPaid += price;
+            } catch (NumberFormatException e) {
+                System.err.println("Error parsing booking paid value: " + data[8]);
+            }
+        }
 
+        return totalPaid;
+    }
+
+    public double calculate_total_paid(String filePath) {
+        double totalPaid = 0.00;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                // Assuming the "Booking Paid" amount is at index 8
+                double paidAmount = Double.parseDouble(data[8].trim());
+                totalPaid += paidAmount;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return totalPaid;
+    }
+
+    public Boolean delete_booking(List<String> book) {
+        ArrayList<String> bookData = new ArrayList<>();
+        String line;
+        boolean delete = false;
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/bookings.txt"))) {
+            while ((line = read.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data[0].equals(book.get(0))) {
+                    delete = true;
+                    // When succefully searching and matching booking id, continue to delete
+                } else {
+                    bookData.add(line);
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        if (delete) {
+            // Ensure all line are written back to the file
+            try (BufferedWriter writeBook = new BufferedWriter(new FileWriter("resources/Database/bookings.txt"))) {
+                for (String booking : bookData) {
+                    writeBook.write(booking);
+                    writeBook.newLine();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return delete;
+
+    }
 
 }

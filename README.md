@@ -49,7 +49,7 @@ Year 2 Sem 1 Assignment
 ## Manager
 - Login
 - Sales dashboard:
-- 1. View and filter the sales made weekly, monthly, and yearly from the bookings
+- 1. View and filter the sales made weekly, monthly, and yearly from the boo6kings
 - Maintenance operation:
 - 1. View and respond to customer issues regarding the hall
 - 2. Assigning the scheduler(staff) to fix the issue
