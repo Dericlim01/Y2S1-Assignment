@@ -1,3 +1,10 @@
-H01,Auditorium,1000,300,
-H02,Banquet_Hall,300,100,
-H03,Meeting_Rooms,30,50,
+H_1,Auditorium,400,300.000000
+H_2,MeetingRoom,100,100.000000
+H_3,BanquetHall,50,50.000000
+H_4,Others,500,500.000000
+H_5,Auditorium,300,300.000000
+H_6,Auditorium,250,300.000000
+H_7,BanquetHall,200,150.000000
+H_8,BanquetHall,175,140.000000
+H_9,MeetingRoom,60,90.000000
+H_10,MeetingRoom,40,100.000000
