@@ -49,10 +49,32 @@ public class Reply_Customer extends JFrame{
         setContentPane(manager_RC);
         manager_RC.setLayout(null);
 
+        // Logo Label
+        JLabel logo_lbl = new JLabel("Symphony Hall");
+        logo_lbl.setFont(new Font("French Script MT", Font.BOLD, 25));
+        logo_lbl.setForeground(new Color(169, 169, 169));
+        logo_lbl.setBounds(60, 20, 160, 30);
+        manager_RC.add(logo_lbl);
+
+        // Logo Picture
+        JLabel logo = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources/Image/hall (1).png"));
+            Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+
+            logo.setIcon(new ImageIcon(image));
+            logo.setBounds(0, 0, 65, 65);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        manager_RC.add(logo);
+
+
         // Title 
         JLabel title = new JLabel("Reply Customer Page");
         title.setFont(new Font("Engravers MT", Font.PLAIN, 20));
-        title.setBounds(300, 20, 400, 20);
+        title.setBounds(350, 20, 400, 20);
         manager_RC.add(title);
 
         // Issues Label
@@ -108,6 +130,8 @@ public class Reply_Customer extends JFrame{
 
         // Send button
         JButton send = new JButton("Send");
+        send.setBackground(new Color(250,240,230));
+        send.setForeground(new Color(128,128,128));
         send.setBounds(450, 600, 100, 50);
         send.addActionListener(new ActionListener() {
             @Override

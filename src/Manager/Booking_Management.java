@@ -1,4 +1,5 @@
 package src.Manager;
+
 import javax.swing.*;
 import javax.imageio.*;
 import javax.swing.border.*;
@@ -7,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.Properties;
 import java.awt.Font;
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -19,35 +21,34 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
-
 import src.DateFormat;
 
-
 public class Booking_Management extends JFrame {
+
     private static String manname;
     private static JScrollPane scrollPane;
     private DefaultTableModel tm;
 
-
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable(){
+        EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     new Booking_Management(manname).setVisible(true);
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    public Booking_Management(String n){
+    public Booking_Management(String n) {
         setTitle("Booking Management");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
@@ -59,6 +60,27 @@ public class Booking_Management extends JFrame {
         manager_BM.setLayout(null);
 
         Manager man_booking = new Manager();
+
+        // Logo Label
+        JLabel logo_lbl = new JLabel("Symphony Hall");
+        logo_lbl.setFont(new Font("French Script MT", Font.BOLD, 25));
+        logo_lbl.setForeground(new Color(169, 169, 169));
+        logo_lbl.setBounds(60, 20, 160, 30);
+        manager_BM.add(logo_lbl);
+
+        // Logo Picture
+        JLabel logo = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources/Image/hall (1).png"));
+            Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+
+            logo.setIcon(new ImageIcon(image));
+            logo.setBounds(0, 0, 65, 65);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        manager_BM.add(logo);
 
         // Title 
         JLabel title = new JLabel("Booking Management");
@@ -97,8 +119,8 @@ public class Booking_Management extends JFrame {
         start_p.put("text.day", "Day");
         start_p.put("text.month", "Month");
         start_p.put("text.year", "Year");
-        JDatePanelImpl start_datePanel = new JDatePanelImpl(start_date_model, start_p);   
-        JDatePickerImpl start_datePicker = new JDatePickerImpl(start_datePanel, new DateFormat()); 
+        JDatePanelImpl start_datePanel = new JDatePanelImpl(start_date_model, start_p);
+        JDatePickerImpl start_datePicker = new JDatePickerImpl(start_datePanel, new DateFormat());
         start_datePicker.setBounds(170, 80, 170, 30);
         manager_BM.add(start_datePicker);
 
@@ -108,8 +130,8 @@ public class Booking_Management extends JFrame {
         end_p.put("text.day", "Day");
         end_p.put("text.month", "Month");
         end_p.put("text.year", "Year");
-        JDatePanelImpl end_datePanel = new JDatePanelImpl(end_date_model, start_p);   
-        JDatePickerImpl end_datePicker = new JDatePickerImpl(end_datePanel, new DateFormat()); 
+        JDatePanelImpl end_datePanel = new JDatePanelImpl(end_date_model, start_p);
+        JDatePickerImpl end_datePicker = new JDatePickerImpl(end_datePanel, new DateFormat());
         end_datePicker.setBounds(480, 80, 170, 30);
         manager_BM.add(end_datePicker);
 
@@ -137,7 +159,7 @@ public class Booking_Management extends JFrame {
 
                 view.revalidate();
                 view.repaint();
-                
+
             }
         };
 
@@ -146,43 +168,146 @@ public class Booking_Management extends JFrame {
 
         // Refresh button to get whole data(new / old) again
         JButton refresh = new JButton("refresh");
-        refresh.setBackground(new Color(250,240,230));
-        refresh.setForeground(new Color(128,128,128));
+        refresh.setBackground(new Color(250, 240, 230));
+        refresh.setForeground(new Color(128, 128, 128));
         refresh.setBounds(720, 83, 80, 20);
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                manager_BM.remove(scrollPane);
                 Object[][] row_data = man_booking.present_data("resources/Database/bookings.txt");
-                tm = new DefaultTableModel();
-                tm.setDataVector(row_data, col_name);
-                JTable view = new JTable(tm);
 
-                scrollPane = new JScrollPane(view);
-                scrollPane.setBounds(9, 125, 970, 400);
-                manager_BM.add(scrollPane);
+                System.out.println("Refreshed data rows: " + row_data.length);
+                for (Object[] row : row_data) {
+                    System.out.println(Arrays.toString(row));
+                }
+
+                tm.setDataVector(row_data, col_name);
+                //(Come from chatgpt) 
+                tm.fireTableDataChanged();
 
                 view.revalidate();
                 view.repaint();
-
             }
         });
+//        refresh.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//                int selectedRow = view.getSelectedRow();
+//                manager_BM.remove(scrollPane);
+//
+//                Object[][] row_data = man_booking.present_data("resources/Database/bookings.txt");
+//                tm = new DefaultTableModel(row_data, col_name);
+////                tm.setDataVector(row_data, col_name);
+//                JTable view = new JTable(tm);
+//
+//                view.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//
+//                scrollPane = new JScrollPane(view);
+//                scrollPane.setBounds(9, 125, 970, 400);
+//                manager_BM.add(scrollPane);
+//
+////                //Restore the previous selection
+////                if (selectedRow >= 0 && selectedRow < view.getRowCount()) {
+////                    view.setRowSelectionInterval(selectedRow, selectedRow);
+////                }
+//
+//                view.revalidate();
+//                view.repaint();
+//                //tm.setRowCount(0);
+//
+//            }
+//        });
         manager_BM.add(refresh);
-        
+
+        // Cancel Booking
+        List<String> book = new ArrayList<>();
+        JButton cancel = new JButton("Cancel Booking");
+        cancel.setBackground(new Color(250, 240, 230));
+        cancel.setForeground(new Color(128, 128, 128));
+        cancel.setBounds(700, 600, 150, 20);
+//        cancel.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//                int selectedRow = view.getSelectedRow();
+//
+//                if (selectedRow >= 0) {
+//                    int col_count = view.getColumnCount();
+//                    if (col_count >= 1) {
+//
+//                        for (int i = 0; i < col_count; i++) {
+//                            book.add(view.getValueAt(selectedRow, i).toString());
+//
+//                            //System.out.println(book);
+//                        }
+//
+//                        tm.removeRow(selectedRow);
+//
+//                        man_booking.delete_booking(book);
+//
+//                        //clear the booking list
+//                        book.clear();
+//
+//                        //Refresh or update table if needed
+//                        view.updateUI();
+////                        selectedRow = view.getSelectedRow();
+//                        //tm.setRowCount(0);
+//
+//                        //new Booking_Management(n).setVisible(true);
+//                    } else {
+//                        JOptionPane.showMessageDialog(null, "Invalid row data");
+//                    }
+//                } else {
+//                    JOptionPane.showMessageDialog(null, "Please select the row");
+//                }
+//            }
+//        });
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = view.getSelectedRow();
+
+                if (selectedRow >= 0) {
+                    int col_count = view.getColumnCount();
+                    if (col_count >= 1) {
+
+                        for (int i = 0; i < col_count; i++) {
+                            book.add(view.getValueAt(selectedRow, i).toString());
+                        }
+
+                        man_booking.delete_booking(book);
+
+                        tm.removeRow(selectedRow);
+
+                        book.clear();
+
+                        view.revalidate();
+                        view.repaint();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Invalid row data");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please select the row");
+                }
+            }
+        });
+        manager_BM.add(cancel);
+
         //Back Page Pic
         JLabel back_lbl = new JLabel();
-        try{
+        try {
 
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
 
-            get_image = ImageIO.read(new File("resources\\Image\\logout.png"));
+            get_image = ImageIO.read(new File("resources/Image/logout.png"));
 
             Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
 
             back_lbl.setIcon(new ImageIcon(image));
             back_lbl.setBounds(920, 30, 35, 35);
 
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -190,16 +315,15 @@ public class Booking_Management extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-                new Manager_Home_Page(n).setVisible(true);         
+//                new Manager_Home_Page(n).setVisible(true);         
             }
 
         });
         manager_BM.add(back_lbl);
 
-
         //Design 4 Background Pic
         JLabel des4 = new JLabel();
-        try{
+        try {
 
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
 
@@ -210,13 +334,10 @@ public class Booking_Management extends JFrame {
             des4.setIcon(new ImageIcon(image));
             des4.setBounds(0, 0, 1000, 800);
 
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         manager_BM.add(des4);
-
-
-        
 
     }
 }

@@ -68,6 +68,28 @@ public class Customer_Issues_Receive extends JFrame {
         //scrollPane.setViewportView(table_Model);
         //scrollPane.setPreferredSize(new Dimension(200, 150));
 
+        // Logo Label
+        JLabel logo_lbl = new JLabel("Symphony Hall");
+        logo_lbl.setFont(new Font("French Script MT", Font.BOLD, 25));
+        logo_lbl.setForeground(new Color(169, 169, 169));
+        logo_lbl.setBounds(60, 20, 160, 30);
+        manager_CIR.add(logo_lbl);
+
+        // Logo Picture
+        JLabel logo = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources/Image/hall (1).png"));
+            Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+
+            logo.setIcon(new ImageIcon(image));
+            logo.setBounds(0, 0, 65, 65);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        manager_CIR.add(logo);
+
+
         // Page Name Label
         JLabel cus = new JLabel("Customer Issues Receive");
         cus.setFont(new Font("Engravers MT", Font.PLAIN, 20));
@@ -115,17 +137,10 @@ public class Customer_Issues_Receive extends JFrame {
                 if(selectedRow >= 0){
                     int col_count = view.getColumnCount();
                     if(col_count >= 5 ){
-                        String Issues_ID = view.getValueAt(selectedRow, 0).toString();
-                        String Issue = view.getValueAt(selectedRow, 1).toString();
-                        String description = view.getValueAt(selectedRow, 2).toString();
-                        String hallType = view.getValueAt(selectedRow, 3).toString();
-                        String userName = view.getValueAt(selectedRow, 4).toString();
 
-                        issues_Row.add(Issues_ID);
-                        issues_Row.add(Issue);
-                        issues_Row.add(description);
-                        issues_Row.add(hallType);
-                        issues_Row.add(userName);
+                        for(int i = 0; i < col_count; i++){
+                            issues_Row.add(view.getValueAt(selectedRow, i).toString());
+                        }
 
                         new Task_Assign(n, issues_Row).setVisible(true);
                         dispose();
