@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -20,6 +22,7 @@ import src.Create_file;
 public class Admin_Management {
     private String line;
     private TableRowSorter<DefaultTableModel> sorter;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     public Admin_Management (String name){
 
@@ -50,7 +53,7 @@ public class Admin_Management {
         ArrayList<String[]> users = new ArrayList<String[]>();
         String line;
         String[] data;
-        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"))) {
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))) {
             while ((line = read.readLine()) != null) {
                 data = line.split(",");
                 users.add(data);
@@ -67,14 +70,15 @@ public class Admin_Management {
         return users.get(0);
     }
 
-    public Boolean update_user(String n, String p) {
+    public Boolean update_user(String n, String p, String pn, String m, Date d, String g) {
         // Create a user list
         ArrayList<String[]> users = new ArrayList<String[]>();
         String line;
         String[] data;
+        String dobform = dateFormat.format(d);
         Boolean user_update = false;
         Boolean users_update = false;
-        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"))) {
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))) {
             while ((line = read.readLine()) != null) {
                 // Store data into data and add to users array
                 data = line.split(",");
@@ -86,6 +90,11 @@ public class Admin_Management {
                 // If username found
                 if (users.get(i)[0].equals(n)) {
                     users.get(i)[1] = p;
+                    users.get(i)[2] = pn;
+                    users.get(i)[3] = m;
+                    users.get(i)[4] = dobform;
+                    users.get(i)[5] = g;
+                    users.get(i)[6] = "admin";
                     user_update = true;
                 }
             }
@@ -95,9 +104,10 @@ public class Admin_Management {
         }
 
         if (user_update) {
-            try (PrintWriter writer = new PrintWriter(new FileWriter("resources/Database/users.txt"))) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter("resources/Database/staffs.txt"))) {
                 for (String[] userdata : users) {
-                    writer.println(userdata[0] + "," + userdata[1] + "," + userdata[2]);
+                    writer.println(userdata[0] + "," + userdata[1] + "," + userdata[2] + "," + userdata[3] 
+                    + "," + userdata[4] + "," + userdata[5] + "," + "admin");
                 }
                 users_update = true;
             } catch (IOException e) {
@@ -112,7 +122,7 @@ public class Admin_Management {
         if (users_update) {
             try (PrintWriter writer = new PrintWriter(new FileWriter("resources/Database/users.txt"))) {
                 for (String[] userdata : users) {
-                    writer.println(userdata[0] + "," + userdata[1] + "," + userdata[2]);
+                    writer.println(userdata[0] + "," + userdata[1] + "," + "admin");
                 }
                 return true;
             } catch (IOException e) {
