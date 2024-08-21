@@ -9,9 +9,18 @@ import java.awt.event.MouseEvent;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
+import src.DateFormat;
 
 import javax.imageio.*;
 
@@ -19,7 +28,7 @@ import javax.imageio.*;
 public class Admin_Profile_Page extends JFrame {
     private JPanel contentPane;
     private static String name;
-    
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable(){
             @Override
@@ -149,47 +158,120 @@ public class Admin_Profile_Page extends JFrame {
         user_lbl.setBounds(470,240,200,30);
         contentPane.add(user_lbl);
 
-        //Role label
-        JLabel role_lbl = new JLabel("Your Role:");
-        role_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        role_lbl.setBounds(360,300,200,30);
-        contentPane.add(role_lbl);
-
-        //Role Show Label
-        JLabel rshow_lbl = new JLabel("Admin");
-        rshow_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        rshow_lbl.setBounds(480,300,200,30);
-        contentPane.add(rshow_lbl);
-
         //Password label
         JLabel pass_lbl = new JLabel("Password:");
         pass_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        pass_lbl.setBounds(360,350,200,30);
+        pass_lbl.setBounds(380,290,200,30);
         contentPane.add(pass_lbl);
 
         //Password Show Label
         JLabel pshow_lbl = new JLabel(user[1]);
         pshow_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
-        pshow_lbl.setBounds(480,350,200,30);
+        pshow_lbl.setBounds(480,290,200,30);
         contentPane.add(pshow_lbl);
+
+        //Phone No. Label
+        JLabel phone_lbl = new JLabel("Phone No.:");
+        phone_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN,15));
+        phone_lbl.setBounds(380,340,200,30);
+        contentPane.add(phone_lbl);
+
+        //Phone Show Label
+        JLabel pnshow_lbl = new JLabel(user[2]);
+        pnshow_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN,15));
+        pnshow_lbl.setBounds(480,340,200,30);
+        contentPane.add(pnshow_lbl);
+
+        //Email Label
+        JLabel mail_lbl = new JLabel("Email:");
+        mail_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN,15));
+        mail_lbl.setBounds(380,390,200,30);
+        contentPane.add(mail_lbl);
+
+        //Email Show Label
+        JLabel mshow_lbl = new JLabel(user[3]);
+        mshow_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        mshow_lbl.setBounds(480,390,200,30);
+        contentPane.add(mshow_lbl);
+
+        //D.O.B. Label
+        JLabel dob_lbl = new JLabel("D.O.B.:");
+        dob_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        dob_lbl.setBounds(380,440,200,30);
+        contentPane.add(dob_lbl);
+
+        //D.O.B. Show Label
+        JLabel dshow_lbl = new JLabel(user[4]);
+        dshow_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        dshow_lbl.setBounds(480,440,200,30);
+        contentPane.add(dshow_lbl);
+
+        //Gender Label
+        JLabel gen_lbl = new JLabel("Gender:");
+        gen_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        gen_lbl.setBounds(380,490,200,30);
+        contentPane.add(gen_lbl);
+
+        //Gender Show Label
+        JLabel gshow_lbl = new JLabel(user[5]);
+        gshow_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        gshow_lbl.setBounds(480,490,200,30);
+        contentPane.add(gshow_lbl);
 
         //Password field
         JTextField pfield = new JTextField();
-        pfield.setBounds(460,350,200,30);
+        pfield.setBounds(480,295,200,30);
+
+        //Phone Number field
+        JTextField pnfield = new JTextField();
+        pnfield.setBounds(480,345,200,30);
+
+        //Mail field
+        JTextField mfield = new JTextField();
+        mfield.setBounds(480,395,200,30);
+
+        //D.O.B DateTimePicker
+        UtilDateModel model = new UtilDateModel();
+        //Properties create object to store values in it
+        Properties prop = new Properties();
+        prop.put("text.day", "Day");
+        prop.put("text.month","Month");
+        prop.put("text.year", "Year");
+        //Import Date Panel and Picker
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, prop);
+        JDatePickerImpl dobDatePicker = new JDatePickerImpl(datePanel, new DateFormat());
+        try {
+            Date dob = dateFormat.parse(dshow_lbl.getText());
+            model.setValue(dob); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        dobDatePicker.setBounds(480,445,200,30);
+
+        //Gender Combo Box
+        String[] gender = {"male","female"};
+        JComboBox<String> genData = new JComboBox<>(gender);
+        genData.setBounds(480,495,200,30);
+        genData.setBackground(new Color(250,240,230));
    
         //Update Button
         JButton up_btn = new JButton("Update");
         up_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         up_btn.setBackground(new Color(250,240,230));
         up_btn.setForeground(new Color(128,128,128));
-        up_btn.setBounds(430,480,150,30);
+        up_btn.setBounds(430,570,150,30);
         up_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String username = user_lbl.getText();
                 String pass = pfield.getText();
+                String phone = pnfield.getText();
+                String mail = mfield.getText();
+                Date dob = (Date) dobDatePicker.getModel().getValue();
+                String gen = (String) genData.getSelectedItem();
                 Admin_Management adman = new Admin_Management(name);          
-                if(adman.update_user(username, pass)){
+                if(adman.update_user(username, pass,phone,mail,dob,gen)){
                     JOptionPane.showMessageDialog(null,"Update Successfully","Plain",JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
@@ -209,13 +291,29 @@ public class Admin_Profile_Page extends JFrame {
         edit_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         edit_btn.setBackground(new Color(250,240,230));
         edit_btn.setForeground(new Color(128,128,128));
-        edit_btn.setBounds(430,480,150,30);
+        edit_btn.setBounds(430,570,150,30);
         edit_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 pfield.setText(pshow_lbl.getText());
                 contentPane.add(pfield);
                 pshow_lbl.setVisible(false);
+
+                pnfield.setText(pnshow_lbl.getText());
+                contentPane.add(pnfield);
+                pnshow_lbl.setVisible(false);
+
+                mfield.setText(mshow_lbl.getText());
+                contentPane.add(mfield);
+                mshow_lbl.setVisible(false);
+
+                contentPane.add(dobDatePicker);
+                dshow_lbl.setVisible(false);
+
+                genData.setSelectedItem(gshow_lbl.getText());
+                contentPane.add(genData);
+                gshow_lbl.setVisible(false);
+
                 up_btn.setVisible(true);
 
             }
