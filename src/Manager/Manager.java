@@ -4,8 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+
 
 import java.text.SimpleDateFormat;
 
@@ -263,6 +262,7 @@ public class Manager {
         return false;
     }
 
+    @SuppressWarnings("null")
     public Double paid_total(List<Object[]> filteredDate, SimpleDateFormat dateFormat, JDatePickerImpl startDate, JDatePickerImpl endDate) {
         double totalPaid = 0.00;
         // Iterate through the filteredDate list, adding up the "Booking Paid" data for each row.
