@@ -189,35 +189,7 @@ public class Booking_Management extends JFrame {
                 view.repaint();
             }
         });
-//        refresh.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                int selectedRow = view.getSelectedRow();
-//                manager_BM.remove(scrollPane);
-//
-//                Object[][] row_data = man_booking.present_data("resources/Database/bookings.txt");
-//                tm = new DefaultTableModel(row_data, col_name);
-////                tm.setDataVector(row_data, col_name);
-//                JTable view = new JTable(tm);
-//
-//                view.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//
-//                scrollPane = new JScrollPane(view);
-//                scrollPane.setBounds(9, 125, 970, 400);
-//                manager_BM.add(scrollPane);
-//
-////                //Restore the previous selection
-////                if (selectedRow >= 0 && selectedRow < view.getRowCount()) {
-////                    view.setRowSelectionInterval(selectedRow, selectedRow);
-////                }
-//
-//                view.revalidate();
-//                view.repaint();
-//                //tm.setRowCount(0);
-//
-//            }
-//        });
+
         manager_BM.add(refresh);
 
         // Cancel Booking
@@ -226,43 +198,7 @@ public class Booking_Management extends JFrame {
         cancel.setBackground(new Color(250, 240, 230));
         cancel.setForeground(new Color(128, 128, 128));
         cancel.setBounds(700, 600, 150, 20);
-//        cancel.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                int selectedRow = view.getSelectedRow();
-//
-//                if (selectedRow >= 0) {
-//                    int col_count = view.getColumnCount();
-//                    if (col_count >= 1) {
-//
-//                        for (int i = 0; i < col_count; i++) {
-//                            book.add(view.getValueAt(selectedRow, i).toString());
-//
-//                            //System.out.println(book);
-//                        }
-//
-//                        tm.removeRow(selectedRow);
-//
-//                        man_booking.delete_booking(book);
-//
-//                        //clear the booking list
-//                        book.clear();
-//
-//                        //Refresh or update table if needed
-//                        view.updateUI();
-////                        selectedRow = view.getSelectedRow();
-//                        //tm.setRowCount(0);
-//
-//                        //new Booking_Management(n).setVisible(true);
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "Invalid row data");
-//                    }
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Please select the row");
-//                }
-//            }
-//        });
+
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -315,7 +251,7 @@ public class Booking_Management extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-//                new Manager_Home_Page(n).setVisible(true);         
+                new Manager_Home_Page(n).setVisible(true);         
             }
 
         });

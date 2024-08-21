@@ -22,7 +22,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Properties;
 
@@ -252,7 +252,7 @@ public class Sales_Dashboard_Page extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-//                new Manager_Home_Page(n).setVisible(true);         
+                new Manager_Home_Page(n).setVisible(true);         
             }
 
         });
