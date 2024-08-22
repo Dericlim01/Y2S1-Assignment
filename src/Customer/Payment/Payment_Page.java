@@ -15,6 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -26,12 +27,13 @@ import javax.swing.border.EmptyBorder;
 
 public class Payment_Page extends JFrame {
     public static String name;
+    public static ArrayList<String> data;
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try {
-                    new Payment_Page(name).setVisible(true);
+                    new Payment_Page(name, data).setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -39,7 +41,7 @@ public class Payment_Page extends JFrame {
         });
     }
 
-    public Payment_Page(String n) {
+    public Payment_Page(String n, ArrayList<String> selected_data) {
         setTitle("Payment");
         setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

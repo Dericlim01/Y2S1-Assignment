@@ -75,22 +75,6 @@ public class Hall_Booking {
         return hall_data_list.toArray(new Object[0][]);
     }
 
-    public Object[][] hall_type_filter(String hall_type, LocalDate date) {
-        List<Object[]> hall_data = new ArrayList<>();
-        Object[][] hall_list = combine_data();
-        for (int i = 0; i < hall_list.length; i++) {
-            if (hall_list[i][6].equals("available")) {
-                if (hall_list[i][1].equals(hall_type)) {
-                    LocalDate start_date = LocalDate.parse(hall_list[i][4].toString(), datePattern);
-                    if (start_date.equals(date) || start_date.isAfter(date)) {
-                        hall_data.add(hall_list[i]);
-                    }
-                }
-            }
-        }
-        return hall_data.toArray(new Object[0][]);
-    }
-
     public Object[][] start_date_filter(LocalDate current_date, String hall_type) {
         List<Object[]> hall_data = new ArrayList<>();
         Object[][] hall_list = combine_data();

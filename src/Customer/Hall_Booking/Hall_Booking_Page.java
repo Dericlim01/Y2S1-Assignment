@@ -25,13 +25,18 @@ import java.util.Properties;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.imageio.ImageIO;
 
@@ -144,11 +149,36 @@ public class Hall_Booking_Page extends JFrame {
         // Table
         String[] col_name = {"Hall ID", "Hall Type", "Capacity", "Price per H", "Start date", "End date", "Status", "Remarks"};
         Object[][] data = new Hall_Booking().start_date_filter(current_date, String.valueOf(hall_type_cmbbx.getSelectedIndex()));
-        DefaultTableModel table = new DefaultTableModel(data, col_name);
-        JTable details = new JTable(table);
-        JScrollPane scrollPane = new JScrollPane(details);
+        DefaultTableModel table_model = new DefaultTableModel(data, col_name);
+        JTable table = new JTable(table_model);
+        ListSelectionModel list_model = table.getSelectionModel();
+        list_model.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(100, 300, 800, 400);
         contentPane.add(scrollPane);
+
+        ArrayList<String> selected_data = new ArrayList<>();
+        list_model.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int[] sel;
+                Object value;
+                selected_data.clear();
+                
+                if (!e.getValueIsAdjusting()) {
+                    sel = table.getSelectedRows();
+
+                    if (sel.length > 0) {
+                        for (int i = 0; i < col_name.length; i++) {
+                            TableModel tm = table.getModel();
+                            value = tm.getValueAt(sel[0], i);
+                            selected_data.add(value.toString());
+                            System.out.println(selected_data);
+                        }
+                    }
+                }
+            }
+        });
 
         // Start Calendar
         UtilDateModel start_date_model = new UtilDateModel();
@@ -181,10 +211,10 @@ public class Hall_Booking_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String hall_type = String.valueOf(hall_type_cmbbx.getSelectedItem());
-                Object[][] hall_data = new Hall_Booking().hall_type_filter(hall_type, current_date);
-                table.setDataVector(hall_data, col_name);
-                details.revalidate();
-                details.repaint();
+                Object[][] hall_data = new Hall_Booking().start_date_filter(current_date, hall_type);
+                table_model.setDataVector(hall_data, col_name);
+                table.revalidate();
+                table.repaint();
             }
         });
 
@@ -205,13 +235,13 @@ public class Hall_Booking_Page extends JFrame {
                     if (selected_end_date != null) {
                         LocalDate end_date = selected_end_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                         Object[][] start_end_date = new Hall_Booking().end_date_filter(start_date, halltype, end_date);
-                        table.setDataVector(start_end_date, col_name);
+                        table_model.setDataVector(start_end_date, col_name);
                     } else {
                         Object[][] start_date_data = new Hall_Booking().start_date_filter(start_date, halltype);
-                        table.setDataVector(start_date_data, col_name);
+                        table_model.setDataVector(start_date_data, col_name);
                     }
-                    details.revalidate();
-                    details.repaint();
+                    table.revalidate();
+                    table.repaint();
                 }
             }
         });
@@ -237,22 +267,30 @@ public class Hall_Booking_Page extends JFrame {
                         halltype = String.valueOf(hall_type_cmbbx.getSelectedItem());
                     }
                     Object[][] end_date_data = new Hall_Booking().end_date_filter(start_date, halltype, end_date);
-                    table.setDataVector(end_date_data, col_name);
-                    details.revalidate();
-                    details.repaint();
+                    table_model.setDataVector(end_date_data, col_name);
+                    table.revalidate();
+                    table.repaint();
                 }
             }
         });
 
         // Next button
-        JButton search_btn = new JButton("Next");
+        JButton search_btn = new JButton("Proceed");
         search_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
         search_btn.setBounds(780, 230, 120, 30);
         search_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
-                new Payment_Page(n).setVisible(true);
+                if (selected_data.isEmpty()) {
+                    JOptionPane.showMessageDialog(
+                        null, 
+                        "No row is selected, pls select one", 
+                        "Row selected status", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    dispose();
+                    new Payment_Page(n, selected_data).setVisible(true);
+                }
             }
         });
         contentPane.add(search_btn);
