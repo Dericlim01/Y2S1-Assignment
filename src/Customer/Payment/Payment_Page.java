@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -128,7 +129,37 @@ public class Payment_Page extends JFrame {
         pay_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //
+                int response = JOptionPane.showConfirmDialog(
+                    null, 
+                    "Confirm Payment?", 
+                    "Payment", 
+                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.QUESTION_MESSAGE, 
+                    null);
+                if (response == 1) {
+                    // Write to booking, proceed to payment
+                    int status = new Payment().confirm_booking(n, selected_data, hour_price[1]);
+                    if (status == 1) {
+                        // Booked succussfully
+                        JOptionPane.showMessageDialog(
+                            null, 
+                            "Book Successfully", 
+                            "Book Status", 
+                            JOptionPane.PLAIN_MESSAGE);
+                        new Receipt_Page(n, selected_data).setVisible(true);
+                    } else {
+                        // Booked failed
+                        JOptionPane.showMessageDialog(
+                            null, 
+                            "Book Failed", 
+                            "Book Status", 
+                            JOptionPane.PLAIN_MESSAGE);
+                        new Hall_Booking_Page(n).setVisible(true);
+                    }
+                } else {
+                    // Close Confirm Dialog
+                    dispose();
+                }
             }
         });
         contentPane.add(pay_btn);
