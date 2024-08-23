@@ -15,7 +15,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -27,7 +26,7 @@ import javax.swing.border.EmptyBorder;
 
 public class Payment_Page extends JFrame {
     public static String name;
-    public static ArrayList<String> data;
+    public static String[] data;
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -41,7 +40,7 @@ public class Payment_Page extends JFrame {
         });
     }
 
-    public Payment_Page(String n, ArrayList<String> selected_data) {
+    public Payment_Page(String n, String[] selected_data) {
         setTitle("Payment");
         setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,43 +81,44 @@ public class Payment_Page extends JFrame {
         contentPane.add(pymt_det_lbl);
 
         // Hall Type
-        JLabel hall_type_lbl = new JLabel("Hall Type : ");
+        JLabel hall_type_lbl = new JLabel("Hall Type : " + selected_data[1]);
         hall_type_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        hall_type_lbl.setBounds(100, 200, 150, 30);
+        hall_type_lbl.setBounds(100, 200, 250, 30);
         contentPane.add(hall_type_lbl);
 
         // Number of guest
-        JLabel guest_num_lbl = new JLabel("Number of guest : ");
+        JLabel guest_num_lbl = new JLabel("Number of guest : " + selected_data[2]);
         guest_num_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        guest_num_lbl.setBounds(100, 300, 200, 30);
+        guest_num_lbl.setBounds(100, 300, 250, 30);
         contentPane.add(guest_num_lbl);
 
         // Price per day
-        JLabel price_per_day_lbl = new JLabel("Price per day : ");
-        price_per_day_lbl.setBounds(getBounds());
+        JLabel price_per_day_lbl = new JLabel("Price per hour : " + selected_data[3]);
+        price_per_day_lbl.setBounds(400, 300, 50, 30);
 
         // Start Date
-        JLabel start_date_lbl = new JLabel("Start Date : ");
+        JLabel start_date_lbl = new JLabel("Start Date : " + selected_data[4]);
         start_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        start_date_lbl.setBounds(400, 200, 150, 30);
+        start_date_lbl.setBounds(400, 200, 250, 30);
         contentPane.add(start_date_lbl);
 
         // End Date
-        JLabel end_date_lbl = new JLabel("End Date : ");
+        JLabel end_date_lbl = new JLabel("End Date : " + selected_data[5]);
         end_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        end_date_lbl.setBounds(600, 200, 150, 30);
+        end_date_lbl.setBounds(650, 200, 250, 30);
         contentPane.add(end_date_lbl);
 
         // Rent days
-        JLabel rent_days_lbl = new JLabel("Rent Days : ");
+        String hour_price[] = new Payment().calculate_price_hour(selected_data[3], selected_data[4], selected_data[5]);
+        JLabel rent_days_lbl = new JLabel("Total Rent Days : " + hour_price[0]);
         rent_days_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        rent_days_lbl.setBounds(600, 400, 150, 30);
+        rent_days_lbl.setBounds(600, 400, 250, 30);
         contentPane.add(rent_days_lbl);
 
         // Total price
-        JLabel total_price_lbl = new JLabel("Total Price : ");
+        JLabel total_price_lbl = new JLabel("Total Price : RM " + hour_price[1]);
         total_price_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        total_price_lbl.setBounds(600, 500, 150, 30);
+        total_price_lbl.setBounds(600, 500, 250, 30);
         contentPane.add(total_price_lbl);
 
         // Pay button

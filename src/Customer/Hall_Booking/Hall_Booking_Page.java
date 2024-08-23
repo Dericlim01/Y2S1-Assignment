@@ -173,7 +173,6 @@ public class Hall_Booking_Page extends JFrame {
                             TableModel tm = table.getModel();
                             value = tm.getValueAt(sel[0], i);
                             selected_data.add(value.toString());
-                            System.out.println(selected_data);
                         }
                     }
                 }
@@ -289,7 +288,7 @@ public class Hall_Booking_Page extends JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     dispose();
-                    new Payment_Page(n, selected_data).setVisible(true);
+                    new Payment_Page(n, selected_data.toArray(new String[0])).setVisible(true);
                 }
             }
         });
