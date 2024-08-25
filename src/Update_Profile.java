@@ -120,7 +120,7 @@ public class Update_Profile extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-                Customer_Page cp = new Customer_Page(name);
+                Customer_Page cp = new Customer_Page(n);
                 cp.setTitle("Customer");
                 cp.setVisible(true);
             }
