@@ -44,11 +44,13 @@ public class Payment {
                 hall_data.add(data);
             }
             for (String[] hall : hall_data) {
+                // hall id and start date same
                 if (hall[1].equals(select_data[0]) && hall[2].equals(select_data[4])) {
                     hall[4] = "booked";
                     hall[6] = id;
                 }
             }
+            update = true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -57,7 +59,7 @@ public class Payment {
         if (update) {
             try (PrintWriter writer = new PrintWriter(new FileWriter("resources/Database/hall_status.txt"))) {
                 for (String[] data : hall_data) {
-                    writer.println(String.join(",", data) + "\n");
+                    writer.println(String.join(",", data));
                 }
                 return true;
             } catch (Exception e) {

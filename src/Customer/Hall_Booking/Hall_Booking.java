@@ -13,6 +13,7 @@ public class Hall_Booking {
     String line;
 
     public ArrayList<String[]> search_hall() {
+        // HallID, HallType, Capacity, Price/h
         ArrayList<String[]> halls = new ArrayList<>();
         if (new Create_file().hall_file()) {
             try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/halls.txt"))) {
@@ -39,6 +40,7 @@ public class Hall_Booking {
     }
 
     public List<String[]> hall_data() {
+        // HallStatusID, HallID, ReservedStartDateTime, ReservedEndDateTime, Status, Remarks, BookingID
         List<String[]> hall_list = new ArrayList<>();
         if (new Create_file().hall_stat_file()) {
             try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/hall_status.txt"))) {
@@ -54,15 +56,20 @@ public class Hall_Booking {
     }
 
     public Object[][] combine_data() {
+        // Hall ID, Hall Type, Capacity, Price/h
         ArrayList<String[]> hall_data = search_hall();
+        // HallStatusID, HallID, ReservedStartDateTime, ReservedEndDateTime, Status, Remarks, BookingID
         List<String[]> hall_details = hall_data();
+        // Hall ID, Hall Type, Capacity, Price per H, Start date, End date, Status, Remarks
         ArrayList<Object[]> hall_data_list = new ArrayList<>();
 
         for (int hall = 0; hall < hall_data.size(); hall++) {
             for (int i = 0; i < hall_details.size(); i++) {
+                // if hall id same
                 if (hall_details.get(i)[1].equals(hall_data.get(hall)[0])) {
+                    // ReservedStartDateTime, ReservedEndDateTime, Status, Remarks, BookingID
                     ArrayList<String> hall_details_format = new ArrayList<>();
-                    for (int ii = 3; ii < hall_details.get(i).length; ii++) {
+                    for (int ii = 2; ii < hall_details.get(i).length; ii++) {
                         hall_details_format.add(hall_details.get(i)[ii]);
                     }
                     String[] combinedata = new String[hall_data.get(hall).length + hall_details_format.size()];
