@@ -25,6 +25,8 @@ import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -149,6 +151,47 @@ public class Login_Page extends JFrame {
         pass_txt_f.setBounds(570, 310, 250, 30);
         pass_txt_f.setEchoChar('*');
         contentPane.add(pass_txt_f);
+
+        pass_txt_f.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    String name = name_txt_f.getText();
+                    String pass = String.valueOf(pass_txt_f.getPassword());
+                    Login log_user = new Login();
+                    String role = log_user.login(name, pass);
+                    // Login Successfull
+                    if (role.equals("customer")) {
+                        dispose();
+                        new Customer_Page(name).setVisible(true);
+                    }
+                    else if (role.equals("superadmin")) {
+                        dispose();
+                        new Suadmin_Page(name).setVisible(true);
+                    }
+                    else if (role.equals("admin")) {
+                        dispose();
+                        new Admin_Page(name).setVisible(true);
+                    } 
+                    else if (role.equals("manager")) {
+                        dispose();
+                        new Manager_Home_Page(name).setVisible(true);
+                    }
+                    else if (role.equals("scheduler")) {
+                        dispose();
+                        new Scheduler_Main_Page(name).setVisible(true);
+                    }
+                    else {
+                        // Login failed, show message box
+                        JOptionPane.showMessageDialog(
+                            null,
+                            "Login Failed",
+                            "Login Status",
+                            JOptionPane.PLAIN_MESSAGE);
+                    }
+                }
+            }
+        });
 
         // Show password check box
         JCheckBox show_pass = new JCheckBox();
