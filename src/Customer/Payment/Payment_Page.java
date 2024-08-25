@@ -15,6 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -136,9 +137,10 @@ public class Payment_Page extends JFrame {
                     JOptionPane.YES_NO_OPTION, 
                     JOptionPane.QUESTION_MESSAGE, 
                     null);
-                if (response == 1) {
+                if (response == 0) {
                     // Write to booking, proceed to payment
-                    int status = new Payment().confirm_booking(n, selected_data, hour_price[1]);
+                    LocalDate date = LocalDate.now();
+                    int status = new Payment().confirm_booking(n, selected_data, hour_price[1], date);
                     if (status == 1) {
                         // Booked succussfully
                         JOptionPane.showMessageDialog(
@@ -146,7 +148,8 @@ public class Payment_Page extends JFrame {
                             "Book Successfully", 
                             "Book Status", 
                             JOptionPane.PLAIN_MESSAGE);
-                        new Receipt_Page(n, selected_data).setVisible(true);
+                        dispose();
+                        new Receipt_Page(n, selected_data, date).setVisible(true);
                     } else {
                         // Booked failed
                         JOptionPane.showMessageDialog(
@@ -157,8 +160,8 @@ public class Payment_Page extends JFrame {
                         new Hall_Booking_Page(n).setVisible(true);
                     }
                 } else {
-                    // Close Confirm Dialog
-                    dispose();
+                    // Close Confirm Dialog and remain
+                    System.out.println("Payment not confirm");
                 }
             }
         });

@@ -4,27 +4,34 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.EventQueue;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import src.Customer.Hall_Booking.Hall_Booking_Page;
+
 public class Receipt_Page extends JFrame {
     public static String name;
     public static String[] select_data;
+    public static LocalDate date;
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try {
-                    new Receipt_Page(name, select_data).setVisible(true);
+                    new Receipt_Page(name, select_data, date).setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -32,7 +39,7 @@ public class Receipt_Page extends JFrame {
         });
     }
 
-    public Receipt_Page(String n, String[] selected_data) {
+    public Receipt_Page(String n, String[] selected_data, LocalDate date) {
         setTitle("Receipt");
         setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,19 +105,33 @@ public class Receipt_Page extends JFrame {
         // Start Date Label
         JLabel start_date_lbl = new JLabel("Start Date : " + selected_data[4]);
         start_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        start_date_lbl.setBounds(100, 400, 200, 30);
+        start_date_lbl.setBounds(100, 400, 250, 30);
         contentPane.add(start_date_lbl);
 
         // End Date Label
         JLabel end_date_lbl = new JLabel("End Date : " + selected_data[5]);
         end_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        end_date_lbl.setBounds(100, 450, 200, 20);
+        end_date_lbl.setBounds(100, 450, 250, 20);
         contentPane.add(end_date_lbl);
 
         // Book Time Label
-        JLabel book_time_lbl = new JLabel("Book time : ");
+        JLabel book_time_lbl = new JLabel("Book time : " + date);
         book_time_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        book_time_lbl.setBounds(100, 500, 200, 20);
+        book_time_lbl.setBounds(100, 500, 250, 20);
         contentPane.add(book_time_lbl);
+
+        // Done Button
+        JButton done_btn = new JButton("Done");
+        done_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        done_btn.setBounds(100, 550, 200, 20);
+        contentPane.add(done_btn);
+
+        done_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new Hall_Booking_Page(n).setVisible(true);
+            }
+        });
     }
 }

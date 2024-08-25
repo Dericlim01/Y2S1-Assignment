@@ -4,9 +4,11 @@ import src.Create_file;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Payment {
     private DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -32,14 +34,47 @@ public class Payment {
         return total;
     }
 
-    public Integer confirm_booking(String name, String[] data, String price) {
+    public Boolean change_book_stat(String[] select_data, String id) {
+        ArrayList<String[]> hall_data = new ArrayList<>();
+        Boolean update = false;
+        String line;
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/hall_status.txt"))) {
+            while ((line = read.readLine()) != null) {
+                String[] data = line.split(",");
+                hall_data.add(data);
+            }
+            for (String[] hall : hall_data) {
+                if (hall[1].equals(select_data[0]) && hall[2].equals(select_data[4])) {
+                    hall[4] = "booked";
+                    hall[6] = id;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        
+        if (update) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter("resources/Database/hall_status.txt"))) {
+                for (String[] data : hall_data) {
+                    writer.println(String.join(",", data) + "\n");
+                }
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public Integer confirm_booking(String name, String[] data, String price, LocalDate date) {
         int nextID = 0;
         String line;
         if (new Create_file().booking_file()) {
-            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/booking.txt"))) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/bookings.txt"))) {
                 int max_id = 0;
                 while ((line = read.readLine()) != null) {
-                    String[] ID_data = line.split(";");
+                    String[] ID_data = line.split(",");
                     int prev_id = Integer.parseInt(ID_data[0].substring(1));
                     if (prev_id > max_id) {
                         max_id = prev_id;
@@ -56,17 +91,21 @@ public class Payment {
         if (new Create_file().booking_file()) {
             // Write to booking txt
             try {
-                FileWriter book_data = new FileWriter("resources/Database/booking.txt", true);
+                FileWriter book_data = new FileWriter("resources/Database/bookings.txt", true);
                 String[] booking_data = {
-                // id, hall id, capacity, start date, end date, book stat, book paid, deposit, username
-                    id, data[0], data[2], data[4], data[5], "approved", price, "300", String.valueOf(LocalDate.now()), name
+                // id, hall id, capacity, start date, end date, book stat, book paid, deposit, booking date, username
+                    id, data[0], data[2], data[4], data[5], "approved", price, "300", String.valueOf(date), name
                 };
-                String data_join = String.join(";", booking_data);
+                String data_join = String.join(",", booking_data);
                 book_data.append(data_join + "\n");
                 book_data.close();
-                return 1;
+                if (change_book_stat(data, id)) {
+                    return 1;
+                }
+                return 0;
             } catch (Exception e) {
                 e.printStackTrace();
+                return 0;
             }
         }
         return 0;
