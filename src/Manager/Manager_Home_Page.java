@@ -13,15 +13,13 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Toolkit;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
+import java.awt.event.ActionListener;
 
 import java.io.*;
-
-
 
 
 public class Manager_Home_Page extends JFrame{

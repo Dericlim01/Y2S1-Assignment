@@ -1,16 +1,16 @@
 package src.Manager;
 
 import java.io.*;
+
 import java.util.*;
 
-import javax.swing.JOptionPane;
+import src.Create_file;
 
+import javax.swing.JOptionPane;
 
 import java.text.SimpleDateFormat;
 
 import org.jdatepicker.impl.JDatePickerImpl;
-
-import src.Create_file;
 
 public class Manager {
 
@@ -268,7 +268,7 @@ public class Manager {
         // Iterate through the filteredDate list, adding up the "Booking Paid" data for each row.
         System.out.println("Filtered Date Entries:");
         for (Object[] data : filteredDate) {
-            if (data == null && data.length <= 8) {
+            if (data == null && data.length <= 9) {
                 System.err.println("Invalid data entry: " + (data == null ? "null" : "length too short"));
                 continue;
             }
@@ -277,12 +277,12 @@ public class Manager {
                 System.out.println(Arrays.toString(data));
             }
 
-            String paidStr = data[8].toString();
+            String paidStr = data[6].toString();
             try {
                 double price = Double.parseDouble(paidStr);
                 totalPaid += price;
             } catch (NumberFormatException e) {
-                System.err.println("Error parsing booking paid value: " + data[8]);
+                System.err.println("Error parsing booking paid value: " + data[6]);
             }
         }
 
@@ -297,7 +297,7 @@ public class Manager {
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 // Assuming the "Booking Paid" amount is at index 8
-                double paidAmount = Double.parseDouble(data[8].trim());
+                double paidAmount = Double.parseDouble(data[6].trim());
                 totalPaid += paidAmount;
             }
         } catch (IOException e) {

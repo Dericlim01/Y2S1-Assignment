@@ -1,9 +1,10 @@
 package src.Manager;
+
 import javax.swing.*;
-import javax.imageio.*;
 import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;
 
+import javax.imageio.*;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -19,7 +20,6 @@ import java.awt.event.ActionListener;
 
 import java.io.File;
 import java.io.IOException;
-
 
 public class Task_Status extends JFrame {
     private static String manname;
