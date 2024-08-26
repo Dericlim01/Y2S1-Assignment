@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Booking_Info {
-    private DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     String line;
 
     // Hall ID, Hall ID, Capacity, Start Date, End Date, Booking Date
