@@ -183,7 +183,7 @@ public class Payment_Page extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-                new Hall_Booking_Page(name).setVisible(true);
+                new Hall_Booking_Page(n).setVisible(true);
             }
 
         });

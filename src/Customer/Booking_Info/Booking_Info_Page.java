@@ -195,7 +195,7 @@ public class Booking_Info_Page extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-                new Customer_Page(name).setVisible(true);
+                new Customer_Page(n).setVisible(true);
             }
 
         });

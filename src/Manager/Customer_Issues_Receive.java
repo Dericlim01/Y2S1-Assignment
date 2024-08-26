@@ -166,17 +166,11 @@ public class Customer_Issues_Receive extends JFrame {
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                manager_CIR.remove(scrollPane);
+                //manager_CIR.remove(scrollPane);
                 Object[][] row_data = man_issues.present_data("resources/Database/issues.txt");
-                table_Model = new DefaultTableModel();
+                //table_Model = new DefaultTableModel();
                 table_Model.setDataVector(row_data, col_name);
 
-                JTable view = new JTable(table_Model);
-
-                scrollPane = new JScrollPane(view);
-                scrollPane.setBounds(9, 105, 970, 550);
-
-                manager_CIR.add(scrollPane);
                 table_Model.fireTableDataChanged();
                 view.revalidate();
                 view.repaint();
