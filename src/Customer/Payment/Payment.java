@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Payment {
-    private DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private String calculate_day(String start_date, String end_date) {
         LocalDate d1 = LocalDate.parse(start_date, datePattern);
         LocalDate d2 = LocalDate.parse(end_date, datePattern);

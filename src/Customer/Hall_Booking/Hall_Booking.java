@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hall_Booking {
-    private DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     String line;
 
     public ArrayList<String[]> search_hall() {
