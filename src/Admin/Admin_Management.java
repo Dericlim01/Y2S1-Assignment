@@ -70,7 +70,7 @@ public class Admin_Management {
         return users.get(0);
     }
 
-    public Boolean update_user(String n, String p, String pn, String m, Date d, String g) {
+    public Boolean update_user(String n, String p, String pn, String m, Date d, String g, String r) {
         // Create a user list
         ArrayList<String[]> users = new ArrayList<String[]>();
         String line;
@@ -94,7 +94,7 @@ public class Admin_Management {
                     users.get(i)[3] = m;
                     users.get(i)[4] = dobform;
                     users.get(i)[5] = g;
-                    users.get(i)[6] = "admin";
+                    users.get(i)[6] = r;
                     user_update = true;
                 }
             }
@@ -107,7 +107,7 @@ public class Admin_Management {
             try (PrintWriter writer = new PrintWriter(new FileWriter("resources/Database/staffs.txt"))) {
                 for (String[] userdata : users) {
                     writer.println(userdata[0] + "," + userdata[1] + "," + userdata[2] + "," + userdata[3] 
-                    + "," + userdata[4] + "," + userdata[5] + "," + "admin");
+                    + "," + userdata[4] + "," + userdata[5] + "," + userdata[6]);
                 }
                 users_update = true;
             } catch (IOException e) {
@@ -122,7 +122,7 @@ public class Admin_Management {
         if (users_update) {
             try (PrintWriter writer = new PrintWriter(new FileWriter("resources/Database/users.txt"))) {
                 for (String[] userdata : users) {
-                    writer.println(userdata[0] + "," + userdata[1] + "," + "admin");
+                    writer.println(userdata[0] + "," + userdata[1] + "," + userdata[6]);
                 }
                 return true;
             } catch (IOException e) {

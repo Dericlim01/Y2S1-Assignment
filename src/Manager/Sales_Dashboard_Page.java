@@ -6,15 +6,16 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;
 
+import java.io.*;
+
 import javax.imageio.*;
 
-import java.io.*;
 
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Toolkit;
 import java.awt.EventQueue;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
@@ -97,7 +98,7 @@ public class Sales_Dashboard_Page extends JFrame {
         manager_SD.add(title);
 
         // Define the columns names
-        String[] col_name = {"Booking ID", "Hall ID", "Num of Guests", "Start Date", "End Date", "Start Time", "End Time", "Book Status", "Booking Paid", "Deposit Paid", "Username"};
+        String[] col_name = {"Booking ID", "Hall ID", "Num of Guests", "Start Date", "End Date", "Book Status", "Booking Paid", "Deposit Paid", "Booking Date", "Username"};
 
         // Define the data for the table
         // Object [][] represents whole table

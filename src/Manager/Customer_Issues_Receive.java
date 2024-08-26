@@ -1,11 +1,11 @@
 package src.Manager;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import javax.imageio.*;
 
-//import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Color;
@@ -17,11 +17,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 
-
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.ArrayList;
 
 
 public class Customer_Issues_Receive extends JFrame {

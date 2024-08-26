@@ -1,16 +1,14 @@
 package src.Manager;
 
 import javax.swing.*;
-import javax.imageio.*;
 import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;
 
-import java.util.Properties;
+import javax.imageio.*;
+
 import java.awt.Font;
-import java.awt.Image;
-import java.util.ArrayList;
-import java.util.List;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -18,14 +16,21 @@ import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
 
+import java.text.SimpleDateFormat;
+
+import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Properties;
+
+import org.jdatepicker.impl.UtilDateModel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
+
 
 import src.DateFormat;
 
@@ -88,7 +93,7 @@ public class Booking_Management extends JFrame {
         title.setBounds(350, 20, 400, 20);
         manager_BM.add(title);
 
-        String[] col_name = {"Booking ID", "Hall ID", "Num of Guests", "Start Date", "End Date", "Start Time", "End Time", "Book Status", "Booking Paid", "Deposit Paid", "Username"};
+        String[] col_name = {"Booking ID", "Hall ID", "Num of Guests", "Start Date", "End Date", "Book Status", "Booking Paid", "Deposit Paid", "Booking Date", "Username"};
 
         Object[][] row_data = man_booking.present_data("resources/Database/bookings.txt");
 

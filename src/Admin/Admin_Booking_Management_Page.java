@@ -91,7 +91,7 @@ public class Admin_Booking_Management_Page extends JFrame {
 
         //Booking Data Table Showing
         Admin_Booking_Management bookman = new Admin_Booking_Management();
-        String[] booking_table = {"Booking ID", "Hall ID", "Num of Guests", "Start Date","End Date", "Start Time", "End Time","Book Status","Booking Paid","Deposit Paid","Username"};
+        String[] booking_table = {"Booking ID", "Hall ID", "Num of Guests", "Start Date","End Date", "Book Status","Booking Paid","Deposit Paid","Booking Date","Username"};
         scrollPane = bookman.view_booking(booking_table);
         scrollPane.setBounds(85,150,850,380);
         contentPane.add(scrollPane);

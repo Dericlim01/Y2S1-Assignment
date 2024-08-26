@@ -212,6 +212,12 @@ public class Admin_Profile_Page extends JFrame {
         gen_lbl.setBounds(380,490,200,30);
         contentPane.add(gen_lbl);
 
+        //Role Label
+        JLabel role_lbl = new JLabel("Role:");
+        role_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        role_lbl.setBounds(380,540,200,30);
+        contentPane.add(role_lbl);
+
         //Gender Show Label
         JLabel gshow_lbl = new JLabel(user[5]);
         gshow_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
@@ -254,13 +260,19 @@ public class Admin_Profile_Page extends JFrame {
         JComboBox<String> genData = new JComboBox<>(gender);
         genData.setBounds(480,495,200,30);
         genData.setBackground(new Color(250,240,230));
+
+        //Role Show Label
+        JLabel rshow_lbl = new JLabel("admin");
+        rshow_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
+        rshow_lbl.setBounds(480,540,200,30);
+        contentPane.add(rshow_lbl);
    
         //Update Button
         JButton up_btn = new JButton("Update");
         up_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         up_btn.setBackground(new Color(250,240,230));
         up_btn.setForeground(new Color(128,128,128));
-        up_btn.setBounds(430,570,150,30);
+        up_btn.setBounds(430,600,150,30);
         up_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -270,8 +282,9 @@ public class Admin_Profile_Page extends JFrame {
                 String mail = mfield.getText();
                 Date dob = (Date) dobDatePicker.getModel().getValue();
                 String gen = (String) genData.getSelectedItem();
+                String role = rshow_lbl.getText();
                 Admin_Management adman = new Admin_Management(name);          
-                if(adman.update_user(username, pass,phone,mail,dob,gen)){
+                if(adman.update_user(username, pass,phone,mail,dob,gen,role)){
                     JOptionPane.showMessageDialog(null,"Update Successfully","Plain",JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
@@ -287,11 +300,11 @@ public class Admin_Profile_Page extends JFrame {
         up_btn.setVisible(false);
 
         //Edit Button
-        JButton edit_btn = new JButton("Edit Password");
+        JButton edit_btn = new JButton("Edit Profile");
         edit_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         edit_btn.setBackground(new Color(250,240,230));
         edit_btn.setForeground(new Color(128,128,128));
-        edit_btn.setBounds(430,570,150,30);
+        edit_btn.setBounds(430,600,150,30);
         edit_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
