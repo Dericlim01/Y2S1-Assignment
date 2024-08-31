@@ -54,6 +54,7 @@ public class Customer_Page extends JFrame {
         // Set panel
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setBackground(new Color(248,248,248));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 

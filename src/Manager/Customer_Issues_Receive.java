@@ -50,6 +50,7 @@ public class Customer_Issues_Receive extends JFrame {
 
         JPanel manager_CIR = new JPanel();
         manager_CIR.setBorder(new EmptyBorder(5, 5, 5, 5));
+        manager_CIR.setBackground(new Color(248,248,248));
         setContentPane(manager_CIR);
         manager_CIR.setLayout(null);
 

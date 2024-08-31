@@ -61,6 +61,7 @@ public class Booking_Management extends JFrame {
 
         JPanel manager_BM = new JPanel();
         manager_BM.setBorder(new EmptyBorder(5, 5, 5, 5));
+        manager_BM.setBackground(new Color(248,248,248));
         setContentPane(manager_BM);
         manager_BM.setLayout(null);
 

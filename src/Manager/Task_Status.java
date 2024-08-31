@@ -53,6 +53,7 @@ public class Task_Status extends JFrame {
 
         JPanel manager_TAS = new JPanel();
         manager_TAS.setBorder(new EmptyBorder(5, 5, 5, 5));
+        manager_TAS.setBackground(new Color(248,248,248));
         setContentPane(manager_TAS);
         manager_TAS.setLayout(null);
 

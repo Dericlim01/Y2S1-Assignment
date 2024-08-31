@@ -48,6 +48,7 @@ public class Reply_Customer extends JFrame{
 
         JPanel manager_RC = new JPanel();
         manager_RC.setBorder(new EmptyBorder(5, 5, 5, 5));
+        manager_RC.setBackground(new Color(248,248,248));
         setContentPane(manager_RC);
         manager_RC.setLayout(null);
 
