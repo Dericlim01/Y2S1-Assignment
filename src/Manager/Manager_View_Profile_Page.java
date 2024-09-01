@@ -5,7 +5,7 @@ import javax.swing.border.*;
 
 import javax.imageio.*;
 
-import src.UpdateProfile;
+//import src.Manager.Manager;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -212,8 +212,13 @@ public class Manager_View_Profile_Page extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String userName = username.getText();
                 String pass = pfield.getText();
-                UpdateProfile up = new UpdateProfile();
-                if (up.update_user(userName, pass)) {
+                String phone = cfield.getText();
+                String mail = efield.getText();
+                String birth = user[4];
+                String gender = user[5];
+                String role = user[6];
+                Manager up = new Manager();
+                if (up.update_user(userName, pass, phone, mail, birth, gender, role)) {
                     JOptionPane.showMessageDialog(null, "Update Successfully", "Plain", JOptionPane.INFORMATION_MESSAGE);
 
                 } else {
