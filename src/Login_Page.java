@@ -152,43 +152,24 @@ public class Login_Page extends JFrame {
         pass_txt_f.setEchoChar('*');
         contentPane.add(pass_txt_f);
 
+        name_txt_f.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    String name = name_txt_f.getText();
+                    String pass = String.valueOf(pass_txt_f.getPassword());
+                    page_nav(name, pass);
+                }
+            }
+        });
+
         pass_txt_f.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     String name = name_txt_f.getText();
                     String pass = String.valueOf(pass_txt_f.getPassword());
-                    Login log_user = new Login();
-                    String role = log_user.login(name, pass);
-                    // Login Successfull
-                    if (role.equals("customer")) {
-                        dispose();
-                        new Customer_Page(name).setVisible(true);
-                    }
-                    else if (role.equals("superadmin")) {
-                        dispose();
-                        new Suadmin_Page(name).setVisible(true);
-                    }
-                    else if (role.equals("admin")) {
-                        dispose();
-                        new Admin_Page(name).setVisible(true);
-                    } 
-                    else if (role.equals("manager")) {
-                        dispose();
-                        new Manager_Home_Page(name).setVisible(true);
-                    }
-                    else if (role.equals("scheduler")) {
-                        dispose();
-                        new Scheduler_Main_Page(name).setVisible(true);
-                    }
-                    else {
-                        // Login failed, show message box
-                        JOptionPane.showMessageDialog(
-                            null,
-                            "Login Failed",
-                            "Login Status",
-                            JOptionPane.PLAIN_MESSAGE);
-                    }
+                    page_nav(name, pass);
                 }
             }
         });
@@ -234,40 +215,21 @@ public class Login_Page extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String name = name_txt_f.getText();
                 String pass = String.valueOf(pass_txt_f.getPassword());
-                Login log_user = new Login();
-                String role = log_user.login(name, pass);
-                // Login Successfull
-                if (role.equals("customer")) {
-                    dispose();
-                    new Customer_Page(name).setVisible(true);
-                }
-                else if (role.equals("superadmin")) {
-                    dispose();
-                    new Suadmin_Page(name).setVisible(true);
-                }
-                else if (role.equals("admin")) {
-                    dispose();
-                    new Admin_Page(name).setVisible(true);
-                } 
-                else if (role.equals("manager")) {
-                    dispose();
-                    new Manager_Home_Page(name).setVisible(true);
-                }
-                else if (role.equals("scheduler")) {
-                    dispose();
-                    new Scheduler_Main_Page(name).setVisible(true);
-                }
-                else {
-                    // Login failed, show message box
-                    JOptionPane.showMessageDialog(
-                        null,
-                        "Login Failed",
-                        "Login Status",
-                        JOptionPane.PLAIN_MESSAGE);
-                }
+                page_nav(name, pass);
             }
         });
         contentPane.add(login_btn);
+
+        login_btn.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    String name = name_txt_f.getText();
+                    String pass = String.valueOf(pass_txt_f.getPassword());
+                    page_nav(name, pass);
+                }
+            }
+        });
 
         // Design Pic 1
         JLabel des1 = new JLabel();
@@ -294,5 +256,53 @@ public class Login_Page extends JFrame {
             e.printStackTrace();
         }
         contentPane.add(des2);
+    }
+
+    private void page_nav(String name, String pass) {
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Username or password cannot be empty", 
+                "Login status", 
+                JOptionPane.INFORMATION_MESSAGE);
+        } else if (pass.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Username or password cannot be empty", 
+                "Login status", 
+                JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            String role = new Login().login(name, pass);
+            JFrame nextPage = null;
+            switch (role) {
+                case "customer":
+                    nextPage = new Customer_Page(name);
+                    break;
+                case "superadmin":
+                    nextPage = new Suadmin_Page(name);
+                    break;
+                case "admin":
+                    nextPage = new Admin_Page(name);
+                    break;
+                case "manager":
+                    nextPage = new Manager_Home_Page(name);
+                    break;
+                case "scheduler":
+                    nextPage = new Scheduler_Main_Page(name);
+                    break;
+                default:
+                    // Login failed, show message box
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Login Failed",
+                        "Login Status",
+                        JOptionPane.PLAIN_MESSAGE);
+                    return;
+            }
+            dispose();
+            if (nextPage != null) {
+                nextPage.setVisible(true);
+            }
+        }
     }
 }

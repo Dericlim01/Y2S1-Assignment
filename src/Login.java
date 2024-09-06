@@ -1,5 +1,7 @@
 package src;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Login {
     public String login(String n, String p) {
