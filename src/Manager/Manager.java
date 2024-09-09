@@ -14,6 +14,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 
 public class Manager {
 
+    //private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     public String[] read_user_Information(String n) {
         ArrayList<String[]> users = new ArrayList<>();
         String line;
@@ -36,6 +37,71 @@ public class Manager {
             }
         }
         return null;
+    }
+
+    public Boolean update_user(String n, String p, String pn, String m, String b, String g, String r) {
+        // Create a user list
+        ArrayList<String[]> users = new ArrayList<String[]>();
+        String line;
+        String[] data;
+        //String dobform = dateFormat.format(d);
+        Boolean user_update = false;
+        Boolean users_update = false;
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))) {
+            while ((line = read.readLine()) != null) {
+                // Store data into data and add to users array
+                data = line.split(",");
+                users.add(data);
+                System.out.println(users);
+            }
+            // Loop through the users
+            for (int i = 0; i < users.size(); i++) {
+                // If username found
+                if (users.get(i)[0].equals(n)) {
+                    users.get(i)[1] = p;
+                    users.get(i)[2] = pn;
+                    users.get(i)[3] = m;
+                    users.get(i)[4] = b;
+                    users.get(i)[5] = g;
+                    users.get(i)[6] = r;
+                    user_update = true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        if (user_update) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter("resources/Database/staffs.txt"))) {
+                for (String[] userdata : users) {
+                    writer.println(userdata[0] + "," + userdata[1] + "," + userdata[2] + "," + userdata[3] 
+                    + "," + userdata[4] + "," + userdata[5] + "," + userdata[6]);
+                }
+                users_update = true;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        } else {
+            System.out.println("User not found");
+            return false;
+        }
+
+        if (users_update) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter("resources/Database/users.txt"))) {
+                for (String[] userdata : users) {
+                    writer.println(userdata[0] + "," + userdata[1] + "," + userdata[6]);
+                }
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        } else {
+            System.out.println("User not found");
+            return false;
+        }
     }
 
     public List<Object[]> date_read(JDatePickerImpl start_date, JDatePickerImpl end_date, String filename) {

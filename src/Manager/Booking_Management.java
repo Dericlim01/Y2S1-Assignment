@@ -189,7 +189,6 @@ public class Booking_Management extends JFrame {
                 tm.setDataVector(row_data, col_name);
                 //(Come from chatgpt) 
                 tm.fireTableDataChanged();
-
                 view.revalidate();
                 view.repaint();
             }

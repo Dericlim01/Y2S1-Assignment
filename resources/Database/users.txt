@@ -1,5 +1,5 @@
 hiadmin,newadmin,admin
-hayhay,scheduler,admin
+hayhay,scheduler,scheduler
 fish,yuyu,admin
 saga,protonwira,admin
 xinchan,xc123,admin
