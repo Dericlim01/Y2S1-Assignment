@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import src.Create_file;
 
@@ -50,4 +52,90 @@ public class Hall_Management {
         }  
         return false;    
     }
+
+    public Object[][] search_hall_data(Object hall_type) {
+         List<Object[]> hallData = new ArrayList<>();
+        if (new Create_file().hall_file()) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/halls.txt"))) {
+                while ((line = read.readLine()) != null) {
+                    String[] data = line.split(",");
+                    if (hall_type != null){
+                        if (data[1].equals(hall_type.toString()) ) {
+                                hallData.add(data);
+                        }
+                    } else if (hall_type == null){
+                            hallData.add(data);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return hallData.toArray(new Object[0][]);
+    }
+
+    public Boolean edit_Hall_Info(String H_ID, String Hall_Type, Integer Capacity, Double Price){
+        List<String> fileContent = new ArrayList<>();
+        boolean edit = false;
+        // Check if the hall status file exists, and if not, create it
+        if (new Create_file().hall_file()) { 
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/halls.txt"))) {        
+                 // Read the existing hall status file line by line
+                while ((line = read.readLine()) != null) {
+                    // Split the line into data fields
+                    String[] data = line.split(",");
+                    if (data[0].equals(H_ID)){
+                        data[1] = Hall_Type;
+                        data[2] = Capacity.toString();
+                        data[3] = Price.toString();
+                        edit = true;
+                    } 
+                    fileContent.add(String.join(",", data));
+                }} catch (IOException e) {
+                    e.printStackTrace();
+                }
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/halls.txt"))) {
+                for (String lines : fileContent) {
+                    writer.write(lines);
+                    writer.newLine();
+                }
+                } catch (IOException g) {
+                    g.printStackTrace(); 
+                }
+            return edit;
+        }
+        return edit;
+    }
+
+        public Boolean delete_Hall(String hall_ID){
+            List<String> fileContent = new ArrayList<>();
+            boolean delete = false;
+            // Check if the hall status file exists, and if not, create it
+            if (new Create_file().hall_file()) { 
+                try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/halls.txt"))) {        
+                     // Read the existing hall status file line by line
+                    while ((line = read.readLine()) != null) {
+                        // Split the line into data fields
+                        String[] data = line.split(",");
+                        if (! data[0].equals(hall_ID)){
+                            fileContent.add(String.join(",", data));
+                        } else if (data[0].equals(hall_ID)){
+                            delete = true;
+                        }
+                        
+                    }} catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/hall_status.txt"))) {
+                    for (String lines : fileContent) {
+                        writer.write(lines);
+                        writer.newLine();
+                    }
+                    } catch (IOException g) {
+                        g.printStackTrace(); 
+                }
+                return delete;
+            }   
+            return delete;
+        }    
 }
