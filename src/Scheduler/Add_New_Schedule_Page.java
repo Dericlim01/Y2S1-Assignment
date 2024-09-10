@@ -26,9 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.SpinnerDateModel;
 import javax.swing.SwingUtilities;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -88,26 +86,15 @@ public class Add_New_Schedule_Page extends JFrame{
         // Start Date label
         JLabel startDate_lbl = new JLabel("Start Date:");
         startDate_lbl.setFont(new Font("Comic Sans MS",Font.BOLD,20));
-        startDate_lbl.setBounds(220,350,300,50);
+        startDate_lbl.setBounds(340,350,300,50);
         panel.add(startDate_lbl);
 
         // End Date label
         JLabel endDate_lbl = new JLabel("End Date:");
         endDate_lbl.setFont(new Font("Comic Sans MS",Font.BOLD,20));
-        endDate_lbl.setBounds(237,470,300,50);
+        endDate_lbl.setBounds(357,470,300,50);
         panel.add(endDate_lbl);
         
-        // Start Time label
-        JLabel startTime_lbl = new JLabel("Start Time:");
-        startTime_lbl.setFont(new Font("Comic Sans MS",Font.BOLD,20));
-        startTime_lbl.setBounds(580,350,300,50);
-        panel.add(startTime_lbl);
-
-        // End Time label
-        JLabel endTime_lbl = new JLabel("End Time:");
-        endTime_lbl.setFont(new Font("Comic Sans MS",Font.BOLD,20));
-        endTime_lbl.setBounds(580,470,300,50);
-        panel.add(endTime_lbl);
 
         // Remark label
         JLabel remark_lbl = new JLabel("Remark:");
@@ -232,7 +219,7 @@ public class Add_New_Schedule_Page extends JFrame{
         JDatePanelImpl sDatePanel = new JDatePanelImpl(sdateModel, Properties);
         JDatePickerImpl sDatePicker = new JDatePickerImpl(sDatePanel, new DateFormat());
         // Set the position and size of the date picker and add the datepicker inside UI
-        sDatePicker.setBounds(350, 363, 140, 30);
+        sDatePicker.setBounds(470, 363, 140, 30);
         panel.add(sDatePicker);
         
         
@@ -246,7 +233,7 @@ public class Add_New_Schedule_Page extends JFrame{
         JDatePanelImpl eDatePanel = new JDatePanelImpl(edateModel, Properties);
         JDatePickerImpl eDatePicker = new JDatePickerImpl(eDatePanel, new DateFormat());
         // Set the position and size of the date picker and add the datepicker inside UI
-        eDatePicker.setBounds(350, 485, 140, 30);
+        eDatePicker.setBounds(470, 485, 140, 30);
         panel.add(eDatePicker);
 
 
@@ -288,43 +275,6 @@ public class Add_New_Schedule_Page extends JFrame{
                 }
         });
 
-
-        // Start JSpinner
-        SpinnerDateModel sTimeModel = new SpinnerDateModel();
-        sTimeModel.setCalendarField(Calendar.HOUR); // Set the field to be manipulated to hours
-        // Create the JSpinner using the model
-        JSpinner sTimeSpinner = new JSpinner(sTimeModel);
-        // Configure the display format to show hours and minutes (minutes set to 00)
-        JSpinner.DateEditor sTimeEditor = new JSpinner.DateEditor(sTimeSpinner, "hh:mm a");
-        sTimeSpinner.setEditor(sTimeEditor);
-        // Prevent manual editing by making the text field non-editable
-        sTimeEditor.getTextField().setEditable(false);
-        // Set the initial value with minutes set to 00
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.MINUTE, 0); // Set minutes to 00
-        sTimeSpinner.setValue(cal.getTime());
-        // Set bounds for the spinner (optional, for positioning)
-        sTimeSpinner.setBounds(720, 370, 150, 30);
-        panel.add(sTimeSpinner);
-
-        // End JSpinner
-        SpinnerDateModel eTimeModel = new SpinnerDateModel();
-        eTimeModel.setCalendarField(Calendar.HOUR); // Set the field to be manipulated to hours
-        // Create the JSpinner using the model
-        JSpinner eTimeSpinner = new JSpinner(eTimeModel);
-        // Configure the display format to show hours and minutes (minutes set to 00)
-        JSpinner.DateEditor eTimeEditor = new JSpinner.DateEditor(eTimeSpinner, "hh:mm a");
-        eTimeSpinner.setEditor(eTimeEditor);
-        // Prevent manual editing by making the text field non-editable
-        eTimeEditor.getTextField().setEditable(false);
-        // Set the initial value with minutes set to 00
-        Calendar cal2 = Calendar.getInstance();
-        cal2.set(Calendar.MINUTE, 0); // Set minutes to 00
-        eTimeSpinner.setValue(cal2.getTime());
-        // Set bounds for the spinner (optional, for positioning)
-        eTimeSpinner.setBounds(720, 490, 150, 30);
-        panel.add(eTimeSpinner);
-
         // Add Button
         JButton add_btn = new JButton("Add");
         add_btn.setBounds(420,675,150,30);
@@ -333,26 +283,20 @@ public class Add_New_Schedule_Page extends JFrame{
         add_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Get the value from the spinner and Date Picker when the button is pressed
-                Date sTime = (Date) sTimeSpinner.getValue();
-                Date eTime = (Date) eTimeSpinner.getValue();
+                // Get the value from the Date Picker when the button is pressed
                 Date sDate = (Date) sDatePicker.getModel().getValue();
                 Date eDate = (Date) eDatePicker.getModel().getValue();
                 
-                // Create Calendar instances for four of them making it able to combine together 
+                // Create Calendar instances 
                 Calendar sdateCal = Calendar.getInstance();
                 Calendar edateCal = Calendar.getInstance();
-                Calendar sTimeCal = Calendar.getInstance();
-                Calendar eTimeCal = Calendar.getInstance();
+
+
                 // Set the calendar dates and times to the selected times
                 sdateCal.setTime(sDate);
                 edateCal.setTime(eDate);
-                sTimeCal.setTime(sTime);
-                eTimeCal.setTime(eTime);
-                // Combine the selected dates and times into the start and end date calendars
-                sdateCal.set(Calendar.HOUR_OF_DAY, sTimeCal.get(Calendar.HOUR_OF_DAY));
-                edateCal.set(Calendar.HOUR_OF_DAY, eTimeCal.get(Calendar.HOUR_OF_DAY));
-                 // Reset minutes, seconds, and milliseconds to zero for consistency
+                sdateCal.set(Calendar.HOUR_OF_DAY, 0);
+                edateCal.set(Calendar.HOUR_OF_DAY, 0);
                 sdateCal.set(Calendar.MINUTE, 0);
                 edateCal.set(Calendar.MINUTE, 0);
                 sdateCal.set(Calendar.SECOND, 0);
@@ -374,27 +318,27 @@ public class Add_New_Schedule_Page extends JFrame{
                     JOptionPane.showMessageDialog(
                         null,
                         "Please Choose a Type to Add: Maintainance or Booking",
-                        "Status",
+                        "Error",
                         JOptionPane.INFORMATION_MESSAGE);
                     }
                  // Check if hall data is selected and a booking or maintenance type is chosen
                 if (hallData != null && (bookingButton.isSelected() || maintainanceButton.isSelected())){
                     // Check for scheduling conflicts
-                    if (new Schedule_Maintainance().check_schedule(hallData.get(0), sDate, eDate)){
+                    if (new Schedule_Maintainance().check_schedule(" ",hallData.get(0), updatedsDate, updatedeDate)){
                         // If no conflict, add the schedule
                         if (new Schedule_Maintainance().Add_Schedule(hallData.get(0), hallData.get(1) ,updatedsDate,updatedeDate,status,remark)){
                              // Show success message
                             JOptionPane.showMessageDialog(
                             null,
                             "Hall Added successfully",
-                            "Status",
+                            "Success",
                             JOptionPane.INFORMATION_MESSAGE);
                         } else {
                         // Show failure message if adding schedule fails
                         JOptionPane.showMessageDialog(
                         null,
                         "Hall Added failed",
-                        "Status",
+                        "Error",
                         JOptionPane.INFORMATION_MESSAGE);
                         }
                     } else {
@@ -412,7 +356,7 @@ public class Add_New_Schedule_Page extends JFrame{
                     }
                 else if (hallData == null) {
                     // Show a message if no hall is selected
-                    JOptionPane.showMessageDialog(null,"Please choose a hall",status,JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Please choose a hall", "Error",JOptionPane.INFORMATION_MESSAGE);
                 }
 
                 }
