@@ -35,7 +35,7 @@ public class Scheduler_Main_Page extends JFrame {
         });
     }
 
-    public Scheduler_Main_Page(String n){
+    public Scheduler_Main_Page(String name){
         setTitle("Scheduler Main Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
@@ -197,6 +197,15 @@ public class Scheduler_Main_Page extends JFrame {
         hallMngBtn.setForeground(new Color(128,128,128));
         hallMngBtn.setFont(new Font("Comic Sans MS",Font.PLAIN,17));
         panel.add(hallMngBtn);
+        hallMngBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Hall_Management_Page hm = new Hall_Management_Page(name);
+                hm.setTitle("Hall Management");
+                hm.setVisible(true);
+            }
+        });
 
         JButton hallSchBtn = new JButton("Hall Scheduling");
         hallSchBtn.setBounds(500, 300, 220, 45);
@@ -204,6 +213,12 @@ public class Scheduler_Main_Page extends JFrame {
         hallSchBtn.setForeground(new Color(128,128,128));
         hallSchBtn.setFont(new Font("Comic Sans MS",Font.PLAIN,17));
         panel.add(hallSchBtn);
+        hallSchBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(name);
+            }
+        });
 
         JButton viewTaskButton = new JButton("View Task");
         viewTaskButton.setBounds(500, 400, 220, 45);
