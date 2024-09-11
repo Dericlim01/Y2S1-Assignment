@@ -1,25 +1,11 @@
-package src;
+package src.Customer.Update_Profile;
 import src.Customer.Customer_Page;
-
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.ImageIcon;
-import javax.swing.JTextField;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.border.EmptyBorder;
-
+import src.DateFormat;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-
-import java.awt.Color;
 import java.awt.Font;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Cursor;
 import java.awt.Toolkit;
@@ -34,6 +20,18 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.border.EmptyBorder;
 
 public class Update_Profile extends JFrame {
     private static String name;
