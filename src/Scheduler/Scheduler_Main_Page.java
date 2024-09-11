@@ -1,7 +1,12 @@
 package src.Scheduler;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
@@ -14,7 +19,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+import javax.imageio.ImageIO;
 import src.Login_Page;
 import src.UpdateProfile;
 
@@ -83,7 +88,7 @@ public class Scheduler_Main_Page extends JFrame {
 
             BufferedImage get_image = new BufferedImage(80, 80, BufferedImage.TYPE_INT_RGB);
 
-            get_image = ImageIO.read(new File("resources\\Image\\nanazi.png"));
+            get_image = ImageIO.read(new File("resources\\Image\\fengjian.png"));
 
             Image image = get_image.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
 
@@ -216,7 +221,10 @@ public class Scheduler_Main_Page extends JFrame {
         hallSchBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(name);
+                dispose();
+                Schedule_Maintainance_Page smp = new Schedule_Maintainance_Page(name);
+                smp.setTitle("Schedule Maintainance");
+                smp.setVisible(true);
             }
         });
 
@@ -226,6 +234,16 @@ public class Scheduler_Main_Page extends JFrame {
         viewTaskButton.setForeground(new Color(128,128,128));
         viewTaskButton.setFont(new Font("Comic Sans MS",Font.PLAIN,17));
         panel.add(viewTaskButton);
+        viewTaskButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Task_Checking_Page tcp = new Task_Checking_Page(name);
+                tcp.setTitle("Task Checking");
+                tcp.setVisible(true);
+            }
+        });
+
 
         //View Profile Button
         JButton viewpro_btn = new JButton("View Profile");
@@ -233,15 +251,15 @@ public class Scheduler_Main_Page extends JFrame {
         viewpro_btn.setForeground(new Color(128,128,128));
         viewpro_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,17));
         viewpro_btn.setBounds(500,500,220,45);
-        // viewpro_btn.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         dispose();
-        //         Admin_Profile_Page ap = new Admin_Profile_Page(name);
-        //         ap.setTitle("Admin Profile");
-        //         ap.setVisible(true);
-        //     }
-        // });
+        viewpro_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Scheduler_Update_Profile_Page sup = new Scheduler_Update_Profile_Page(name);
+                sup.setTitle("Scheduler Profile");
+                sup.setVisible(true);
+            }
+        });
         panel.add(viewpro_btn);
 
 

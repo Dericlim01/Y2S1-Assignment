@@ -2,7 +2,7 @@ T01,I02,environment hall cannot la,blablabla ok,bean,Banquest_Hall,qingfui,pleas
 T02,I03,environment hall cannot la,blablabla ok,fish,Meeting_Rooms,hayhay,halo settle this issues ya,In progress
 T03,I02,environment hall cannot la,blablabla ok,bean,Banquest_Hall,fish,good morning,In progress
 T04,I02,environment hall cannot la,blablabla ok,bean,Banquest_Hall,hayhay,good morning afternoon good night,In progress
-T05,I03,environment hall cannot la,blablabla ok,fish,Meeting_Rooms,qingfui,pls help to settle this customer issues,In progress
+T05,I03,environment hall cannot la,blablabla ok,fish,Meeting_Rooms,qingfui,pls help to settle this customer issues,Done
 T06,I01,hall dirty,blablablalabablablablablablabla,mona,Auditorium,saga,remember to settle this customer issues,In progress
 T07,I02,environment hall cannot la,blablabla ok,bean,Banquet_Hall,fish,sjkdaskdjakjdkajsdkajs,In progress
 T08,I03,environment hall cannot la,blablabla ok,fish,Meeting_Rooms,hayhay,blablblablala,In progress
