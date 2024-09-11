@@ -56,7 +56,7 @@ public class Customer_Issues_Receive extends JFrame {
 
         Manager man_issues = new Manager();
 
-        String[] col_name = {"Issue ID", "Issue", "Description","Hall Type","Username"};
+        String[] col_name = {"Issue ID", "Issue", "Description","Hall ID","Hall Type","Username"};
         Object[][] row_data = man_issues.present_data("resources/Database/issues.txt");
         table_Model = new DefaultTableModel();
         table_Model.setDataVector(row_data, col_name);

@@ -223,6 +223,65 @@ public class Manager {
 
     }
 
+    // 
+    public ArrayList<String> task_ID() {
+        String task_line;
+        ArrayList<String> tasks = new ArrayList<>();
+
+        if (new Create_file().hall_file()) {
+            try (BufferedReader task_br = new BufferedReader(new FileReader("resources/Database/task.txt"))) {
+                while ((task_line = task_br.readLine()) != null) {
+                    String[] row_task = task_line.split(",");
+                    if (!tasks.contains(row_task[1])) {
+                        tasks.add(row_task[1]);
+                    }
+                }
+                return tasks;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return tasks;
+
+    }
+
+    public Boolean update_status(String taskID, String issuesID, String issues_title, String issues_description, String username, String hallId, String Staff, String s) {
+        // Create a user list
+        List<String> task = new ArrayList<>();
+        String line;
+
+        Boolean status_update = false;
+
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/task.txt"))) {
+            while ((line = read.readLine()) != null) {
+                // Store data into data and add to task array
+                String[] data = line.split(",");
+                if (data[0].equals(taskID)){
+                    data[8] = s;
+                    status_update = true;
+                }
+                task.add(String.join(",", data));
+            }} catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+            // Loop through the task
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/task.txt"))) {
+            for (String taskdata : task) {
+                 //writer.println(taskdata[0] + "," + taskdata[1] + "," + taskdata[2] + "," + taskdata[3] 
+                 //+ "," + taskdata[4] + "," + taskdata[5] + "," + taskdata[6] + "," + taskdata[7] + "," + taskdata[8]);
+                writer.write(taskdata);
+                writer.newLine();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+        return status_update;
+    }
+
     // Customer_Issues_Receive
     public ArrayList<String> hall_type() {
         String hall_line;
@@ -252,7 +311,7 @@ public class Manager {
                 String line;
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
-                    if (data[3].equals(hall_type)) {
+                    if (data[4].equals(hall_type)) {
                         hallList.add(data);
                     }
                 }
@@ -292,8 +351,9 @@ public class Manager {
         String issues_id = issuesRow.get(0);
         String issues = issuesRow.get(1);
         String description = issuesRow.get(2);
-        String hallType = issuesRow.get(3);
-        String userName = issuesRow.get(4);
+        String hallID = issuesRow.get(3);
+        //String hallType = issuesRow.get(4);
+        String userName = issuesRow.get(5);
 
         try (BufferedReader task_br = new BufferedReader(new FileReader("resources/Database/task.txt"))) {
             int maxID = 0;
@@ -318,7 +378,7 @@ public class Manager {
         String issues_status = "In progress";
 
         try (FileWriter task = new FileWriter("resources/Database/task.txt", true)) {
-            task.write(id + "," + issues_id + "," + issues + "," + description + "," + userName + "," + hallType + "," + staff_data + "," + details + "," + issues_status + "\n");
+            task.write(id + "," + issues_id + "," + issues + "," + description + "," + userName + "," + hallID  + "," + staff_data + "," + details + "," + issues_status + "\n");
             JOptionPane.showMessageDialog(null, "Assign Successfull. Please go to the Task Status Page to check. Thank You ^_^", "Successful Assign Notification", JOptionPane.OK_CANCEL_OPTION);
 
         } catch (Exception e) {
