@@ -1,17 +1,9 @@
-HS_1,H_1,Auditorium,20-08-2024-09:00 AM,20-08-2024-06:00 PM,maintainance,Fix cctv
-HS_2,H_2,MeetingRoom,20-08-2024-09:00 AM,30-08-2024-06:00 PM,available,null
-HS_3,H_3,BanquetHall,20-08-2024-09:00 AM,30-08-2024-06:00 PM,available,null
-HS_4,H_4,Others,20-08-2024-09:00 AM,30-08-2024-06:00 PM,available,null
-HS_5,H_1,Auditorium,23-08-2024-09:00 AM,30-08-2024-06:00 PM,available,null
-HS_6,H_4,Others,31-08-2024-09:00 AM,31-08-2024-06:00 PM,maintainance,Monthly Checking
-HS_7,H_3,BanquetHall,31-08-2024-09:00 AM,31-08-2024-06:00 PM,maintainance,Monthly Checking
-HS_8,H_2,MeetingRoom,31-08-2024-09:00 AM,31-08-2024-06:00 PM,maintainance,Monthly Checking
-HS_9,H_1,Auditorium,31-08-2024-09:00 AM,31-08-2024-06:00 PM,maintainance,Monthly Checking
-HS_10,H_1,Auditorium,01-09-2024-09:00 AM,10-09-2024-06:00 PM,available,null
-HS_11,H_2,MeetingRoom,01-09-2024-08:00 AM,10-09-2024-06:00 PM,available,null
-HS_12,H_10,MeetingRoom,23-08-2024-08:00 AM,30-08-2024-06:00 PM,available,null
-HS_13,H_8,BanquetHall,23-08-2024-08:00 AM,30-08-2024-06:00 PM,available,null
-HS_14,H_6,Auditorium,23-08-2024-08:00 AM,30-08-2024-06:00 PM,available,null
-HS_15,H_5,Auditorium,23-08-2024-08:00 AM,30-08-2024-06:00 PM,maintainance,Fix Chair
-HS_16,H_7,BanquetHall,04-09-2024-08:00 AM,04-09-2024-06:00 PM,maintainance,Install new TV
-HS_17,H_9,MeetingRoom,02-09-2024-08:00 AM,02-09-2024-06:00 PM,maintainance,Install new table
+H_1,Auditorium,400,300.000000
+H_2,MeetingRoom,100,100.000000
+H_3,BanquetHall,50,50.0
+H_4,Others,500,500.000000
+H_5,Auditorium,300,300.000000
+H_6,Auditorium,250,300.000000
+H_7,Others,200,150.0
+H_8,BanquetHall,175,140.000000
+H_9,MeetingRoom,60,90.000000

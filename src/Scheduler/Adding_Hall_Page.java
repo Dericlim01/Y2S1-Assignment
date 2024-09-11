@@ -120,7 +120,7 @@ public class Adding_Hall_Page extends JFrame {
          SpinnerModel value =  
              new SpinnerNumberModel(20, //initial value  
                 0, //minimum value  
-                500, //maximum value  
+                1000, //maximum value  
                 1); //step  
         JSpinner capacitySpinner = new JSpinner(value);   
         capacitySpinner.setBounds(450,358,200,40);    

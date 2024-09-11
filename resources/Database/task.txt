@@ -6,3 +6,5 @@ T05,I03,environment hall cannot la,blablabla ok,fish,Meeting_Rooms,qingfui,pls h
 T06,I01,hall dirty,blablablalabablablablablablabla,mona,Auditorium,saga,remember to settle this customer issues,In progress
 T07,I02,environment hall cannot la,blablabla ok,bean,Banquet_Hall,fish,sjkdaskdjakjdkajsdkajs,In progress
 T08,I03,environment hall cannot la,blablabla ok,fish,Meeting_Rooms,hayhay,blablblablala,In progress
+T09,I03,environment hall cannot la,blablabla ok,fish,MeetingRoom,qf,blablablabla,In progress
+T10,I03,environment hall cannot la,blablabla ok,fish,MeetingRoom,qf,blablablabla,In progress
