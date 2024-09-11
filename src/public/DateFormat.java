@@ -1,5 +1,3 @@
-package src;
-
 import java.util.Calendar;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
