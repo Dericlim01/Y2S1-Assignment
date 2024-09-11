@@ -16,12 +16,6 @@ import src.Create_file;
  */
 public class Hall_Management {
 
-    public static String name;
-    
-    public Hall_Management(String n) {
-        name = n;
-    }
-
     String line;
     Integer newIDNum;
     ArrayList<Integer> findBiggest = new ArrayList<Integer>();

@@ -112,4 +112,20 @@ public class Create_file {
             return false;
         }
     }
+
+    // Task file
+    public Boolean task_file() {
+        try {
+            if (new File("resources/Database/task.txt").createNewFile()) {
+                System.out.println("Task file created");
+            } else {
+                System.out.println("Task File exist");
+            }
+            return true;
+        } catch (Exception e) {
+            System.out.println("An error occured");
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

@@ -44,7 +44,7 @@ public class Hall_Management_Page extends JFrame {
     SwingUtilities.invokeLater(() -> new Hall_Management_Page(name).setVisible(true));
     }
 
-    public Hall_Management_Page(String n){
+    public Hall_Management_Page(String name){
         setTitle("Hall Info Management");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
@@ -90,7 +90,7 @@ public class Hall_Management_Page extends JFrame {
         pricePerH_lbl.setBounds(520, 180,150,50);
         panel.add(pricePerH_lbl);
 
-        // Price per hour label
+        // Filter label
         JLabel filterlbl = new JLabel("Filter By Hall Type:");
         filterlbl.setFont(new Font("Comic Sans MS",Font.PLAIN,18));
         filterlbl.setBounds(40,550,300,50);
@@ -150,7 +150,7 @@ public class Hall_Management_Page extends JFrame {
       
         // table
         String[] col_name = {"Hall ID", "Hall Type", "Capacity", "Price per Hour"};
-        Object[][] data =  new Hall_Management(name).search_hall_data(hallTypeBox.getSelectedItem());;
+        Object[][] data =  new Hall_Management().search_hall_data(hallTypeBox.getSelectedItem());;
         DefaultTableModel table = new DefaultTableModel(data, col_name){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -278,7 +278,7 @@ public class Hall_Management_Page extends JFrame {
                     showAllBtn.setVisible(true);
                     details.setEnabled(true);
 
-                    if(new Hall_Management(name).edit_Hall_Info(hallID_ctn_lbl.getText(),
+                    if(new Hall_Management().edit_Hall_Info(hallID_ctn_lbl.getText(),
                     hallTypeBox.getSelectedItem().toString(),
                     (int) capacitySpinner.getValue(),
                     (Double) priceField.getValue()))
@@ -288,7 +288,7 @@ public class Hall_Management_Page extends JFrame {
                         JOptionPane.showMessageDialog(null,"Edit Failed", "Error",JOptionPane.INFORMATION_MESSAGE);
                     }
 
-                    Object[][] newData = new Hall_Management(name).search_hall_data(hallTypeFilterBox.getSelectedItem());
+                    Object[][] newData = new Hall_Management().search_hall_data(hallTypeFilterBox.getSelectedItem());
                     // Clear the existing rows in the table model
                     table.setRowCount(0);
 
@@ -308,7 +308,7 @@ public class Hall_Management_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (selectedRow != -1) {
-                    if (new Hall_Management(name).delete_Hall(hallID)){
+                    if (new Hall_Management().delete_Hall(hallID)){
                         JOptionPane.showMessageDialog(null,"Delete Successful", "Success",JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(null,"Delete Failed", "Error",JOptionPane.INFORMATION_MESSAGE);
@@ -331,7 +331,7 @@ public class Hall_Management_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 hallTypeFilterBox.setSelectedIndex(-1);
-                Object[][] newData = new Hall_Management(name).search_hall_data(hallTypeFilterBox.getSelectedItem());
+                Object[][] newData = new Hall_Management().search_hall_data(hallTypeFilterBox.getSelectedItem());
                 // Clear the existing rows in the table model
                 table.setRowCount(0);
 
@@ -347,7 +347,7 @@ public class Hall_Management_Page extends JFrame {
         hallTypeFilterBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Object[][] newData = new Hall_Management(name).search_hall_data(hallTypeFilterBox.getSelectedItem());
+                Object[][] newData = new Hall_Management().search_hall_data(hallTypeFilterBox.getSelectedItem());
                 // Clear the existing rows in the table model
                 table.setRowCount(0);
                 // Add new data to the table model
@@ -357,10 +357,6 @@ public class Hall_Management_Page extends JFrame {
                 // Table done refresh
             }
         });
-
-
-        
-
 
         //Home Page Label
         JLabel back_lbl = new JLabel();
@@ -379,9 +375,9 @@ public class Hall_Management_Page extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-                Hall_Management_Page hm = new Hall_Management_Page(name);
-                hm.setTitle("Hall Management");
-                hm.setVisible(true);
+                Scheduler_Main_Page mp = new Scheduler_Main_Page(name);
+                mp.setTitle("Scheduler Main Page");
+                mp.setVisible(true);
             }
         });
         panel.add(back_lbl);
