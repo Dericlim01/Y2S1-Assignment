@@ -1,15 +1,12 @@
 package src.Scheduler;
-
+import src.shared.Create_file;
+import java.util.List;
+import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-
-import java.util.List;
-
-import src.Create_file;
 
 public class Task_Checking {
     String line;

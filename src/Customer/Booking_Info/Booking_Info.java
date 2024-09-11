@@ -1,15 +1,14 @@
 package src.Customer.Booking_Info;
-import src.Create_file;
-
-import java.io.BufferedReader;
+import src.shared.Create_file;
+import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.BufferedReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Booking_Info {
     private DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -62,8 +61,8 @@ public class Booking_Info {
         for (int i = 0; i < all_event_data.length; i++) {
             LocalDate data_start_date = LocalDate.parse(all_event_data[i][3].toString(), datePattern);
             LocalDate data_end_date = LocalDate.parse(all_event_data[i][4].toString(), datePattern);
-            if ((data_start_date.equals(date) || data_start_date.isAfter(date)) && 
-                (data_end_date.isBefore(date) || data_end_date.equals(date))) {
+            if ((data_start_date.equals(date) || data_start_date.isBefore(date)) && 
+                (data_end_date.equals(date) || data_end_date.isAfter(date))) {
                 event_data.add(all_event_data[i]);
             }
         }
