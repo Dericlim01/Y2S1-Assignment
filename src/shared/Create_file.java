@@ -1,4 +1,6 @@
-import java.io.*;
+package src.shared;
+import java.io.File;
+import java.io.IOException;
 
 public class Create_file {
     // User file

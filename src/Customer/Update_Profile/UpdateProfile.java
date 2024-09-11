@@ -1,11 +1,11 @@
 package src.Customer.Update_Profile;
-import java.util.ArrayList;
 import java.util.Date;
-import java.io.BufferedReader;
+import java.util.ArrayList;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.FileWriter;
+import java.io.BufferedReader;
 
 public class UpdateProfile {
     String line;
