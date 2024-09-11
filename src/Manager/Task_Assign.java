@@ -48,6 +48,7 @@ public class Task_Assign extends JFrame{
 
         JPanel manager_TA = new JPanel();
         manager_TA.setBorder(new EmptyBorder(5, 5, 5, 5));
+        manager_TA.setBackground(new Color(248,248,248));
         setContentPane(manager_TA);
         manager_TA.setLayout(null);
 

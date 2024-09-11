@@ -59,6 +59,7 @@ public class Booking_Info_Page extends JFrame {
         // Set Panel
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setBackground(new Color(248,248,248));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
