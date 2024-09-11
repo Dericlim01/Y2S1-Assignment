@@ -5,3 +5,4 @@ saga,protonwira,52000,saga@mail.com,20-03-2011,male,admin
 xinchan,xc123,565474343,xc@mail.com,22-04-2013,female,admin
 nanazi,nanaz1234,695795,nz@mail.com,18-02-2016,female,admin
 jqong,ongjq,0123456789,jqong@gmail.com,23-10-2004,female,manager
+qingfui,qftee,123123123,java@assignment.com,01-10-1996,male,scheduler

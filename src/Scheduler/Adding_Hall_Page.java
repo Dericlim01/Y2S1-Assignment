@@ -42,7 +42,7 @@ public class Adding_Hall_Page extends JFrame {
     }
 
     // Set Panel
-    public Adding_Hall_Page(String n){
+    public Adding_Hall_Page(String name){
         setTitle("Adding New Hall");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
@@ -156,7 +156,7 @@ public class Adding_Hall_Page extends JFrame {
                 String hallTypeValue = (String) hallTypeBox.getSelectedItem();
                 Integer capacityValue = (Integer) capacitySpinner.getValue();
                 Double priceValue = ((Number) priceField.getValue()).doubleValue();
-            if (new Hall_Management(n).Add_Hall(hallTypeValue, capacityValue,priceValue)) {
+            if (new Hall_Management().Add_Hall(hallTypeValue, capacityValue,priceValue)) {
                     JOptionPane.showMessageDialog(
                         null,
                         "Hall Added successfully",

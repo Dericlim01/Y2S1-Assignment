@@ -45,7 +45,7 @@ public class Add_New_Schedule_Page extends JFrame{
     }
 
     
-    public Add_New_Schedule_Page(String n){
+    public Add_New_Schedule_Page(String name){
         //  Set up the page 
         setTitle("Adding New Schedule");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -350,7 +350,7 @@ public class Add_New_Schedule_Page extends JFrame{
                             if (choice == JOptionPane.YES_OPTION) { 
                             // If the user chose 'Yes', it will change the page to the schedule checker page
                             dispose();
-                            new Schedule_Maintainance_Page(n).setVisible(true);
+                            new Schedule_Maintainance_Page(name).setVisible(true);
                             } 
                     }
                     }
@@ -380,7 +380,7 @@ public class Add_New_Schedule_Page extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-                new Schedule_Maintainance_Page(n).setVisible(true);
+                new Schedule_Maintainance_Page(name).setVisible(true);
             }
 
         });

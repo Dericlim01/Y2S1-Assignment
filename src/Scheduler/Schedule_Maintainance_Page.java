@@ -46,7 +46,7 @@ public class Schedule_Maintainance_Page extends JFrame {
     SwingUtilities.invokeLater(() -> new Schedule_Maintainance_Page(name).setVisible(true));
     }
     
-    public Schedule_Maintainance_Page(String n){
+    public Schedule_Maintainance_Page(String name){
         setTitle("Hall Schedule Management");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
