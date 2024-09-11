@@ -1,3 +1,4 @@
+suad,super,superadmin
 hiadmin,newadmin,admin
 hayhay,scheduler,scheduler
 fish,yuyu,admin
