@@ -1,12 +1,6 @@
 package src.Scheduler;
-
-import javax.swing.*;
-
-import javax.imageio.*;
-
-import src.UpdateProfile;
+import src.Customer.Update_Profile.UpdateProfile;
 import src.Scheduler.Scheduler_Update_Profile_Page;
-
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Color;
@@ -18,9 +12,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
-
 import java.io.File;
 import java.io.IOException;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+import javax.imageio.ImageIO;
 
 public class Scheduler_Update_Profile_Page extends JFrame {
 

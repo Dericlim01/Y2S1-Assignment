@@ -1,4 +1,4 @@
-package src;
+package src.shared;
 import src.Admin.Admin_Page;
 import src.Admin.Suadmin_Page;
 import src.Customer.Customer_Page;

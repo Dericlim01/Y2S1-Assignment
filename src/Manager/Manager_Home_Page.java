@@ -1,12 +1,7 @@
 package src.Manager;
-import javax.swing.*;
-import javax.swing.border.*;
-
-import javax.imageio.ImageIO;
-
 import src.Login_Page;
-import src.UpdateProfile;
-
+import src.Customer.Update_Profile.UpdateProfile;
+import java.io.*;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Color;
@@ -18,9 +13,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
-
-import java.io.*;
-
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.imageio.ImageIO;
 
 public class Manager_Home_Page extends JFrame{
     private static String manname;

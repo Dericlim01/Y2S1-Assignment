@@ -211,6 +211,7 @@ public class Sales_Dashboard_Page extends JFrame {
                 double totalPaid = man_data.calculate_total_paid("resources/Database/bookings.txt");
                 paid.setText(String.format("%.2f", totalPaid));
 
+                //tm.fireTableDataChanged();
                 table_tm.revalidate(); // important, recalculate the layout / resize the panel?
                 table_tm.repaint(); // important, rearranging components
 
@@ -219,7 +220,7 @@ public class Sales_Dashboard_Page extends JFrame {
         manager_SD.add(refresh);
 
         // Total Label
-        JLabel tt_lbl = new JLabel("Total:");
+        JLabel tt_lbl = new JLabel("Total (RM) :");
         tt_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         tt_lbl.setBounds(700, 575, 110, 20);
         manager_SD.add(tt_lbl);

@@ -1,52 +1,46 @@
 package src.Admin;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import src.shared.Create_file;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-
-import javax.swing.DefaultComboBoxModel;
+import java.util.ArrayList;
+import javax.swing.JTable;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.TableRowSorter;
-
-import src.Create_file;
+import javax.swing.table.DefaultTableModel;
 
 public class Admin_Management {
     private String line;
     private TableRowSorter<DefaultTableModel> sorter;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-    public Admin_Management (String name){
+    public Admin_Management (String name) {}
 
-    }
-
-    //Check the unique adminname
-        Create_file file = new Create_file();
-        public Boolean check_staff (String name) {
-        if(file.staffs_file()){
-            try (BufferedReader read_staff = new BufferedReader(new FileReader("resources/Database/users.txt"))){
-                while ((line = read_staff.readLine()) != null){
+    // Check the unique adminname
+    Create_file file = new Create_file();
+    public Boolean check_staff (String name) {
+        if (file.staffs_file()) {
+            try (BufferedReader read_staff = new BufferedReader(new FileReader("resources/Database/users.txt"))) {
+                while ((line = read_staff.readLine()) != null) {
                     String[] data = line.split(",");
                     String staffname = data[0];
-                    if(staffname.equals(name)){
+                    if (staffname.equals(name)) {
                         return false;
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
                 return false;
-            }    
-
-    }
-    return true;
+            }
+        }
+        return true;
     }
 
     public String[] search_user(String name) {
@@ -135,21 +129,20 @@ public class Admin_Management {
         }
     }
 
-    public JScrollPane view_admin(String[] adCol){
+    public JScrollPane view_admin(String[] adCol) {
     ArrayList<String[]> adData = new ArrayList<>();
-        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"))){
-            while((line = read.readLine()) != null) {
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"))) {
+            while ((line = read.readLine()) != null) {
                 String[] data = line.split(",");
-                if(data[2].equals("admin")){
+                if (data[2].equals("admin")) {
                     adData.add(data);
                 }
-                }
             }
-            catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
         Object[][] adRow= adData.toArray(new Object[0][]);
-
         DefaultTableModel admin_table = new DefaultTableModel(adRow,adCol);
         JTable table = new JTable(admin_table);
         sorter = new TableRowSorter<>(admin_table);
@@ -163,22 +156,21 @@ public class Admin_Management {
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         //set model to JComboBox
         adshow.setModel(model);
-        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))){
-            while((line = read.readLine()) != null){
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))) {
+            while ((line = read.readLine()) != null) {
                 String[] data = line.split(",");
-                if(data[6].equals("admin")){
+                if (data[6].equals("admin")) {
                     String adname = data[0];
                     //adding element at the end of vector with increasing the size by one
                     model.addElement(adname);
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public Boolean edit_admin(String adname, String password, String role){
+    public Boolean edit_admin(String adname, String password, String role) {
         ArrayList<String> usersData = new ArrayList<>();
         boolean edit = false;
         // Read all lines and modify the target line
@@ -189,10 +181,8 @@ public class Admin_Management {
                 if (data[0].equals(adname)) {
                     data[1] = password;
                     data[2] = role;
-
                     edit = true;
                 }
-
                 //adding all file datas into ArrayList
                 //spliting data with comma
                 usersData.add(String.join(",", data));
@@ -214,32 +204,30 @@ public class Admin_Management {
             e.printStackTrace();
             return false;
         }
-
         return edit;
     }
 
     public Boolean delete_admin(String adname) {
         ArrayList<String> usersData = new ArrayList<>();
         boolean delete = false;
-        try(BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"))) {
-            while((line = read.readLine())!= null){
+        try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/users.txt"))) {
+            while((line = read.readLine())!= null) {
                 String[] data = line.split(",");
-                if (data[0].equals(adname)){
+                if (data[0].equals(adname)) {
                     delete = true;
                     //when succeffully searching and matching staff name, continue to delete
                     continue;
-
                 }
                 usersData.add(line);
-        }          
-        }catch (Exception e) {
+            }          
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        if(delete){
+        if (delete) {
             //Ensure all line are written back to the file
-            try(BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/users.txt"))) {
-                for(String user: usersData){
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/users.txt"))) {
+                for (String user: usersData) {
                     writer.write(user);
                     writer.newLine();
                 }
@@ -247,7 +235,6 @@ public class Admin_Management {
                 e.printStackTrace();
             }
         }
-
         return delete;
     }
 

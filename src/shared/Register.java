@@ -1,4 +1,4 @@
-package src;
+package src.shared;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
