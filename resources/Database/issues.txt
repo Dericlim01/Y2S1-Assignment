@@ -1,4 +1,4 @@
-I01,hall dirty,blablablalabablablablablablabla,Auditorium,mona,
-I02,environment hall cannot la,blablabla ok,BanquetHall,bean,
-I03,environment hall cannot la,blablabla ok,MeetingRoom,fish,
+I01,hall dirty,blablablalabablablablablablabla,H1,Auditorium,mona
+I02,environment hall cannot la,blablabla ok,H2,BanquetHall,bean
+I03,environment hall cannot la,blablabla ok,H3,MeetingRoom,fish
 I6,blablabla,hi good morning eveyrone,null
