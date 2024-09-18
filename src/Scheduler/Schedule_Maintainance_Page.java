@@ -262,6 +262,14 @@ public class Schedule_Maintainance_Page extends JFrame {
             }
         });
 
+        // Add Schedule
+        addSchdlBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Add_New_Schedule_Page(name).setVisible(true);
+            }
+        });
+
         // Get Selected row content on table
         details.addMouseListener(new MouseAdapter() {
             @Override

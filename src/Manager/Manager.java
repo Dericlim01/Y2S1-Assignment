@@ -1,16 +1,10 @@
 package src.Manager;
-
-import java.io.*;
-
-import java.util.*;
-
-import src.Create_file;
-
-import javax.swing.JOptionPane;
-
-import java.text.SimpleDateFormat;
-
 import org.jdatepicker.impl.JDatePickerImpl;
+import src.shared.Create_file;
+import java.io.*;
+import java.util.*;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 
 public class Manager {
 

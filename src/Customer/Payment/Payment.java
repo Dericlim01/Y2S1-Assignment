@@ -8,15 +8,18 @@ import java.io.BufferedReader;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Payment {
     private DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private String calculate_day(String start_date, String end_date) {
         LocalDate d1 = LocalDate.parse(start_date, datePattern);
         LocalDate d2 = LocalDate.parse(end_date, datePattern);
-        Duration diff = Duration.between(d1.atStartOfDay(), d2.atStartOfDay());
-        String diffDays = String.valueOf(diff.toDays());
-        return diffDays;
+        //Duration diff = Duration.between(d1.atStartOfDay(), d2.atStartOfDay());
+        //Integer diffDays = Integer.parseInt(diff.toString()) + 1;
+        long diffDays = ChronoUnit.DAYS.between(d1, d2) + 1;
+        String diffDays_str = String.valueOf(diffDays);
+        return diffDays_str;
     }
 
     private String calculate_price(String days, String price_per_hour) {

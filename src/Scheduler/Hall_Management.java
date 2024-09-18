@@ -118,7 +118,7 @@ public class Hall_Management {
                     }} catch (IOException e) {
                         e.printStackTrace();
                     }
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/hall_status.txt"))) {
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/hall.txt"))) {
                     for (String lines : fileContent) {
                         writer.write(lines);
                         writer.newLine();

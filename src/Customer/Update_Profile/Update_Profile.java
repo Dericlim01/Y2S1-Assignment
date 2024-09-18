@@ -208,7 +208,7 @@ public class Update_Profile extends JFrame {
 
         // D.O.B Calendar
         UtilDateModel model = new UtilDateModel();
-        //Properties create object to store values in it
+        // Properties create object to store values in it
         Properties prop = new Properties();
         prop.put("text.day", "Day");
         prop.put("text.month","Month");
@@ -217,6 +217,7 @@ public class Update_Profile extends JFrame {
         JDatePanelImpl datePanel = new JDatePanelImpl(model, prop);
         JDatePickerImpl dobDatePicker = new JDatePickerImpl(datePanel, new DateFormat());
         dobDatePicker.setBounds(460,480,200,25);
+        dobDatePicker.getComponent(1).setEnabled(false);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         try {
             Date dob = dateFormat.parse(users[3]);
@@ -323,6 +324,7 @@ public class Update_Profile extends JFrame {
                 reen_pass_txt_f.setEditable(true);
                 cont_num_txt_f.setEditable(true);
                 email_txt_f.setEditable(true);
+                dobDatePicker.getComponent(1).setEnabled(true);
                 gen_cmbbx.setEnabled(true);
                 contentPane.add(show_pass);
                 contentPane.remove(edit_btn);

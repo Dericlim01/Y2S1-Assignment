@@ -177,10 +177,8 @@ public class Hall_Management_Page extends JFrame {
         @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Scheduler_Main_Page smp = new Scheduler_Main_Page(name);
-                smp.setTitle("Scheduler Main Page");
-                smp.setVisible(true);
-        }
+                new Adding_Hall_Page(name).setVisible(true);
+            }
         });
 
 
@@ -313,7 +311,7 @@ public class Hall_Management_Page extends JFrame {
                     } else {
                         JOptionPane.showMessageDialog(null,"Delete Failed", "Error",JOptionPane.INFORMATION_MESSAGE);
                     }
-                    Object[][] newData = new Schedule_Maintainance().search_hall_schedule(hallTypeFilterBox.getSelectedItem());
+                    Object[][] newData = new Hall_Management().search_hall_data(hallTypeFilterBox.getSelectedItem());
                     // Clear the existing rows in the table model
                     table.setRowCount(0);
 

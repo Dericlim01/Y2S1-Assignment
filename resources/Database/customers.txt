@@ -1,2 +1,1 @@
-customer,0123456789,customer@mail.com,07-08-2024,male
-suga,0123456789,suga@mail.com,07-08-2024,female
+customer,0123456789,customer@mail.com,01-01-2000,male

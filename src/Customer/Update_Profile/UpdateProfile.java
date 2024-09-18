@@ -5,10 +5,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.io.BufferedReader;
 
 public class UpdateProfile {
     String line;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
 
     // search user and return to update for display
     public String[] search_user(String name) {
@@ -67,7 +70,6 @@ public class UpdateProfile {
                 // Store data into data and add to users array
                 String[] data = line.split(",");
                 users.add(data);
-                System.out.println(users);
             }
             // Loop through the users
             for (int i = 0; i < users.size(); i++) {
@@ -99,6 +101,7 @@ public class UpdateProfile {
     }
 
     public Boolean update_users(String n, String cn, String em, Date dob, String gender) {
+        String dobformat = dateFormat.format(dob);
         // Create a user list
         ArrayList<String[]> users = new ArrayList<String[]>();
         Boolean user_update = false;
@@ -107,7 +110,6 @@ public class UpdateProfile {
                 // Store data into data and add to users array
                 String[] data = line.split(",");
                 users.add(data);
-                System.out.println(users);
             }
             // Loop through the users
             for (int i = 0; i < users.size(); i++) {
@@ -115,7 +117,7 @@ public class UpdateProfile {
                 if (users.get(i)[0].equals(n)) {
                     users.get(i)[1] = cn;
                     users.get(i)[2] = em;
-                    users.get(i)[3] = dob.toString();
+                    users.get(i)[3] = dobformat;
                     users.get(i)[4] = gender;
                     user_update = true;
                 }
