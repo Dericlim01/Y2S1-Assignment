@@ -1,5 +1,7 @@
 package src.Scheduler;
+
 import src.shared.Create_file;
+
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -29,7 +31,6 @@ public class Schedule_Maintainance {
                     }
                 }
                 return hallType;
-                
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -54,7 +55,7 @@ public class Schedule_Maintainance {
             }
         }
         return hallData;
-}
+    }
 
     public ArrayList<String> search_hall_ID() {
         ArrayList<String> hallID = new ArrayList<String>();
@@ -113,9 +114,8 @@ public class Schedule_Maintainance {
         }
         return hallData.toArray(new Object[0][]);
     }
-
     
-    public Boolean check_schedule(String schID, String Hall_ID,Date add_sDate , Date add_eDate){
+    public Boolean check_schedule(String schID, String Hall_ID,Date add_sDate , Date add_eDate) {
         if (new Create_file().hall_stat_file()) {
             try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/hall_status.txt"))) {        
                 while ((line = read.readLine()) != null) {
@@ -147,10 +147,10 @@ public class Schedule_Maintainance {
 
     // Method to add a schedule entry for a hall
     public Boolean Add_Schedule(String Hall_ID,String HallType,Date StartD,Date EndD,String status,String remark ) {
-         // Format the start and end dates to strings using dateFormat
+        // Format the start and end dates to strings using dateFormat
         String formattedsDate = dateFormat.format(StartD);
         String formattedeDate = dateFormat.format(EndD);
-          // Check if the hall status file exists, and if not, create it
+        // Check if the hall status file exists, and if not, create it
         if (new Create_file().hall_stat_file()) { 
             try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/hall_status.txt"))) {        
                  // Read the existing hall status file line by line
@@ -166,14 +166,14 @@ public class Schedule_Maintainance {
                 // Determine the new ID number
                 if (findBiggest.isEmpty()) {
                     newIDNum = 1;  // No valid lines in file, start from 1
-                } else{
+                } else {
                     // Otherwise, find the maximum ID and increment it by 1 for the new entry
-                newIDNum = Collections.max(findBiggest) + 1;
+                    newIDNum = Collections.max(findBiggest) + 1;
                 }
             } catch (Exception e) {
                 e.printStackTrace();// Print any exceptions that occur during reading
             }
-                // Write the new schedule entry to the hall status file
+            // Write the new schedule entry to the hall status file
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/hall_status.txt",true))) {
                 // Append the new schedule entry to the file in the specified format
                 writer.append(String.format("HS_%d,%s,%s,%s,%s,%s,%s\n",newIDNum, Hall_ID, HallType, formattedsDate, formattedeDate, status, remark));
@@ -185,7 +185,7 @@ public class Schedule_Maintainance {
         return false;    // Return false if the operation failed at any step
     }
 
-    public Boolean edit_Schedule(String sch_ID, String H_ID, Date updatedsDate, Date updatedeDate, String Status, String Remark){
+    public Boolean edit_Schedule(String sch_ID, String H_ID, Date updatedsDate, Date updatedeDate, String Status, String Remark) {
         List<String> fileContent = new ArrayList<>();
         boolean edit = false;
         // Check if the hall status file exists, and if not, create it
@@ -195,7 +195,7 @@ public class Schedule_Maintainance {
                 while ((line = read.readLine()) != null) {
                     // Split the line into data fields
                     String[] data = line.split(",");
-                    if (data[0].equals(sch_ID)){
+                    if (data[0].equals(sch_ID)) {
                         data[1] = H_ID;
                         data[3] = dateFormat.format(updatedsDate);
                         data[4] = dateFormat.format(updatedeDate);
@@ -215,40 +215,41 @@ public class Schedule_Maintainance {
                 } catch (IOException g) {
                     g.printStackTrace(); 
             }
+            return edit;
+        }
         return edit;
-}
-        return edit;}
+    }
 
-        public Boolean delete_Schedule(String sch_ID){
-            List<String> fileContent = new ArrayList<>();
-            boolean delete = false;
-            // Check if the hall status file exists, and if not, create it
-            if (new Create_file().hall_stat_file()) { 
-                try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/hall_status.txt"))) {        
-                     // Read the existing hall status file line by line
-                    while ((line = read.readLine()) != null) {
-                        // Split the line into data fields
-                        String[] data = line.split(",");
-                        if (! data[0].equals(sch_ID)){
-                            fileContent.add(String.join(",", data));
-                        } else if (data[0].equals(sch_ID)){
-                            delete = true;
-                        }
-                        
-                    }} catch (IOException e) {
-                        e.printStackTrace();
+    public Boolean delete_Schedule(String sch_ID) {
+        List<String> fileContent = new ArrayList<>();
+        boolean delete = false;
+        // Check if the hall status file exists, and if not, create it
+        if (new Create_file().hall_stat_file()) { 
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/hall_status.txt"))) {        
+                // Read the existing hall status file line by line
+                while ((line = read.readLine()) != null) {
+                    // Split the line into data fields
+                    String[] data = line.split(",");
+                    if (! data[0].equals(sch_ID)) {
+                        fileContent.add(String.join(",", data));
+                    } else if (data[0].equals(sch_ID)) {
+                        delete = true;
                     }
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/hall_status.txt"))) {
-                    for (String lines : fileContent) {
-                        writer.write(lines);
-                        writer.newLine();
-                    }
-                    } catch (IOException g) {
-                        g.printStackTrace(); 
+                    
                 }
-                return delete;
-            }   
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/hall_status.txt"))) {
+                for (String lines : fileContent) {
+                    writer.write(lines);
+                    writer.newLine();
+                }
+            } catch (IOException g) {
+                g.printStackTrace(); 
+            }
             return delete;
-        }    
+        }   
+        return delete;
+    }
 }
-   

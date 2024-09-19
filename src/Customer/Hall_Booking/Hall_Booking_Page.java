@@ -1,10 +1,13 @@
 package src.Customer.Hall_Booking;
+
 import src.shared.DateFormat;
 import src.Customer.Customer_Page;
 import src.Customer.Payment.Payment_Page;
+
+import org.jdatepicker.impl.UtilDateModel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Color;
@@ -23,6 +26,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Properties;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;

@@ -1,11 +1,13 @@
 package src.Customer.Payment;
+
 import src.shared.Create_file;
+
 import java.util.ArrayList;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.BufferedReader;
-import java.time.Duration;
+// import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -98,7 +100,7 @@ public class Payment {
                 FileWriter book_data = new FileWriter("resources/Database/bookings.txt", true);
                 String[] booking_data = {
                 // id, hall id, capacity, start date, end date, book stat, book paid, deposit, booking date, username
-                    id, data[0], data[2], data[4], data[5], "approved", price, "300", String.valueOf(date), name
+                    id, data[0], data[2], data[4], data[5], "approved", price, "300", String.valueOf(datePattern.format(date)), name
                 };
                 String data_join = String.join(",", booking_data);
                 book_data.append(data_join + "\n");

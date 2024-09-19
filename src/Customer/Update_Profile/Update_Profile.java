@@ -1,9 +1,12 @@
 package src.Customer.Update_Profile;
+
 import src.Customer.Customer_Page;
 import src.shared.DateFormat;
+
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Image;
@@ -20,6 +23,7 @@ import java.util.Properties;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;

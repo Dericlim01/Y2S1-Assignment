@@ -1,11 +1,5 @@
 package src.Manager;
 
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.table.DefaultTableModel;
-
-import javax.imageio.*;
-
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Color;
@@ -17,10 +11,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
-
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.table.DefaultTableModel;
+import javax.imageio.*;
 
 public class Task_Status extends JFrame {
     private static String manname;
@@ -29,10 +26,8 @@ public class Task_Status extends JFrame {
     private static JTable view;
     private static String issues_title;
     private static String issues_description;
-    //private static String taskStatus;
+    // private static String taskStatus;
     private static String username;
-    
-
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -75,7 +70,6 @@ public class Task_Status extends JFrame {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
             get_image = ImageIO.read(new File("resources/Image/hall (1).png"));
             Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-
             logo.setIcon(new ImageIcon(image));
             logo.setBounds(0, 0, 65, 65);
         } catch (IOException e) {
@@ -91,28 +85,21 @@ public class Task_Status extends JFrame {
 
         String[] col_name = {"Task ID", "Issues ID", "Issues", "Description", "Username", "Halls ID", "Handled Staff", "Issues Status"};
         Object[][] tasks_status = man_task.task_status();
-        
         tm = new DefaultTableModel(tasks_status, col_name);
         view = new JTable(tm);
-
         scrollPane = new JScrollPane(view);
         scrollPane.setBounds(9, 80, 970, 450);
         manager_TAS.add(scrollPane);
 
         // Back Label
         JLabel back_lbl = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources/Image/logout.png"));
-
             Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-
             back_lbl.setIcon(new ImageIcon(image));
             back_lbl.setBounds(920, 15, 35, 35);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -122,7 +109,6 @@ public class Task_Status extends JFrame {
                 dispose();
                 new Manager_Home_Page(n).setVisible(true);         
             }
-
         });
         manager_TAS.add(back_lbl);
 
@@ -137,15 +123,11 @@ public class Task_Status extends JFrame {
                 Object[][] taskStatus = man_task.task_status();
                 tm.setDataVector(taskStatus, col_name);
                 view = new JTable(tm);
-                
                 scrollPane = new JScrollPane(view);
                 scrollPane.setBounds(9, 80, 970, 450);
-
                 manager_TAS.add(scrollPane);
-                
                 view.revalidate();
                 view.repaint();
-
             }
         });
         manager_TAS.add(update);
@@ -216,9 +198,9 @@ public class Task_Status extends JFrame {
         JLabel staff_show = new JLabel();
         staff_show.setFont(new Font("Comic Sans Ms", Font.PLAIN, 15));
         staff_show.setBounds(450, 600, 110, 20);
-        //hall_id_show.setVisible(false);
+        // hall_id_show.setVisible(false);
         manager_TAS.add(staff_show);
-       
+        
         view.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -228,26 +210,24 @@ public class Task_Status extends JFrame {
                 String handle_staff;
                 String taskStatus;
                 int selectedRow = view.getSelectedRow();
+            
+                if (selectedRow != -1) {
+                    // Get value from each column in the selected row 
+                    taskID = view.getValueAt(selectedRow, 0).toString();
+                    issues_id = view.getValueAt(selectedRow, 1).toString();
+                    issues_title = view.getValueAt(selectedRow, 2).toString();
+                    issues_description = view.getValueAt(selectedRow, 3).toString();
+                    username = view.getValueAt(selectedRow, 4).toString();
+                    hallId = view.getValueAt(selectedRow, 5).toString();
+                    handle_staff = view.getValueAt(selectedRow, 6).toString();
+                    taskStatus = view.getValueAt(selectedRow, 7).toString();
                     
-            if(selectedRow != -1){
-                // Get value from each column in the selected row 
-                taskID = view.getValueAt(selectedRow, 0).toString();
-                issues_id = view.getValueAt(selectedRow, 1).toString();
-                issues_title = view.getValueAt(selectedRow, 2).toString();
-                issues_description = view.getValueAt(selectedRow, 3).toString();
-                username = view.getValueAt(selectedRow, 4).toString();
-                hallId = view.getValueAt(selectedRow, 5).toString();
-                handle_staff = view.getValueAt(selectedRow, 6).toString();
-                taskStatus = view.getValueAt(selectedRow, 7).toString();
-                
-
-                task_ID_show.setText(taskID);
-                issue_id_show.setText(issues_id);
-                hall_id_show.setText(hallId);
-                staff_show.setText(handle_staff);
-                statusBox.setSelectedItem(taskStatus);
-
-            }
+                    task_ID_show.setText(taskID);
+                    issue_id_show.setText(issues_id);
+                    hall_id_show.setText(hallId);
+                    staff_show.setText(handle_staff);
+                    statusBox.setSelectedItem(taskStatus);
+                }
             }
         });
 
@@ -265,30 +245,22 @@ public class Task_Status extends JFrame {
                 String Staff = staff_show.getText();
                 String status = statusBox.getSelectedItem().toString();
 
-
                 man_task.update_status(taskID, issuesID, issues_title, issues_description, username, hallId, Staff, status);
             }
         });
         manager_TAS.add(save_btn);
 
-
-        //Design 4 Background Pic
+        // Design 4 Background Pic
         JLabel des4 = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources/Image/design4.png"));
-
             Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
-
             des4.setIcon(new ImageIcon(image));
             des4.setBounds(0, 0, 1000, 800);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         manager_TAS.add(des4);
-
     }
 }

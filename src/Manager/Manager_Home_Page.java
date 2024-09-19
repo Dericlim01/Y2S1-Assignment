@@ -1,6 +1,8 @@
 package src.Manager;
+
 import src.shared.Login_Page;
 import src.Customer.Update_Profile.UpdateProfile;
+
 import java.io.*;
 import java.awt.Font;
 import java.awt.Image;
@@ -13,27 +15,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.imageio.ImageIO;
 
-public class Manager_Home_Page extends JFrame{
+public class Manager_Home_Page extends JFrame {
     private static String manname;
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable(){
+        EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     new Manager_Home_Page(manname).setVisible(true);
-
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    public Manager_Home_Page(String n){
+    public Manager_Home_Page(String n) {
         setTitle("Manager Home Page");
         setIconImage(Toolkit.getDefaultToolkit().getImage("resources/Image/hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,7 +64,6 @@ public class Manager_Home_Page extends JFrame{
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
             get_image = ImageIO.read(new File("resources/Image/hall (1).png"));
             Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-
             logo.setIcon(new ImageIcon(image));
             logo.setBounds(0, 0, 65, 65);
         } catch (IOException e) {
@@ -72,22 +73,16 @@ public class Manager_Home_Page extends JFrame{
 
         // image icon
         JLabel picture = new JLabel();
-        try{
+        try {
             BufferedImage image_icon = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             image_icon = ImageIO.read(new File("resources/Image/little white dog.png"));
-
             Image imageIcon = image_icon.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
-
             picture.setIcon(new ImageIcon(imageIcon));
             picture.setBounds(70, 60, 120, 120);
-
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         manager_HP.add(picture);
-
-
 
         // Name
         JLabel name_lbl = new JLabel(user[0]);
@@ -105,38 +100,27 @@ public class Manager_Home_Page extends JFrame{
         JLabel setting = new JLabel();
         try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources/Image/setting.png"));
-
             Image image = get_image.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-
             setting.setIcon(new ImageIcon(image));
             setting.setBounds(40, 290, 30, 30);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
         manager_HP.add(setting);
-
    
-        //Notification Pic
+        // Notification Pic
         JLabel noti= new JLabel();
-        try{
- 
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources/Image/notification.png"));
-
             Image image = get_image.getScaledInstance(43, 43, Image.SCALE_SMOOTH);
-
             noti.setIcon(new ImageIcon(image));
             noti.setBounds(100, 285, 38, 38);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         manager_HP.add(noti);
-
 
         // Mail Picture
         JLabel email = new JLabel();
@@ -154,8 +138,12 @@ public class Manager_Home_Page extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 do {
-                    JOptionPane.showMessageDialog(null,"You have been hacked! Give us 4.0 to resolve! Thank You!","Hacked Notification",JOptionPane.OK_CANCEL_OPTION);
-                        System.out.println("Prompting continue.");
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "You have been hacked! Give us 4.0 to resolve! Thank You!",
+                        "Hacked Notification",
+                        JOptionPane.OK_CANCEL_OPTION);
+                    System.out.println("Prompting continue.");
                 } while (true);      
             }
         });
@@ -190,12 +178,9 @@ public class Manager_Home_Page extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Login_Page logout = new Login_Page();
-                logout.setTitle("Login");
-                logout.setVisible(true);
+                new Login_Page().setVisible(true);
             }
         });
-
         manager_HP.add(logout_btn);
 
         // View Profile Button
@@ -206,8 +191,8 @@ public class Manager_Home_Page extends JFrame{
         view_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Manager_View_Profile_Page(n).setVisible(true);
                 dispose();
+                new Manager_View_Profile_Page(n).setVisible(true);
             }
         });
         manager_HP.add(view_btn);
@@ -220,8 +205,8 @@ public class Manager_Home_Page extends JFrame{
         sales_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Sales_Dashboard_Page(n).setVisible(true);
                 dispose();
+                new Sales_Dashboard_Page(n).setVisible(true);
             }
         });
         manager_HP.add(sales_btn);
@@ -248,9 +233,8 @@ public class Manager_Home_Page extends JFrame{
         cus_iss_rec_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Customer_Issues_Receive(n).setVisible(true);
                 dispose();
-                
+                new Customer_Issues_Receive(n).setVisible(true);
             }
         });
         manager_HP.add(cus_iss_rec_btn);
@@ -268,8 +252,5 @@ public class Manager_Home_Page extends JFrame{
             }
         });
         manager_HP.add(task_ass_sta_btn);
-
-
     }
-
 }

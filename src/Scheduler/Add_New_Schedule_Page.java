@@ -1,8 +1,11 @@
 package src.Scheduler;
+
 import src.shared.DateFormat;
+
 import org.jdatepicker.impl.UtilDateModel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Image;
@@ -19,6 +22,7 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.Properties;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,7 +36,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 
-public class Add_New_Schedule_Page extends JFrame{
+public class Add_New_Schedule_Page extends JFrame {
     public static String name;
     ArrayList<String> hallData;
     String status;
@@ -44,7 +48,7 @@ public class Add_New_Schedule_Page extends JFrame{
     }
 
     
-    public Add_New_Schedule_Page(String name){
+    public Add_New_Schedule_Page(String name) {
         //  Set up the page 
         setTitle("Adding New Schedule");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,14 +98,13 @@ public class Add_New_Schedule_Page extends JFrame{
         endDate_lbl.setBounds(357,470,300,50);
         panel.add(endDate_lbl);
         
-
         // Remark label
         JLabel remark_lbl = new JLabel("Remark:");
         remark_lbl.setFont(new Font("Comic Sans MS",Font.BOLD,20));
         remark_lbl.setBounds(120,590,300,50);
         panel.add(remark_lbl);
 
-        //Logo Label
+        // Logo Label
         JLabel logo_lbl = new JLabel("Symphony Hall");
         logo_lbl.setFont(new Font("French Script MT", Font.BOLD,25));
         logo_lbl.setForeground(new Color(169,169,169));
@@ -150,15 +153,13 @@ public class Add_New_Schedule_Page extends JFrame{
             }
         });
 
-
-        
-        //Remark Text Field
+        // Remark Text Field
         JTextField remarkField = new JTextField();
         remarkField.setFont(new Font("Comic Sans MS",Font.BOLD,18));
         remarkField.setBounds(220,600,700,30);
         panel.add(remarkField);
 
-        //Radio Button Maintainance Schedule
+        // Radio Button Maintainance Schedule
         JRadioButton maintainanceButton , bookingButton; 
         maintainanceButton = new JRadioButton("Maintainance Schedule");
         maintainanceButton.setFont(new Font("Comic Sans MS",Font.BOLD,20));
@@ -197,11 +198,10 @@ public class Add_New_Schedule_Page extends JFrame{
 
         });
 
-        //Group Radio Button
+        // Group Radio Button
         ButtonGroup bg=new ButtonGroup();    
         bg.add(maintainanceButton);bg.add(bookingButton);  
         
-
         // Start Date Picker
         // Create a date model to hold the selected date
         UtilDateModel sdateModel = new UtilDateModel();
@@ -214,13 +214,12 @@ public class Add_New_Schedule_Page extends JFrame{
         Properties.put("text.day", "Day");
         Properties.put("text.month", "Month");
         Properties.put("text.year", "Year");
-       // Import Date Panel and Picker
+        // Import Date Panel and Picker
         JDatePanelImpl sDatePanel = new JDatePanelImpl(sdateModel, Properties);
         JDatePickerImpl sDatePicker = new JDatePickerImpl(sDatePanel, new DateFormat());
         // Set the position and size of the date picker and add the datepicker inside UI
         sDatePicker.setBounds(470, 363, 140, 30);
         panel.add(sDatePicker);
-        
         
         // End Date Picker
         // Create a date model to hold the selected date
@@ -228,13 +227,12 @@ public class Add_New_Schedule_Page extends JFrame{
         // Set today's date 
         edateModel.setDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         edateModel.setSelected(true); 
-       // Import Date Panel and Picker
+        // Import Date Panel and Picker
         JDatePanelImpl eDatePanel = new JDatePanelImpl(edateModel, Properties);
         JDatePickerImpl eDatePicker = new JDatePickerImpl(eDatePanel, new DateFormat());
         // Set the position and size of the date picker and add the datepicker inside UI
         eDatePicker.setBounds(470, 485, 140, 30);
         panel.add(eDatePicker);
-
 
         sDatePicker.addActionListener(new ActionListener() {
             @Override
@@ -249,10 +247,8 @@ public class Add_New_Schedule_Page extends JFrame{
                     JOptionPane.showMessageDialog(null,"Cannot choose invalid date",status,JOptionPane.INFORMATION_MESSAGE);
                     sdateModel.setValue((Date) eDatePicker.getModel().getValue());
                 }
-        }
+            }
         });
-
-
 
         eDatePicker.addActionListener(new ActionListener() {
             @Override
@@ -264,14 +260,17 @@ public class Add_New_Schedule_Page extends JFrame{
                 if (eDate.after((Date) sDatePicker.getModel().getValue()) || eDate.equals((Date) sDatePicker.getModel().getValue())) {
                     System.out.println("This is able" );
                     System.out.println("End Date Selected: " + eDate);
-                    
                 } else {
                     System.out.println("Unable");
                     System.out.println("End Date Selected: " + eDate);
-                    JOptionPane.showMessageDialog(null,"Cannot choose invalid date",status,JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Cannot choose invalid date",
+                        status,
+                        JOptionPane.INFORMATION_MESSAGE);
                     edateModel.setValue((Date) sDatePicker.getModel().getValue());
                 }
-                }
+            }
         });
 
         // Add Button
@@ -290,7 +289,6 @@ public class Add_New_Schedule_Page extends JFrame{
                 Calendar sdateCal = Calendar.getInstance();
                 Calendar edateCal = Calendar.getInstance();
 
-
                 // Set the calendar dates and times to the selected times
                 sdateCal.setTime(sDate);
                 edateCal.setTime(eDate);
@@ -303,16 +301,16 @@ public class Add_New_Schedule_Page extends JFrame{
                 sdateCal.set(Calendar.MILLISECOND, 0);
                 edateCal.set(Calendar.MILLISECOND, 0);
 
-                 // Get the final updated start and end dates with times
+                // Get the final updated start and end dates with times
                 Date updatedsDate = sdateCal.getTime();
                 Date updatedeDate = edateCal.getTime();
 
-                  // Determine the remark based on the selected schedule type
-                if (bookingButton.isSelected()){
+                // Determine the remark based on the selected schedule type
+                if (bookingButton.isSelected()) {
                     remark = null;
-                } else if (maintainanceButton.isSelected()){
+                } else if (maintainanceButton.isSelected()) {
                     remark = remarkField.getText();
-                } else if (!bookingButton.isSelected() & !maintainanceButton.isSelected()){
+                } else if (!bookingButton.isSelected() & !maintainanceButton.isSelected()) {
                     // Show a message if no schedule type is selected
                     JOptionPane.showMessageDialog(
                         null,
@@ -321,11 +319,11 @@ public class Add_New_Schedule_Page extends JFrame{
                         JOptionPane.INFORMATION_MESSAGE);
                     }
                  // Check if hall data is selected and a booking or maintenance type is chosen
-                if (hallData != null && (bookingButton.isSelected() || maintainanceButton.isSelected())){
+                if (hallData != null && (bookingButton.isSelected() || maintainanceButton.isSelected())) {
                     // Check for scheduling conflicts
-                    if (new Schedule_Maintainance().check_schedule(" ",hallData.get(0), updatedsDate, updatedeDate)){
+                    if (new Schedule_Maintainance().check_schedule(" ",hallData.get(0), updatedsDate, updatedeDate)) {
                         // If no conflict, add the schedule
-                        if (new Schedule_Maintainance().Add_Schedule(hallData.get(0), hallData.get(1) ,updatedsDate,updatedeDate,status,remark)){
+                        if (new Schedule_Maintainance().Add_Schedule(hallData.get(0), hallData.get(1), updatedsDate,updatedeDate,status,remark)) {
                              // Show success message
                             JOptionPane.showMessageDialog(
                             null,
@@ -342,27 +340,32 @@ public class Add_New_Schedule_Page extends JFrame{
                         }
                     } else {
                          // Show a confirmation dialog if there's a scheduling conflict
-                        int choice = JOptionPane.showConfirmDialog(null, "There is an event on that day.\nChecking Schedule,Click 'Yes' and change to 'Schedule Checker Page'\nClick 'No' will stay at this page  ", 
-                    "Confirmation", JOptionPane.YES_NO_OPTION); 
+                        int choice = JOptionPane.showConfirmDialog(
+                            null,
+                            "There is an event on that day.\nChecking Schedule,Click 'Yes' and change to 'Schedule Checker Page'\nClick 'No' will stay at this page  ", 
+                            "Confirmation",
+                            JOptionPane.YES_NO_OPTION); 
 
                             // Check the user's choice and display a corresponding message 
                             if (choice == JOptionPane.YES_OPTION) { 
-                            // If the user chose 'Yes', it will change the page to the schedule checker page
-                            dispose();
-                            new Schedule_Maintainance_Page(name).setVisible(true);
+                                // If the user chose 'Yes', it will change the page to the schedule checker page
+                                dispose();
+                                new Schedule_Maintainance_Page(name).setVisible(true);
                             } 
                     }
                     }
                 else if (hallData == null) {
                     // Show a message if no hall is selected
-                    JOptionPane.showMessageDialog(null,"Please choose a hall", "Error",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Please choose a hall",
+                        "Error",
+                        JOptionPane.INFORMATION_MESSAGE);
                 }
 
-                }
-
-            
-        
+            }
         });
+
         // Back Page Pic
         JLabel back_lbl = new JLabel();
         try {
@@ -397,5 +400,5 @@ public class Add_New_Schedule_Page extends JFrame{
             e.printStackTrace();
         }
         panel.add(des4);
-}
+    }
 }

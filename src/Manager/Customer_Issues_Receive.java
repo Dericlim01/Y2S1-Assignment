@@ -1,11 +1,5 @@
 package src.Manager;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-
-import javax.imageio.*;
-
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Color;
@@ -16,12 +10,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
-
 import java.io.File;
 import java.io.IOException;
-
 import java.util.List;
 import java.util.ArrayList;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.imageio.*;
 
 
 public class Customer_Issues_Receive extends JFrame {
@@ -42,7 +39,7 @@ public class Customer_Issues_Receive extends JFrame {
         });
     }
 
-    public Customer_Issues_Receive(String n){
+    public Customer_Issues_Receive(String n) {
         setTitle("Customer Issues Receive");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
@@ -61,13 +58,11 @@ public class Customer_Issues_Receive extends JFrame {
         table_Model = new DefaultTableModel();
         table_Model.setDataVector(row_data, col_name);
         JTable view = new JTable(table_Model);
-
         scrollPane = new JScrollPane(view);
         scrollPane.setBounds(9, 105, 970, 550);
-
         manager_CIR.add(scrollPane);
-        //scrollPane.setViewportView(table_Model);
-        //scrollPane.setPreferredSize(new Dimension(200, 150));
+        // scrollPane.setViewportView(table_Model);
+        // scrollPane.setPreferredSize(new Dimension(200, 150));
 
         // Logo Label
         JLabel logo_lbl = new JLabel("Symphony Hall");
@@ -82,14 +77,12 @@ public class Customer_Issues_Receive extends JFrame {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
             get_image = ImageIO.read(new File("resources/Image/hall (1).png"));
             Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-
             logo.setIcon(new ImageIcon(image));
             logo.setBounds(0, 0, 65, 65);
         } catch (IOException e) {
             e.printStackTrace();
         }
         manager_CIR.add(logo);
-
 
         // Page Name Label
         JLabel cus = new JLabel("Customer Issues Receive");
@@ -122,7 +115,6 @@ public class Customer_Issues_Receive extends JFrame {
                 view.repaint();
             }
         });
-        
         manager_CIR.add(hall_cb);
 
         // Assign Staff
@@ -135,26 +127,24 @@ public class Customer_Issues_Receive extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = view.getSelectedRow();
-                
-                if(selectedRow >= 0){
+                if (selectedRow >= 0) {
                     int col_count = view.getColumnCount();
-                    if(col_count >= 5 ){
-
-                        for(int i = 0; i < col_count; i++){
+                    if (col_count >= 5 ) {
+                        for (int i = 0; i < col_count; i++) {
                             issues_Row.add(view.getValueAt(selectedRow, i).toString());
                         }
-
-                        new Task_Assign(n, issues_Row).setVisible(true);
                         dispose();
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Invalid row data");
+                        new Task_Assign(n, issues_Row).setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(
+                            null,
+                            "Invalid row data");
                     }
-
-                }else{
-                    JOptionPane.showMessageDialog(null,"Please select the row");
+                } else {
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Please select the row");
                 }
-
-
             }
         });
         manager_CIR.add(assign);
@@ -209,15 +199,18 @@ public class Customer_Issues_Receive extends JFrame {
                         issues_Row.add(description);
                         issues_Row.add(hallType);
                         issues_Row.add(userName);
-                        
-                        new Reply_Customer(n, issues_Row).setVisible(true);
-                        dispose();
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Invalid row data");
-                    }
 
-                }else{
-                    JOptionPane.showMessageDialog(null,"Please select the row");
+                        dispose();
+                        new Reply_Customer(n, issues_Row).setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(
+                            null,
+                            "Invalid row data");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Please select the row");
                 }
             }
         });;
@@ -225,18 +218,13 @@ public class Customer_Issues_Receive extends JFrame {
 
         // Back to Home Page Label
         JLabel back_lbl = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources/Image/logout.png"));
-
             Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-
             back_lbl.setIcon(new ImageIcon(image));
             back_lbl.setBounds(920, 15, 35, 35);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -246,35 +234,20 @@ public class Customer_Issues_Receive extends JFrame {
                 dispose();
                 new Manager_Home_Page(n).setVisible(true);         
             }
-
         });
         manager_CIR.add(back_lbl);
 
-
-        //Design 4 Background Pic
+        // Design 4 Background Pic
         JLabel des4 = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources/Image/design4.png"));
-
             Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
-
             des4.setIcon(new ImageIcon(image));
             des4.setBounds(0, 0, 1000, 800);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         manager_CIR.add(des4);
-
-
-
-
-
-
-
-        
     }
 }

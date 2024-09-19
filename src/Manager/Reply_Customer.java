@@ -1,12 +1,7 @@
 package src.Manager;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
-import javax.imageio.ImageIO;
-
-import java.awt.Color;
 import java.awt.Font;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Cursor;
 import java.awt.Toolkit;
@@ -16,11 +11,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
-
 import java.util.List;
-
 import java.io.File;
 import java.io.IOException;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.imageio.ImageIO;
 
 public class Reply_Customer extends JFrame{
     private static String manname;
@@ -30,16 +27,16 @@ public class Reply_Customer extends JFrame{
         EventQueue.invokeLater(new Runnable(){
             @Override
             public void run() {
-                try{
+                try {
                     new Reply_Customer(manname, issues_Row).setVisible(true);
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    public Reply_Customer(String n, List<String> issuesRow){
+    public Reply_Customer(String n, List<String> issuesRow) {
         setTitle("Reply Customer");
         setIconImage(Toolkit.getDefaultToolkit().getImage("resources/Image/hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,7 +69,6 @@ public class Reply_Customer extends JFrame{
             e.printStackTrace();
         }
         manager_RC.add(logo);
-
 
         // Title 
         JLabel title = new JLabel("Reply Customer Page");
@@ -144,21 +140,15 @@ public class Reply_Customer extends JFrame{
         });
         manager_RC.add(send);
 
-
-        //Back Page Pic
+        // Back Page Pic
         JLabel back_lbl = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources/Image/logout.png"));
-
             Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-
             back_lbl.setIcon(new ImageIcon(image));
             back_lbl.setBounds(920, 30, 35, 35);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -168,25 +158,18 @@ public class Reply_Customer extends JFrame{
                 dispose();
                 new Manager_Home_Page(n).setVisible(true);         
             }
-
         });
         manager_RC.add(back_lbl);
 
-
-        //Design 4 Background Pic
+        // Design 4 Background Pic
         JLabel des4 = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources/Image/design4.png"));
-
             Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
-
             des4.setIcon(new ImageIcon(image));
             des4.setBounds(0, 0, 1000, 800);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         manager_RC.add(des4);

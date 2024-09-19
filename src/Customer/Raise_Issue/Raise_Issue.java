@@ -1,5 +1,7 @@
 package src.Customer.Raise_Issue;
+
 import src.shared.Create_file;
+
 import java.util.ArrayList;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -22,16 +24,10 @@ public class Raise_Issue {
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
                     // if hall is book by user
-                    if (data[10].equals(name)) {
+                    if (data[9].equals(name)) {
                         // Check if hall id valid
-                        for (int i = 0; i < halls.size(); i++) {
-                            // if valid, break
-                            if (data[0].equals(halls.get(i))) {
-                                break;
-                            } else {
-                                // else, add
-                                halls.add(data[0]);
-                            }
+                        if (!halls.contains(data[1])) {
+                            halls.add(data[1]);
                         }
                     }
                 }
@@ -62,7 +58,7 @@ public class Raise_Issue {
 
     // Send issue
     int num_issue;
-    public Boolean send_issue(String issue_title, String issue_desc) {
+    public Boolean send_issue(String issue_title, String issue_desc, String hall_id) {
         int nextID = 0;
         String line;
         if (new Create_file().issue_file()) {
@@ -84,9 +80,10 @@ public class Raise_Issue {
         // ID (I01)
         String id = String.format("I%02d", nextID);
         if (new Create_file().issue_file()) {
+            String hall_type = search_id(hall_id);
             try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/issues.txt"))) {
                 FileWriter issues = new FileWriter("resources/Database/issues.txt", true);
-                issues.append(id + "," + issue_title + "," + issue_desc + "," + name);
+                issues.append(id + "," + issue_title + "," + issue_desc + "," + hall_id + "," + hall_type + "," + name);
                 issues.close();
                 return true;
             } catch (Exception e) {

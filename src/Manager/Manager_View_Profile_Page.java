@@ -1,10 +1,5 @@
 package src.Manager;
 
-import javax.swing.*;
-import javax.swing.border.*;
-
-import javax.imageio.*;
-
 //import src.Manager.Manager;
 
 import java.awt.Font;
@@ -18,27 +13,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
-
 import java.io.File;
 import java.io.IOException;
 
-public class Manager_View_Profile_Page extends JFrame {
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.imageio.*;
 
+public class Manager_View_Profile_Page extends JFrame {
     private static String manname;
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable(){
             @Override
             public void run() {
-                try{
+                try {
                     new Manager_View_Profile_Page(manname).setVisible(true);
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    public Manager_View_Profile_Page(String n){
+    public Manager_View_Profile_Page(String n) {
         setTitle("Manager View Profile");
         setIconImage(Toolkit.getDefaultToolkit().getImage("resources/Image/hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,19 +49,15 @@ public class Manager_View_Profile_Page extends JFrame {
         Manager up = new Manager();
         String[] user = up.read_user_Information(n);
 
-
         // Hall icon
         JLabel hall = new JLabel();
-        try{
+        try {
             BufferedImage hallImage = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             hallImage = ImageIO.read(new File("resources/Image/hall (1).png"));
-
             Image hall_Image = hallImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-
             hall.setIcon(new ImageIcon(hall_Image));
             hall.setBounds(10, 5, 40, 40);
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         manager_VP.add(hall);
@@ -79,30 +72,22 @@ public class Manager_View_Profile_Page extends JFrame {
 
         // Profile Picture 
         JLabel picture = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources/Image/little white dog.png"));
-
             Image image = get_image.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
-
             picture.setIcon(new ImageIcon(image));
             picture.setBounds(425, 80, 120, 120);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
         manager_VP.add(picture);
 
-       
         // Greeting Label
         JLabel greet_lbl = new JLabel("Welcome Back!");
         greet_lbl.setFont(new Font("Serif", Font.PLAIN, 15));
         greet_lbl.setBounds(440, 210, 200, 30);
         manager_VP.add(greet_lbl);
-
 
         // // Username icon
         // JLabel user_icon = new JLabel();
@@ -219,11 +204,18 @@ public class Manager_View_Profile_Page extends JFrame {
                 String role = user[6];
                 Manager up = new Manager();
                 if (up.update_user(userName, pass, phone, mail, birth, gender, role)) {
-                    JOptionPane.showMessageDialog(null, "Update Successfully", "Plain", JOptionPane.INFORMATION_MESSAGE);
-
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Update Successfully",
+                        "Plain",
+                        JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     // UPdate Failed
-                    int response = JOptionPane.showConfirmDialog(null, "Update Failed, Do you want to Update Again?", "Question", JOptionPane.YES_NO_CANCEL_OPTION);
+                    int response = JOptionPane.showConfirmDialog(
+                        null,
+                        "Update Failed, Do you want to Update Again?",
+                        "Question",
+                        JOptionPane.YES_NO_CANCEL_OPTION);
                     if (response == 1) {
                         new Manager_View_Profile_Page(n).setVisible(true);
                     }
@@ -233,22 +225,16 @@ public class Manager_View_Profile_Page extends JFrame {
         update_btn.setBounds(430, 550, 120, 30);
         update_btn.setVisible(false);
         manager_VP.add(update_btn);
-        
 
         // Back button
         JLabel back_lbl = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources/Image/logout.png"));
-
             Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-
             back_lbl.setIcon(new ImageIcon(image));
             back_lbl.setBounds(920, 15, 35, 35);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -283,24 +269,19 @@ public class Manager_View_Profile_Page extends JFrame {
                 manager_VP.add(update_btn);
             }
         });
-
         manager_VP.add(edit_btn);
 
-         // Gradient Design
-         JLabel gradient = new JLabel();
-         try {
-             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
- 
-             get_image = ImageIO.read(new File("resources/Image/gradient.png"));
- 
-             Image image = get_image.getScaledInstance(1000, 280, Image.SCALE_SMOOTH);
- 
-             gradient.setIcon(new ImageIcon(image));
-             gradient.setBounds(0, 0, 1000, 200);
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
-         manager_VP.add(gradient);
-
+        // Gradient Design
+        JLabel gradient = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources/Image/gradient.png"));
+            Image image = get_image.getScaledInstance(1000, 280, Image.SCALE_SMOOTH);
+            gradient.setIcon(new ImageIcon(image));
+            gradient.setBounds(0, 0, 1000, 200);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        manager_VP.add(gradient);
     }
 }

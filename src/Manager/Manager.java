@@ -1,13 +1,16 @@
 package src.Manager;
-import org.jdatepicker.impl.JDatePickerImpl;
+
 import src.shared.Create_file;
+
+import org.jdatepicker.impl.JDatePickerImpl;
+
 import java.io.*;
 import java.util.*;
 import java.text.SimpleDateFormat;
+
 import javax.swing.JOptionPane;
 
 public class Manager {
-
     //private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     public String[] read_user_Information(String n) {
         ArrayList<String[]> users = new ArrayList<>();
@@ -38,7 +41,7 @@ public class Manager {
         ArrayList<String[]> users = new ArrayList<String[]>();
         String line;
         String[] data;
-        //String dobform = dateFormat.format(d);
+        // String dobform = dateFormat.format(d);
         Boolean user_update = false;
         Boolean users_update = false;
         try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/staffs.txt"))) {
@@ -99,12 +102,9 @@ public class Manager {
     }
 
     public List<Object[]> date_read(JDatePickerImpl start_date, JDatePickerImpl end_date, String filename) {
-        //Opject startDateOption = start_date.getDate();
-
+        // Opject startDateOption = start_date.getDate();
         List<Object[]> dateList = new ArrayList<>();
-
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
         if (new Create_file().booking_file()) {
             try (BufferedReader read = new BufferedReader(new FileReader(filename))) {
                 String line;
@@ -118,7 +118,6 @@ public class Manager {
 
                     // Create an object array to hold the data
                     Object[] rowData = new Object[f_data.length];
-
                     // Fill other data first
                     for (int i = 0; i < 3; i++) {
                         rowData[i] = f_data[i].trim();
@@ -132,11 +131,8 @@ public class Manager {
                     for (int i = 5; i < f_data.length; i++) {
                         rowData[i] = f_data[i].trim();
                     }
-
                     dateList.add(rowData);
-
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -147,7 +143,6 @@ public class Manager {
 
         List<Object[]> filteredDates = new ArrayList<>();
         for (Object[] dateData : dateList) {
-
             Date Startdate = (Date) dateData[3];
             Date Enddate = (Date) dateData[4];
 
@@ -158,11 +153,8 @@ public class Manager {
 
             if (!Startdate.before(decrease_one_date) && !Enddate.after(endDate)) {
                 filteredDates.add(dateData);
-
             }
-
         }
-
         return filteredDates;
     }
 
@@ -193,7 +185,6 @@ public class Manager {
                     String[] row = task.split(",");
                     taskStatus.add(row);
                 }
-
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -210,11 +201,8 @@ public class Manager {
             tasks_status[i][5] = task_row[5];
             tasks_status[i][6] = task_row[6];
             tasks_status[i][7] = task_row[8];
-
         }
-
         return tasks_status;
-
     }
 
     // 
@@ -236,14 +224,12 @@ public class Manager {
             }
         }
         return tasks;
-
     }
 
     public Boolean update_status(String taskID, String issuesID, String issues_title, String issues_description, String username, String hallId, String Staff, String s) {
         // Create a user list
         List<String> task = new ArrayList<>();
         String line;
-
         Boolean status_update = false;
 
         try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/task.txt"))) {
@@ -255,23 +241,20 @@ public class Manager {
                     status_update = true;
                 }
                 task.add(String.join(",", data));
-            }} catch (IOException e) {
-                e.printStackTrace();
             }
-            
-            // Loop through the task
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Loop through the task
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/task.txt"))) {
             for (String taskdata : task) {
-                 //writer.println(taskdata[0] + "," + taskdata[1] + "," + taskdata[2] + "," + taskdata[3] 
-                 //+ "," + taskdata[4] + "," + taskdata[5] + "," + taskdata[6] + "," + taskdata[7] + "," + taskdata[8]);
+                //writer.println(taskdata[0] + "," + taskdata[1] + "," + taskdata[2] + "," + taskdata[3] 
+                //+ "," + taskdata[4] + "," + taskdata[5] + "," + taskdata[6] + "," + taskdata[7] + "," + taskdata[8]);
                 writer.write(taskdata);
                 writer.newLine();
             }
-
         } catch (IOException e) {
             e.printStackTrace();
-
         }
         return status_update;
     }
@@ -295,7 +278,6 @@ public class Manager {
             }
         }
         return halls;
-
     }
 
     public Object[][] hallData(String hall_type) {
@@ -327,10 +309,8 @@ public class Manager {
                     if (!staffList.contains(data[0]) && data[6].equals("scheduler")) {
                         staffList.add(data[0]);
                     }
-
                 }
                 return staffList;
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -339,14 +319,14 @@ public class Manager {
     }
 
     public Boolean keep_task(List<String> issuesRow, String staff_data, String details) {
-        //String halls;
+        // String halls;
         int nextID = 0;
         String ID_data;
         String issues_id = issuesRow.get(0);
         String issues = issuesRow.get(1);
         String description = issuesRow.get(2);
         String hallID = issuesRow.get(3);
-        //String hallType = issuesRow.get(4);
+        // String hallType = issuesRow.get(4);
         String userName = issuesRow.get(5);
 
         try (BufferedReader task_br = new BufferedReader(new FileReader("resources/Database/task.txt"))) {
@@ -360,25 +340,23 @@ public class Manager {
                 }
             }
             nextID = maxID + 1;
-
         } catch (IOException e) {
             e.printStackTrace();
-
         }
 
         String id = String.format("T%02d", nextID);
-
         // In progress , Done, Closed, Cancelled
         String issues_status = "In progress";
-
         try (FileWriter task = new FileWriter("resources/Database/task.txt", true)) {
             task.write(id + "," + issues_id + "," + issues + "," + description + "," + userName + "," + hallID  + "," + staff_data + "," + details + "," + issues_status + "\n");
-            JOptionPane.showMessageDialog(null, "Assign Successfull. Please go to the Task Status Page to check. Thank You ^_^", "Successful Assign Notification", JOptionPane.OK_CANCEL_OPTION);
-
+            JOptionPane.showMessageDialog(
+                null,
+                "Assign Successfull. Please go to the Task Status Page to check. Thank You ^_^",
+                "Successful Assign Notification",
+                JOptionPane.OK_CANCEL_OPTION);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return false;
     }
 
@@ -405,7 +383,6 @@ public class Manager {
                 System.err.println("Error parsing booking paid value: " + data[6]);
             }
         }
-
         return totalPaid;
     }
 
@@ -423,7 +400,6 @@ public class Manager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return totalPaid;
     }
 
@@ -440,7 +416,6 @@ public class Manager {
                 } else {
                     bookData.add(line);
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -457,9 +432,6 @@ public class Manager {
                 e.printStackTrace();
             }
         }
-
         return delete;
-
     }
-
 }

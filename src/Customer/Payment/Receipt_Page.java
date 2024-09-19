@@ -1,5 +1,7 @@
 package src.Customer.Payment;
+
 import src.Customer.Hall_Booking.Hall_Booking_Page;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Image;
@@ -11,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;

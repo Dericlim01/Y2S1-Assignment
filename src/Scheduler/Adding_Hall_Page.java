@@ -1,20 +1,20 @@
 package src.Scheduler;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.Cursor;
+import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.DecimalFormat;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -31,23 +31,23 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 import javax.swing.text.NumberFormatter;
 
-
 /**
  * Adding_Hall_Page
  */
 public class Adding_Hall_Page extends JFrame {
     public static String name;
     public static void main(String[] args) {
-    SwingUtilities.invokeLater(() -> new Adding_Hall_Page(name).setVisible(true));    
+        SwingUtilities.invokeLater(() -> new Adding_Hall_Page(name).setVisible(true));    
     }
 
     // Set Panel
-    public Adding_Hall_Page(String name){
+    public Adding_Hall_Page(String name) {
         setTitle("Adding New Hall");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setBounds(140, 100, 1000, 800);
         setResizable(false);
+
         JPanel panel = new JPanel();
         setContentPane(panel);
         panel.setLayout(null);
@@ -65,13 +65,11 @@ public class Adding_Hall_Page extends JFrame {
         hallType_lbl.setBounds(315,230,300,50);
         panel.add(hallType_lbl);
 
-
         // Hall Capacity label
         JLabel hallCap_lbl = new JLabel("Hall Capacity:");
         hallCap_lbl.setFont(new Font("Comic Sans MS",Font.BOLD,20));
         hallCap_lbl.setBounds(280,350,300,50);
         panel.add(hallCap_lbl);
-
 
         // Price per hour label
         JLabel pricePerH_lbl = new JLabel("Price Per Hour:");
@@ -79,14 +77,12 @@ public class Adding_Hall_Page extends JFrame {
         pricePerH_lbl.setBounds(270,470,300,50);
         panel.add(pricePerH_lbl);
 
-
-        //Logo Label
+        // Logo Label
         JLabel logo_lbl = new JLabel("Symphony Hall");
         logo_lbl.setFont(new Font("French Script MT", Font.BOLD,25));
         logo_lbl.setForeground(new Color(169,169,169));
         logo_lbl.setBounds(60,20,160,30);
         panel.add(logo_lbl);
-
 
         // JFormattedTextField for Price Per Hour
         // Using Number Format to convert number and display it as Malaysia Ringgit Format
@@ -106,7 +102,6 @@ public class Adding_Hall_Page extends JFrame {
         priceField.setEditable(true);
         panel.add(priceField);
     
-
         // Combo Box for hall type
         String[] hallType = {"Auditorium", "BanquetHall", "MeetingRoom", "Others"};
         JComboBox<String> hallTypeBox = new JComboBox<>(hallType);
@@ -115,36 +110,31 @@ public class Adding_Hall_Page extends JFrame {
         hallTypeBox.setBackground(new Color(250,240,230));
         panel.add(hallTypeBox);
 
-
         // Spinner for Capacity
-         SpinnerModel value =  
-             new SpinnerNumberModel(20, //initial value  
-                0, //minimum value  
-                1000, //maximum value  
-                1); //step  
+        SpinnerModel value =  
+            new SpinnerNumberModel(20, // initial value  
+                0, // minimum value  
+                1000, // maximum value  
+                1); // step  
         JSpinner capacitySpinner = new JSpinner(value);   
         capacitySpinner.setBounds(450,358,200,40);    
         capacitySpinner.setFont(new Font("Comic Sans MS",Font.BOLD,18));
-        panel.add(capacitySpinner);          
+        panel.add(capacitySpinner);
 
-
-
-        //Logo Pic
+        // Logo Pic
         JLabel logo = new JLabel();
-        try{
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
             get_image = ImageIO.read(new File("resources\\Image\\hall (1).png"));
             Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
             logo.setIcon(new ImageIcon(image));
             logo.setBounds(0, 0, 65, 65);
-
-        } catch(IOException e){
+        } catch(IOException e) {
             e.printStackTrace();
         }
         panel.add(logo);
 
-       
-        //Add Hall Button
+        // Add Hall Button
         JButton addHall_btn = new JButton("Add");
         addHall_btn.setFont(new Font("Comic Sans MS",Font.BOLD,18));
         addHall_btn.setBackground(new Color(250,240,230));
@@ -170,20 +160,19 @@ public class Adding_Hall_Page extends JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                }
             }
-            });
+        });
         panel.add(addHall_btn);
 
-
-        //Home Page Label
+        // Home Page Label
         JLabel back_lbl = new JLabel();
-        try{
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
             get_image = ImageIO.read(new File("resources\\Image\\logout.png"));
             Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
             back_lbl.setIcon(new ImageIcon(image));
             back_lbl.setBounds(920, 30, 35, 35);
 
-        } catch(IOException e){
+        } catch(IOException e) {
             e.printStackTrace();
         }
         back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -191,31 +180,22 @@ public class Adding_Hall_Page extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-                Hall_Management_Page hm = new Hall_Management_Page(name);
-                hm.setTitle("Hall Management");
-                hm.setVisible(true);
+                new Hall_Management_Page(name).setVisible(true);
             }
         });
         panel.add(back_lbl);
 
-
-        //Design 4 Pic
+        // Design 4 Pic
         JLabel des4 = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\design4.png"));
-
             Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
-
             des4.setIcon(new ImageIcon(image));
             des4.setBounds(0, 0, 1000, 800);
-
-        } catch(IOException e){
+        } catch(IOException e) {
             e.printStackTrace();
         }
         panel.add(des4);
-
     }
 }

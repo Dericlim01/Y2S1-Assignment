@@ -1,12 +1,14 @@
 package src.Scheduler;
+
 import src.shared.Create_file;
+
 import java.util.List;
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 
 public class Task_Checking {
     String line;
@@ -48,9 +50,7 @@ public class Task_Checking {
         return taskData;
     }
     
-
-
-    public Boolean change_task_done(String task_ID){
+    public Boolean change_task_done(String task_ID) {
         List<String> fileContent = new ArrayList<>();
         boolean change = false;
         // Check if the hall status file exists, and if not, create it
@@ -65,18 +65,19 @@ public class Task_Checking {
                         change = true;
                     } 
                     fileContent.add(String.join(",", data));
-                }} catch (IOException e) {
-                    e.printStackTrace();
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/task.txt"))) {
                 for (String lines : fileContent) {
                     writer.write(lines);
                     writer.newLine();
                 }
-                } catch (IOException g) {
-                    g.printStackTrace(); 
+            } catch (IOException g) {
+                g.printStackTrace(); 
             }
         return change;
-}
-        return change;}
+    }
+    return change;}
 }

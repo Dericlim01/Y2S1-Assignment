@@ -1,5 +1,7 @@
 package src.Customer.Raise_Issue;
+
 import src.Customer.Customer_Page;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Image;
@@ -14,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -87,7 +90,7 @@ public class Raise_Issue_Page extends JFrame {
         contentpane.add(hall_type_show_lbl);
 
         // Hall type label
-        JLabel hall_id_lbl = new JLabel("Hall Type : ");
+        JLabel hall_id_lbl = new JLabel("Hall ID : ");
         hall_id_lbl.setBounds(100, 150, 100, 20);
         hall_id_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         contentpane.add(hall_id_lbl);
@@ -142,7 +145,9 @@ public class Raise_Issue_Page extends JFrame {
         submit_issue_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (new Raise_Issue(n).send_issue(issue_title_txt.getText(), issue_desc_txt.getText())) {
+                if (new Raise_Issue(n).send_issue(issue_title_txt.getText(), 
+                                                    issue_desc_txt.getText(), 
+                                                    String.valueOf(hall_id_cmbbx.getSelectedItem()))) {
                     JOptionPane.showMessageDialog(
                         null,
                         "Issue send successfully",

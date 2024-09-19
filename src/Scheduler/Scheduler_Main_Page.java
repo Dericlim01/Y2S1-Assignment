@@ -1,8 +1,10 @@
 package src.Scheduler;
+
 import src.shared.Login_Page;
 import src.Customer.Update_Profile.UpdateProfile;
-import java.awt.Color;
+
 import java.awt.Font;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Cursor;
 import java.awt.EventQueue;
@@ -13,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,138 +31,113 @@ public class Scheduler_Main_Page extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try{
-                new Scheduler_Main_Page(name).setVisible(true);
+                try {
+                    new Scheduler_Main_Page(name).setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
         });
     }
 
-    public Scheduler_Main_Page(String name){
+    public Scheduler_Main_Page(String name) {
         setTitle("Scheduler Main Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
         setResizable(false);
+
         JPanel panel = new JPanel();
         setContentPane(panel);
         panel.setLayout(null);
         UpdateProfile search = new UpdateProfile();
         String[] user = search.search_user(name);
         
-        //Label
+        // Label
         JLabel titleLabel = new JLabel("Scheduler Main Page");
         titleLabel.setBounds(450, -20, 450, 300);
         titleLabel.setFont(new Font("Engravers MT",Font.PLAIN,20));
         panel.add(titleLabel);
 
-         //Logo Label
+        // Logo Label
         JLabel logo_lbl = new JLabel("Symphony Hall");
         logo_lbl.setFont(new Font("French Script MT", Font.BOLD,25));
         logo_lbl.setForeground(new Color(169,169,169));
         logo_lbl.setBounds(60,20,160,30);
         panel.add(logo_lbl);
 
-        //Logo Pic
+        // Logo Pic
         JLabel logo = new JLabel();
-        try{
- 
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\hall (1).png"));
-
             Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-
             logo.setIcon(new ImageIcon(image));
             logo.setBounds(0, 0, 65, 65);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         panel.add(logo);
 
-        //Profile Pic
+        // Profile Pic
         JLabel profile = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(80, 80, BufferedImage.TYPE_INT_RGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\fengjian.png"));
-
             Image image = get_image.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-
             profile.setIcon(new ImageIcon(image));
             profile.setBounds(75, 50, 1000, 200);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         panel.add(profile);
 
-        //Greeting Label
+        // Greeting Label
         JLabel greet_lbl = new JLabel("Welcome Back!");
         greet_lbl.setFont(new Font("Serif",Font.PLAIN,15));
         greet_lbl.setBounds(70,210,200,30);
         panel.add(greet_lbl);
 
-        //Username Label
+        // Username Label
         JLabel user_lbl = new JLabel(user[0]);
         user_lbl.setFont(new Font("Serif",Font.PLAIN,15));
         user_lbl.setBounds(90,240,200,30);
         panel.add(user_lbl);
 
-        //Setting Pic
+        // Setting Pic
         JLabel setting = new JLabel();
-        try{
- 
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\setting.png"));
-
             Image image = get_image.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-
             setting.setIcon(new ImageIcon(image));
             setting.setBounds(40, 290, 30, 30);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         panel.add(setting);
 
-        //Notification Pic
+        // Notification Pic
         JLabel noti= new JLabel();
-        try{
- 
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\notification.png"));
-
             Image image = get_image.getScaledInstance(43, 43, Image.SCALE_SMOOTH);
-
             noti.setIcon(new ImageIcon(image));
             noti.setBounds(100, 285, 38, 38);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         panel.add(noti);
 
-        //Mail Pic
+        // Mail Pic
         JLabel email = new JLabel();
-        try{
- 
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\email.png"));
-
             Image image = get_image.getScaledInstance(55, 55, Image.SCALE_SMOOTH);
-
             email.setIcon(new ImageIcon(image));
             email.setBounds(160, 280, 55, 55);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         panel.add(email);
@@ -168,32 +146,30 @@ public class Scheduler_Main_Page extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 do {
-                    JOptionPane.showMessageDialog(null,"You have been hacked! Give us 4.0 to resolve! Thank You!","Hacked Notification",JOptionPane.OK_CANCEL_OPTION);
-                        System.out.println("Prompting continue.");
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "You have been hacked! Give us 4.0 to resolve! Thank You!",
+                        "Hacked Notification",
+                        JOptionPane.OK_CANCEL_OPTION);
+                    System.out.println("Prompting continue.");
                 } while (true);      
             }
         });
         
-        //Side Pic
+        // Side Pic
         JLabel side = new JLabel();
-        try{
- 
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\side.png"));
-
             Image image = get_image.getScaledInstance(400, 800, Image.SCALE_SMOOTH);
-
             side.setIcon(new ImageIcon(image));
             side.setBounds(0, 0, 400, 800);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         panel.add(side);
 
         // Button
-
         JButton hallMngBtn = new JButton("Hall Management");
         hallMngBtn.setBounds(500, 200, 220, 45);
         hallMngBtn.setBackground(new Color(250,240,230));
@@ -204,9 +180,7 @@ public class Scheduler_Main_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Hall_Management_Page hm = new Hall_Management_Page(name);
-                hm.setTitle("Hall Management");
-                hm.setVisible(true);
+                new Hall_Management_Page(name).setVisible(true);
             }
         });
 
@@ -220,9 +194,7 @@ public class Scheduler_Main_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Schedule_Maintainance_Page smp = new Schedule_Maintainance_Page(name);
-                smp.setTitle("Schedule Maintainance");
-                smp.setVisible(true);
+                new Schedule_Maintainance_Page(name).setVisible(true);
             }
         });
 
@@ -236,14 +208,11 @@ public class Scheduler_Main_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Task_Checking_Page tcp = new Task_Checking_Page(name);
-                tcp.setTitle("Task Checking");
-                tcp.setVisible(true);
+                new Task_Checking_Page(name).setVisible(true);
             }
         });
 
-
-        //View Profile Button
+        // View Profile Button
         JButton viewpro_btn = new JButton("View Profile");
         viewpro_btn.setBackground(new Color(250,240,230));
         viewpro_btn.setForeground(new Color(128,128,128));
@@ -253,16 +222,12 @@ public class Scheduler_Main_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Scheduler_Update_Profile_Page sup = new Scheduler_Update_Profile_Page(name);
-                sup.setTitle("Scheduler Profile");
-                sup.setVisible(true);
+                new Scheduler_Update_Profile_Page(name).setVisible(true);
             }
         });
         panel.add(viewpro_btn);
 
-
-
-        //Logout Button
+        // Logout Button
         JButton logout_btn = new JButton("Logout");
         logout_btn.setBackground(new Color(250,240,230));
         logout_btn.setForeground(new Color(128,128,128));
@@ -272,11 +237,8 @@ public class Scheduler_Main_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Login_Page log = new Login_Page();
-                log.setTitle("Login");
-                log.setVisible(true);
+                new Login_Page().setVisible(true);
             }
-
         });
         panel.add(logout_btn);
     }

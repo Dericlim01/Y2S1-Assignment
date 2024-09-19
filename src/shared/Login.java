@@ -1,7 +1,8 @@
 package src.shared;
-import java.io.BufferedReader;
+
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.BufferedReader;
 
 public class Login {
     public String login(String n, String p) {

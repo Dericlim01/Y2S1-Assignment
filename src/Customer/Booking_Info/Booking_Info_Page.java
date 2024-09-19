@@ -1,5 +1,7 @@
 package src.Customer.Booking_Info;
+
 import src.Customer.Customer_Page;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Image;
@@ -15,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -92,6 +95,9 @@ public class Booking_Info_Page extends JFrame {
         Object[][] current_event_data = new Booking_Info().current_data(n, current_date);
         DefaultTableModel current_table_model = new DefaultTableModel(current_event_data, col_name);
         JTable current_table = new JTable(current_table_model);
+        current_table.setRowSelectionAllowed(false);
+        current_table.setColumnSelectionAllowed(false);
+        current_table.setCellSelectionEnabled(false);
         JScrollPane current_scrollPane = new JScrollPane(current_table);
         current_scrollPane.setBounds(100, 200, 800, 100);
         contentPane.add(current_scrollPane);
@@ -122,6 +128,9 @@ public class Booking_Info_Page extends JFrame {
         Object[][] past_data = new Booking_Info().past_data(n, current_date);
         DefaultTableModel past_table_model = new DefaultTableModel(past_data, col_name);
         JTable past_table = new JTable(past_table_model);
+        past_table.setRowSelectionAllowed(false);
+        past_table.setColumnSelectionAllowed(false);
+        past_table.setCellSelectionEnabled(false);
         JScrollPane past_scrollPane = new JScrollPane(past_table);
         past_scrollPane.setBounds(100, 550, 800, 150);
         contentPane.add(past_scrollPane);
@@ -156,24 +165,32 @@ public class Booking_Info_Page extends JFrame {
         cancel_book_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int response = JOptionPane.showConfirmDialog(
-                    null, 
-                    "Confirm cancel?", 
-                    "Cancel booking confirmation", 
-                    JOptionPane.OK_CANCEL_OPTION);
-                if (response == 0) {
-                    // go cancel
-                    if (new Booking_Info().cancel_book(selected_data.toArray(new String[0]))) {
-                        JOptionPane.showMessageDialog(
-                            null, 
-                            "Booking cancel successfully", 
-                            "Booking cancel status", 
-                            JOptionPane.INFORMATION_MESSAGE);
-                        dispose();
-                        new Booking_Info_Page(n);
+                if (selected_data.size() > 0) {
+                    int response = JOptionPane.showConfirmDialog(
+                        null, 
+                        "Confirm cancel?", 
+                        "Cancel booking confirmation", 
+                        JOptionPane.OK_CANCEL_OPTION);
+                    if (response == 0) {
+                        // go cancel
+                        if (new Booking_Info().cancel_book(selected_data.toArray(new String[0]))) {
+                            JOptionPane.showMessageDialog(
+                                null, 
+                                "Booking cancel successfully", 
+                                "Booking cancel status", 
+                                JOptionPane.INFORMATION_MESSAGE);
+                            dispose();
+                            new Booking_Info_Page(n).setVisible(true);
+                        }
+                    } else {
+                        System.out.println("No cancel booking");
                     }
                 } else {
-                    System.out.println("No cancel booking");
+                    JOptionPane.showMessageDialog(
+                        null, 
+                        "No row selected", 
+                        "Selected status", 
+                        JOptionPane.WARNING_MESSAGE);
                 }
             }
         });

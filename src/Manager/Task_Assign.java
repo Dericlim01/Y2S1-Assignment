@@ -1,13 +1,7 @@
 package src.Manager;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import java.util.List;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Color;
@@ -18,29 +12,32 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
-
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.imageio.ImageIO;
+
 public class Task_Assign extends JFrame{
     private static String manname;
-    //private static Object[] row_Data;
+    // private static Object[] row_Data;
     private static List<String> issues_Row;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     new Task_Assign(manname, issues_Row).setVisible(true);
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    public Task_Assign(String n, List<String> issuesRow){
+    public Task_Assign(String n, List<String> issuesRow) {
         setTitle("Task Assign");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
@@ -67,7 +64,6 @@ public class Task_Assign extends JFrame{
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
             get_image = ImageIO.read(new File("resources/Image/hall (1).png"));
             Image image = get_image.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-
             logo.setIcon(new ImageIcon(image));
             logo.setBounds(0, 0, 65, 65);
         } catch (IOException e) {
@@ -95,14 +91,12 @@ public class Task_Assign extends JFrame{
         staff.setForeground(new Color(128,128,128));
         staff.setBounds(160, 83, 120, 20);
         manager_TA.add(staff);
-
         
         // Assign Text Label
         JLabel text_lbl = new JLabel("Assign Description: ");
         text_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         text_lbl.setBounds(50, 125, 150, 30);
         manager_TA.add(text_lbl);
-
 
         // Assign Text Area
         JTextArea assignText = new JTextArea(10, 50);
@@ -124,25 +118,19 @@ public class Task_Assign extends JFrame{
                 String staff_data = staff.getSelectedItem().toString();
                 String details = assignText.getText(); 
                 man_taskAssign.keep_task(issuesRow, staff_data, details);
-                
             }
         });
         manager_TA.add(assign);
         
         // Back Home page
         JLabel back_lbl = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources/Image/logout.png"));
-
             Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-
             back_lbl.setIcon(new ImageIcon(image));
             back_lbl.setBounds(920, 15, 35, 35);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -152,24 +140,18 @@ public class Task_Assign extends JFrame{
                 dispose();
                 new Manager_Home_Page(n).setVisible(true);         
             }
-
         });
         manager_TA.add(back_lbl);
 
-        //Design 4 Background Pic
+        // Design 4 Background Pic
         JLabel des4 = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources/Image/design4.png"));
-
             Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
-
             des4.setIcon(new ImageIcon(image));
             des4.setBounds(0, 0, 1000, 800);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         manager_TA.add(des4);

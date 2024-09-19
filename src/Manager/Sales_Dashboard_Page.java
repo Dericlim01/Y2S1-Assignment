@@ -1,8 +1,11 @@
 package src.Manager;
+
+import src.shared.DateFormat;
+
 import org.jdatepicker.impl.UtilDateModel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
-import src.shared.DateFormat;
+
 import java.io.File;
 import java.io.IOException;
 import java.awt.Font;
@@ -19,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Properties;
 import java.text.SimpleDateFormat;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -31,7 +35,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.imageio.ImageIO;
 
 public class Sales_Dashboard_Page extends JFrame {
-
     private static String manname;
     private JScrollPane scrollPane;
     private DefaultTableModel tm;
@@ -95,14 +98,11 @@ public class Sales_Dashboard_Page extends JFrame {
 
         // Define the columns names
         String[] col_name = {"Booking ID", "Hall ID", "Num of Guests", "Start Date", "End Date", "Book Status", "Booking Paid", "Deposit Paid", "Booking Date", "Username"};
-
         // Define the data for the table
         // Object [][] represents whole table
         Object[][] row_Data = man_data.present_data("resources/Database/bookings.txt");
-
         tm = new DefaultTableModel(row_Data, col_name);
         JTable view = new JTable(tm);
-
         scrollPane = new JScrollPane(view);
         scrollPane.setBounds(9, 125, 970, 400);
         manager_SD.add(scrollPane);
@@ -143,7 +143,7 @@ public class Sales_Dashboard_Page extends JFrame {
         end_datePicker.setBounds(480, 80, 170, 30);
         manager_SD.add(end_datePicker);
 
-        //Add the total from the program 
+        // Add the total from the program 
         double totalPaid = man_data.calculate_total_paid("resources/Database/bookings.txt");
         tp = totalPaid;
 
@@ -152,12 +152,9 @@ public class Sales_Dashboard_Page extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 filteredDate = man_data.date_read(start_datePicker, end_datePicker, "resources/Database/bookings.txt");
                 tm.setRowCount(0);
-
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
                 for (Object[] dates : filteredDate) {
                     Object[] formated = new Object[dates.length];
-
                     for (int i = 0; i < dates.length; i++) {
                         if (i == 3 || i == 4) {
                             formated[i] = dateFormat.format(dates[i]);
@@ -167,21 +164,17 @@ public class Sales_Dashboard_Page extends JFrame {
                     }
                     tm.addRow(formated);
                 }
-
                 view.revalidate();
                 view.repaint();
-
                 Double totalPaid = man_data.paid_total(filteredDate, dateFormat, start_datePicker, end_datePicker);
                 if (totalPaid != null) {
                     paid.setText(String.valueOf(totalPaid));
                 } else {
                     paid.setText("0.00");
                 }
-
-//                tp = man_data.paid_total(filteredDate, dateFormat, start_datePicker, end_datePicker);
+            // tp = man_data.paid_total(filteredDate, dateFormat, start_datePicker, end_datePicker);
             }
         };
-
         start_datePicker.addActionListener(actionListener);
         end_datePicker.addActionListener(actionListener);
 
@@ -195,19 +188,14 @@ public class Sales_Dashboard_Page extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 manager_SD.remove(scrollPane);
                 Object[][] row_Data = man_data.present_data("resources/Database/bookings.txt");
-
                 tm.setDataVector(row_Data, col_name);
                 JTable table_tm = new JTable(tm);
-
                 scrollPane = new JScrollPane(table_tm);
-
                 scrollPane.setBounds(9, 125, 970, 400);
                 manager_SD.add(scrollPane);
-
                 double totalPaid = man_data.calculate_total_paid("resources/Database/bookings.txt");
                 paid.setText(String.format("%.2f", totalPaid));
-
-                //tm.fireTableDataChanged();
+                // tm.fireTableDataChanged();
                 table_tm.revalidate(); // important, recalculate the layout / resize the panel?
                 table_tm.repaint(); // important, rearranging components
             }
@@ -225,7 +213,6 @@ public class Sales_Dashboard_Page extends JFrame {
         paid = new JLabel(String.valueOf(tp));
         paid.setFont(new Font("Comic Sans Ms", Font.PLAIN, 15));
         paid.setBounds(800, 575, 110, 20);
-
         manager_SD.add(paid);
 
         //Back Page Pic

@@ -1,8 +1,11 @@
 package src.Manager;
+
 import src.shared.DateFormat;
+
 import org.jdatepicker.impl.UtilDateModel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Image;
@@ -20,6 +23,7 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Properties;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;

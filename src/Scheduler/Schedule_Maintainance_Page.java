@@ -1,11 +1,14 @@
 package src.Scheduler;
+
 import src.shared.DateFormat;
+
+import org.jdatepicker.impl.UtilDateModel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
+
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
@@ -19,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -38,19 +42,19 @@ public class Schedule_Maintainance_Page extends JFrame {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     private static int selectedRow = -1;
     public static void main(String[] args) {
-    SwingUtilities.invokeLater(() -> new Schedule_Maintainance_Page(name).setVisible(true));
+        SwingUtilities.invokeLater(() -> new Schedule_Maintainance_Page(name).setVisible(true));
     }
     
-    public Schedule_Maintainance_Page(String name){
+    public Schedule_Maintainance_Page(String name) {
         setTitle("Hall Schedule Management");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
         setResizable(false);
+
         JPanel panel = new JPanel();
         setContentPane(panel);
         panel.setLayout(null);
         panel.setBackground(new Color(248,248,248));
-   
 
         // Logo Label
         JLabel logo_lbl = new JLabel("Symphony Hall");
@@ -59,8 +63,7 @@ public class Schedule_Maintainance_Page extends JFrame {
         logo_lbl.setBounds(60,20,160,30);
         panel.add(logo_lbl);
 
-
-    // Logo Pic
+        // Logo Pic
         JLabel logo = new JLabel();
         try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
@@ -72,7 +75,6 @@ public class Schedule_Maintainance_Page extends JFrame {
             e.printStackTrace();
         }
         panel.add(logo);
-
 
         // Title Label
         JLabel titleLabel = new JLabel("Schedule Checker");
@@ -157,7 +159,7 @@ public class Schedule_Maintainance_Page extends JFrame {
         Properties.put("text.day", "Day");
         Properties.put("text.month", "Month");
         Properties.put("text.year", "Year");
-       // Import Date Panel and Picker
+        // Import Date Panel and Picker
         JDatePanelImpl sDatePanel = new JDatePanelImpl(sdateModel, Properties);
         JDatePickerImpl sDatePicker = new JDatePickerImpl(sDatePanel, new DateFormat());
         // Set the position and size of the date picker and add the datepicker inside UI
@@ -166,11 +168,10 @@ public class Schedule_Maintainance_Page extends JFrame {
         sDatePicker.getComponent(1).setEnabled(false);
         panel.add(sDatePicker);
 
-
         // End Date Picker
         // Create a date model to hold the selected date
         UtilDateModel edateModel = new UtilDateModel();
-       // Import Date Panel and Picker
+        // Import Date Panel and Picker
         JDatePanelImpl eDatePanel = new JDatePanelImpl(edateModel, Properties);
         JDatePickerImpl eDatePicker = new JDatePickerImpl(eDatePanel, new DateFormat());
         // Set the position and size of the date picker and add the datepicker inside UI
@@ -185,7 +186,6 @@ public class Schedule_Maintainance_Page extends JFrame {
         rmk_txtField.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
         rmk_txtField.setEditable(false);
         panel.add(rmk_txtField);
-
 
         // Add Schedule Button
         JButton addSchdlBtn = new JButton("Add New Schedule");
@@ -211,7 +211,6 @@ public class Schedule_Maintainance_Page extends JFrame {
         editSchdlBtn.setBounds(360,670,230,35);
         panel.add(editSchdlBtn);
 
-
         // Show All Button
         JButton showAllBtn = new JButton("Show All");
         showAllBtn.setFont(new Font("Comic Sans MS",Font.BOLD,15));
@@ -229,11 +228,10 @@ public class Schedule_Maintainance_Page extends JFrame {
         editDoneBtn.setVisible(false);
         panel.add(editDoneBtn);
         
-
         // table
         String[] col_name = {"Hall Schedule ID", "Hall ID", "Hall Type", "Start Date", "End Date",  "Status", "Comment"};
         Object[][] data =  new Schedule_Maintainance().search_hall_schedule(hall_type_cmbbx.getSelectedItem());
-        DefaultTableModel table = new DefaultTableModel(data, col_name){
+        DefaultTableModel table = new DefaultTableModel(data, col_name) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // All cells are non-editable
@@ -256,8 +254,7 @@ public class Schedule_Maintainance_Page extends JFrame {
                 for (Object[] row : newData) {
                     table.addRow(row);
                 }
-
-                 // Refresh the table
+                // Refresh the table
                 table.fireTableDataChanged();
             }
         });
@@ -286,36 +283,36 @@ public class Schedule_Maintainance_Page extends JFrame {
                     String selectedSDateStr = details.getValueAt(selectedRow, 3).toString();
                     Date selectedSDate = null;
                     try {
-                            selectedSDate = dateFormat.parse(selectedSDateStr);
-                        } catch (ParseException g) {
-                            g.printStackTrace();
-                        }
-                        // Set the parsed Date value to the date picker
-                        if (selectedSDate != null) {
-                            sdateModel.setValue(selectedSDate); // Set the Date value to the model
-                            sdateModel.setSelected(true); // Mark the date as selected
-                        }
+                        selectedSDate = dateFormat.parse(selectedSDateStr);
+                    } catch (ParseException g) {
+                        g.printStackTrace();
+                    }
+                    // Set the parsed Date value to the date picker
+                    if (selectedSDate != null) {
+                        sdateModel.setValue(selectedSDate); // Set the Date value to the model
+                        sdateModel.setSelected(true); // Mark the date as selected
+                    }
                     
-
                     String selectedEDateStr = details.getValueAt(selectedRow, 4).toString();
                     Date selectedEDate = null;
                     try {
-                            selectedEDate = dateFormat.parse(selectedEDateStr);
-                        } catch (ParseException g) {
-                            g.printStackTrace();
-                        }
-                        // Set the parsed Date value to the date picker
-                        if (selectedEDate != null) {
-                            edateModel.setValue(selectedEDate); // Set the Date value to the model
-                            edateModel.setSelected(true); // Mark the date as selected
-                        }
-                    
-
+                        selectedEDate = dateFormat.parse(selectedEDateStr);
+                    } catch (ParseException g) {
+                        g.printStackTrace();
+                    }
+                    // Set the parsed Date value to the date picker
+                    if (selectedEDate != null) {
+                        edateModel.setValue(selectedEDate); // Set the Date value to the model
+                        edateModel.setSelected(true); // Mark the date as selected
+                    }
                     status_cmbbx.setSelectedItem(details.getValueAt(selectedRow, 5).toString());
-
                     rmk_txtField.setText(details.getValueAt(selectedRow, 6).toString());
                 } else {
-                    JOptionPane.showMessageDialog(null,"Please Select A Row", "Error",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Please Select A Row",
+                        "Error",
+                        JOptionPane.INFORMATION_MESSAGE);
                 }   
             }                 
         });
@@ -337,12 +334,14 @@ public class Schedule_Maintainance_Page extends JFrame {
                     details.setEnabled(false);
                     rmk_txtField.setEditable(true);
                 } else {
-                    JOptionPane.showMessageDialog(null,"Please Select A Row", "Error",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Please Select A Row",
+                        "Error",
+                        JOptionPane.INFORMATION_MESSAGE);
                 }   
             }
         });
-
-                
 
         editDoneBtn.addActionListener(new ActionListener() {
             @Override
@@ -363,16 +362,29 @@ public class Schedule_Maintainance_Page extends JFrame {
 
                     Date updatedsDate = (Date) sDatePicker.getModel().getValue(); 
                     Date updatedeDate = (Date) eDatePicker.getModel().getValue();
-                    if (new Schedule_Maintainance().check_schedule(schedule_ID, hallID_cmbbx.getSelectedItem().toString(), updatedsDate, updatedeDate)){
+                    if (new Schedule_Maintainance().check_schedule(schedule_ID, hallID_cmbbx.getSelectedItem().toString(), updatedsDate, updatedeDate)) {
                         if (new Schedule_Maintainance().edit_Schedule(schedule_ID, hallID_cmbbx.getSelectedItem().toString(), updatedsDate,
-                        updatedeDate, status_cmbbx.getSelectedItem().toString(), rmk_txtField.getText())){
-                            JOptionPane.showMessageDialog(null,"Edit Successful", "Success",JOptionPane.INFORMATION_MESSAGE);
+                        updatedeDate, status_cmbbx.getSelectedItem().toString(), rmk_txtField.getText())) {
+                            JOptionPane.showMessageDialog(
+                                null,
+                                "Edit Successful",
+                                "Success",
+                                JOptionPane.INFORMATION_MESSAGE);
                         } else {
-                            JOptionPane.showMessageDialog(null,"Edit Failed", "Error",JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(
+                                null,
+                                "Edit Failed",
+                                "Error",
+                                JOptionPane.INFORMATION_MESSAGE);
                         }
                     } else {
-                        JOptionPane.showConfirmDialog(null, "There is an event on that day.\nChecking Schedule,Click 'Yes' and change to 'Schedule Checker Page'\nClick 'No' will stay at this page  ", 
-                        "Confirmation", JOptionPane.YES_NO_OPTION); 
+                        JOptionPane.showConfirmDialog(
+                            null,
+                            "There is an event on that day.\n" +
+                            "Checking Schedule,Click 'Yes' and change to 'Schedule Checker Page'\n" +
+                            "Click 'No' will stay at this page  ", 
+                            "Confirmation",
+                            JOptionPane.YES_NO_OPTION); 
                     }
                     hall_type_cmbbx.setSelectedIndex(-1);
                     Object[][] newData = new Schedule_Maintainance().search_hall_schedule(hall_type_cmbbx.getSelectedItem());
@@ -382,9 +394,14 @@ public class Schedule_Maintainance_Page extends JFrame {
                     // Add new data to the table model
                     for (Object[] row : newData) {
                         table.addRow(row);
-                    }// Table done refresh
+                    }
+                    // Table done refresh
                 } else {
-                    JOptionPane.showMessageDialog(null,"Please Select A Row", "Error",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Please Select A Row",
+                        "Error",
+                        JOptionPane.INFORMATION_MESSAGE);
                 }   
             }           
         });
@@ -400,18 +417,27 @@ public class Schedule_Maintainance_Page extends JFrame {
                 // Add new data to the table model
                 for (Object[] row : newData) {
                     table.addRow(row);
-                }// Table done refresh
                 }
+                // Table done refresh
+            }
         });
 
         deleteSchdlBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (selectedRow != -1) {
-                    if (new Schedule_Maintainance().delete_Schedule(schedule_ID)){
-                        JOptionPane.showMessageDialog(null,"Delete Successful", "Success",JOptionPane.INFORMATION_MESSAGE);
+                    if (new Schedule_Maintainance().delete_Schedule(schedule_ID)) {
+                        JOptionPane.showMessageDialog(
+                            null,
+                            "Delete Successful",
+                            "Success",
+                            JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(null,"Delete Failed", "Error",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(
+                            null,
+                            "Delete Failed",
+                            "Error",
+                            JOptionPane.INFORMATION_MESSAGE);
                     }
                     Object[][] newData = new Schedule_Maintainance().search_hall_schedule(hall_type_cmbbx.getSelectedItem());
                     // Clear the existing rows in the table model
@@ -422,21 +448,25 @@ public class Schedule_Maintainance_Page extends JFrame {
                         table.addRow(row);
                     }// Table done refresh
                 } else {
-                    JOptionPane.showMessageDialog(null,"Please Select A Row", "Error",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Please Select A Row",
+                        "Error",
+                        JOptionPane.INFORMATION_MESSAGE);
                 }   
             }
         });
 
-        //Home Page Label
+        // Home Page Label
         JLabel back_lbl = new JLabel();
-        try{
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
             get_image = ImageIO.read(new File("resources\\Image\\logout.png"));
             Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
             back_lbl.setIcon(new ImageIcon(image));
             back_lbl.setBounds(920, 30, 35, 35);
 
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -444,30 +474,22 @@ public class Schedule_Maintainance_Page extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-                Scheduler_Main_Page smp = new Scheduler_Main_Page(name);
-                smp.setTitle("Scheduler Main Page");
-                smp.setVisible(true);
+                new Scheduler_Main_Page(name).setVisible(true);
             }
         });
         panel.add(back_lbl);
 
-
-        //Design 4 Pic
+        // Design 4 Pic
         JLabel des4 = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\design4.png"));
-
             Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
-
             des4.setIcon(new ImageIcon(image));
             des4.setBounds(0, 0, 1000, 800);
-
-        } catch(IOException e){
+        } catch(IOException e) {
             e.printStackTrace();
         }
         panel.add(des4);
-    }  
+    }
 }

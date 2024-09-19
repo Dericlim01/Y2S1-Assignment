@@ -1,9 +1,11 @@
 package src.Scheduler;
+
 import src.Customer.Update_Profile.UpdateProfile;
 import src.Scheduler.Scheduler_Update_Profile_Page;
+
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Cursor;
 import java.awt.Toolkit;
 import java.awt.EventQueue;
@@ -14,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,23 +27,22 @@ import javax.swing.JOptionPane;
 import javax.imageio.ImageIO;
 
 public class Scheduler_Update_Profile_Page extends JFrame {
-
     private static String name;
     private static String[] user ;
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable(){
+        EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     new Scheduler_Update_Profile_Page(name).setVisible(true);
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    public Scheduler_Update_Profile_Page(String name){
+    public Scheduler_Update_Profile_Page(String name) {
         setTitle("Scheduler View Profile");
         setIconImage(Toolkit.getDefaultToolkit().getImage("resources/Image/hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,19 +55,15 @@ public class Scheduler_Update_Profile_Page extends JFrame {
         setContentPane(panel);
         panel.setLayout(null);
 
-
         // Hall icon
         JLabel hall = new JLabel();
-        try{
+        try {
             BufferedImage hallImage = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             hallImage = ImageIO.read(new File("resources/Image/hall (1).png"));
-
             Image hall_Image = hallImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-
             hall.setIcon(new ImageIcon(hall_Image));
             hall.setBounds(10, 5, 40, 40);
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         panel.add(hall);
@@ -74,29 +72,22 @@ public class Scheduler_Update_Profile_Page extends JFrame {
         JLabel hall_txt_lbl = new JLabel("Symphony Hall");
         hall_txt_lbl.setFont(new Font("French Script MT", Font.BOLD, 25));
         hall_txt_lbl.setForeground(new Color(169, 169, 169));
-        //hall_txt_lbl.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));;
+        // hall_txt_lbl.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));;
         hall_txt_lbl.setBounds(50, 5, 180, 40);
         panel.add(hall_txt_lbl);
 
         // Profile Picture 
         JLabel picture = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources/Image/fengjian.png"));
-
             Image image = get_image.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
-
             picture.setIcon(new ImageIcon(image));
             picture.setBounds(425, 80, 120, 120);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
         panel.add(picture);
-
        
         // Greeting Label
         JLabel greet_lbl = new JLabel("Welcome Back!");
@@ -156,7 +147,7 @@ public class Scheduler_Update_Profile_Page extends JFrame {
         // Birth Show Label
         JLabel birth = new JLabel(user[4]);
         birth.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        //email.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        // email.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         birth.setBounds(480, 433, 200, 50);
         panel.add(birth);
 
@@ -169,7 +160,7 @@ public class Scheduler_Update_Profile_Page extends JFrame {
         // Gender Show Label
         JLabel gender = new JLabel(user[5]);
         gender.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        //email.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        // email.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         gender.setBounds(480, 480, 200, 50);
         panel.add(gender);
 
@@ -196,11 +187,18 @@ public class Scheduler_Update_Profile_Page extends JFrame {
                 String pass = pfield.getText();
                 UpdateProfile up = new UpdateProfile();
                 if (up.update_user(userName, pass)) {
-                    JOptionPane.showMessageDialog(null, "Update Successfully", "Plain", JOptionPane.INFORMATION_MESSAGE);
-
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Update Successfully",
+                        "Plain",
+                        JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     // UPdate Failed
-                    int response = JOptionPane.showConfirmDialog(null, "Update Failed, Do you want to Update Again?", "Question", JOptionPane.YES_NO_CANCEL_OPTION);
+                    int response = JOptionPane.showConfirmDialog(
+                        null,
+                        "Update Failed, Do you want to Update Again?",
+                        "Question",
+                        JOptionPane.YES_NO_CANCEL_OPTION);
                     if (response == 1) {
                         new Scheduler_Update_Profile_Page(name).setVisible(true);
                     }
@@ -211,21 +209,15 @@ public class Scheduler_Update_Profile_Page extends JFrame {
         update_btn.setVisible(false);
         panel.add(update_btn);
         
-
         // Back button
         JLabel back_lbl = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources/Image/logout.png"));
-
             Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-
             back_lbl.setIcon(new ImageIcon(image));
             back_lbl.setBounds(920, 15, 35, 35);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -235,7 +227,6 @@ public class Scheduler_Update_Profile_Page extends JFrame {
                 dispose();
                 new Scheduler_Main_Page(name).setVisible(true);         
             }
-
         });
         panel.add(back_lbl);
 
@@ -253,32 +244,25 @@ public class Scheduler_Update_Profile_Page extends JFrame {
                 pfield.setText(pshow_lbl.getText());
                 cfield.setText(cshow_lbl.getText());
                 efield.setText(email.getText());
-
                 panel.add(pfield);
                 panel.add(cfield);
                 panel.add(efield);
                 panel.add(update_btn);
             }
         });
-
         panel.add(edit_btn);
 
-         // Gradient Design
-         JLabel gradient = new JLabel();
-         try {
-             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
- 
-             get_image = ImageIO.read(new File("resources/Image/gradient.png"));
- 
-             Image image = get_image.getScaledInstance(1000, 280, Image.SCALE_SMOOTH);
- 
-             gradient.setIcon(new ImageIcon(image));
-             gradient.setBounds(0, 0, 1000, 200);
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
-         panel.add(gradient);
-
+        // Gradient Design
+        JLabel gradient = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources/Image/gradient.png"));
+            Image image = get_image.getScaledInstance(1000, 280, Image.SCALE_SMOOTH);
+            gradient.setIcon(new ImageIcon(image));
+            gradient.setBounds(0, 0, 1000, 200);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        panel.add(gradient);
     }
 }
-

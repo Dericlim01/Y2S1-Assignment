@@ -1,51 +1,50 @@
 package src.Scheduler;
 
-import javax.imageio.ImageIO;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-
+import java.awt.Font;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Cursor;
 import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Task_Checking_Page extends JFrame {
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.DefaultComboBoxModel;
 
+public class Task_Checking_Page extends JFrame {
     public static String name;
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try{
-                new Task_Checking_Page(name).setVisible(true);
+                try {
+                    new Task_Checking_Page(name).setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
         });
     }
 
-    public Task_Checking_Page(String name){
+    public Task_Checking_Page(String name) {
         setTitle("Task Checking Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
         setResizable(false);
+        
         JPanel panel = new JPanel();
         setContentPane(panel);
         panel.setLayout(null);
@@ -130,7 +129,6 @@ public class Task_Checking_Page extends JFrame {
             }
         });
 
-
         // Done Button
         JButton done_btn = new JButton("Done Task");
         done_btn.setBounds(420,675,220,35);
@@ -141,22 +139,37 @@ public class Task_Checking_Page extends JFrame {
         done_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(taskID_cmbbx.getSelectedIndex() != -1){
-                    int choice = JOptionPane.showConfirmDialog(null, "\nComfirmation,Click 'OK' to set this task as done ", 
-                    "Confirmation", JOptionPane.OK_CANCEL_OPTION); 
+                if (taskID_cmbbx.getSelectedIndex() != -1) {
+                    int choice = JOptionPane.showConfirmDialog(
+                        null,
+                        "\nComfirmation,Click 'OK' to set this task as done ", 
+                        "Confirmation",
+                        JOptionPane.OK_CANCEL_OPTION); 
                     // Check the user's choice and display a corresponding message 
                     if (choice == JOptionPane.OK_OPTION) { 
-                        if (new Task_Checking().change_task_done(taskID_cmbbx.getSelectedItem().toString())){
-                            JOptionPane.showMessageDialog(null,"Change Successful", "Success",JOptionPane.INFORMATION_MESSAGE);
+                        if (new Task_Checking().change_task_done(taskID_cmbbx.getSelectedItem().toString())) {
+                            JOptionPane.showMessageDialog(
+                                null,
+                                "Change Successful",
+                                "Success",
+                                JOptionPane.INFORMATION_MESSAGE);
                             ArrayList<String> newTasksList = new Task_Checking().search_task_assigned(name);
                             DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(newTasksList.toArray(new String[0]));
                             taskID_cmbbx.setModel(model);
                         } else {
-                            JOptionPane.showMessageDialog(null,"Change Failed", "Error",JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(
+                                null,
+                                "Change Failed",
+                                "Error",
+                                JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                 } else { 
-                    JOptionPane.showMessageDialog(null,"Please Select a Task", "Error",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Please Select a Task",
+                        "Error",
+                        JOptionPane.INFORMATION_MESSAGE);
                 }   
             }
         });
@@ -172,26 +185,19 @@ public class Task_Checking_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Schedule_Maintainance_Page sc = new Schedule_Maintainance_Page(name);
-                sc.setTitle("Schedule Maintainance Page");
-                sc.setVisible(true);
+                new Schedule_Maintainance_Page(name).setVisible(true);
             }
         });
 
-
-
-
-        
-        //Home Page Label
+        // Home Page Label
         JLabel back_lbl = new JLabel();
-        try{
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
             get_image = ImageIO.read(new File("resources\\Image\\logout.png"));
             Image image = get_image.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
             back_lbl.setIcon(new ImageIcon(image));
             back_lbl.setBounds(920, 30, 35, 35);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         back_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -199,32 +205,22 @@ public class Task_Checking_Page extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-                Scheduler_Main_Page mp = new Scheduler_Main_Page(name);
-                mp.setTitle("Scheduler Main Page");
-                mp.setVisible(true);
+                new Scheduler_Main_Page(name).setVisible(true);
             }
         });
         panel.add(back_lbl);
 
-
-        //Design 4 Pic
+        // Design 4 Pic
         JLabel des4 = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\design4.png"));
-
             Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
-
             des4.setIcon(new ImageIcon(image));
             des4.setBounds(0, 0, 1000, 800);
-
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         panel.add(des4);
-    }
-
-    
+    }   
 }

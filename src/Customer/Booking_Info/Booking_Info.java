@@ -1,5 +1,7 @@
 package src.Customer.Booking_Info;
+
 import src.shared.Create_file;
+
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -106,7 +108,7 @@ public class Booking_Info {
                 for (String[] hall_data : hall_stat_data) {
                     if (hall_data[6].equals(select_data[0])) {
                         hall_data[4] = "available";
-                        hall_data[6] = "";
+                        hall_data[6] = "null";
                     }
                 }
             } catch (Exception e) {

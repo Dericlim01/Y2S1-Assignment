@@ -1,5 +1,7 @@
 package src.Scheduler;
+
 import src.shared.Create_file;
+
 import java.util.ArrayList;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,7 +11,6 @@ import java.io.BufferedReader;
  * Scheduler_Update_Profile
  */
 public class Scheduler_Update_Profile {
-
     public String[] read_user_Information(String n) {
         ArrayList<String[]> users = new ArrayList<>();
         String line;
