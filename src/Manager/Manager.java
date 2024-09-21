@@ -128,9 +128,13 @@ public class Manager {
                     rowData[4] = s_date;
 
                     // Fill remaining data
-                    for (int i = 5; i < f_data.length; i++) {
-                        rowData[i] = f_data[i].trim();
-                    }
+                    // for (int i = 6; i < f_data.length; i++) {
+                    //     rowData[i] = f_data[i].trim();
+                    // }
+                    rowData[5] = f_data[6].trim();
+                    rowData[6] = f_data[8].trim();
+                    rowData[7] = f_data[9].trim();
+
                     dateList.add(rowData);
                 }
             } catch (Exception e) {
@@ -173,6 +177,36 @@ public class Manager {
             }
         }
         return rowData.toArray(new Object[0][]);
+    }
+    
+    public Object[][] view_sales(String fileName) {
+        String sales;
+        ArrayList<String[]> viewSales = new ArrayList<>();
+
+        if (new Create_file().issue_file()) {
+            try (BufferedReader br_sales = new BufferedReader(new FileReader(fileName))) {
+                while ((sales = br_sales.readLine()) != null) {
+                    String[] row = sales.split(",");
+                    viewSales.add(row);
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        Object[][] view_Sales = new Object[viewSales.size()][8];
+        for (int i = 0; i < viewSales.size(); i++) {
+            String[] sales_row = viewSales.get(i);
+            view_Sales[i][0] = sales_row[0];
+            view_Sales[i][1] = sales_row[1];
+            view_Sales[i][2] = sales_row[2];
+            view_Sales[i][3] = sales_row[3];
+            view_Sales[i][4] = sales_row[4];
+            view_Sales[i][5] = sales_row[6];
+            view_Sales[i][6] = sales_row[8];
+            view_Sales[i][7] = sales_row[9];
+        }
+        return view_Sales;
     }
 
     public Object[][] task_status() {
@@ -260,7 +294,7 @@ public class Manager {
     }
 
     // Customer_Issues_Receive
-    public ArrayList<String> hall_type() {
+    public ArrayList<String> hall_id_type() {
         String hall_line;
         ArrayList<String> halls = new ArrayList<>();
 
@@ -268,9 +302,11 @@ public class Manager {
             try (BufferedReader hall_br = new BufferedReader(new FileReader("resources/Database/halls.txt"))) {
                 while ((hall_line = hall_br.readLine()) != null) {
                     String[] row_hall = hall_line.split(",");
-                    if (!halls.contains(row_hall[1])) {
+                    if (!halls.contains(row_hall[0])) {
+                        halls.add(row_hall[0]);
                         halls.add(row_hall[1]);
                     }
+                    
                 }
                 return halls;
             } catch (Exception e) {
@@ -280,7 +316,7 @@ public class Manager {
         return halls;
     }
 
-    public Object[][] hallData(String hall_type) {
+    public Object[][] hallType(String hall_type) {
         List<Object[]> hallList = new ArrayList<>();
         if (new Create_file().hall_file()) {
             try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/issues.txt"))) {
@@ -288,6 +324,24 @@ public class Manager {
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
                     if (data[4].equals(hall_type)) {
+                        hallList.add(data);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return hallList.toArray(new Object[0][]);
+    }
+
+    public Object[][] hallID(String hall_ID) {
+        List<Object[]> hallList = new ArrayList<>();
+        if (new Create_file().hall_file()) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/issues.txt"))) {
+                String line;
+                while ((line = read.readLine()) != null) {
+                    String[] data = line.split(",");
+                    if (data[3].equals(hall_ID)) {
                         hallList.add(data);
                     }
                 }
@@ -375,12 +429,12 @@ public class Manager {
                 System.out.println(Arrays.toString(data));
             }
 
-            String paidStr = data[6].toString();
+            String paidStr = data[5].toString();
             try {
                 double price = Double.parseDouble(paidStr);
                 totalPaid += price;
             } catch (NumberFormatException e) {
-                System.err.println("Error parsing booking paid value: " + data[6]);
+                System.err.println("Error parsing booking paid value: " + data[5]);
             }
         }
         return totalPaid;

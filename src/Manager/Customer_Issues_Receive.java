@@ -90,32 +90,69 @@ public class Customer_Issues_Receive extends JFrame {
         cus.setBounds(300, 20, 400, 20);
         manager_CIR.add(cus);
 
+        // Hall ID filter Label
+        JLabel hall_id = new JLabel("Hall ID:");
+        hall_id.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+        hall_id.setBounds(50, 70, 80, 20);
+        manager_CIR.add(hall_id);
+
+        // Hall ID combo box
+        ArrayList<String> hall_Id_Type = man_issues.hall_id_type();
+        JComboBox<String> hall_id_cb = new JComboBox<String>();
+        for(int i = 0; i < hall_Id_Type.size(); i+=2){
+            hall_id_cb.addItem(hall_Id_Type.get(i));
+        }
+        hall_id_cb.setBackground(new Color(250,240,230));
+        hall_id_cb.setForeground(new Color(128,128,128));
+        hall_id_cb.setBounds(125, 72, 120, 20);
+        hall_id_cb.setSelectedIndex(-1);
+        hall_id_cb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String hallID = String.valueOf(hall_id_cb.getSelectedItem());
+                Object[][] hall_ID = man_issues.hallID(hallID);
+                table_Model.setDataVector(hall_ID, col_name);
+                table_Model.fireTableDataChanged();
+                view.revalidate();
+                view.repaint();
+            }
+        });
+        manager_CIR.add(hall_id_cb);
+
         // Hall Type filter Label
         JLabel hall = new JLabel("Hall Type:");
         hall.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
-        hall.setBounds(50, 70, 80, 20);
+        hall.setBounds(400, 70, 80, 20);
         manager_CIR.add(hall);
 
         // Hall Type combo box
-        ArrayList<String> hall_Type = man_issues.hall_type();
-        String[] hall_data = hall_Type.toArray(new String[0]);
-        JComboBox<String> hall_cb = new JComboBox<String>(hall_data);
+     
+        JComboBox<String> hall_cb = new JComboBox<String>();
+        for (int i = 1; i < hall_Id_Type.size(); i+=2){
+            hall_cb.addItem(hall_Id_Type.get(i));
+        }
         hall_cb.setBackground(new Color(250,240,230));
         hall_cb.setForeground(new Color(128,128,128));
-        hall_cb.setBounds(125, 72, 120, 20);
+        hall_cb.setBounds(475, 72, 120, 20);
         hall_cb.setSelectedIndex(-1);
         hall_cb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String hallType = String.valueOf(hall_cb.getSelectedItem());
-                Object[][] hall_Data = man_issues.hallData(hallType);
-                table_Model.setDataVector(hall_Data, col_name);
+                Object[][] hall_Type = man_issues.hallType(hallType);
+                table_Model.setDataVector(hall_Type, col_name);
                 table_Model.fireTableDataChanged();
                 view.revalidate();
                 view.repaint();
             }
         });
         manager_CIR.add(hall_cb);
+
+        // ArrayList<String> hall_Type = man_issues.hall_type();
+        // String[] hall_data = hall_Type.toArray(new String[0]);
+        // for(String[] hall_id_type : hall_data){
+        //     hall_id_cb.addItem(hall_id_type[0]);
+        // }
 
         // Assign Staff
         List<String> issues_Row = new ArrayList<>();
@@ -191,12 +228,14 @@ public class Customer_Issues_Receive extends JFrame {
                         String Issues_ID = view.getValueAt(selectedRow, 0).toString();
                         String Issue = view.getValueAt(selectedRow, 1).toString();
                         String description = view.getValueAt(selectedRow, 2).toString();
-                        String hallType = view.getValueAt(selectedRow, 3).toString();
-                        String userName = view.getValueAt(selectedRow, 4).toString();
+                        String hallID = view.getValueAt(selectedRow, 3).toString();
+                        String hallType = view.getValueAt(selectedRow, 4).toString();
+                        String userName = view.getValueAt(selectedRow, 5).toString();
 
                         issues_Row.add(Issues_ID);
                         issues_Row.add(Issue);
                         issues_Row.add(description);
+                        issues_Row.add(hallID);
                         issues_Row.add(hallType);
                         issues_Row.add(userName);
 

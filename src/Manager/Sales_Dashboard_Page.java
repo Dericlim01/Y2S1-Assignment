@@ -97,10 +97,10 @@ public class Sales_Dashboard_Page extends JFrame {
         manager_SD.add(title);
 
         // Define the columns names
-        String[] col_name = {"Booking ID", "Hall ID", "Num of Guests", "Start Date", "End Date", "Book Status", "Booking Paid", "Deposit Paid", "Booking Date", "Username"};
+        String[] col_name = {"Booking ID", "Hall ID", "Num of Guests", "Start Date", "End Date", "Booking Paid", "Booking Date", "Username"};
         // Define the data for the table
         // Object [][] represents whole table
-        Object[][] row_Data = man_data.present_data("resources/Database/bookings.txt");
+        Object[][] row_Data = man_data.view_sales("resources/Database/bookings.txt");
         tm = new DefaultTableModel(row_Data, col_name);
         JTable view = new JTable(tm);
         scrollPane = new JScrollPane(view);
@@ -187,7 +187,7 @@ public class Sales_Dashboard_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 manager_SD.remove(scrollPane);
-                Object[][] row_Data = man_data.present_data("resources/Database/bookings.txt");
+                Object[][] row_Data = man_data.view_sales("resources/Database/bookings.txt");
                 tm.setDataVector(row_Data, col_name);
                 JTable table_tm = new JTable(tm);
                 scrollPane = new JScrollPane(table_tm);
