@@ -85,9 +85,9 @@ public class Admin_Add_Page extends JFrame {
         contentPane.add(logo);
 
         // Admin login info Adding Label
-        JLabel adadd_lbl = new JLabel("Add Admin Login Information");
+        JLabel adadd_lbl = new JLabel("Add Admin Information");
         adadd_lbl.setFont(new Font("Engravers MT",Font.PLAIN,15));
-        adadd_lbl.setBounds(365,100,350,30);
+        adadd_lbl.setBounds(375,100,350,30);
         contentPane.add(adadd_lbl);
 
         // Add Admin information and register admin
