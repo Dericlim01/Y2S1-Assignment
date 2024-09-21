@@ -229,7 +229,7 @@ public class Schedule_Maintainance_Page extends JFrame {
         panel.add(editDoneBtn);
         
         // table
-        String[] col_name = {"Hall Schedule ID", "Hall ID", "Hall Type", "Start Date", "End Date",  "Status", "Comment"};
+        String[] col_name = {"Hall Schedule ID", "Hall ID", "Start Date", "End Date",  "Status", "Comment", "Booking ID"};
         Object[][] data =  new Schedule_Maintainance().search_hall_schedule(hall_type_cmbbx.getSelectedItem());
         DefaultTableModel table = new DefaultTableModel(data, col_name) {
             @Override
@@ -263,6 +263,7 @@ public class Schedule_Maintainance_Page extends JFrame {
         addSchdlBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
                 new Add_New_Schedule_Page(name).setVisible(true);
             }
         });

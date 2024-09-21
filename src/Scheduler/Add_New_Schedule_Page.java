@@ -46,7 +46,6 @@ public class Add_New_Schedule_Page extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Add_New_Schedule_Page(name).setVisible(true));
     }
-
     
     public Add_New_Schedule_Page(String name) {
         //  Set up the page 
@@ -176,7 +175,7 @@ public class Add_New_Schedule_Page extends JFrame {
                     remarkField.setVisible(true);
                     status = "maintainance";
                 }
-                }
+            }
         });
 
         // Radio Button Booking Slot
@@ -194,8 +193,7 @@ public class Add_New_Schedule_Page extends JFrame {
                     remarkField.setVisible(false);
                     status = "available";
                 }
-                }
-
+            }
         });
 
         // Group Radio Button
@@ -317,7 +315,7 @@ public class Add_New_Schedule_Page extends JFrame {
                         "Please Choose a Type to Add: Maintainance or Booking",
                         "Error",
                         JOptionPane.INFORMATION_MESSAGE);
-                    }
+                }
                  // Check if hall data is selected and a booking or maintenance type is chosen
                 if (hallData != null && (bookingButton.isSelected() || maintainanceButton.isSelected())) {
                     // Check for scheduling conflicts
@@ -353,7 +351,7 @@ public class Add_New_Schedule_Page extends JFrame {
                                 new Schedule_Maintainance_Page(name).setVisible(true);
                             } 
                     }
-                    }
+                }
                 else if (hallData == null) {
                     // Show a message if no hall is selected
                     JOptionPane.showMessageDialog(
@@ -362,7 +360,6 @@ public class Add_New_Schedule_Page extends JFrame {
                         "Error",
                         JOptionPane.INFORMATION_MESSAGE);
                 }
-
             }
         });
 
@@ -384,7 +381,6 @@ public class Add_New_Schedule_Page extends JFrame {
                 dispose();
                 new Schedule_Maintainance_Page(name).setVisible(true);
             }
-
         });
         panel.add(back_lbl);
 

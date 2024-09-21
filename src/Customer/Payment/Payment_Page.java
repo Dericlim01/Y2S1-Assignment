@@ -202,6 +202,4 @@ public class Payment_Page extends JFrame {
         }
         contentPane.add(des4);
     }
-
-    
 }

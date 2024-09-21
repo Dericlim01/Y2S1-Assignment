@@ -331,8 +331,8 @@ public class Update_Profile extends JFrame {
                 dobDatePicker.getComponent(1).setEnabled(true);
                 gen_cmbbx.setEnabled(true);
                 contentPane.add(show_pass);
-                contentPane.remove(edit_btn);
                 contentPane.add(update_btn);
+                contentPane.remove(edit_btn);
             }
         });
         contentPane.add(edit_btn);
