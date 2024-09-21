@@ -154,6 +154,7 @@ public class Staff_Add_Page extends JFrame {
         JComboBox<String> roleData = new JComboBox<>(roletype);
         roleData.setBounds(300,410,170,30);
         roleData.setBackground(new Color(250,240,230));
+        roleData.setSelectedIndex(-1);
         contentPane.add(roleData);
 
         // Email Text Field
@@ -179,6 +180,7 @@ public class Staff_Add_Page extends JFrame {
         JComboBox<String> genData = new JComboBox<>(gender);
         genData.setBounds(590,340,170,30);
         genData.setBackground(new Color(250,240,230));
+        genData.setSelectedIndex(-1);
         contentPane.add(genData);
 
         // Add New Staff Button

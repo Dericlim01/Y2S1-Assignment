@@ -1,3 +1,4 @@
+suadmin,suadmin,superadmin
 admin,admin,admin
 manager,manager,manager
 scheduler,scheduler,scheduler

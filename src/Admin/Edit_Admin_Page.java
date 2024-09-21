@@ -160,6 +160,7 @@ public class Edit_Admin_Page extends JFrame {
         genData = new JComboBox<>(gender);
         genData.setBounds(590,340,170,30);
         genData.setBackground(new Color(250,240,230));
+        genData.setSelectedIndex(-1);
         contentPane.add(genData);        
        
         // Admin Name Combo Box
@@ -179,6 +180,7 @@ public class Edit_Admin_Page extends JFrame {
                 }
             }
         });
+        adname.setSelectedIndex(-1);
         
         // Role Show Label
         JLabel adshow_lbl = new JLabel("admin");
