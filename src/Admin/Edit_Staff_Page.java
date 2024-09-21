@@ -158,6 +158,7 @@ public class Edit_Staff_Page extends JFrame {
         roleData = new JComboBox<>(roletype);
         roleData.setBounds(300,410,170,30);
         roleData.setBackground(new Color(250,240,230));
+        roleData.setSelectedIndex(-1);
         contentPane.add(roleData);
 
         // Email Text Field
@@ -183,6 +184,7 @@ public class Edit_Staff_Page extends JFrame {
         genData = new JComboBox<>(gender);
         genData.setBounds(590,340,170,30);
         genData.setBackground(new Color(250,240,230));
+        genData.setSelectedIndex(-1);
         contentPane.add(genData);
 
         // Staffname ComboBox
@@ -202,6 +204,7 @@ public class Edit_Staff_Page extends JFrame {
                 }
             }
         });
+        staffname.setSelectedIndex(-1);
 
         // Delete Button
         JButton delete_btn = new JButton("Delete Information");
