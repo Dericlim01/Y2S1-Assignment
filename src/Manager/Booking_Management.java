@@ -140,7 +140,7 @@ public class Booking_Management extends JFrame {
         ActionListener actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<Object[]> filteredDate = man_booking.date_read(start_datePicker, end_datePicker, "resources/Database/bookings.txt");
+                List<Object[]> filteredDate = man_booking.date_book_read(start_datePicker, end_datePicker, "resources/Database/bookings.txt");
                 tm.setRowCount(0);
 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");

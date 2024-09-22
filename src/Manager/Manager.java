@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 
 public class Manager {
     //private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    String line;
+    
     public String[] read_user_Information(String n) {
         ArrayList<String[]> users = new ArrayList<>();
         String line;
@@ -134,6 +136,67 @@ public class Manager {
                     rowData[5] = f_data[6].trim();
                     rowData[6] = f_data[8].trim();
                     rowData[7] = f_data[9].trim();
+
+                    dateList.add(rowData);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        Date startDate = (Date) start_date.getModel().getValue();
+        Date endDate = (Date) end_date.getModel().getValue();
+
+        List<Object[]> filteredDates = new ArrayList<>();
+        for (Object[] dateData : dateList) {
+            Date Startdate = (Date) dateData[3];
+            Date Enddate = (Date) dateData[4];
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(startDate);
+            cal.add(Calendar.DATE, -1);
+            Date decrease_one_date = cal.getTime();
+
+            if (!Startdate.before(decrease_one_date) && !Enddate.after(endDate)) {
+                filteredDates.add(dateData);
+            }
+        }
+        return filteredDates;
+    }
+
+    public List<Object[]> date_book_read(JDatePickerImpl start_date, JDatePickerImpl end_date, String filename) {
+        // Opject startDateOption = start_date.getDate();
+        List<Object[]> dateList = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        if (new Create_file().booking_file()) {
+            try (BufferedReader read = new BufferedReader(new FileReader(filename))) {
+                String line;
+                while ((line = read.readLine()) != null) {
+                    String[] f_data = line.split(",");
+                    String enddate = f_data[3].trim();
+                    String startdate = f_data[4].trim();
+
+                    Date e_date = dateFormat.parse(enddate);
+                    Date s_date = dateFormat.parse(startdate);
+
+                    // Create an object array to hold the data
+                    Object[] rowData = new Object[f_data.length];
+                    // Fill other data first
+                    for (int i = 0; i < 3; i++) {
+                        rowData[i] = f_data[i].trim();
+                    }
+
+                    // Insert Start Date and End Date
+                    rowData[3] = e_date;
+                    rowData[4] = s_date;
+
+                    // Fill remaining data
+                    for (int i = 5; i < f_data.length; i++) {
+                        rowData[i] = f_data[i].trim();
+                    }
+                    // rowData[5] = f_data[6].trim();
+                    // rowData[6] = f_data[8].trim();
+                    // rowData[7] = f_data[9].trim();
 
                     dateList.add(rowData);
                 }
@@ -457,6 +520,37 @@ public class Manager {
         return totalPaid;
     }
 
+    public Boolean update_stat(String[] select_data) {
+        List<String[]> hall_stat_data = new ArrayList<>();
+        if (new Create_file().hall_stat_file()) {
+            try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/hall_status.txt"))) {
+                while ((line = read.readLine()) != null) {
+                    String[] data = line.split(",");
+                    hall_stat_data.add(data);
+                }
+                for (String[] hall_data : hall_stat_data) {
+                    if (hall_data[6].equals(select_data[0])) {
+                        hall_data[4] = "available";
+                        hall_data[6] = "null";
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Writing into hall stat file
+            try (PrintWriter writer = new PrintWriter(new FileWriter("resources/Database/hall_status.txt"))) {
+                for (String[] hall_data : hall_stat_data) {
+                    writer.println(String.join(",", hall_data));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
+        return false;
+    }
+
     public Boolean delete_booking(List<String> book) {
         ArrayList<String> bookData = new ArrayList<>();
         String line;
@@ -482,10 +576,16 @@ public class Manager {
                     writeBook.write(booking);
                     writeBook.newLine();
                 }
+
+                String[] select_data = book.toArray(new String[0]);
+                return update_stat(select_data);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return delete;
     }
+
+    
 }
