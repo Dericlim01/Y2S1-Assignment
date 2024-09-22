@@ -78,19 +78,19 @@ public class Payment_Page extends JFrame {
 
         // Payment Details
         JLabel pymt_det_lbl = new JLabel("Payment Details");
-        pymt_det_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
-        pymt_det_lbl.setBounds(375, 75, 250, 45);
+        pymt_det_lbl.setFont(new Font("Engravers MT", Font.PLAIN, 15));
+        pymt_det_lbl.setBounds(405, 75, 250, 45);
         contentPane.add(pymt_det_lbl);
 
         // Hall Type
         JLabel hall_type_lbl = new JLabel("Hall Type : " + selected_data[1]);
-        hall_type_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        hall_type_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         hall_type_lbl.setBounds(100, 200, 250, 30);
         contentPane.add(hall_type_lbl);
 
         // Number of guest
         JLabel guest_num_lbl = new JLabel("Number of guest : " + selected_data[2]);
-        guest_num_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        guest_num_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         guest_num_lbl.setBounds(100, 300, 250, 30);
         contentPane.add(guest_num_lbl);
 
@@ -100,33 +100,35 @@ public class Payment_Page extends JFrame {
 
         // Start Date
         JLabel start_date_lbl = new JLabel("Start Date : " + selected_data[4]);
-        start_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        start_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         start_date_lbl.setBounds(400, 200, 250, 30);
         contentPane.add(start_date_lbl);
 
         // End Date
         JLabel end_date_lbl = new JLabel("End Date : " + selected_data[5]);
-        end_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        end_date_lbl.setBounds(650, 200, 250, 30);
+        end_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        end_date_lbl.setBounds(700, 200, 250, 30);
         contentPane.add(end_date_lbl);
 
         // Rent days
         String hour_price[] = new Payment().calculate_price_hour(selected_data[3], selected_data[4], selected_data[5]);
         JLabel rent_days_lbl = new JLabel("Total Rent Days : " + hour_price[0]);
-        rent_days_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        rent_days_lbl.setBounds(600, 400, 250, 30);
+        rent_days_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        rent_days_lbl.setBounds(400, 300, 250, 30);
         contentPane.add(rent_days_lbl);
 
         // Total price
         JLabel total_price_lbl = new JLabel("Total Price : RM " + hour_price[1]);
-        total_price_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        total_price_lbl.setBounds(600, 500, 250, 30);
+        total_price_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        total_price_lbl.setBounds(700, 300, 250, 30);
         contentPane.add(total_price_lbl);
 
         // Pay button
         JButton pay_btn = new JButton("Pay");
         pay_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        pay_btn.setBounds(200, 700, 100, 30);
+        pay_btn.setBackground(new Color(250,240,230));
+        pay_btn.setForeground(new Color(128,128,128));
+        pay_btn.setBounds(780, 450, 100, 30);
         pay_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
