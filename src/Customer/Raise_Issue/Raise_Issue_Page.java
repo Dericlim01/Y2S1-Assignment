@@ -77,6 +77,12 @@ public class Raise_Issue_Page extends JFrame {
         }
         contentpane.add(logo);
 
+        // Raise Issue Label 
+        JLabel raise_lbl = new JLabel("Raise Issue");
+        raise_lbl.setFont(new Font("Engravers MT", Font.PLAIN,15));
+        raise_lbl.setBounds(435,50,200,30);
+        contentpane.add(raise_lbl);
+
         // Hall type label
         JLabel hall_type_lbl = new JLabel("Hall Type : ");
         hall_type_lbl.setBounds(350, 150, 100, 20);
@@ -110,11 +116,12 @@ public class Raise_Issue_Page extends JFrame {
                 hall_type_show_lbl.setText(hall_type);
             }
         });
+        hall_id_cmbbx.setBackground(new Color(250,240,230));
         contentpane.add(hall_id_cmbbx);
 
         // Issue Label
-        JLabel issue_title_lbl = new JLabel("Issue : ");
-        issue_title_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        JLabel issue_title_lbl = new JLabel("Issue Title: ");
+        issue_title_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         issue_title_lbl.setBounds(100, 200, 100, 30);
         contentpane.add(issue_title_lbl);
 
@@ -122,12 +129,12 @@ public class Raise_Issue_Page extends JFrame {
         JTextArea issue_title_txt = new JTextArea(10, 50);
         issue_title_txt.setEditable(true);
         issue_title_txt.setLineWrap(true);
-        issue_title_txt.setBounds(100, 230, 400, 35);
+        issue_title_txt.setBounds(100, 230, 500, 35);
         contentpane.add(issue_title_txt);
 
         // Issue Description label
         JLabel issue_desc_lbl = new JLabel("Issue Description : ");
-        issue_desc_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        issue_desc_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         issue_desc_lbl.setBounds(100, 270, 200, 30);
         contentpane.add(issue_desc_lbl);
 
@@ -135,13 +142,15 @@ public class Raise_Issue_Page extends JFrame {
         JTextArea issue_desc_txt = new JTextArea(10, 50);
         issue_desc_txt.setEditable(true);
         issue_desc_txt.setLineWrap(true);
-        issue_desc_txt.setBounds(100, 300, 400, 300);
+        issue_desc_txt.setBounds(100, 300, 700, 300);
         contentpane.add(issue_desc_txt);
 
         // Submit button
         JButton submit_issue_btn = new JButton("Submit Issue");
-        submit_issue_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        submit_issue_btn.setBounds(100, 630, 200, 30);
+        submit_issue_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        submit_issue_btn.setBounds(380, 630, 200, 30);
+        submit_issue_btn.setBackground(new Color(250,240,230));
+        submit_issue_btn.setForeground(new Color(128,128,128));
         submit_issue_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

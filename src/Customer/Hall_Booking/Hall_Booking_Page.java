@@ -103,46 +103,47 @@ public class Hall_Booking_Page extends JFrame {
 
         // Hall Booking Label
         JLabel hall_book_lbl = new JLabel("Hall Booking");
-        hall_book_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
-        hall_book_lbl.setBounds(400, 50, 200, 45);
+        hall_book_lbl.setFont(new Font("Engravers MT", Font.PLAIN, 15));
+        hall_book_lbl.setBounds(435, 50, 350, 30);
         contentPane.add(hall_book_lbl);
 
         // Hall type label
         JLabel hall_type_lbl = new JLabel("Hall type : ");
-        hall_type_lbl.setBounds(30, 110, 100, 30);
-        hall_type_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        hall_type_lbl.setBounds(110, 110, 120, 30);
+        hall_type_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         contentPane.add(hall_type_lbl);
         
         // Hall type
         ArrayList<String> hallsList = new Hall_Booking().arrange_hall_type();
         String[] halls = hallsList.toArray(new String[0]);
         JComboBox<String> hall_type_cmbbx = new JComboBox<String>(halls);
-        hall_type_cmbbx.setBounds(175, 110, 125, 25);
+        hall_type_cmbbx.setBounds(225, 110, 150, 25);
         hall_type_cmbbx.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        hall_type_cmbbx.setBackground(new Color(250,240,230));
         hall_type_cmbbx.setSelectedIndex(-1);
         contentPane.add(hall_type_cmbbx);
 
         // Start Date
         JLabel start_date_lbl = new JLabel("Start Date : ");
-        start_date_lbl.setBounds(30, 150, 150, 30);
-        start_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        start_date_lbl.setBounds(110, 150, 150, 30);
+        start_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         contentPane.add(start_date_lbl);
 
         // End Date
         JLabel end_date_lbl = new JLabel("End Date : ");
-        end_date_lbl.setBounds(30, 190, 150, 30);
-        end_date_lbl.setFont(new Font("Comic Sans Ms", Font.PLAIN, 20));
+        end_date_lbl.setBounds(110, 190, 150, 30);
+        end_date_lbl.setFont(new Font("Comic Sans Ms", Font.PLAIN, 15));
         contentPane.add(end_date_lbl);
 
         // Remarks label
         JLabel remark_lbl = new JLabel("Remarks : ");
-        remark_lbl.setBounds(30, 230, 150,30);
-        remark_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        remark_lbl.setBounds(110, 230, 150,30);
+        remark_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         contentPane.add(remark_lbl);
 
         // Remarks text area
         JTextField remark_txtarea = new JTextField();
-        remark_txtarea.setBounds(175, 230, 400, 30);
+        remark_txtarea.setBounds(225, 230, 400, 30);
         remark_txtarea.setForeground(new Color(169, 169, 169));
         remark_txtarea.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         contentPane.add(remark_txtarea);
@@ -190,7 +191,8 @@ public class Hall_Booking_Page extends JFrame {
         // Import Date Panel and Picker
         JDatePanelImpl start_datePanel = new JDatePanelImpl(start_date_model, start_date_prop);
         JDatePickerImpl start_datePicker = new JDatePickerImpl(start_datePanel, new DateFormat());
-        start_datePicker.setBounds(175,150,140,30);
+        start_datePicker.setBounds(225,150,150,30);
+        start_datePicker.setBackground(new Color(250,240,230));
         contentPane.add(start_datePicker);
 
         // End Calendar
@@ -203,7 +205,8 @@ public class Hall_Booking_Page extends JFrame {
         // Import Date Panel and Picker
         JDatePanelImpl end_datePanel = new JDatePanelImpl(end_date_model, end_date_prop);
         JDatePickerImpl end_datePicker = new JDatePickerImpl(end_datePanel, new DateFormat());
-        end_datePicker.setBounds(175,190,140,30);
+        end_datePicker.setBounds(225,190,150,30);
+        end_datePicker.setBackground(new Color(250,240,230));
         contentPane.add(end_datePicker);
 
         // Hall type combobox action listener
@@ -276,8 +279,10 @@ public class Hall_Booking_Page extends JFrame {
 
         // Next button
         JButton search_btn = new JButton("Proceed");
-        search_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        search_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         search_btn.setBounds(780, 230, 120, 30);
+        search_btn.setBackground(new Color(250,240,230));
+        search_btn.setForeground(new Color(128,128,128));
         search_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

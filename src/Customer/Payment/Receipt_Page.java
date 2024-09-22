@@ -49,6 +49,7 @@ public class Receipt_Page extends JFrame {
         // Set Panel
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setBackground(new Color(248,248,248));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
@@ -74,56 +75,58 @@ public class Receipt_Page extends JFrame {
 
         // Receipt Label
         JLabel receipt_lbl = new JLabel("Receipt");
-        receipt_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
-        receipt_lbl.setBounds(400, 75, 250, 45);
+        receipt_lbl.setFont(new Font("Engravers MT", Font.PLAIN, 15));
+        receipt_lbl.setBounds(435, 75, 250, 45);
         contentPane.add(receipt_lbl);
 
         // Name Label
         JLabel name_lbl = new JLabel("Name : " + n);
-        name_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        name_lbl.setBounds(100, 200, 200, 30);
+        name_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        name_lbl.setBounds(375, 200, 200, 30);
         contentPane.add(name_lbl);
 
         // Book Hall ID Label
         JLabel hall_id_label = new JLabel("Hall ID : " + selected_data[0]);
-        hall_id_label.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        hall_id_label.setBounds(100, 250, 200, 30);
+        hall_id_label.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        hall_id_label.setBounds(375, 250, 200, 30);
         contentPane.add(hall_id_label);
 
         // Book Hall Type Label
         JLabel hall_type_lbl = new JLabel("Hall Type : " + selected_data[1]);
-        hall_type_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        hall_type_lbl.setBounds(100, 300, 200, 30);
+        hall_type_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        hall_type_lbl.setBounds(375, 300, 200, 30);
         contentPane.add(hall_type_lbl);
 
         // Number of hall Label
         JLabel hall_capacity_lbl = new JLabel("Capacity : " + selected_data[2]);
-        hall_capacity_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        hall_capacity_lbl.setBounds(100, 350, 200, 30);
+        hall_capacity_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        hall_capacity_lbl.setBounds(375, 350, 200, 30);
         contentPane.add(hall_capacity_lbl);
 
         // Start Date Label
         JLabel start_date_lbl = new JLabel("Start Date : " + selected_data[4]);
-        start_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        start_date_lbl.setBounds(100, 400, 250, 30);
+        start_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        start_date_lbl.setBounds(375, 400, 250, 30);
         contentPane.add(start_date_lbl);
 
         // End Date Label
         JLabel end_date_lbl = new JLabel("End Date : " + selected_data[5]);
-        end_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        end_date_lbl.setBounds(100, 450, 250, 20);
+        end_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        end_date_lbl.setBounds(375, 450, 250, 20);
         contentPane.add(end_date_lbl);
 
         // Book Time Label
         JLabel book_time_lbl = new JLabel("Book time : " + date);
-        book_time_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        book_time_lbl.setBounds(100, 500, 250, 20);
+        book_time_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        book_time_lbl.setBounds(375, 500, 250, 20);
         contentPane.add(book_time_lbl);
 
         // Done Button
         JButton done_btn = new JButton("Done");
-        done_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-        done_btn.setBounds(100, 550, 200, 20);
+        done_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        done_btn.setBackground(new Color(250,240,230));
+        done_btn.setForeground(new Color(128,128,128));
+        done_btn.setBounds(400, 600, 200, 20);
         contentPane.add(done_btn);
 
         done_btn.addActionListener(new ActionListener() {
@@ -133,5 +136,18 @@ public class Receipt_Page extends JFrame {
                 new Hall_Booking_Page(n).setVisible(true);
             }
         });
+
+        // Design 4 Pic
+        JLabel des4 = new JLabel();
+        try {
+            BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+            get_image = ImageIO.read(new File("resources\\Image\\design4.png"));
+            Image image = get_image.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
+            des4.setIcon(new ImageIcon(image));
+            des4.setBounds(0, 0, 1000, 800);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        contentPane.add(des4);
     }
 }

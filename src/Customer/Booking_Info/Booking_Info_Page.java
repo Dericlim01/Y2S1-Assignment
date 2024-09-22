@@ -64,14 +64,20 @@ public class Booking_Info_Page extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        //Logo Label
+        // Booking Information Page
+        JLabel bookinfo_lbl = new JLabel("Booking Information");
+        bookinfo_lbl.setFont(new Font("Engravers MT", Font.PLAIN, 15));
+        bookinfo_lbl.setBounds(375,100,350,30);
+        contentPane.add(bookinfo_lbl);
+
+        // Logo Label
         JLabel logo_lbl = new JLabel("Symphony Hall");
         logo_lbl.setFont(new Font("French Script MT", Font.BOLD,25));
         logo_lbl.setForeground(new Color(169,169,169));
         logo_lbl.setBounds(60,20,160,30);
         contentPane.add(logo_lbl);
 
-        //Logo Pic
+        // Logo Pic
         JLabel logo = new JLabel();
         try {
             BufferedImage get_image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
@@ -86,7 +92,7 @@ public class Booking_Info_Page extends JFrame {
 
         // Upcoming Label
         JLabel current_event_lbl = new JLabel("Current Event : ");
-        current_event_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        current_event_lbl.setFont(new Font("Engravers MT", Font.PLAIN, 15));
         current_event_lbl.setBounds(100, 160, 200, 30);
         contentPane.add(current_event_lbl);
 
@@ -104,7 +110,7 @@ public class Booking_Info_Page extends JFrame {
 
         // Upcoming Label
         JLabel upcome_lbl = new JLabel("Upcoming Event : ");
-        upcome_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        upcome_lbl.setFont(new Font("Engravers MT", Font.PLAIN, 15));
         upcome_lbl.setBounds(100, 310, 200, 30);
         contentPane.add(upcome_lbl);
 
@@ -120,7 +126,7 @@ public class Booking_Info_Page extends JFrame {
 
         // Past Label
         JLabel past_lbl = new JLabel("Pass Event : ");
-        past_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        past_lbl.setFont(new Font("Engravers MT", Font.PLAIN, 15));
         past_lbl.setBounds(100, 510, 200, 30);
         contentPane.add(past_lbl);
 
@@ -137,8 +143,10 @@ public class Booking_Info_Page extends JFrame {
 
         // Cancel Button
         JButton cancel_book_btn = new JButton("Cancel Booking");
-        cancel_book_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        cancel_book_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         cancel_book_btn.setBounds(700, 710, 200, 30);
+        cancel_book_btn.setBackground(new Color(250,240,230));
+        cancel_book_btn.setForeground(new Color(128,128,128));
         contentPane.add(cancel_book_btn);
 
         // Upcoming table action listener
