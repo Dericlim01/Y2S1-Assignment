@@ -38,13 +38,13 @@ public class Schedule_Maintainance {
         return hallType;
     }
 
-    public  ArrayList<String> match_hall_type(String hall_type) {
+    public  ArrayList<String> match_hall_type(String hall_id) {
         ArrayList<String> hallData = new ArrayList<>();
         if (new Create_file().hall_file()) {
             try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/halls.txt"))) {
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
-                    if (hall_type.equals(data[1])) {
+                    if (hall_id.equals(data[1])) {
                         for (String item : data) {
                             hallData.add(item);
                         }
@@ -94,17 +94,17 @@ public class Schedule_Maintainance {
         return hallData;
     }
 
-    public Object[][] search_hall_schedule(Object hall_type) {
+    public Object[][] search_hall_schedule(Object hall_id) {
          List<Object[]> hallData = new ArrayList<>();
         if (new Create_file().hall_stat_file()) {
             try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/hall_status.txt"))) {
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
-                    if (hall_type != null){
-                        if (data[2].equals(hall_type.toString()) ) {
+                    if (hall_id != null){
+                        if (data[1].equals(hall_id.toString()) ) {
                                 hallData.add(data);
                         }
-                    } else if (hall_type == null){
+                    } else if (hall_id == null){
                             hallData.add(data);
                     }
                 }
@@ -120,8 +120,8 @@ public class Schedule_Maintainance {
             try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/hall_status.txt"))) {        
                 while ((line = read.readLine()) != null) {
                     String[] data = line.split(",");
-                    Date sDate = dateFormat.parse(data[3]);
-                    Date eDate = dateFormat.parse(data[4]);
+                    Date sDate = dateFormat.parse(data[2]);
+                    Date eDate = dateFormat.parse(data[3]);
                     System.out.println("SDate"+sDate);
                     System.out.println("added sDate"+add_sDate);
                     System.out.println(add_sDate.equals(sDate));
@@ -146,7 +146,7 @@ public class Schedule_Maintainance {
     }
 
     // Method to add a schedule entry for a hall
-    public Boolean Add_Schedule(String Hall_ID,String HallType,Date StartD,Date EndD,String status,String remark ) {
+    public Boolean Add_Schedule(String Hall_ID,Date StartD,Date EndD,String status,String remark ) {
         // Format the start and end dates to strings using dateFormat
         String formattedsDate = dateFormat.format(StartD);
         String formattedeDate = dateFormat.format(EndD);
@@ -176,7 +176,7 @@ public class Schedule_Maintainance {
             // Write the new schedule entry to the hall status file
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/hall_status.txt",true))) {
                 // Append the new schedule entry to the file in the specified format
-                writer.append(String.format("HS_%d,%s,%s,%s,%s,%s,%s\n",newIDNum, Hall_ID, HallType, formattedsDate, formattedeDate, status, remark));
+                writer.append(String.format("HS_%d,%s,%s,%s,%s,%s,null\n",newIDNum, Hall_ID, formattedsDate, formattedeDate, status, remark));
                 return true;// Return true if the write operation was successful
             } catch (Exception e) {
                 e.printStackTrace();// Print any exceptions that occur during writing
@@ -197,10 +197,10 @@ public class Schedule_Maintainance {
                     String[] data = line.split(",");
                     if (data[0].equals(sch_ID)) {
                         data[1] = H_ID;
-                        data[3] = dateFormat.format(updatedsDate);
-                        data[4] = dateFormat.format(updatedeDate);
-                        data[5] = Status;
-                        data[6] = Remark;
+                        data[2] = dateFormat.format(updatedsDate);
+                        data[3] = dateFormat.format(updatedeDate);
+                        data[4] = Status;
+                        data[5] = Remark;
                         edit = true;
                     } 
                     fileContent.add(String.join(",", data));

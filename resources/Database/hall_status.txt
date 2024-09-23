@@ -1,4 +1,5 @@
-HS_1,H_1,18-09-2024,18-09-2024,booked,null,B01
+HS_1,H_2,18-09-2024,18-09-2024,booked,null,B01
 HS_2,H_1,20-09-2024,23-09-2024,available,null,null
-HS_3,H_2,19-09-2024,22-09-2024,available,null,null
-HS_4,H_3,20-09-2024,22-09-2024,booked,null,B02
+HS_5,H_2,01-10-2024,04-10-2024,available,null,null
+HS_6,H_2,07-10-2024,08-10-2024,available,null,null
+HS_8,H_1,05-10-2024,09-10-2024,available,null,null

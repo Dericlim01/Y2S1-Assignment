@@ -57,63 +57,75 @@ public class Task_Checking_Page extends JFrame {
 
         // Task ID label
         JLabel taskID_lbl = new JLabel("Task ID: ");
-        taskID_lbl.setBounds(210, 150, 100, 30);
+        taskID_lbl.setBounds(210, 130, 100, 30);
         taskID_lbl.setFont(new Font("Comic Sans Ms", Font.BOLD, 20));
         panel.add(taskID_lbl);
 
-        // Issues label
-        JLabel issues_lbl = new JLabel("Issues:");
-        issues_lbl.setBounds(225, 250, 100, 30);
-        issues_lbl.setFont(new Font("Comic Sans Ms", Font.BOLD, 20));
-        panel.add(issues_lbl);
+        // Issues Title label
+        JLabel issues_title_lbl = new JLabel("Issues:");
+        issues_title_lbl.setBounds(225, 220, 100, 30);
+        issues_title_lbl.setFont(new Font("Comic Sans Ms", Font.BOLD, 20));
+        panel.add(issues_title_lbl);
 
-        // Issues Content label
-        JLabel issues_cnt_lbl = new JLabel();
-        issues_cnt_lbl.setBounds(300, 250, 400, 30);
-        issues_cnt_lbl.setFont(new Font("Comic Sans Ms", Font.PLAIN, 20));
-        panel.add(issues_cnt_lbl);
+        // Issues Title Content label
+        JLabel issues_title_cnt_lbl = new JLabel();
+        issues_title_cnt_lbl.setBounds(300, 220, 400, 30);
+        issues_title_cnt_lbl.setFont(new Font("Comic Sans Ms", Font.PLAIN, 20));
+        panel.add(issues_title_cnt_lbl);
 
-        // Description label
-        JLabel description_lbl = new JLabel("Description:");
-        description_lbl.setFont(new Font("Comic Sans MS",Font.BOLD,20));
-        description_lbl.setBounds(175,350,400,50);
-        panel.add(description_lbl);
+        // Issue Description label
+        JLabel issue_description_lbl = new JLabel("Issue Description:");
+        issue_description_lbl.setFont(new Font("Comic Sans MS",Font.BOLD,20));
+        issue_description_lbl.setBounds(120,310,400,50);
+        panel.add(issue_description_lbl);
 
-        // Description Content label
-        JLabel description_cnt_lbl = new JLabel();
-        description_cnt_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,20));
-        description_cnt_lbl.setBounds(305,350,400,50);
-        panel.add(description_cnt_lbl);
+        // Issue Description Content label
+        JLabel issue_description_cnt_lbl = new JLabel();
+        issue_description_cnt_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,20));
+        issue_description_cnt_lbl.setBounds(305,310,400,50);
+        panel.add(issue_description_cnt_lbl);
+
+        // Task Description label
+        JLabel task_description_lbl = new JLabel("Task Description:");
+        task_description_lbl.setFont(new Font("Comic Sans MS",Font.BOLD,20));
+        task_description_lbl.setBounds(125,450,400,50);
+        panel.add(task_description_lbl);
+
+        // Task Description Content label
+        JLabel task_description_cnt_lbl = new JLabel();
+        task_description_cnt_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,20));
+        task_description_cnt_lbl.setBounds(305,450,400,50);
+        panel.add(task_description_cnt_lbl);
 
         // Hall ID label
         JLabel hallID_lbl = new JLabel("Hall ID: ");
         hallID_lbl.setFont(new Font("Comic Sans MS",Font.BOLD,20));
-        hallID_lbl.setBounds(550, 145,150,50);
+        hallID_lbl.setBounds(550, 130,150,50);
         panel.add(hallID_lbl);
 
         // Hall ID Content label
         JLabel hallID_cnt_lbl = new JLabel();
         hallID_cnt_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,20));
-        hallID_cnt_lbl.setBounds(650, 145,400,50);
+        hallID_cnt_lbl.setBounds(650, 130,400,50);
         panel.add(hallID_cnt_lbl);
 
         // Status label
         JLabel status_lbl = new JLabel("Status: ");
         status_lbl.setFont(new Font("Comic Sans MS",Font.BOLD,20));
-        status_lbl.setBounds(220,450,300,50);
+        status_lbl.setBounds(220,590,300,50);
         panel.add(status_lbl);
 
         // Status Content label
         JLabel status_cnt_lbl = new JLabel();
         status_cnt_lbl.setFont(new Font("Comic Sans MS",Font.PLAIN,20));
-        status_cnt_lbl.setBounds(300,450,400,50);
+        status_cnt_lbl.setBounds(300,590,400,50);
         panel.add(status_cnt_lbl);
 
         // TaskID ComboBox
         ArrayList<String> tasksList = new Task_Checking().search_task_assigned(name) ;
         String[] task = tasksList.toArray(new String[0]);
         JComboBox<String> taskID_cmbbx = new JComboBox<String>(task);
-        taskID_cmbbx.setBounds(320, 155, 125, 25);
+        taskID_cmbbx.setBounds(320, 135, 125, 25);
         taskID_cmbbx.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         taskID_cmbbx.setSelectedIndex(-1);
         panel.add(taskID_cmbbx);
@@ -121,17 +133,20 @@ public class Task_Checking_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ArrayList<String> taskData;
-                taskData = new Task_Checking().search_task_data(taskID_cmbbx.getSelectedItem().toString());
-                issues_cnt_lbl.setText(taskData.get(2));
-                description_cnt_lbl.setText(taskData.get(3));
-                hallID_cnt_lbl.setText(taskData.get(5));
-                status_cnt_lbl.setText(taskData.get(7));
+                if (taskID_cmbbx.getSelectedItem() != null){
+                    taskData = new Task_Checking().search_task_data(taskID_cmbbx.getSelectedItem().toString());
+                    issues_title_cnt_lbl.setText(taskData.get(2));
+                    issue_description_cnt_lbl.setText(taskData.get(3));
+                    task_description_cnt_lbl.setText(taskData.get(7));
+                    hallID_cnt_lbl.setText(taskData.get(5));
+                    status_cnt_lbl.setText(taskData.get(8));
+                }
             }
         });
 
         // Done Button
         JButton done_btn = new JButton("Done Task");
-        done_btn.setBounds(420,675,220,35);
+        done_btn.setBounds(600,675,220,35);
         done_btn.setFont(new Font("Comic Sans MS",Font.BOLD,18));
         done_btn.setBackground(new Color(250,240,230));
         done_btn.setForeground(new Color(128,128,128));
@@ -152,10 +167,16 @@ public class Task_Checking_Page extends JFrame {
                                 null,
                                 "Change Successful",
                                 "Success",
-                                JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.INFORMATION_MESSAGE);
+                            issues_title_cnt_lbl.setText("");
+                            issue_description_cnt_lbl.setText("");
+                            task_description_cnt_lbl.setText("");
+                            hallID_cnt_lbl.setText("");
+                            status_cnt_lbl.setText("");
                             ArrayList<String> newTasksList = new Task_Checking().search_task_assigned(name);
                             DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(newTasksList.toArray(new String[0]));
                             taskID_cmbbx.setModel(model);
+                            taskID_cmbbx.setSelectedIndex(-1);
                         } else {
                             JOptionPane.showMessageDialog(
                                 null,
@@ -174,9 +195,9 @@ public class Task_Checking_Page extends JFrame {
             }
         });
 
-        // Done Button
+        // Add maintainance Button
         JButton add_maintainance_btn = new JButton("Add Maintainance");
-        add_maintainance_btn.setBounds(150,675,220,35);
+        add_maintainance_btn.setBounds(200,675,220,35);
         add_maintainance_btn.setFont(new Font("Comic Sans MS",Font.BOLD,18));
         add_maintainance_btn.setBackground(new Color(250,240,230));
         add_maintainance_btn.setForeground(new Color(128,128,128));

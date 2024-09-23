@@ -81,12 +81,6 @@ public class Schedule_Maintainance_Page extends JFrame {
         titleLabel.setBounds(340, -80, 370, 300);
         titleLabel.setFont(new Font("Engravers MT",Font.PLAIN,25));
         panel.add(titleLabel);
-
-        // Hall type label
-        JLabel hall_type_lbl = new JLabel("Hall type : ");
-        hall_type_lbl.setBounds(48, 110, 100, 30);
-        hall_type_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
-        panel.add(hall_type_lbl);
     
         // Start Date label
         JLabel start_date_lbl = new JLabel("Start Date : ");
@@ -96,45 +90,44 @@ public class Schedule_Maintainance_Page extends JFrame {
 
         // End Date label
         JLabel end_date_lbl = new JLabel("End Date : ");
-        end_date_lbl.setBounds(44, 190, 150, 30);
+        end_date_lbl.setBounds(335, 150, 150, 30);
         end_date_lbl.setFont(new Font("Comic Sans Ms", Font.PLAIN, 18));
         panel.add(end_date_lbl);
 
         // Status label
         JLabel status_lbl = new JLabel("Status : ");
-        status_lbl.setBounds(355, 150, 150, 30);
+        status_lbl.setBounds(355, 110, 150, 30);
         status_lbl.setFont(new Font("Comic Sans Ms", Font.PLAIN, 18));
         panel.add(status_lbl);
 
         // HallID label
         JLabel hallID_lbl = new JLabel("Hall ID : ");
-        hallID_lbl.setBounds(350, 110, 150, 30);
+        hallID_lbl.setBounds(60, 110, 100, 30);
         hallID_lbl.setFont(new Font("Comic Sans Ms", Font.PLAIN, 18));
         panel.add(hallID_lbl);
 
         // Remark label
         JLabel rmk_lbl = new JLabel("Remark : ");
-        rmk_lbl.setBounds(59, 230, 150, 30);
+        rmk_lbl.setBounds(59, 190, 150, 30);
         rmk_lbl.setFont(new Font("Comic Sans Ms", Font.PLAIN, 18));
         panel.add(rmk_lbl);
 
-        // Hall type ComboBox
-        ArrayList<String> hallsList = new Schedule_Maintainance().search_hall_type() ;
-        String[] halls = hallsList.toArray(new String[0]);
-        JComboBox<String> hall_type_cmbbx = new JComboBox<String>(halls);
-        hall_type_cmbbx.setBounds(150, 115, 125, 25);
-        hall_type_cmbbx.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-        hall_type_cmbbx.setSelectedIndex(-1);
-        panel.add(hall_type_cmbbx);
+         // Filter label
+         JLabel filter_lbl = new JLabel("Filter by HallID:");
+         filter_lbl.setBounds(40, 550, 150, 30);
+         filter_lbl.setFont(new Font("Comic Sans Ms", Font.PLAIN, 18));
+         panel.add(filter_lbl);
 
         // Status ComboBox
-        String status[] = {"available","maintainance"};
+        String status[] = {"available","maintainance", "booked"};
         JComboBox<String> status_cmbbx = new JComboBox<String>(status);
-        status_cmbbx.setBounds(450, 155, 125, 25);
+        status_cmbbx.setBounds(450, 115, 125, 25);
         status_cmbbx.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
         status_cmbbx.setEnabled(false);
         status_cmbbx.setSelectedIndex(-1);
         panel.add(status_cmbbx);
+
+        
 
         // Hall ID Combo Box
         // Calling the search_hall_ID page from Schedule_Maintainance.java
@@ -145,11 +138,20 @@ public class Schedule_Maintainance_Page extends JFrame {
         // Add those hallID into comboBox
         JComboBox<String> hallID_cmbbx = new JComboBox<String>(hallID);
         // setup the combobox
-        hallID_cmbbx.setBounds(450, 115, 125, 25);
+        hallID_cmbbx.setBounds(150, 115, 125, 25);
         hallID_cmbbx.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         hallID_cmbbx.setSelectedIndex(-1);
         hallID_cmbbx.setEnabled(false);
         panel.add(hallID_cmbbx);
+
+        // Filter Hall ID Combo Box
+        JComboBox<String> Filter_hallID_cmbbx = new JComboBox<String>(hallID);
+        // setup the combobox
+        Filter_hallID_cmbbx.setBounds(200, 555, 125, 25);
+        Filter_hallID_cmbbx.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+        Filter_hallID_cmbbx.setBackground(new Color(250,240,230));
+        Filter_hallID_cmbbx.setSelectedIndex(-1);
+        panel.add(Filter_hallID_cmbbx);
 
         // Start Date Picker
         // Create a date model to hold the selected date
@@ -175,14 +177,14 @@ public class Schedule_Maintainance_Page extends JFrame {
         JDatePanelImpl eDatePanel = new JDatePanelImpl(edateModel, Properties);
         JDatePickerImpl eDatePicker = new JDatePickerImpl(eDatePanel, new DateFormat());
         // Set the position and size of the date picker and add the datepicker inside UI
-        eDatePicker.setBounds(150, 195, 150, 30);
+        eDatePicker.setBounds(450, 155, 150, 30);
         eDatePicker.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
         eDatePicker.getComponent(1).setEnabled(false);
         panel.add(eDatePicker);
 
         // Remark Text Box
         JTextField rmk_txtField = new JTextField();
-        rmk_txtField.setBounds(150, 235, 600, 25);
+        rmk_txtField.setBounds(150, 195, 600, 25);
         rmk_txtField.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
         rmk_txtField.setEditable(false);
         panel.add(rmk_txtField);
@@ -216,7 +218,7 @@ public class Schedule_Maintainance_Page extends JFrame {
         showAllBtn.setFont(new Font("Comic Sans MS",Font.BOLD,15));
         showAllBtn.setBackground(new Color(250,240,230));
         showAllBtn.setForeground(new Color(128,128,128));
-        showAllBtn.setBounds(840,240,120,30);
+        showAllBtn.setBounds(840,200,120,30);
         panel.add(showAllBtn);
 
         // Edit Done Button
@@ -224,13 +226,13 @@ public class Schedule_Maintainance_Page extends JFrame {
         editDoneBtn.setFont(new Font("Comic Sans MS",Font.BOLD,15));
         editDoneBtn.setBackground(new Color(250,240,230));
         editDoneBtn.setForeground(new Color(128,128,128));
-        editDoneBtn.setBounds(840,240,120,30);
+        editDoneBtn.setBounds(840,200,120,30);
         editDoneBtn.setVisible(false);
         panel.add(editDoneBtn);
         
         // table
         String[] col_name = {"Hall Schedule ID", "Hall ID", "Start Date", "End Date",  "Status", "Comment", "Booking ID"};
-        Object[][] data =  new Schedule_Maintainance().search_hall_schedule(hall_type_cmbbx.getSelectedItem());
+        Object[][] data =  new Schedule_Maintainance().search_hall_schedule(Filter_hallID_cmbbx.getSelectedItem());
         DefaultTableModel table = new DefaultTableModel(data, col_name) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -239,14 +241,14 @@ public class Schedule_Maintainance_Page extends JFrame {
         };
         JTable details = new JTable(table);
         JScrollPane scrollPane = new JScrollPane(details);
-        scrollPane.setBounds(30, 290, 930, 350);
+        scrollPane.setBounds(30, 250, 930, 280);
         panel.add(scrollPane);
 
         // Filter table based on hall type combobox choosing
-        hall_type_cmbbx.addActionListener(new ActionListener() {
+        Filter_hallID_cmbbx.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Object[][] newData = new Schedule_Maintainance().search_hall_schedule(hall_type_cmbbx.getSelectedItem());
+                Object[][] newData = new Schedule_Maintainance().search_hall_schedule(Filter_hallID_cmbbx.getSelectedItem());
                 // Clear the existing rows in the table model
                 table.setRowCount(0);
 
@@ -281,7 +283,7 @@ public class Schedule_Maintainance_Page extends JFrame {
                     hallID_cmbbx.setSelectedItem(details.getValueAt(selectedRow, 1).toString());
                     schedule_ID = details.getValueAt(selectedRow, 0).toString();
 
-                    String selectedSDateStr = details.getValueAt(selectedRow, 3).toString();
+                    String selectedSDateStr = details.getValueAt(selectedRow, 2).toString();
                     Date selectedSDate = null;
                     try {
                         selectedSDate = dateFormat.parse(selectedSDateStr);
@@ -294,7 +296,7 @@ public class Schedule_Maintainance_Page extends JFrame {
                         sdateModel.setSelected(true); // Mark the date as selected
                     }
                     
-                    String selectedEDateStr = details.getValueAt(selectedRow, 4).toString();
+                    String selectedEDateStr = details.getValueAt(selectedRow, 3).toString();
                     Date selectedEDate = null;
                     try {
                         selectedEDate = dateFormat.parse(selectedEDateStr);
@@ -306,8 +308,8 @@ public class Schedule_Maintainance_Page extends JFrame {
                         edateModel.setValue(selectedEDate); // Set the Date value to the model
                         edateModel.setSelected(true); // Mark the date as selected
                     }
-                    status_cmbbx.setSelectedItem(details.getValueAt(selectedRow, 5).toString());
-                    rmk_txtField.setText(details.getValueAt(selectedRow, 6).toString());
+                    status_cmbbx.setSelectedItem(details.getValueAt(selectedRow, 4).toString());
+                    rmk_txtField.setText(details.getValueAt(selectedRow, 5).toString());
                 } else {
                     JOptionPane.showMessageDialog(
                         null,
@@ -330,7 +332,7 @@ public class Schedule_Maintainance_Page extends JFrame {
                     deleteSchdlBtn.setVisible(false);
                     editSchdlBtn.setVisible(false);
                     status_cmbbx.setEnabled(true);
-                    hall_type_cmbbx.setEnabled(false);
+                    Filter_hallID_cmbbx.setEnabled(false);
                     hallID_cmbbx.setEnabled(true);
                     details.setEnabled(false);
                     rmk_txtField.setEditable(true);
@@ -358,7 +360,7 @@ public class Schedule_Maintainance_Page extends JFrame {
                     status_cmbbx.setEnabled(false);
                     editSchdlBtn.setVisible(true);
                     hallID_cmbbx.setEnabled(false);
-                    hall_type_cmbbx.setEnabled(true);
+                    Filter_hallID_cmbbx.setEnabled(true);
                     details.setEnabled(true);
 
                     Date updatedsDate = (Date) sDatePicker.getModel().getValue(); 
@@ -387,8 +389,16 @@ public class Schedule_Maintainance_Page extends JFrame {
                             "Confirmation",
                             JOptionPane.YES_NO_OPTION); 
                     }
-                    hall_type_cmbbx.setSelectedIndex(-1);
-                    Object[][] newData = new Schedule_Maintainance().search_hall_schedule(hall_type_cmbbx.getSelectedItem());
+                    Filter_hallID_cmbbx.setSelectedIndex(-1);
+                    hallID_cmbbx.setSelectedIndex(-1);
+                    status_cmbbx.setSelectedIndex(-1);
+                    sdateModel.setValue(null);
+                    sdateModel.setSelected(true);
+                    edateModel.setValue(null);
+                    edateModel.setSelected(true);
+                    rmk_txtField.setText(null);
+
+                    Object[][] newData = new Schedule_Maintainance().search_hall_schedule(Filter_hallID_cmbbx.getSelectedItem());
                     // Clear the existing rows in the table model
                     table.setRowCount(0);
 
@@ -410,8 +420,8 @@ public class Schedule_Maintainance_Page extends JFrame {
         showAllBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                hall_type_cmbbx.setSelectedIndex(-1);
-                Object[][] newData = new Schedule_Maintainance().search_hall_schedule(hall_type_cmbbx.getSelectedItem());
+                Filter_hallID_cmbbx.setSelectedIndex(-1);
+                Object[][] newData = new Schedule_Maintainance().search_hall_schedule(Filter_hallID_cmbbx.getSelectedItem());
                 // Clear the existing rows in the table model
                 table.setRowCount(0);
 
@@ -440,7 +450,7 @@ public class Schedule_Maintainance_Page extends JFrame {
                             "Error",
                             JOptionPane.INFORMATION_MESSAGE);
                     }
-                    Object[][] newData = new Schedule_Maintainance().search_hall_schedule(hall_type_cmbbx.getSelectedItem());
+                    Object[][] newData = new Schedule_Maintainance().search_hall_schedule(Filter_hallID_cmbbx.getSelectedItem());
                     // Clear the existing rows in the table model
                     table.setRowCount(0);
 

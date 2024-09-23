@@ -321,7 +321,7 @@ public class Add_New_Schedule_Page extends JFrame {
                     // Check for scheduling conflicts
                     if (new Schedule_Maintainance().check_schedule(" ",hallData.get(0), updatedsDate, updatedeDate)) {
                         // If no conflict, add the schedule
-                        if (new Schedule_Maintainance().Add_Schedule(hallData.get(0), hallData.get(1), updatedsDate,updatedeDate,status,remark)) {
+                        if (new Schedule_Maintainance().Add_Schedule(hallData.get(0), updatedsDate,updatedeDate,status,remark)) {
                              // Show success message
                             JOptionPane.showMessageDialog(
                             null,
