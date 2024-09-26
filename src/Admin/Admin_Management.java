@@ -118,6 +118,7 @@ public class Admin_Management {
 
         if (users_update) {
             try (PrintWriter writer = new PrintWriter(new FileWriter("resources/Database/users.txt"))) {
+                writer.println("suadmin,suadmin,superadmin");
                 for (String[] userdata : users) {
                     writer.println(userdata[0] + "," + userdata[1] + "," + userdata[6]);
                 }
