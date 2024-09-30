@@ -83,7 +83,7 @@ public class Raise_Issue {
             String hall_type = search_id(hall_id);
             try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/issues.txt"))) {
                 FileWriter issues = new FileWriter("resources/Database/issues.txt", true);
-                issues.append(id + "," + issue_title + "," + issue_desc + "," + hall_id + "," + hall_type + "," + name);
+                issues.append(id + "," + issue_title + "," + issue_desc + "," + hall_id + "," + hall_type + "," + name + "\n");
                 issues.close();
                 return true;
             } catch (Exception e) {

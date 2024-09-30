@@ -265,7 +265,7 @@ public class Register_Page extends JFrame {
                 Register register_user = new Register(role);
 
                 // If username and password is empty
-                if (name.isEmpty() && pass.isEmpty()) {
+                if (name.isEmpty() || pass.isEmpty()) {
                     name_stat_lbl.setText("Username cannot be empty");
                     name_stat_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
                 } else if (String.valueOf(pass_txt_f.getPassword()).equals(String.valueOf(pass_txt_f_reen.getPassword()))) {

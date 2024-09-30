@@ -156,7 +156,7 @@ public class Admin_User_Management_Page extends JFrame {
         contentPane.add(userbox);
         userman.admin_load_user(userbox);
 
-        // Delete Page Button
+        // Delete Button
         JButton delete_btn = new JButton("~Click Me To Delete a User~");
         delete_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,12));
         delete_btn.setBounds(550,610,300,20);
@@ -166,7 +166,7 @@ public class Admin_User_Management_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selectName = (String) userbox.getSelectedItem();
-                if(selectName != null) {
+                if (selectName != null) {
                     userman.delete_users(selectName);
                     int response = JOptionPane.showConfirmDialog(
                         null, 
@@ -176,7 +176,7 @@ public class Admin_User_Management_Page extends JFrame {
                     if (response == 0) {
                         //delete again
                         dispose();
-                        new User_Management_Page(name).setVisible(true);
+                        new Admin_User_Management_Page(name).setVisible(true);
                     }
                 }
                 else {
@@ -188,7 +188,7 @@ public class Admin_User_Management_Page extends JFrame {
                         JOptionPane.YES_OPTION);
                     if (response == 0) {
                         dispose();
-                        new User_Management_Page(name).setVisible(true);
+                        new Admin_User_Management_Page(name).setVisible(true);
                     }
                 }
             }
