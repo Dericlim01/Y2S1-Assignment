@@ -13,7 +13,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -26,12 +25,14 @@ public class Receipt_Page extends JFrame {
     public static String name;
     public static String[] select_data;
     public static LocalDate date;
+    public static String startdate;
+    public static String enddate;
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try {
-                    new Receipt_Page(name, select_data, date).setVisible(true);
+                    new Receipt_Page(name, select_data, date, startdate, enddate).setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -39,7 +40,7 @@ public class Receipt_Page extends JFrame {
         });
     }
 
-    public Receipt_Page(String n, String[] selected_data, LocalDate date) {
+    public Receipt_Page(String n, String[] selected_data, LocalDate date, String sDate,String eDate) {
         setTitle("Receipt");
         setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -104,13 +105,13 @@ public class Receipt_Page extends JFrame {
         contentPane.add(hall_capacity_lbl);
 
         // Start Date Label
-        JLabel start_date_lbl = new JLabel("Start Date : " + selected_data[4]);
+        JLabel start_date_lbl = new JLabel("Start Date : " + sDate);
         start_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         start_date_lbl.setBounds(375, 400, 250, 30);
         contentPane.add(start_date_lbl);
 
         // End Date Label
-        JLabel end_date_lbl = new JLabel("End Date : " + selected_data[5]);
+        JLabel end_date_lbl = new JLabel("End Date : " + eDate);
         end_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         end_date_lbl.setBounds(375, 450, 250, 20);
         contentPane.add(end_date_lbl);

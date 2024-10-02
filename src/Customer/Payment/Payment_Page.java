@@ -16,6 +16,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -27,14 +29,17 @@ import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 
 public class Payment_Page extends JFrame {
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     public static String name;
     public static String[] data;
+    public static Date startdate;
+    public static Date enddate;
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 try {
-                    new Payment_Page(name, data).setVisible(true);
+                    new Payment_Page(name, data,startdate,enddate).setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -42,12 +47,14 @@ public class Payment_Page extends JFrame {
         });
     }
 
-    public Payment_Page(String n, String[] selected_data) {
+    public Payment_Page(String n, String[] selected_data,Date sDate,Date eDate) {
         setTitle("Payment");
         setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\Image\\hall.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(140, 100, 1000, 800);
         setResizable(false);
+        String formattedsDate = dateFormat.format(sDate);
+        String formattedeDate = dateFormat.format(eDate);
 
         // Create a panel
         JPanel contentPane = new JPanel();
@@ -89,7 +96,7 @@ public class Payment_Page extends JFrame {
         contentPane.add(hall_type_lbl);
 
         // Number of guest
-        JLabel guest_num_lbl = new JLabel("Number of guest : " + selected_data[2]);
+        JLabel guest_num_lbl = new JLabel("Capacity : " + selected_data[2]);
         guest_num_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         guest_num_lbl.setBounds(100, 300, 250, 30);
         contentPane.add(guest_num_lbl);
@@ -99,19 +106,19 @@ public class Payment_Page extends JFrame {
         price_per_day_lbl.setBounds(400, 300, 50, 30);
 
         // Start Date
-        JLabel start_date_lbl = new JLabel("Start Date : " + selected_data[4]);
+        JLabel start_date_lbl = new JLabel("Start Date : " + formattedsDate);
         start_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         start_date_lbl.setBounds(400, 200, 250, 30);
         contentPane.add(start_date_lbl);
 
         // End Date
-        JLabel end_date_lbl = new JLabel("End Date : " + selected_data[5]);
+        JLabel end_date_lbl = new JLabel("End Date : " + formattedeDate);
         end_date_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         end_date_lbl.setBounds(700, 200, 250, 30);
         contentPane.add(end_date_lbl);
 
         // Rent days
-        String hour_price[] = new Payment().calculate_price_hour(selected_data[3], selected_data[4], selected_data[5]);
+        String hour_price[] = new Payment().calculate_price_hour(selected_data[3], formattedsDate, formattedeDate);
         JLabel rent_days_lbl = new JLabel("Total Rent Days : " + hour_price[0]);
         rent_days_lbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         rent_days_lbl.setBounds(400, 300, 250, 30);
@@ -142,7 +149,7 @@ public class Payment_Page extends JFrame {
                 if (response == 0) {
                     // Write to booking, proceed to payment
                     LocalDate date = LocalDate.now();
-                    int status = new Payment().confirm_booking(n, selected_data, hour_price[1], date);
+                    int status = new Payment().confirm_booking(n, selected_data, hour_price[1], date, formattedsDate,formattedeDate);
                     if (status == 1) {
                         // Booked succussfully
                         JOptionPane.showMessageDialog(
@@ -151,7 +158,7 @@ public class Payment_Page extends JFrame {
                             "Book Status", 
                             JOptionPane.PLAIN_MESSAGE);
                         dispose();
-                        new Receipt_Page(n, selected_data, date).setVisible(true);
+                        new Receipt_Page(n, selected_data, date, formattedsDate, formattedeDate ).setVisible(true);
                     } else {
                         // Booked failed
                         JOptionPane.showMessageDialog(

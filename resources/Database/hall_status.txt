@@ -2,4 +2,12 @@ HS_1,H_2,18-09-2024,18-09-2024,booked,null,B01
 HS_2,H_1,20-09-2024,23-09-2024,available,null,null
 HS_5,H_2,01-10-2024,04-10-2024,available,null,null
 HS_6,H_2,07-10-2024,08-10-2024,available,null,null
-HS_8,H_1,05-10-2024,09-10-2024,available,null,null
+HS_9,H_1,05-10-2024,09-10-2024,available,null,null
+HS_10,H_3,20-10-2024,22-10-2024,available,null,null
+HS_11,H_2,17-10-2024,19-10-2024,booked,null,B04
+HS_12,H_4,17-10-2024,18-10-2024,booked,null,B03
+HS_13,H_1,12-10-2024,16-10-2024,available,null,null
+HS_14,H_4,15-10-2024,16-10-2024,available,null,null
+HS_15,H_4,19-10-2024,25-10-2024,available,null,null
+HS_16,H_2,10-10-2024,16-10-2024,available,null,null
+HS_17,H_2,20-10-2024,25-10-2024,available,null,null

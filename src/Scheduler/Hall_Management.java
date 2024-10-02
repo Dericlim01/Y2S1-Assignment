@@ -19,7 +19,7 @@ public class Hall_Management {
     Integer newIDNum;
     ArrayList<Integer> findBiggest = new ArrayList<Integer>();
 
-    public Boolean Add_Hall(String HallType,Integer Capacity,Double PricePerHour) {
+    public Boolean Add_Hall(String HallType,Integer Capacity,String PricePerHour) {
         if (new Create_file().hall_file()) { 
             try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/halls.txt"))) {        
                 while ((line = read.readLine()) != null) {
@@ -39,7 +39,7 @@ public class Hall_Management {
             }
             // HallID = ;
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/Database/halls.txt",true))) {
-                writer.append(String.format("H_%d,%s,%d,%f\n", newIDNum, HallType, Capacity, PricePerHour));
+                writer.append(String.format("H_%d,%s,%d,%s\n", newIDNum, HallType, Capacity, PricePerHour));
                 return true;
             } catch (Exception e) {
                 e.printStackTrace();

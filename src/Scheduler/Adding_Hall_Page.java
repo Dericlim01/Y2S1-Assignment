@@ -146,7 +146,8 @@ public class Adding_Hall_Page extends JFrame {
                 String hallTypeValue = (String) hallTypeBox.getSelectedItem();
                 Integer capacityValue = (Integer) capacitySpinner.getValue();
                 Double priceValue = ((Number) priceField.getValue()).doubleValue();
-            if (new Hall_Management().Add_Hall(hallTypeValue, capacityValue,priceValue)) {
+                String formattedPrice = String.format("%.2f", priceValue);
+            if (new Hall_Management().Add_Hall(hallTypeValue, capacityValue,formattedPrice)) {
                     JOptionPane.showMessageDialog(
                         null,
                         "Hall Added successfully",

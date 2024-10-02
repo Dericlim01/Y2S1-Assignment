@@ -52,7 +52,10 @@ public class Hall_Booking_Page extends JFrame {
     public static String name;
 
     // Today's date
+    public static LocalDate start_date = null;
+    public static LocalDate end_date = null;
     public static LocalDate current_date = LocalDate.now();
+    public static Date currentDateAsDate = Date.from(current_date.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -150,7 +153,7 @@ public class Hall_Booking_Page extends JFrame {
 
         // Table
         String[] col_name = {"Hall ID", "Hall Type", "Capacity", "Price per H", "Start date", "End date", "Status", "Remarks"};
-        Object[][] data = new Hall_Booking().start_date_filter(current_date, String.valueOf(hall_type_cmbbx.getSelectedIndex()));
+        Object[][] data = new Hall_Booking().start_date_filter(start_date, String.valueOf(hall_type_cmbbx.getSelectedIndex()));
         DefaultTableModel table_model = new DefaultTableModel(data, col_name);
         JTable table = new JTable(table_model);
         ListSelectionModel list_model = table.getSelectionModel();
@@ -160,7 +163,7 @@ public class Hall_Booking_Page extends JFrame {
         contentPane.add(scrollPane);
 
         ArrayList<String> selected_data = new ArrayList<>();
-        list_model.addListSelectionListener(new ListSelectionListener() {
+        list_model.addListSelectionListener(new ListSelectionListener() {   
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int[] sel;
@@ -214,7 +217,7 @@ public class Hall_Booking_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String hall_type = String.valueOf(hall_type_cmbbx.getSelectedItem());
-                Object[][] hall_data = new Hall_Booking().start_date_filter(current_date, hall_type);
+                Object[][] hall_data = new Hall_Booking().end_date_filter(start_date, hall_type, end_date);
                 table_model.setDataVector(hall_data, col_name);
                 table.revalidate();
                 table.repaint();
@@ -226,26 +229,65 @@ public class Hall_Booking_Page extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Date selected_start_date = (Date) start_datePicker.getModel().getValue();
-                if (selected_start_date != null) {
-                    LocalDate start_date = selected_start_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    String halltype;
-                    if (String.valueOf(hall_type_cmbbx.getSelectedIndex()).equals("-1")) {
-                        halltype = "-1";
-                    } else {
-                        halltype = String.valueOf(hall_type_cmbbx.getSelectedItem());
+                if (selected_start_date.after(currentDateAsDate)){
+                    if (selected_start_date != null && end_datePicker.getModel().getValue() != null) {
+                        // Make start Date must before End Date
+                        if (selected_start_date.before((Date) end_datePicker.getModel().getValue()) || selected_start_date.equals((Date) end_datePicker.getModel().getValue())) {
+                            System.out.println("Start Date Selected: " + selected_start_date);
+                            LocalDate start_date = selected_start_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                            String halltype;
+                            if (String.valueOf(hall_type_cmbbx.getSelectedIndex()).equals("-1")) {
+                                halltype = "-1";
+                            } else {
+                                halltype = String.valueOf(hall_type_cmbbx.getSelectedItem());
+                            }
+                            Date selected_end_date = (Date) end_datePicker.getModel().getValue();
+                            if (selected_end_date != null) {
+                                LocalDate end_date = selected_end_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                                Object[][] start_end_date = new Hall_Booking().end_date_filter(start_date, halltype, end_date);
+                                table_model.setDataVector(start_end_date, col_name);
+                            } else {
+                                Object[][] start_date_data = new Hall_Booking().start_date_filter(start_date, halltype);
+                                table_model.setDataVector(start_date_data, col_name);
+                            }
+                            table.revalidate();
+                            table.repaint();
+                        } else {
+                            System.out.println("Start Date Selected: " + selected_start_date);
+                            JOptionPane.showMessageDialog(null,"Cannot choose invalid date","Status",JOptionPane.INFORMATION_MESSAGE);
+                            start_date_model.setValue((Date) end_datePicker.getModel().getValue());
+                        }
+
+                    } else if (selected_start_date != null){
+                        LocalDate start_date = selected_start_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        String halltype;
+                        if (String.valueOf(hall_type_cmbbx.getSelectedIndex()).equals("-1")) {
+                            halltype = "-1";
+                        } else {
+                            halltype = String.valueOf(hall_type_cmbbx.getSelectedItem());
+                        }
+                        Date selected_end_date = (Date) end_datePicker.getModel().getValue();
+                        if (selected_end_date != null) {
+                            LocalDate end_date = selected_end_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                            Object[][] start_end_date = new Hall_Booking().end_date_filter(start_date, halltype, end_date);
+                            table_model.setDataVector(start_end_date, col_name);
+                        } else {
+                            Object[][] start_date_data = new Hall_Booking().start_date_filter(start_date, halltype);
+                            table_model.setDataVector(start_date_data, col_name);
+                        }
+                        table.revalidate();
+                        table.repaint();
                     }
-                    Date selected_end_date = (Date) end_datePicker.getModel().getValue();
-                    if (selected_end_date != null) {
-                        LocalDate end_date = selected_end_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                        Object[][] start_end_date = new Hall_Booking().end_date_filter(start_date, halltype, end_date);
-                        table_model.setDataVector(start_end_date, col_name);
-                    } else {
-                        Object[][] start_date_data = new Hall_Booking().start_date_filter(start_date, halltype);
-                        table_model.setDataVector(start_date_data, col_name);
-                    }
-                    table.revalidate();
-                    table.repaint();
+                } else {
+                    JOptionPane.showMessageDialog(
+                        null, 
+                        "Cannot Choose A Date Before Todays Date", 
+                        "Error", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                    start_date_model.setValue(currentDateAsDate);
+                    start_date_model.setSelected(true);
                 }
+                
             }
         });
         
@@ -255,11 +297,40 @@ public class Hall_Booking_Page extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Date selected_end_date = (Date) end_datePicker.getModel().getValue();
                 Date selected_start_date = (Date) start_datePicker.getModel().getValue();
-                LocalDate start_date = current_date;
+                start_date = current_date;
                 if (selected_start_date != null) {
                     start_date = selected_start_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 }
-                if (selected_end_date != null) {
+                if (selected_end_date != null && selected_start_date != null) {
+                    if (selected_end_date.after((Date) start_datePicker.getModel().getValue()) || selected_end_date.equals((Date) start_datePicker.getModel().getValue())) {
+                        System.out.println("This is able" );
+                        System.out.println("End Date Selected: " + selected_end_date);
+                   
+                        // End date
+                        end_date = selected_end_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        // Hall type
+                        String halltype;
+                        if (String.valueOf(hall_type_cmbbx.getSelectedIndex()).equals("-1")) {
+                            halltype = "-1";
+                        } else {
+                            halltype = String.valueOf(hall_type_cmbbx.getSelectedItem());
+                        }
+                        
+                        Object[][] end_date_data = new Hall_Booking().end_date_filter(start_date, halltype, end_date);
+                        table_model.setDataVector(end_date_data, col_name);
+                        table.revalidate();
+                        table.repaint();
+                    } else {
+                        System.out.println("Unable");
+                        System.out.println("End Date Selected: " + selected_end_date);
+                        JOptionPane.showMessageDialog(
+                            null,
+                            "Cannot choose invalid date",
+                            "status",
+                            JOptionPane.INFORMATION_MESSAGE);
+                        end_date_model.setValue((Date) start_datePicker.getModel().getValue());
+                    }
+                } else if (selected_end_date != null && selected_start_date == null){
                     // End date
                     LocalDate end_date = selected_end_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     // Hall type
@@ -269,6 +340,7 @@ public class Hall_Booking_Page extends JFrame {
                     } else {
                         halltype = String.valueOf(hall_type_cmbbx.getSelectedItem());
                     }
+                    
                     Object[][] end_date_data = new Hall_Booking().end_date_filter(start_date, halltype, end_date);
                     table_model.setDataVector(end_date_data, col_name);
                     table.revalidate();
@@ -278,7 +350,7 @@ public class Hall_Booking_Page extends JFrame {
         });
 
         // Next button
-        JButton search_btn = new JButton("Proceed");
+        JButton search_btn = new JButton("Proceed to Payment");
         search_btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
         search_btn.setBounds(780, 230, 120, 30);
         search_btn.setBackground(new Color(250,240,230));
@@ -289,12 +361,12 @@ public class Hall_Booking_Page extends JFrame {
                 if (selected_data.isEmpty()) {
                     JOptionPane.showMessageDialog(
                         null, 
-                        "No row is selected, pls select one", 
+                        "No row is selected\nPlease select a row to book hall", 
                         "Row selected status", 
                         JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     dispose();
-                    new Payment_Page(n, selected_data.toArray(new String[0])).setVisible(true);
+                    new Payment_Page(n, selected_data.toArray(new String[0]),(Date) start_datePicker.getModel().getValue(),(Date) end_datePicker.getModel().getValue()).setVisible(true);
                 }
             }
         });

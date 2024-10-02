@@ -23,6 +23,9 @@ import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -37,10 +40,12 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 
 public class Add_New_Schedule_Page extends JFrame {
-    public static String name;
-    ArrayList<String> hallData;
-    String status;
-    String remark;
+    private static String name;
+    private static ArrayList<String> hallData;
+    private static String status;
+    private static String remark;
+    private static LocalDate currentLocalDate = LocalDate.now();
+    private static Date currentDate = Date.from(currentLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
     // The creation and display of Add_New_Schedule_Page window 
     public static void main(String[] args) {
@@ -237,6 +242,16 @@ public class Add_New_Schedule_Page extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Get Date value from DatePicker
                 Date sDate = (Date) sDatePicker.getModel().getValue();
+                // Make start date after current date
+                if (sDate.before(currentDate)){
+                    JOptionPane.showMessageDialog(
+                        null, 
+                        "Cannot Choose A Date Before Todays Date", 
+                        "Error", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                    sdateModel.setValue(currentDate);
+                    sdateModel.setSelected(true);
+                }
                 // Make start Date must before End Date
                 if (sDate.before((Date) eDatePicker.getModel().getValue()) || sDate.equals((Date) eDatePicker.getModel().getValue())) {
                     System.out.println("Start Date Selected: " + sDate);
@@ -253,7 +268,16 @@ public class Add_New_Schedule_Page extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Get Date value from DatePicker
                 Date eDate = (Date) eDatePicker.getModel().getValue();
-
+                // Make end date after current date
+                if (eDate.before(currentDate)){
+                    JOptionPane.showMessageDialog(
+                        null, 
+                        "Cannot Choose A Date Before Todays Date", 
+                        "Error", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                    edateModel.setValue((Date)sDatePicker.getModel().getValue());
+                    edateModel.setSelected(true);
+                }
                 // Make End Date must after Start Date
                 if (eDate.after((Date) sDatePicker.getModel().getValue()) || eDate.equals((Date) sDatePicker.getModel().getValue())) {
                     System.out.println("This is able" );

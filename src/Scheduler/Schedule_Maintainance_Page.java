@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -41,6 +43,8 @@ public class Schedule_Maintainance_Page extends JFrame {
     private static String name, schedule_ID;
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     private static int selectedRow = -1;
+    private static LocalDate currentLocalDate = LocalDate.now();
+    private static Date currentDate = Date.from(currentLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Schedule_Maintainance_Page(name).setVisible(true));
     }
@@ -267,6 +271,64 @@ public class Schedule_Maintainance_Page extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 new Add_New_Schedule_Page(name).setVisible(true);
+            }
+        });
+
+        sDatePicker.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Get Date value from DatePicker
+                Date sDate = (Date) sDatePicker.getModel().getValue();
+                // Make start date after current date
+                if (sDate.before(currentDate)){
+                    JOptionPane.showMessageDialog(
+                        null, 
+                        "Cannot Choose A Date Before Todays Date", 
+                        "Error", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                    sdateModel.setValue(currentDate);
+                    sdateModel.setSelected(true);
+                }
+                // Make start Date must before End Date
+                if (sDate.before((Date) eDatePicker.getModel().getValue()) || sDate.equals((Date) eDatePicker.getModel().getValue())) {
+                    System.out.println("Start Date Selected: " + sDate);
+                } else {
+                    System.out.println("Start Date Selected: " + sDate);
+                    JOptionPane.showMessageDialog(null,"Cannot choose invalid date","Status",JOptionPane.INFORMATION_MESSAGE);
+                    sdateModel.setValue((Date) eDatePicker.getModel().getValue());
+                }
+            }
+        });
+
+        eDatePicker.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Get Date value from DatePicker
+                Date eDate = (Date) eDatePicker.getModel().getValue();
+                // Make end date after current date
+                if (eDate.before(currentDate)){
+                    JOptionPane.showMessageDialog(
+                        null, 
+                        "Cannot Choose A Date Before Todays Date", 
+                        "Error", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                    edateModel.setValue((Date)sDatePicker.getModel().getValue());
+                    edateModel.setSelected(true);
+                }
+                // Make End Date must after Start Date
+                if (eDate.after((Date) sDatePicker.getModel().getValue()) || eDate.equals((Date) sDatePicker.getModel().getValue())) {
+                    System.out.println("This is able" );
+                    System.out.println("End Date Selected: " + eDate);
+                } else {
+                    System.out.println("Unable");
+                    System.out.println("End Date Selected: " + eDate);
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Cannot choose invalid date",
+                        "Status",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    edateModel.setValue((Date) sDatePicker.getModel().getValue());
+                }
             }
         });
 

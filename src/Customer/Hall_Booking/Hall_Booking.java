@@ -56,7 +56,7 @@ public class Hall_Booking {
         return hall_list;
     }
 
-    public Object[][] combine_data() {
+    public Object[][] unfiltered_data() {
         // Hall ID, Hall Type, Capacity, Price/h
         ArrayList<String[]> hall_data = search_hall();
         // HallStatusID, HallID, ReservedStartDateTime, ReservedEndDateTime, Status, Remarks, BookingID
@@ -83,14 +83,54 @@ public class Hall_Booking {
         return hall_data_list.toArray(new Object[0][]);
     }
 
-    public Object[][] start_date_filter(LocalDate current_date, String hall_type) {
+    public Object[][] start_date_filter(LocalDate start_date, String hall_type) {
         List<Object[]> hall_data = new ArrayList<>();
-        Object[][] hall_list = combine_data();
-        for (int i = 0; i < hall_list.length; i++) {
-            if (hall_list[i][6].equals("available")) {
-                // Start Date in data
-                LocalDate date = LocalDate.parse(hall_list[i][4].toString(), datePattern);
-                if (date.equals(current_date) || date.isAfter(current_date)) {
+        Object[][] hall_list = unfiltered_data();
+        if (start_date == null){
+            start_date = LocalDate.now();
+            for (int i = 0; i < hall_list.length; i++) {
+                if (hall_list[i][6].equals("available")) {
+                    LocalDate end = LocalDate.parse(hall_list[i][5].toString(), datePattern);
+                    if (!start_date.isAfter(end)||!start_date.equals(end)) {
+                        if (hall_type.equals("-1")) {
+                            hall_data.add(hall_list[i]);
+                        } else if (hall_list[i][1].equals(hall_type)) {
+                            hall_data.add(hall_list[i]);
+                        }
+                    }
+                }
+            }
+        } else{
+            for (int i = 0; i < hall_list.length; i++) {
+                if (hall_list[i][6].equals("available")) {
+                    // Start Date in data
+                    LocalDate start = LocalDate.parse(hall_list[i][4].toString(), datePattern);
+                    LocalDate end = LocalDate.parse(hall_list[i][5].toString(), datePattern);
+                    if ((start.equals(start_date) || start_date.isAfter(start))&& start_date.isBefore(end)) {
+                        if (hall_type.equals("-1")) {
+                            hall_data.add(hall_list[i]);
+                        } else if (hall_list[i][1].equals(hall_type)) {
+                            hall_data.add(hall_list[i]);
+                        }
+                    }
+                }
+            }
+        }
+        
+        return hall_data.toArray(new Object[0][]);
+    }
+
+    public Object[][] end_date_filter(LocalDate start_date, String hall_type, LocalDate end_date) {
+        List<Object[]> hall_data = new ArrayList<>();
+        Object[][] hall_list = start_date_filter(start_date, hall_type);
+        if (end_date == null) {
+            return hall_list;
+        } else{
+            for (int i = 0; i < hall_list.length; i++) {    
+                // End date in data
+                LocalDate ListEndDate = LocalDate.parse(hall_list[i][5].toString(), datePattern);
+                LocalDate ListStartDate = LocalDate.parse(hall_list[i][4].toString(), datePattern);
+                if ((ListEndDate.equals(end_date) || end_date.isBefore(ListEndDate))&&(end_date.isAfter(ListStartDate)||end_date.isEqual(ListStartDate))) {
                     if (hall_type.equals("-1")) {
                         hall_data.add(hall_list[i]);
                     } else if (hall_list[i][1].equals(hall_type)) {
@@ -98,24 +138,7 @@ public class Hall_Booking {
                     }
                 }
             }
+            return hall_data.toArray(new Object[0][]);
         }
-        return hall_data.toArray(new Object[0][]);
-    }
-
-    public Object[][] end_date_filter(LocalDate current_date, String hall_type, LocalDate end_date) {
-        List<Object[]> hall_data = new ArrayList<>();
-        Object[][] hall_list = start_date_filter(current_date, hall_type);
-        for (int i = 0; i < hall_list.length; i++) {
-            // End date in data
-            LocalDate date = LocalDate.parse(hall_list[i][5].toString(), datePattern);
-            if (date.equals(end_date) || date.isBefore(end_date)) {
-                if (hall_type.equals("-1")) {
-                    hall_data.add(hall_list[i]);
-                } else if (hall_list[i][1].equals(hall_type)) {
-                    hall_data.add(hall_list[i]);
-                }
-            }
-        }
-        return hall_data.toArray(new Object[0][]);
     }
 }
