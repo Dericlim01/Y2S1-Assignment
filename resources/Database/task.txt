@@ -1,6 +1,2 @@
-T01,I01,issue,description,customer,H_3,scheduler,hello_blabla,Cancel
-T02,I01,issue,description,customer,H_3,scheduler,Fix the h_1 air-conditional issue,Done
-T03,I01,issue,description,customer,H_3,scheduler,Fix the h_1 air-conditional issue,Done
-T04,I01,issue,description,customer,H_3,scheduler,Fix the h_1 air-conditional issue,In progress
-T05,I01,issue,description,customer,H_3,scheduler,Fix the h_1 air-conditional issue,In progress
-T06,I01,issue,description,customer,H_3,scheduler,Fix the h_1 air-conditional issue,In progress
+T01,I01,Mic got problem,mic not working,customer,H_1,scheduler1,fix the mic and check others,In progress
+T02,I02,Mic got problem,mic not working,customer,H_2,scheduler,check the mic and check others,In progress

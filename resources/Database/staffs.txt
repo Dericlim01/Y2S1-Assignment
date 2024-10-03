@@ -1,3 +1,6 @@
 admin,admin,0123456789,admin@mail.com,01-01-2000,male,admin
+admin1,admin1,0123456789,admin1@mail.com,01-01-2000,female,admin
 manager,manager,0123456789,manager@mail.com,01-01-2000,male,manager
-scheduler,scheduler,0123456789,scheduler@mail.com,01-01-2000,female,scheduler
+manager1,manager,0123456789,manager1@mail.com,01-01-2000,female,manager
+scheduler,scheduler,0123456789,scheduler@mail.com,01-01-2000,male,scheduler
+scheduler1,scheduler,0123456789,scheduler1@mail.com,01-01-2000,female,scheduler
