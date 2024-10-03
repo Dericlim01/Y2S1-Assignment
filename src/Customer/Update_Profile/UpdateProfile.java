@@ -13,7 +13,6 @@ public class UpdateProfile {
     String line;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-
     // search user and return to update for display
     public String[] search_user(String name) {
         // Create an user arraylist

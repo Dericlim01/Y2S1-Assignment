@@ -143,7 +143,7 @@ public class Hall_Management_Page extends JFrame {
         capacitySpinner.setFont(new Font("Comic Sans MS",Font.BOLD,18));
         capacitySpinner.setEnabled(false);
         panel.add(capacitySpinner); 
-      
+
         // table
         String[] col_name = {"Hall ID", "Hall Type", "Capacity", "Price per Hour"};
         Object[][] data =  new Hall_Management().search_hall_data(hallTypeBox.getSelectedItem());;
@@ -192,7 +192,7 @@ public class Hall_Management_Page extends JFrame {
         deleteHallBtn.setForeground(new Color(128,128,128));
         deleteHallBtn.setBounds(65,670,230,35);
         panel.add(deleteHallBtn);
- 
+
         // Edit Schedule Button
         JButton editHallBtn = new JButton("Edit Hall");
         editHallBtn.setFont(new Font("Comic Sans MS",Font.BOLD,18));
@@ -398,7 +398,6 @@ public class Hall_Management_Page extends JFrame {
             }
         });
         panel.add(back_lbl);
-
 
         // Design 4 Pic
         JLabel des4 = new JLabel();

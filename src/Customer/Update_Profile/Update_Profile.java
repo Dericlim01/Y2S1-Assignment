@@ -122,9 +122,7 @@ public class Update_Profile extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-                Customer_Page cp = new Customer_Page(n);
-                cp.setTitle("Customer");
-                cp.setVisible(true);
+                new Customer_Page(n).setVisible(true);
             }
         });
         contentPane.add(back_lbl);
@@ -142,7 +140,7 @@ public class Update_Profile extends JFrame {
         }
         contentPane.add(gradient);
 
-        //Greeting Label
+        // Greeting Label
         JLabel greet_lbl = new JLabel("Welcome Back!");
         greet_lbl.setFont(new Font("Serif",Font.PLAIN,15));
         greet_lbl.setBounds(450,210,200,30);
@@ -293,6 +291,7 @@ public class Update_Profile extends JFrame {
                             "Update Successfully",
                             "Plain",
                             JOptionPane.INFORMATION_MESSAGE);
+                        new Customer_Page(n);
                     } else {
                         // Update Failed
                         int response = JOptionPane.showConfirmDialog(
@@ -302,7 +301,7 @@ public class Update_Profile extends JFrame {
                             JOptionPane.YES_NO_OPTION);
                         if (response == 1) {
                             // Go to update page
-                            new Update_Profile(name).setVisible(true);
+                            new Update_Profile(n).setVisible(true);
                         }
                     }
                 } else {

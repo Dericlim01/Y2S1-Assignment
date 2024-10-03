@@ -18,7 +18,7 @@ import java.io.IOException;
 
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.imageio.*;
+import javax.imageio.ImageIO;
 
 public class Manager_View_Profile_Page extends JFrame {
     private static String manname;

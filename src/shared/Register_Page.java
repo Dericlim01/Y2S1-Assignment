@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -32,6 +31,7 @@ import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
+import javax.imageio.ImageIO;
 
 public class Register_Page extends JFrame {
     public static void main(String[] args) {

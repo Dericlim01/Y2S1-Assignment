@@ -14,6 +14,7 @@ import java.awt.Toolkit;
 import java.awt.EventQueue;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.ActionListener;
@@ -153,6 +154,28 @@ public class Login_Page extends JFrame {
         pass_txt_f.setEchoChar('*');
         contentPane.add(pass_txt_f);
 
+        // Forgot Password Label
+        JLabel forgot_pass_lbl = new JLabel("Forgot Password?");
+        forgot_pass_lbl.setFont(new Font("Serif", Font.PLAIN, 12));
+        forgot_pass_lbl.setForeground(new Color(128, 128, 128));
+        forgot_pass_lbl.setBounds(730, 340, 200, 30);
+        forgot_pass_lbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        forgot_pass_lbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (name_txt_f.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                                                    "Please enter your name to continue.",
+                                                    "Username empty",
+                                                    JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    dispose();
+                    new Forgot_Pass_Page(name_txt_f.getText()).setVisible(true);
+                }
+            }
+        });
+        contentPane.add(forgot_pass_lbl);
+
         name_txt_f.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -211,7 +234,7 @@ public class Login_Page extends JFrame {
         login_btn.setFont(new Font("Comic Sans MS",Font.PLAIN,15));
         login_btn.setBackground(new Color(250,240,230));
         login_btn.setForeground(new Color(128,128,128));
-        login_btn.setBounds(640, 380, 100, 30);
+        login_btn.setBounds(640, 400, 100, 30);
         login_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = name_txt_f.getText();

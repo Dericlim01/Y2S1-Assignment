@@ -95,7 +95,7 @@ public class Schedule_Maintainance {
     }
 
     public Object[][] search_hall_schedule(Object hall_id) {
-         List<Object[]> hallData = new ArrayList<>();
+        List<Object[]> hallData = new ArrayList<>();
         if (new Create_file().hall_stat_file()) {
             try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/hall_status.txt"))) {
                 while ((line = read.readLine()) != null) {
@@ -114,7 +114,7 @@ public class Schedule_Maintainance {
         }
         return hallData.toArray(new Object[0][]);
     }
-    
+
     public Boolean check_schedule(String schID, String Hall_ID,Date add_sDate , Date add_eDate) {
         if (new Create_file().hall_stat_file()) {
             try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/hall_status.txt"))) {        
@@ -235,7 +235,6 @@ public class Schedule_Maintainance {
                     } else if (data[0].equals(sch_ID)) {
                         delete = true;
                     }
-                    
                 }
             } catch (IOException e) {
                 e.printStackTrace();

@@ -51,7 +51,7 @@ public class Add_New_Schedule_Page extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Add_New_Schedule_Page(name).setVisible(true));
     }
-    
+
     public Add_New_Schedule_Page(String name) {
         //  Set up the page 
         setTitle("Adding New Schedule");
@@ -68,7 +68,7 @@ public class Add_New_Schedule_Page extends JFrame {
 
         // Title Label
         JLabel titleLabel = new JLabel("Add New Schedule");
-        titleLabel.setBounds(330, -55, 350, 300);
+        titleLabel.setBounds(330, -55, 400, 300);
         titleLabel.setFont(new Font("Engravers MT",Font.BOLD,25));
         panel.add(titleLabel);
 
@@ -77,7 +77,7 @@ public class Add_New_Schedule_Page extends JFrame {
         pricePerH_lbl.setFont(new Font("Comic Sans MS",Font.BOLD,20));
         pricePerH_lbl.setBounds(120,230,300,50);
         panel.add(pricePerH_lbl);
-   
+
         // Hall Type Label
         JLabel hallType_lbl = new JLabel("Hall Type: ");
         hallType_lbl.setFont(new Font("Comic Sans MS",Font.BOLD,20));

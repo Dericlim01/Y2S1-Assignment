@@ -51,7 +51,7 @@ public class Scheduler_Main_Page extends JFrame {
         panel.setLayout(null);
         UpdateProfile search = new UpdateProfile();
         String[] user = search.search_user(name);
-        
+
         // Label
         JLabel titleLabel = new JLabel("Scheduler Main Page");
         titleLabel.setBounds(450, -20, 450, 300);
@@ -155,7 +155,7 @@ public class Scheduler_Main_Page extends JFrame {
                 } while (true);      
             }
         });
-        
+
         // Side Pic
         JLabel side = new JLabel();
         try {

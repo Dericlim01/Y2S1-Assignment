@@ -147,7 +147,7 @@ public class Adding_Hall_Page extends JFrame {
                 Integer capacityValue = (Integer) capacitySpinner.getValue();
                 Double priceValue = ((Number) priceField.getValue()).doubleValue();
                 String formattedPrice = String.format("%.2f", priceValue);
-            if (new Hall_Management().Add_Hall(hallTypeValue, capacityValue,formattedPrice)) {
+                if (new Hall_Management().Add_Hall(hallTypeValue, capacityValue,formattedPrice)) {
                     JOptionPane.showMessageDialog(
                         null,
                         "Hall Added successfully",
@@ -159,7 +159,7 @@ public class Adding_Hall_Page extends JFrame {
                         "Hall Added failed",
                         "Status",
                         JOptionPane.INFORMATION_MESSAGE);
-               }
+                }
             }
         });
         panel.add(addHall_btn);

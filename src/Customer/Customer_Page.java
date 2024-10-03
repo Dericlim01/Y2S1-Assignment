@@ -59,7 +59,7 @@ public class Customer_Page extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        //Logo Label
+        // Logo Label
         JLabel logo_lbl = new JLabel("Symphony Hall");
         logo_lbl.setFont(new Font("French Script MT", Font.BOLD,25));
         logo_lbl.setForeground(new Color(169,169,169));
@@ -81,17 +81,12 @@ public class Customer_Page extends JFrame {
 
         // Profile Pic
         JLabel profile = new JLabel();
-        try{
-
+        try {
             BufferedImage get_image = new BufferedImage(80, 80, BufferedImage.TYPE_INT_RGB);
-
             get_image = ImageIO.read(new File("resources\\Image\\labixiaoxin(red).png"));
-
             Image image = get_image.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-
             profile.setIcon(new ImageIcon(image));
             profile.setBounds(75, 50, 1000, 200);
-
         } catch(IOException e) {
             e.printStackTrace();
         }

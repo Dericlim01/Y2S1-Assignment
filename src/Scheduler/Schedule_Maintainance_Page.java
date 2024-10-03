@@ -116,11 +116,11 @@ public class Schedule_Maintainance_Page extends JFrame {
         rmk_lbl.setFont(new Font("Comic Sans Ms", Font.PLAIN, 18));
         panel.add(rmk_lbl);
 
-         // Filter label
-         JLabel filter_lbl = new JLabel("Filter by HallID:");
-         filter_lbl.setBounds(40, 550, 150, 30);
-         filter_lbl.setFont(new Font("Comic Sans Ms", Font.PLAIN, 18));
-         panel.add(filter_lbl);
+        // Filter label
+        JLabel filter_lbl = new JLabel("Filter by HallID:");
+        filter_lbl.setBounds(40, 550, 150, 30);
+        filter_lbl.setFont(new Font("Comic Sans Ms", Font.PLAIN, 18));
+        panel.add(filter_lbl);
 
         // Status ComboBox
         String status[] = {"available","maintainance", "booked"};
@@ -130,8 +130,6 @@ public class Schedule_Maintainance_Page extends JFrame {
         status_cmbbx.setEnabled(false);
         status_cmbbx.setSelectedIndex(-1);
         panel.add(status_cmbbx);
-
-        
 
         // Hall ID Combo Box
         // Calling the search_hall_ID page from Schedule_Maintainance.java

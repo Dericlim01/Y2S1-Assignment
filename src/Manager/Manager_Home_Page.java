@@ -108,7 +108,7 @@ public class Manager_Home_Page extends JFrame {
             e.printStackTrace();
         }
         manager_HP.add(setting);
-   
+
         // Notification Pic
         JLabel noti= new JLabel();
         try {

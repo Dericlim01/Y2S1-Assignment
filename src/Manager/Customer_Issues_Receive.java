@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.imageio.*;
+import javax.imageio.ImageIO;
 
 
 public class Customer_Issues_Receive extends JFrame {
@@ -126,7 +126,7 @@ public class Customer_Issues_Receive extends JFrame {
         manager_CIR.add(hall);
 
         // Hall Type combo box
-     
+
         JComboBox<String> hall_cb = new JComboBox<String>();
         for (int i = 1; i < hall_Id_Type.size(); i+=2){
             hall_cb.addItem(hall_Id_Type.get(i));

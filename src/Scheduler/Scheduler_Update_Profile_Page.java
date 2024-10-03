@@ -88,7 +88,7 @@ public class Scheduler_Update_Profile_Page extends JFrame {
             e.printStackTrace();
         }
         panel.add(picture);
-       
+
         // Greeting Label
         JLabel greet_lbl = new JLabel("Welcome Back!");
         greet_lbl.setFont(new Font("Serif", Font.PLAIN, 15));
@@ -208,7 +208,7 @@ public class Scheduler_Update_Profile_Page extends JFrame {
         update_btn.setBounds(430, 550, 120, 30);
         update_btn.setVisible(false);
         panel.add(update_btn);
-        
+
         // Back button
         JLabel back_lbl = new JLabel();
         try {

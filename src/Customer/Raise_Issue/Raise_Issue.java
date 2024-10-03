@@ -15,7 +15,6 @@ public class Raise_Issue {
     }
 
     String line;
-
     // Search hall id in booking file booked previously by the user
     public ArrayList<String> search_hall() {
         ArrayList<String> halls = new ArrayList<String>();

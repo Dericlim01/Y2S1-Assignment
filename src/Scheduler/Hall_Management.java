@@ -49,7 +49,7 @@ public class Hall_Management {
     }
 
     public Object[][] search_hall_data(Object hall_type) {
-         List<Object[]> hallData = new ArrayList<>();
+        List<Object[]> hallData = new ArrayList<>();
         if (new Create_file().hall_file()) {
             try (BufferedReader read = new BufferedReader(new FileReader("resources/Database/halls.txt"))) {
                 while ((line = read.readLine()) != null) {

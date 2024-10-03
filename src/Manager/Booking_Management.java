@@ -27,7 +27,7 @@ import java.util.Properties;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;
-import javax.imageio.*;
+import javax.imageio.ImageIO;
 
 public class Booking_Management extends JFrame {
 

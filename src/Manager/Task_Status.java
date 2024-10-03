@@ -15,9 +15,9 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.imageio.*;
+import javax.imageio.ImageIO;
 
 public class Task_Status extends JFrame {
     private static String manname;
@@ -151,7 +151,7 @@ public class Task_Status extends JFrame {
         manager_TAS.add(status);
 
         // Status combo box
-        String[] Status = {"In_progress", "Cancel", "Close"};
+        String[] Status = {"In progress", "Cancel", "Close"};
         JComboBox<String> statusBox = new JComboBox<>(Status);
         statusBox.setBounds(700, 550, 150, 28);
         statusBox.setFont(new Font("Comic Sans MS",Font.PLAIN,15));

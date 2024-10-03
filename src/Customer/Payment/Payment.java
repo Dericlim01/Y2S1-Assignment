@@ -16,8 +16,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.text.SimpleDateFormat;
 
-
-
 public class Payment {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     private DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -110,7 +108,6 @@ public class Payment {
                         writer.println(String.join(",", extraLine1));
                         addedline1 = true;
                     }
-
 
                     calendar.setTime(splitEdate);
                     calendar.add(Calendar.DAY_OF_MONTH, 1);
